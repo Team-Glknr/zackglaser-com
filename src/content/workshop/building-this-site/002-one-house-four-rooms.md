@@ -39,6 +39,6 @@ Two unknowns. First, section names: "field notes" for the essay pillar feels rig
 
 ## Next up
 
-Picking the stack — and whether the guy with the fullstack certificate builds it by hand or has the sense not to.
+Where the code actually lives, before any framework gets picked.
 
 **Costs so far:** $12/yr / 3 hours
