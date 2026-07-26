@@ -32,6 +32,7 @@ title:
 date: 2026-XX-XX
 status: draft        # draft | published
 pillar: workshop
+format: log          # the series is log-format; see brief §6 for the pillar/format axes
 series: building-this-site
 tags: []
 ---
@@ -52,7 +53,10 @@ tags: []
 - 002 — The architecture: one house, four rooms ✓
 - 003 — Where the code lives (git/GitHub, the thirdth account) ✓
 - 004 — Choosing the stack (Astro vs. Next; members-area question — see brief §8) ✓
-- 005 — Naming the newsletter
-- 006 — Brand: colors, type, and the logo question
-- 007 — The speaking page (and the Lawyerist/Affinity line — brief §9)
-- 008 — Launch
+- 005 — Pillars vs. formats: untangling the taxonomy ✓
+- 006 — The GitHub on-ramp: the repo goes public, and the site starts teaching GitHub (docs/03-github-onramp.md) ✓
+- 007 — Naming the newsletter
+- 008 — Brand: colors, type, and the logo question (incl. section display-name gut-check)
+- 009 — The speaking page (and the Lawyerist/Affinity line — brief §9)
+- 010 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 011 — Launch

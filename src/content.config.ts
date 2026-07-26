@@ -6,7 +6,9 @@ const postSchema = z.object({
   title: z.string(),
   date: z.coerce.date(),
   status: z.enum(['draft', 'published']),
+  // Two axes, never conflated (brief §6): pillar = subject, format = method.
   pillar: z.enum(['legal-tech', 'running', 'workshop', 'field-notes']),
+  format: z.enum(['teardown', 'log', 'take']),
   series: z.string().optional(),
   newsletter: z.number().optional(),
   tags: z.array(z.string()).default([]),

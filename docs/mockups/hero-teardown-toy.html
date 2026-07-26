@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>zackglaser.com — hero prototype: the teardown toy</title>
+<style>
+  :root{
+    --paper:#faf7f2; --card:#f1ebe0; --ink:#211d17; --muted:#6f675a; --line:#d9d0bf;
+    --tech:#185fa5; --tech-bg:#dbe7fb;
+    --run:#0f6e56;  --run-accent:#1d9e75;
+    --make:#993c1d; --make-accent:#d85a30;
+    --idea:#53389e; --idea-bg:#ece6fa;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--paper);color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,sans-serif}
+  a{color:inherit}
+  header{display:flex;align-items:center;gap:28px;padding:18px 40px;border-bottom:1px solid var(--line)}
+  .wordmark{font:600 18px ui-serif,Georgia,serif;letter-spacing:.02em;margin-right:auto}
+  nav a{text-decoration:none;font-size:14.5px;color:var(--muted)}
+  nav a:hover{color:var(--ink)}
+  .btn{background:var(--ink);color:var(--paper);border:none;border-radius:8px;padding:9px 16px;font-size:14.5px;cursor:pointer;text-decoration:none}
+  .hero{display:flex;flex-wrap:wrap;gap:24px;align-items:center;max-width:1080px;margin:0 auto;padding:48px 40px 24px}
+  .copy{flex:1 1 320px;min-width:300px}
+  h1{font:600 44px/1.15 ui-serif,Georgia,serif;margin-bottom:14px}
+  .copy p{color:var(--muted);max-width:44ch}
+  .hint{margin-top:14px;color:var(--ink)}
+  .hint a{color:var(--muted)}
+  .status{margin-top:18px;font-size:14px;color:var(--muted);min-height:22px}
+  .reset{margin-top:8px;background:none;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:13px;color:var(--muted);cursor:pointer;display:none}
+  .toy{flex:1 1 420px;min-width:340px}
+  svg{width:100%;height:auto;display:block}
+  .part{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .65s cubic-bezier(.2,.8,.3,1.15)}
+  .part:not(.out):hover{transform:translateY(-5px) rotate(-2deg)}
+  .part.out{transform:var(--tx)}
+  .lbl{opacity:0;transition:opacity .4s ease .35s;pointer-events:none}
+  .lbl.show{opacity:1;pointer-events:auto;cursor:pointer}
+  .t1{font:600 15px ui-sans-serif,system-ui,sans-serif;fill:var(--ink)}
+  .t2{font:12.5px ui-sans-serif,system-ui,sans-serif;fill:var(--muted)}
+  .reveal{opacity:0;transition:opacity .5s ease .4s}
+  .reveal.show{opacity:1}
+  #doors{max-width:1080px;margin:0 auto;padding:24px 40px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .door{border:1px solid var(--line);border-radius:12px;padding:18px;text-decoration:none;background:#fffdf9}
+  .door:hover{border-color:var(--muted)}
+  .door b{display:block;font-size:15.5px;margin-bottom:4px}
+  .door span{font-size:13.5px;color:var(--muted)}
+  footer{padding:18px 40px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+  @media (prefers-reduced-motion: reduce){.part,.lbl,.reveal{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="wordmark">Zack Glaser</span>
+  <nav style="display:flex;gap:22px">
+    <a href="#">Legal tech</a><a href="#">Running</a><a href="#">Workshop</a><a href="#">Field notes</a><a href="#">Newsletter</a>
+  </nav>
+  <a class="btn" href="#">Book me to speak</a>
+</header>
+
+<section class="hero">
+  <div class="copy">
+    <h1>I take things apart.</h1>
+    <p>Legal tech stacks, marathon training blocks, workbenches, big ideas — same method every time: figure out how it works, show you the pieces.</p>
+    <p class="hint">This site is no different. <strong>Click the pieces</strong> — or <a href="#doors">skip the game ↓</a></p>
+    <div class="status" id="status">0 of 4 pieces removed</div>
+    <button class="reset" id="reset">Put it back together</button>
+  </div>
+
+  <div class="toy">
+  <svg viewBox="0 0 680 440" role="img" aria-label="A gadget you can take apart. Each removed piece links to a section of the site.">
+    <rect x="240" y="120" width="200" height="200" rx="24" fill="var(--card)" stroke="var(--line)" stroke-width="2"/>
+    <circle cx="258" cy="138" r="3.5" fill="var(--line)"/><circle cx="422" cy="138" r="3.5" fill="var(--line)"/>
+    <circle cx="258" cy="302" r="3.5" fill="var(--line)"/><circle cx="422" cy="302" r="3.5" fill="var(--line)"/>
+
+    <g class="part" id="p-tech" style="--tx:translate(-150px,-70px)" data-href="/legal-tech" data-name="Legal tech" data-lbl="lbl-tech">
+      <rect x="258" y="146" width="84" height="64" rx="6" fill="var(--tech-bg)" stroke="var(--tech)" stroke-width="2"/>
+      <polyline points="270,196 270,168 292,168 292,158" fill="none" stroke="var(--tech)" stroke-width="2"/>
+      <polyline points="330,156 312,156 312,182 296,182 296,196" fill="none" stroke="var(--tech)" stroke-width="2"/>
+      <circle cx="270" cy="196" r="3.5" fill="var(--tech)"/><circle cx="292" cy="158" r="3.5" fill="var(--tech)"/>
+      <circle cx="330" cy="156" r="3.5" fill="var(--tech)"/><circle cx="296" cy="196" r="3.5" fill="var(--tech)"/>
+      <rect x="318" y="188" width="16" height="12" rx="2" fill="var(--tech)"/>
+    </g>
+    <g class="lbl" id="lbl-tech" data-href="/legal-tech" data-name="Legal tech">
+      <text class="t1" x="150" y="150" text-anchor="middle">Legal tech</text>
+      <text class="t2" x="150" y="169" text-anchor="middle">tools &amp; takes →</text>
+    </g>
+
+    <g class="part" id="p-make" style="--tx:translate(140px,-58px)" data-href="/workshop" data-name="The workshop" data-lbl="lbl-make">
+      <g fill="var(--make-accent)" stroke="var(--make)" stroke-width="1.5">
+        <rect x="398" y="129" width="8" height="14" rx="2"/>
+        <rect x="398" y="129" width="8" height="14" rx="2" transform="rotate(45 402 168)"/>
+        <rect x="398" y="129" width="8" height="14" rx="2" transform="rotate(90 402 168)"/>
+        <rect x="398" y="129" width="8" height="14" rx="2" transform="rotate(135 402 168)"/>
+        <rect x="398" y="129" width="8" height="14" rx="2" transform="rotate(180 402 168)"/>
+        <rect x="398" y="129" width="8" height="14" rx="2" transform="rotate(225 402 168)"/>
+        <rect x="398" y="129" width="8" height="14" rx="2" transform="rotate(270 402 168)"/>
+        <rect x="398" y="129" width="8" height="14" rx="2" transform="rotate(315 402 168)"/>
+        <circle cx="402" cy="168" r="28"/>
+      </g>
+      <circle cx="402" cy="168" r="10" fill="var(--card)" stroke="var(--make)" stroke-width="1.5"/>
+    </g>
+    <g class="lbl" id="lbl-make" data-href="/workshop" data-name="The workshop">
+      <text class="t1" x="542" y="166" text-anchor="middle">The workshop</text>
+      <text class="t2" x="542" y="185" text-anchor="middle">builds &amp; tinkering →</text>
+    </g>
+
+    <g class="part" id="p-run" style="--tx:translate(-160px,62px)" data-href="/running" data-name="Running" data-lbl="lbl-run">
+      <path d="M264 262 l12 -20 l15 30 l15 -30 l15 30 l15 -30 l12 20" fill="none" stroke="var(--run-accent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="256" y="255" width="10" height="16" rx="3" fill="var(--run)"/>
+      <rect x="346" y="255" width="10" height="16" rx="3" fill="var(--run)"/>
+    </g>
+    <g class="lbl" id="lbl-run" data-href="/running" data-name="Running">
+      <text class="t1" x="146" y="366" text-anchor="middle">Running</text>
+      <text class="t2" x="146" y="385" text-anchor="middle">training &amp; races →</text>
+    </g>
+
+    <g class="part" id="p-idea" style="--tx:translate(148px,66px)" data-href="/field-notes" data-name="Field notes" data-lbl="lbl-idea">
+      <rect x="372" y="238" width="48" height="48" rx="8" fill="var(--idea-bg)" stroke="var(--idea)" stroke-width="2"/>
+      <text x="396" y="272" text-anchor="middle" style="font:600 26px ui-serif,Georgia,serif" fill="var(--idea)">?</text>
+    </g>
+    <g class="lbl" id="lbl-idea" data-href="/field-notes" data-name="Field notes">
+      <text class="t1" x="546" y="372" text-anchor="middle">Field notes</text>
+      <text class="t2" x="546" y="391" text-anchor="middle">big questions →</text>
+    </g>
+
+    <circle cx="340" cy="220" r="24" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"/>
+    <text x="340" y="226" text-anchor="middle" style="font:600 16px ui-serif,Georgia,serif" fill="var(--ink)">ZG</text>
+    <g class="reveal" id="reveal">
+      <text class="t2" x="340" y="262" text-anchor="middle">that's me — the rest is details</text>
+    </g>
+  </svg>
+  </div>
+</section>
+
+<section id="doors">
+  <a class="door" href="#"><b>Legal tech</b><span>Tools, takes, and teardowns for lawyers</span></a>
+  <a class="door" href="#"><b>Running</b><span>Training logs and race reports</span></a>
+  <a class="door" href="#"><b>The workshop</b><span>Builds, tinkering, and this site itself</span></a>
+  <a class="door" href="#"><b>Field notes</b><span>Big questions, taken apart</span></a>
+</section>
+
+<footer>Prototype v0 · the teardown toy · candidate for build log: "A game as a front door"</footer>
+
+<script>
+  const status = document.getElementById('status');
+  const reset  = document.getElementById('reset');
+  const reveal = document.getElementById('reveal');
+  const parts  = [...document.querySelectorAll('.part')];
+
+  function removedCount(){ return parts.filter(p => p.classList.contains('out')).length; }
+
+  function update(navMsg){
+    const n = removedCount();
+    if (navMsg) { status.textContent = navMsg; }
+    else if (n === 4) { status.textContent = "That's all of me. Pick a piece to explore, or head through a door below."; }
+    else { status.textContent = n + " of 4 pieces removed"; }
+    reset.style.display = n > 0 ? 'inline-block' : 'none';
+    reveal.classList.toggle('show', n === 4);
+  }
+
+  function go(el){
+    update("→ In the real site, you'd be heading to " + el.dataset.href + " (" + el.dataset.name + ")");
+  }
+
+  parts.forEach(p => p.addEventListener('click', () => {
+    if (!p.classList.contains('out')) {
+      p.classList.add('out');
+      document.getElementById(p.dataset.lbl).classList.add('show');
+      update();
+    } else { go(p); }
+  }));
+
+  document.querySelectorAll('.lbl').forEach(l => l.addEventListener('click', () => go(l)));
+
+  reset.addEventListener('click', () => {
+    parts.forEach(p => p.classList.remove('out'));
+    document.querySelectorAll('.lbl').forEach(l => l.classList.remove('show'));
+    update();
+  });
+</script>
+</body>
+</html>

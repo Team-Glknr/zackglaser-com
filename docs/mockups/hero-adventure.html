@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>zackglaser.com — hero prototype v0.2: the courtyard</title>
+<style>
+  :root{
+    --paper:#faf7f2; --ink:#211d17; --muted:#6f675a; --line:#d9d0bf;
+    --floor:#e9e1cd; --floor2:#e3dac2; --wall:#a3937a; --wall2:#8a7c64; --crate:#c9a86a;
+    --tech:#185fa5; --run:#0f6e56; --make:#993c1d; --idea:#53389e;
+    --dlg:#201c15; --dlgtext:#f5efdf;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--paper);color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,sans-serif}
+  header{display:flex;align-items:center;gap:28px;padding:18px 40px;border-bottom:1px solid var(--line)}
+  .wordmark{font:600 18px ui-serif,Georgia,serif;margin-right:auto}
+  nav a{text-decoration:none;font-size:14.5px;color:var(--muted);}
+  nav a:hover{color:var(--ink)}
+  .btn{background:var(--ink);color:var(--paper);border-radius:8px;padding:9px 16px;font-size:14.5px;text-decoration:none}
+  .hero{max-width:1080px;margin:0 auto;padding:40px 40px 16px;display:flex;flex-wrap:wrap;gap:28px;align-items:center}
+  .copy{flex:1 1 300px;min-width:280px}
+  h1{font:600 40px/1.15 ui-serif,Georgia,serif;margin-bottom:12px}
+  .copy p{color:var(--muted);max-width:42ch}
+  .hint{margin-top:12px;color:var(--ink);font-size:15px}
+  .hint a{color:var(--muted)}
+  .game{flex:1 1 480px;min-width:340px;outline:none}
+  .stage{position:relative;width:540px;max-width:100%;margin:0 auto;border:2px solid var(--wall2);border-radius:10px;overflow:hidden;background:var(--floor)}
+  .grid{position:relative;width:540px;height:288px}
+  .tile{position:absolute;width:36px;height:36px}
+  .wall{background:var(--wall);box-shadow:inset 0 -4px 0 var(--wall2)}
+  .floor{background:var(--floor)}
+  .floor.alt{background:var(--floor2)}
+  .crate{background:var(--crate);border:2px solid #a5854b;border-radius:4px;box-shadow:inset 3px 3px 0 rgba(255,255,255,.25)}
+  .door{display:flex;align-items:center;justify-content:center;background:#2a241b}
+  .door i{display:block;width:22px;height:26px;border-radius:5px 5px 0 0;border:3px solid;border-bottom:none}
+  .sign{position:absolute;font:600 11px ui-sans-serif,system-ui;color:#5c5344;background:rgba(250,247,242,.85);padding:1px 6px;border-radius:4px;pointer-events:none}
+  #player{position:absolute;width:36px;height:36px;transition:transform .12s linear;z-index:5;pointer-events:none}
+  #player .head{position:absolute;left:11px;top:5px;width:14px;height:12px;border-radius:6px;background:#e5b183}
+  #player .body{position:absolute;left:9px;top:16px;width:18px;height:14px;border-radius:4px;background:#3b6fd4}
+  #player .feet{position:absolute;left:12px;top:29px;width:12px;height:4px;border-radius:2px;background:#211d17}
+  .hud{display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap}
+  .hud .msg{flex:1;min-width:200px;font-size:13.5px;color:var(--muted)}
+  .pad{display:flex;gap:6px}
+  .pad button{width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:#fffdf9;cursor:pointer;font-size:14px;color:var(--ink)}
+  .scene{position:absolute;inset:0;background:var(--dlg);color:var(--dlgtext);display:none;flex-direction:column;z-index:10}
+  .scene.on{display:flex}
+  .scene .top{flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:16px 18px 10px;border-bottom:1px solid #3a332a}
+  .npc{width:44px;height:44px;position:relative;flex:0 0 44px}
+  .npc .head{position:absolute;left:13px;top:4px;width:18px;height:15px;border-radius:8px;background:#e5b183}
+  .npc .body{position:absolute;left:10px;top:20px;width:24px;height:20px;border-radius:5px}
+  .npc.bot .head{background:#b8c4cc;border-radius:4px}
+  .scene .who{font:600 14px ui-sans-serif,system-ui;letter-spacing:.03em}
+  .scene .where{font-size:12px;color:#a99f8b}
+  .dlg{flex:1;padding:14px 18px;overflow:auto}
+  .dlg .say{font-size:15px;line-height:1.55;margin-bottom:12px}
+  .choices button{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;background:#2c261d;border:1px solid #4a4132;border-radius:8px;color:var(--dlgtext);font-size:14px;cursor:pointer}
+  .choices button:hover{border-color:#8b7c60;background:#332c21}
+  .found{display:none;border:1px solid #4a4132;border-radius:10px;padding:12px 14px;background:#2c261d}
+  .found.on{display:block}
+  .found .label{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#a99f8b;margin-bottom:4px}
+  .found b{font-size:15.5px}
+  .found p{font-size:13.5px;color:#cfc6b2;margin:4px 0 10px}
+  .found .row{display:flex;gap:8px}
+  .found .row button{padding:7px 12px;border-radius:8px;border:1px solid #4a4132;background:#3b3830;color:var(--dlgtext);font-size:13.5px;cursor:pointer}
+  .found .row button.go{background:var(--dlgtext);color:var(--dlg);border-color:var(--dlgtext)}
+  .leave{padding:8px 18px 14px}
+  .leave button{background:none;border:none;color:#a99f8b;font-size:13px;cursor:pointer;text-decoration:underline}
+  #doors{max-width:1080px;margin:0 auto;padding:24px 40px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .doorcard{border:1px solid var(--line);border-radius:12px;padding:18px;text-decoration:none;color:var(--ink);background:#fffdf9}
+  .doorcard:hover{border-color:var(--muted)}
+  .doorcard b{display:block;font-size:15.5px;margin-bottom:4px}
+  .doorcard span{font-size:13.5px;color:var(--muted)}
+  footer{padding:18px 40px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+  @media (prefers-reduced-motion: reduce){#player{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="wordmark">Zack Glaser</span>
+  <nav style="display:flex;gap:22px">
+    <a href="#">Legal tech</a><a href="#">Running</a><a href="#">Workshop</a><a href="#">Field notes</a><a href="#">Newsletter</a>
+  </nav>
+  <a class="btn" href="#">Book me to speak</a>
+</header>
+
+<section class="hero">
+  <div class="copy">
+    <h1>Welcome to the courtyard.</h1>
+    <p>Four doors, four sides of me. Walk through one and the folks inside will point you somewhere good.</p>
+    <p class="hint">Arrow keys or the pad to move. Not in the mood? <a href="#doors">Skip the game ↓</a></p>
+  </div>
+
+  <div class="game" id="game" tabindex="0" aria-label="Courtyard mini-game. Use arrow keys to reach a door.">
+    <div class="stage">
+      <div class="grid" id="grid"></div>
+      <div id="player"><div class="head"></div><div class="body"></div><div class="feet"></div></div>
+
+      <div class="scene" id="scene">
+        <div class="top">
+          <div class="npc" id="npcArt"><div class="head"></div><div class="body" id="npcBody"></div></div>
+          <div><div class="who" id="npcName"></div><div class="where" id="roomName"></div></div>
+        </div>
+        <div class="dlg">
+          <div class="say" id="say"></div>
+          <div class="choices" id="choices"></div>
+          <div class="found" id="found">
+            <div class="label">Quest item found</div>
+            <b id="fTitle"></b><p id="fDesc"></p>
+            <div class="row">
+              <button class="go" id="fGo"></button>
+              <button id="fStay">Keep exploring</button>
+            </div>
+          </div>
+        </div>
+        <div class="leave"><button id="leave">← Back to the courtyard</button></div>
+      </div>
+    </div>
+    <div class="hud">
+      <span class="msg" id="msg">Walk into a door to enter.</span>
+      <div class="pad">
+        <button data-d="l" aria-label="left">←</button>
+        <button data-d="u" aria-label="up">↑</button>
+        <button data-d="d" aria-label="down">↓</button>
+        <button data-d="r" aria-label="right">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="doors">
+  <a class="doorcard" href="#"><b>Legal tech</b><span>Tools, takes, and teardowns for lawyers</span></a>
+  <a class="doorcard" href="#"><b>Running</b><span>Training logs and race reports</span></a>
+  <a class="doorcard" href="#"><b>The workshop</b><span>Builds, tinkering, and this site itself</span></a>
+  <a class="doorcard" href="#"><b>Field notes</b><span>Big questions, taken apart</span></a>
+</section>
+
+<footer>Prototype v0.2 · the courtyard · NPC dialog = content routing (see brief §6 — needs quest metadata on posts)</footer>
+
+<script>
+const T=36;
+const MAP=[
+"###############",
+"#######N#######",
+"#..o.......o..#",
+"#.............#",
+"W.............E",
+"#.............#",
+"#..o.......o..#",
+"#######S#######"];
+const ROOMS={
+ N:{name:"The workshop",color:"var(--make)",npc:"The Foreman",bot:false,
+    greet:"Mind the sawdust. Everything in here is half-finished on purpose. What d'you want to see?",
+    choices:[
+     ["How this website is being built",{t:"Building this site — the log",d:"Every decision, dead ends included.",h:"/workshop/building-this-site"}],
+     ["Real things, made of wood",{t:"The workbench, piece by piece",d:"A teardown in reverse.",h:"/workshop"}],
+     ["Show me the failures",{t:"The scrap bin",d:"Projects that fought back and won.",h:"/workshop"}]]},
+ E:{name:"The law office",color:"var(--tech)",npc:"Dot, the office robot",bot:true,
+    greet:"BZZT. Welcome, counselor. State the nature of your legal-technical emergency.",
+    choices:[
+     ["My firm's tech stack is a junk drawer",{t:"Teardown: a solo firm's entire stack",d:"Every tool, what it costs, what it's actually for.",h:"/legal-tech"}],
+     ["What does AI actually do in a law firm?",{t:"AI in law firms, taken apart",d:"Past the demo, into the gears.",h:"/legal-tech"}],
+     ["I need a speaker for my event",{t:"You found the quest-giver",d:"Topics, one-sheet, booking form.",h:"/legal-tech/speaking"}]]},
+ W:{name:"The trailhead",color:"var(--run)",npc:"June, the pacer",bot:false,
+    greet:"You made it out here — good sign. What are you chasing?",
+    choices:[
+     ["My first marathon",{t:"A marathon block, disassembled",d:"It's dangerous to run alone — take this plan.",h:"/running"}],
+     ["The race stories",{t:"Race reports",d:"Splits, weather, and poor decisions.",h:"/running"}],
+     ["Zack's actual training",{t:"The training log",d:"Unfiltered weeks, good and bad.",h:"/running"}]]},
+ S:{name:"The night library",color:"var(--idea)",npc:"The night librarian",bot:false,
+    greet:"Shhh. The good questions live down here. Which one keeps you up?",
+    choices:[
+     ["Why do we work the way we do?",{t:"Work, taken apart",d:"An essay in progress.",h:"/field-notes"}],
+     ["What makes people believe things?",{t:"On belief",d:"From a religion degree that never quite left.",h:"/field-notes"}],
+     ["Surprise me",{t:"A random field note",d:"The librarian picks. No refunds.",h:"/field-notes"}]]}};
+const DOORCOLOR={N:"var(--make)",E:"var(--tech)",W:"var(--run)",S:"var(--idea)"};
+const SIGNS={N:["workshop",252,42],E:["law office",458,132],W:["trailhead",14,132],S:["library",262,246]};
+
+const grid=document.getElementById('grid'),player=document.getElementById('player'),msg=document.getElementById('msg');
+const scene=document.getElementById('scene');
+let px=7,py=4,locked=false;
+
+MAP.forEach((row,y)=>{[...row].forEach((c,x)=>{
+  const d=document.createElement('div');d.className='tile';
+  d.style.left=x*T+'px';d.style.top=y*T+'px';
+  if(c==='#')d.classList.add('wall');
+  else if(c==='o')d.classList.add('floor','crate');
+  else if(ROOMS[c]){d.classList.add('door');d.innerHTML='<i style="border-color:'+DOORCOLOR[c]+'"></i>';}
+  else{d.classList.add('floor');if((x+y)%2)d.classList.add('alt');}
+  grid.appendChild(d);
+});});
+for(const k in SIGNS){const s=document.createElement('div');s.className='sign';
+ s.textContent=SIGNS[k][0];s.style.left=SIGNS[k][1]+'px';s.style.top=SIGNS[k][2]+'px';grid.appendChild(s);}
+
+function draw(){player.style.transform='translate('+px*T+'px,'+py*T+'px)';}
+draw();
+
+function tryMove(dx,dy){
+  if(locked)return;
+  const nx=px+dx,ny=py+dy;
+  const c=(MAP[ny]||'')[nx];
+  if(!c||c==='#'||c==='o')return;
+  if(ROOMS[c]){enter(c);return;}
+  px=nx;py=ny;draw();
+}
+
+function enter(k){
+  locked=true;const r=ROOMS[k];
+  document.getElementById('npcName').textContent=r.npc;
+  document.getElementById('roomName').textContent=r.name;
+  document.getElementById('npcBody').style.background=r.color;
+  document.getElementById('npcArt').classList.toggle('bot',r.bot);
+  document.getElementById('say').textContent='"'+r.greet+'"';
+  const ch=document.getElementById('choices');ch.innerHTML='';ch.style.display='block';
+  document.getElementById('found').classList.remove('on');
+  r.choices.forEach(([label,res])=>{
+    const b=document.createElement('button');b.textContent=label;
+    b.onclick=()=>{
+      ch.style.display='none';
+      document.getElementById('say').textContent='"Then this is what you\'re after."';
+      document.getElementById('fTitle').textContent=res.t;
+      document.getElementById('fDesc').textContent=res.d;
+      document.getElementById('fGo').textContent='Read it →';
+      document.getElementById('fGo').onclick=()=>{msg.textContent='→ In the real site: '+res.h;close();};
+      document.getElementById('found').classList.add('on');
+    };
+    ch.appendChild(b);
+  });
+  scene.classList.add('on');
+}
+function close(){scene.classList.remove('on');locked=false;
+  if(py===1)py=2; if(py===MAP.length-2)py=MAP.length-3;
+  if(px===0)px=1; if(px===MAP[0].length-1)px=MAP[0].length-2;
+  draw();document.getElementById('game').focus();}
+document.getElementById('leave').onclick=close;
+document.getElementById('fStay').onclick=close;
+
+const game=document.getElementById('game');
+game.addEventListener('keydown',e=>{
+  const m={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1],a:[-1,0],d:[1,0],w:[0,-1],s:[0,1]}[e.key];
+  if(m){e.preventDefault();tryMove(m[0],m[1]);}
+});
+document.querySelectorAll('.pad button').forEach(b=>b.onclick=()=>{
+  const m={l:[-1,0],r:[1,0],u:[0,-1],d:[0,1]}[b.dataset.d];tryMove(m[0],m[1]);game.focus();
+});
+game.addEventListener('click',()=>game.focus());
+</script>
+</body>
+</html>

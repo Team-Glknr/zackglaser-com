@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>zackglaser.com — hero prototype v0.3: just for kicks</title>
+<style>
+  :root{
+    --paper:#faf7f2; --ink:#211d17; --muted:#6f675a; --line:#d9d0bf; --card:#fffdf9;
+    --tech:#185fa5; --run:#0f6e56; --make:#993c1d; --idea:#53389e; --gray:#5f5e5a;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--paper);color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,sans-serif}
+  header{display:flex;align-items:center;gap:28px;padding:18px 40px;border-bottom:1px solid var(--line)}
+  .wordmark{font:600 18px ui-serif,Georgia,serif;margin-right:auto}
+  nav a{text-decoration:none;font-size:14.5px;color:var(--muted)}
+  nav a:hover{color:var(--ink)}
+  .btn{background:var(--ink);color:var(--paper);border-radius:8px;padding:9px 16px;font-size:14.5px;text-decoration:none}
+  .hero{max-width:1080px;margin:0 auto;padding:44px 40px 20px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+  .copy{flex:1 1 300px;min-width:280px}
+  h1{font:600 42px/1.15 ui-serif,Georgia,serif;margin-bottom:12px}
+  .copy p{color:var(--muted);max-width:42ch}
+  .hint{margin-top:12px;font-size:14.5px;color:var(--muted)}
+  .panel{flex:1 1 460px;min-width:340px;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
+  .panel .bar{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--line)}
+  .tag{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:2px 10px}
+  .bar b{font-size:14px;font-weight:600}
+  .stage{padding:18px}
+  .q{font:600 17px ui-serif,Georgia,serif;margin-bottom:4px}
+  .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+  .opts{display:grid;gap:8px}
+  .opt{display:flex;align-items:center;gap:12px;text-align:left;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--paper);cursor:pointer;font-size:14.5px;color:var(--ink)}
+  .opt:hover{border-color:var(--muted)}
+  .opt .dot{flex:0 0 12px;width:12px;height:12px;border-radius:50%}
+  .opt small{display:block;color:var(--muted);font-size:12.5px;line-height:1.4}
+  .opt svg{flex:0 0 30px}
+  .crumb{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+  .crumb a{color:var(--muted)}
+  .result{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--paper)}
+  .result .lab{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .result b{font-size:17px}
+  .result p{font-size:14px;color:var(--muted);margin:5px 0 12px}
+  .row{display:flex;gap:8px;flex-wrap:wrap}
+  .row .go{background:var(--ink);color:var(--paper);border:none;border-radius:8px;padding:8px 14px;font-size:14px;cursor:pointer}
+  .row .again{background:none;border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:14px;color:var(--muted);cursor:pointer}
+  .aside{font-size:12.5px;color:var(--muted);margin-top:12px;font-style:italic}
+  .rate{border-top:1px solid var(--line);padding:14px 18px;background:#f6f1e6}
+  .rate .q2{font-size:13.5px;margin-bottom:8px}
+  .rate .row button{border-radius:8px;padding:7px 12px;font-size:13px;cursor:pointer}
+  .rate .cool{border:1px solid var(--ink);background:var(--ink);color:var(--paper)}
+  .rate .lame{border:1px solid var(--line);background:var(--card);color:var(--ink)}
+  .rate .verdict{font-size:12.5px;color:var(--muted);margin-top:8px;min-height:18px}
+  .msgline{font-size:13px;color:var(--muted);padding:0 18px 14px}
+  #doors{max-width:1080px;margin:0 auto;padding:24px 40px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .doorcard{border:1px solid var(--line);border-radius:12px;padding:18px;text-decoration:none;color:var(--ink);background:var(--card)}
+  .doorcard:hover{border-color:var(--muted)}
+  .doorcard b{display:block;font-size:15.5px;margin-bottom:4px}
+  .doorcard span{font-size:13.5px;color:var(--muted)}
+  footer{padding:18px 40px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="wordmark">Zack Glaser</span>
+  <nav style="display:flex;gap:22px">
+    <a href="#">Legal tech</a><a href="#">Running</a><a href="#">Workshop</a><a href="#">Field notes</a><a href="#">Newsletter</a>
+  </nav>
+  <a class="btn" href="#">Book me to speak</a>
+</header>
+
+<section class="hero">
+  <div class="copy">
+    <h1>I take things apart.</h1>
+    <p>Legal tech stacks, marathon training blocks, workbenches, big ideas. Same method every time: figure out how it works, show you the pieces.</p>
+    <p class="hint">There are four sections. You could just use the nav like a normal person. Or → <br><a href="#doors" style="color:var(--muted)">skip the game ↓</a></p>
+  </div>
+
+  <div class="panel">
+    <div class="bar"><b>Find me something to read</b><span class="tag">gamified · just for kicks</span></div>
+    <div class="stage" id="stage"></div>
+    <div class="msgline" id="msg"></div>
+    <div class="rate">
+      <div class="q2"><b>Rate this game:</b> is it as cool as I think it is, or as lame as my wife thinks it is?</div>
+      <div class="row">
+        <button class="cool" id="vCool">Cool, actually · <span id="nCool">61</span></button>
+        <button class="lame" id="vLame">Your wife is right · <span id="nLame">64</span></button>
+      </div>
+      <div class="verdict" id="verdict"></div>
+    </div>
+  </div>
+</section>
+
+<section id="doors">
+  <a class="doorcard" href="#"><b>Legal tech</b><span>Tools, takes, and teardowns for lawyers</span></a>
+  <a class="doorcard" href="#"><b>Running</b><span>Training logs and race reports</span></a>
+  <a class="doorcard" href="#"><b>The workshop</b><span>Builds, tinkering, and this site itself</span></a>
+  <a class="doorcard" href="#"><b>Field notes</b><span>Big questions, taken apart</span></a>
+</section>
+
+<footer>Prototype v0.3 · "just for kicks" · character + tool = a curated article route (matrix in JS, quest metadata later)</footer>
+
+<script>
+const CHARS=[
+ {id:'run', name:'The Runner', color:'var(--run)', desc:'You know your paces. You have opinions about gels.'},
+ {id:'tink',name:'The Tinkerer', color:'var(--make)', desc:'You own three of everything; at least one is disassembled.'},
+ {id:'ops', name:'The Operator', color:'var(--tech)', desc:'You keep a law firm running. You’d like it to run smoother.'},
+ {id:'browse',name:'The Browser', color:'var(--gray)', desc:'No agenda. Clicked something, ended up here. Welcome.'},
+ {id:'all', name:'All of the Above', color:'var(--idea)', desc:'Why pick one? That’s sort of the whole premise here.'}];
+
+const TOOLS=[
+ {id:'tear', name:'Screwdriver', desc:'Take something apart for me.',
+  icon:'<svg width="30" height="30" viewBox="0 0 30 30"><rect x="4" y="12" width="10" height="6" rx="3" fill="#c9a86a" stroke="#a5854b"/><rect x="14" y="13.5" width="10" height="3" rx="1" fill="#8a8a8a"/><rect x="24" y="12.5" width="3" height="5" rx="1" fill="#8a8a8a"/></svg>'},
+ {id:'log', name:'Stopwatch', desc:'Show me the logs. Real numbers.',
+  icon:'<svg width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="17" r="9" fill="none" stroke="#5f5e5a" stroke-width="2"/><rect x="13" y="4" width="4" height="4" rx="1" fill="#5f5e5a"/><path d="M15 17 L15 11" stroke="#5f5e5a" stroke-width="2" stroke-linecap="round"/><path d="M15 17 L19 19" stroke="#5f5e5a" stroke-width="2" stroke-linecap="round"/></svg>'},
+ {id:'take', name:'Coffee', desc:'Just give me your take.',
+  icon:'<svg width="30" height="30" viewBox="0 0 30 30"><rect x="6" y="10" width="14" height="12" rx="3" fill="#fffdf9" stroke="#8a7c64" stroke-width="2"/><path d="M20 13 h3 a3 3 0 0 1 0 6 h-3" fill="none" stroke="#8a7c64" stroke-width="2"/><path d="M10 7 q1 -2 0 -3 M14 7 q1 -2 0 -3" stroke="#b4b2a9" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>'},
+ {id:'mic', name:'Microphone', desc:'I’m actually here to book a speaker.',
+  icon:'<svg width="30" height="30" viewBox="0 0 30 30"><rect x="11" y="4" width="8" height="13" rx="4" fill="#5f5e5a"/><path d="M8 13 a7 7 0 0 0 14 0" fill="none" stroke="#5f5e5a" stroke-width="2"/><path d="M15 20 v5 M10 26 h10" stroke="#5f5e5a" stroke-width="2" stroke-linecap="round"/></svg>'}];
+
+const MIC={t:'You found the booking page',d:'Topics, one-sheet, contact form. Candidly, the whole reason this site exists.',h:'/legal-tech/speaking'};
+const R={
+ run:{ tear:{t:'A marathon block, disassembled',d:'Sixteen weeks, every decision, including the dumb ones.',h:'/running'},
+       log:{t:'The training log',d:'Unfiltered weeks. Some of them are ugly.',h:'/running'},
+       take:{t:'The watch knows less than you think',d:'A take on running data.',h:'/running'}},
+ tink:{tear:{t:'The workbench, piece by piece',d:'A build, told in reverse.',h:'/workshop'},
+       log:{t:'Building this site — the log',d:'Every decision, dead ends included. You’re inside the project right now.',h:'/workshop/building-this-site'},
+       take:{t:'Tools I bought so you don’t have to',d:'The scrap bin has opinions.',h:'/workshop'}},
+ ops:{ tear:{t:'Teardown: a solo firm’s entire tech stack',d:'Every tool, what it costs, what it’s actually for.',h:'/legal-tech'},
+       log:{t:'The automation experiment log',d:'Tried on real firm workflows. Receipts included.',h:'/legal-tech'},
+       take:{t:'What AI actually does in a law firm',d:'Past the demo, into the gears.',h:'/legal-tech'}},
+ browse:{tear:{t:'Start here: the best teardown so far',d:'Reader favorite. Low commitment.',h:'/newsletter'},
+       log:{t:'Building this site — the log',d:'Watch this website assemble itself in public.',h:'/workshop/building-this-site'},
+       take:{t:'On belief',d:'From a religion degree that never quite left.',h:'/field-notes'}},
+ all:{ tear:{t:'Taking Things Apart — the newsletter',d:'One thing disassembled, weekly-ish. Rotates through all four sections.',h:'/newsletter'},
+       log:{t:'The everything feed',d:'Latest from all four sections, unsorted on purpose.',h:'/'},
+       take:{t:'Why this site refuses to pick a lane',d:'The mix is the point. An explainer.',h:'/field-notes'}}};
+
+const stage=document.getElementById('stage'), msg=document.getElementById('msg');
+let charPick=null;
+
+function step1(){
+  charPick=null; msg.textContent='';
+  stage.innerHTML='<div class="q">First: who’s clicking?</div>'+
+  '<div class="sub">Pick whoever’s closest. There’s no wrong answer, only mild profiling.</div>'+
+  '<div class="opts" id="opts"></div>';
+  const o=document.getElementById('opts');
+  CHARS.forEach(c=>{
+    const b=document.createElement('button');b.className='opt';
+    b.innerHTML='<span class="dot" style="background:'+c.color+'"></span><span><b>'+c.name+'</b><small>'+c.desc+'</small></span>';
+    b.onclick=()=>{charPick=c;step2();};
+    o.appendChild(b);
+  });
+}
+
+function step2(){
+  stage.innerHTML='<div class="crumb">'+charPick.name+' · <a href="#" id="back">change</a></div>'+
+  '<div class="q">Now grab a tool off the bench.</div>'+
+  '<div class="sub">Tools, not doors — turns out what you want matters more than where you’d wander.</div>'+
+  '<div class="opts" id="opts"></div>';
+  document.getElementById('back').onclick=(e)=>{e.preventDefault();step1();};
+  const o=document.getElementById('opts');
+  TOOLS.forEach(t=>{
+    const b=document.createElement('button');b.className='opt';
+    b.innerHTML=t.icon+'<span><b>'+t.name+'</b><small>'+t.desc+'</small></span>';
+    b.onclick=()=>step3(t);
+    o.appendChild(b);
+  });
+}
+
+function step3(tool){
+  const res = tool.id==='mic' ? MIC : R[charPick.id][tool.id];
+  stage.innerHTML='<div class="crumb">'+charPick.name+' + '+tool.name.toLowerCase()+' · <a href="#" id="back">start over</a></div>'+
+  '<div class="result"><div class="lab">Here’s where I’d start</div><b>'+res.t+'</b><p>'+res.d+'</p>'+
+  '<div class="row"><button class="go" id="go">Read it →</button><button class="again" id="again">Run it back</button></div></div>'+
+  '<div class="aside">Yes, this “game” is three buttons in a trench coat. The rating box below is real, though.</div>';
+  document.getElementById('back').onclick=(e)=>{e.preventDefault();step1();};
+  document.getElementById('again').onclick=step1;
+  document.getElementById('go').onclick=()=>{msg.textContent='→ In the real site: '+res.h;};
+}
+
+step1();
+
+let voted=false, nCool=61, nLame=64;
+document.getElementById('vCool').onclick=()=>{
+  if(voted)return; voted=true; nCool++;
+  document.getElementById('nCool').textContent=nCool;
+  document.getElementById('verdict').textContent='Thank you. She will be hearing about this.';
+};
+document.getElementById('vLame').onclick=()=>{
+  if(voted)return; voted=true; nLame++;
+  document.getElementById('nLame').textContent=nLame;
+  document.getElementById('verdict').textContent='Noted. She asked me to thank you personally.';
+};
+</script>
+</body>
+</html>

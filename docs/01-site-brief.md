@@ -21,7 +21,7 @@ Implications:
 
 ## 3. Goals (ranked)
 
-1. **Speaking & consulting leads.** Make it effortless to evaluate and book Zack. The /speaking page is the site's one conversion job.
+1. **Visibility as an expert.** Speaking, press, and podcast appearances are proof points, not the goal itself — the /speaking page's job is credibility first, booking made easy second.
 2. **Audience building.** Regular publishing via a single newsletter; subscribers are the asset.
 3. **Personal playground.** The site itself is a workshop project. If it stops being fun, the design has failed.
 
@@ -42,17 +42,30 @@ One site, path-based sections, no subdomains. Rationale: preserves consolidated 
 /now                    What Zack is building / training for / reading right now
 /about                  Longer story, photos, the arc
 /legal-tech             Pillar: tools, takes, industry commentary
-/legal-tech/speaking    THE conversion page: topics, appearances, one-sheet, headshots, booking form
+/legal-tech/speaking    Credibility page first, booking made easy second: topics, appearances, press, one-sheet, headshots, booking form
 /running                Pillar: training logs, race reports
 /workshop               Pillar: builds, tinkering, code
 /workshop/building-this-site   The build-in-public series (launch content)
 /field-notes            Pillar: essays, big questions, alternative viewpoints
 /newsletter             About + archive + subscribe
+/teardowns              Format view: every teardown across all pillars — doubles as the newsletter archive
 ```
+
+Navigation is pillar-based (subjects are how people browse). Formats get cross-cutting views (`/teardowns`; each log series gets its own page). No nav changes required by the format axis.
 
 ## 6. Content model
 
 Everything is a post in one system; sections are filtered views.
+
+**Two axes, never conflated** (decided 2026-07-26; build log entry 005):
+
+- **Pillar** = subject — *what the post is about*. Exactly one per post. Pillars are the interests: legal tech, running, making things, big ideas. Slugs double as section URLs and content folders.
+- **Format** = method — *what the post does*. Exactly one per post:
+  - `teardown` — the flagship: disassemble one thing, show the pieces. Every newsletter issue is a teardown.
+  - `log` — ongoing journal entries in a series (training log, building-this-site, experiment logs).
+  - `take` — short, timely opinion.
+
+The earlier model crammed both axes into one list, which is why "workshop" (a subject) and "teardowns" (a method) kept colliding.
 
 Front matter schema (all content):
 
@@ -60,13 +73,14 @@ Front matter schema (all content):
 title:        string
 date:         YYYY-MM-DD
 status:       draft | published
-pillar:       legal-tech | running | workshop | field-notes
+pillar:       legal-tech | running | workshop | field-notes   # subject — exactly one
+format:       teardown | log | take                           # method — exactly one
 series:       optional (e.g. building-this-site)
 newsletter:   optional issue number, if the post ran as an issue
-tags:         []
+tags:         []   # fine-grained topics (ai, woodworking); not promoted to structure until a tag earns it
 ```
 
-**The newsletter is the engine.** One format — each issue takes one thing apart — rotating across pillars. Working title: *Taking Things Apart*. Each issue publishes to the site and auto-files into its pillar archive. One publishing habit feeds the whole site.
+**The newsletter is a format, not a pillar.** *Taking Things Apart* = the teardown format, full stop. Each issue files under one pillar; `/teardowns` is its archive. Logs and takes are site-only content between issues — which also answers "what do I publish when a teardown isn't ready."
 
 Cadence commitment: regular (target weekly-ish; the format doc governs the build-log series specifically).
 
@@ -84,6 +98,7 @@ Cadence commitment: regular (target weekly-ish; the format doc governs the build
 - Analytics: privacy-friendly (Plausible/Fathom-class), watch pillar crossover specifically.
 - **Members-area future-proofing**: no v1 build, but stack must not preclude gated content. Astro SSR + middleware + drop-in auth (Clerk/Auth.js/Supabase) covers gated archives and course-style content. If members ever means an interactive app (dashboards, UGC), stand up a separate app — that's the legitimate use of a subdomain.
 - Booking form on /speaking must notify immediately (email at minimum). Zero friction: no accounts, no multi-step.
+- **GitHub on-ramp** (decided 2026-07-26; build log entry 006): the repo goes public and the site itself teaches GitHub to attorneys — footer links to source and commit history, comments via giscus (GitHub Discussions), and a "suggest an edit" link on every post that walks readers into their first pull request. Full spec: `docs/03-github-onramp.md`. Note the accepted tradeoff: `status: draft` posts are visible in the public repo.
 
 ## 9. Positioning guardrail
 
@@ -91,17 +106,18 @@ Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podca
 
 ## 10. Success metrics
 
-- Speaking/consulting inquiries per quarter via the site (primary).
+- Visibility proof points landed per quarter (primary): speaking engagements, press mentions, podcast appearances — the direct measure of "visibility as an expert," not a proxy like follower counts or raw traffic.
 - Newsletter subscribers and open rate; % of subscribers who engage with 2+ pillars (the crossover bet).
 - Publishing streak — issues shipped on cadence.
+- Speaking/consulting inquiries per quarter via the site (secondary — still worth tracking, but a lagging indicator now that credibility, not conversion, is the goal).
 
 ## 11. Roadmap
 
 | Phase | Scope | Exit criteria |
 |-------|-------|---------------|
 | 0. Foundation (now) | Briefs, build log running, decisions logged | This doc + entries 001–002 ✓ |
-| 1. Decisions | Stack (003), newsletter name/platform (004), brand basics (005) | Each is a build log entry |
-| 2. Build | Hub, pillar pages, /speaking, newsletter wired up | Site deployable; speaking page reviewed against §9 |
+| 1. Decisions | Stack (004) ✓, taxonomy (005) ✓, GitHub on-ramp (006), newsletter name/platform (007), brand basics (008) | Each is a build log entry |
+| 2. Build | Hub, pillar pages, /speaking, newsletter wired up, GitHub on-ramp (docs/03) | Site deployable; speaking page reviewed against §9; repo public with comments + edit links live |
 | 3. Launch | Publish build-log series retroactively, announce, first newsletter issue | Live + issue 001 sent |
 | 4. Habit | Weekly-ish issues, quarterly review of metrics (§10) | 12 consecutive issues |
 
@@ -109,5 +125,5 @@ Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podca
 
 - Affinity/Lawyerist positioning line (§9) — resolve before /speaking.
 - Newsletter name — *Taking Things Apart* is a working title, not a decision.
-- Section naming — "workshop" vs. physical/code split; "field notes" gut-check.
+- Section naming — the subject/method conflation is resolved (pillar vs. format, entry 005), but whether "workshop" and "field notes" *read* as subjects to visitors is still a gut-check for the brand entry. Slugs stay put either way; only display names would change.
 - Whether one rotating newsletter retains single-pillar subscribers — the bet to watch in metrics.

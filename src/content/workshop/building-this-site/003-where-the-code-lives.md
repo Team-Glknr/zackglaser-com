@@ -3,6 +3,7 @@ title: "Where the code lives"
 date: 2026-07-26
 status: draft
 pillar: workshop
+format: log
 series: building-this-site
 tags: [tooling, version-control]
 ---
