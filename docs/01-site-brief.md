@@ -79,7 +79,7 @@ Cadence commitment: regular (target weekly-ish; the format doc governs the build
 
 ## 8. Technical requirements
 
-- Static-first with SSR available. Working stack recommendation: **Astro** (content collections map 1:1 to pillars). Final call = build log entry 003.
+- Static-first with SSR available. Stack: **Astro** (content collections map 1:1 to pillars). Decided in build log entry 004.
 - Newsletter platform must support: custom domain, API access, web archive, tagging (Buttondown/ConvertKit-class; decide alongside stack).
 - Analytics: privacy-friendly (Plausible/Fathom-class), watch pillar crossover specifically.
 - **Members-area future-proofing**: no v1 build, but stack must not preclude gated content. Astro SSR + middleware + drop-in auth (Clerk/Auth.js/Supabase) covers gated archives and course-style content. If members ever means an interactive app (dashboards, UGC), stand up a separate app — that's the legitimate use of a subdomain.
