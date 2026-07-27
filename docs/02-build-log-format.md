@@ -70,6 +70,7 @@ tags: []
 - 018 — The GitHub on-ramp, for real: rungs 1 and 3 live, rung 2 built but waiting on the giscus App install (docs/03-github-onramp.md) ✓
 - 019 — Social share images: one PNG per post, generated at build time (docs/design-system/Social Share Image.dc.html) ✓
 - 020 — The default OG image: every page gets a real social card now, not just posts ✓
-- 021 — The speaking page (tabled; the Lawyerist/Affinity line — brief §9 — needs deep work before this ships)
-- 022 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 023 — Launch
+- 021 — Comments go live: rung 2 of the GitHub on-ramp, closed ✓
+- 022 — The speaking page (tabled; the Lawyerist/Affinity line — brief §9 — needs deep work before this ships)
+- 023 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 024 — Launch
