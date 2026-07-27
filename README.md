@@ -2,6 +2,27 @@
 
 Personal site and brand hub for Zack Glaser. One site, four pillars: legal tech, running, the workshop, and field notes — unified by the premise that the mix is the brand: a guy who takes things apart to see how they work.
 
+Live at [zackglaser.com](https://zackglaser.com), deployed on Vercel (personal account) from this repo's `main` branch.
+
+## Where things stand
+
+Shipped and live: Hub, all four pillar pages, individual post pages, `/now`, `/about`, nav/footer chrome with the motion logo, the full brand system (favicon, wordmark lockups, Knolling marks), Knolling's Buttondown subscribe forms, the GitHub on-ramp's footer link + suggest-an-edit links, and a real social share image on every page.
+
+**One thing needs your action to finish:** GitHub comments (rung 2 of the on-ramp, `docs/03-github-onramp.md`). `Comments.astro` is built and ready — it just isn't mounted anywhere yet. To activate it:
+
+1. Install the giscus GitHub App at [github.com/apps/giscus](https://github.com/apps/giscus) on `thirdth/zackglaser-com`
+2. Create a Discussion category named `Comments`, type **Announcement**
+3. Generate the embed config at [giscus.app](https://giscus.app) (mapping = `pathname`, strict matching on, lazy loading on)
+4. Send the resulting `repo-id` / `category-id` values over — I'll drop them into `Comments.astro`'s props and mount it in the post layout
+
+**Tabled, deliberately not started:**
+- `/speaking` — needs the Affinity/Lawyerist positioning line worked out first (brief §9); this is the one open *strategy* question left, not a build task
+- "A game as a front door" — three prototypes sit in `docs/mockups/`, untouched
+
+**Not started yet:** Launch (publish the build log retroactively, announce, first newsletter issue).
+
+Full decision-by-decision history: `docs/02-build-log-format.md`'s entry backlog, or the entries themselves in `src/content/workshop/building-this-site/` (currently 001–020, all `status: draft` until launch).
+
 ## Repo map
 
 ```
@@ -10,18 +31,31 @@ zackglaser-com/
 ├── astro.config.mjs / tsconfig.json / package.json
 ├── src/
 │   ├── content.config.ts      ← content collection schemas (loaders + zod, brief §6)
-│   ├── pages/                 ← Astro routes (just a placeholder index for now)
+│   ├── layouts/Layout.astro   ← shell: nav, footer, meta/OG tags
+│   ├── components/            ← Nav, Footer, NewsletterCard, AuthorshipStamp, Comments, EmptyState
+│   ├── lib/                   ← pillars.ts, postMeta.ts, ogImage.ts (shared, not page-specific)
+│   ├── styles/theme.css       ← design tokens (colors, type, spacing) — light/dark aware
+│   ├── assets/og-fonts/       ← WOFF fonts for build-time OG image generation
+│   ├── pages/
+│   │   ├── index.astro        ← Hub
+│   │   ├── [pillar]/index.astro   ← the 4 pillar landing pages, one template
+│   │   ├── [...id].astro      ← individual post pages
+│   │   ├── about.astro / now.astro
+│   │   └── og/                ← build-time PNG generation (satori + resvg), one per post + a default
 │   └── content/               ← publishable content, organized as collections
-│       ├── workshop/
-│       │   └── building-this-site/   ← the build-in-public log (entries 001+)
-│       ├── legal-tech/
-│       ├── running/
-│       ├── field-notes/
-│       └── newsletter/        ← issue archive once the newsletter exists
-├── public/                    ← static assets
+│       ├── workshop/building-this-site/   ← the build-in-public log (entries 001+)
+│       ├── legal-tech/ / running/ / field-notes/
+│       └── newsletter/        ← issue archive once Knolling issues start shipping
+├── public/
+│   ├── brand/                 ← wordmark lockups, Knolling marks + rasters
+│   └── favicon.svg / favicon.ico / apple-touch-icon.png
 └── docs/                      ← private working docs (not published)
-    ├── 01-site-brief.md       ← the brief: goals, architecture, content model, roadmap
-    └── 02-build-log-format.md ← operating manual for the build-in-public series
+    ├── 01-site-brief.md       ← the brief: goals, architecture, content model, roadmap — the living source of truth
+    ├── 02-build-log-format.md ← operating manual + entry backlog for the build-in-public series
+    ├── 03-github-onramp.md    ← the GitHub on-ramp spec (giscus, edit links, footer)
+    ├── 04-ai-first.md         ← authorship disclosure spec (the `authorship` field, the colophon)
+    ├── 05-favicon-marks.md    ← the mark system spec (Mark A, Mark B, motion)
+    └── design-system/         ← frozen reference: the original design-tool mockups everything here was ported from
 ```
 
 ## Conventions
