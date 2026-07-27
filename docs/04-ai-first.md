@@ -44,7 +44,7 @@ A standing page — the operating manual as content:
 - Links to the live instruction files in the repo (`AGENTS.md` — already public). Very few people publish the actual instructions their bots run under; that's the celebration.
 - What the stamps (§3) mean.
 
-Slug is provisional — "colophon" is the bookish word, `/how-this-site-is-made` is the plain-spoken one. Gut-check at the brand pass (build log entry 013).
+Slug decided 2026-07-26 (entry 013): `/how-this-site-is-made`, the plain-spoken option over "colophon" — matches the teaching-voice brand (brief §2) and was already the live link in `AuthorshipStamp.astro`.
 
 ## 6. The audience angle: supervision, in lawyer terms
 

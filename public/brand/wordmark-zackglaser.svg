@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 36">
+  <g transform="translate(0,4)">
+    <rect x="1" y="1" width="13" height="13" rx="1.5" class="ink" />
+    <rect x="18" y="1" width="13" height="13" rx="1.5" class="ink" />
+    <rect x="1" y="18" width="13" height="13" rx="1.5" class="ink" />
+    <rect x="18" y="18" width="13" height="13" rx="1.5" class="accent" />
+    <text x="44" y="23" font-size="22" class="ink">
+      <tspan font-family="Literata, serif" font-style="italic" font-weight="500">zack</tspan><tspan font-family="'Space Mono', monospace" font-weight="700">glaser.com</tspan>
+    </text>
+  </g>
+  <style>
+    .ink { fill: #1f2429; }
+    .accent { fill: #a6792e; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #edf0f2; }
+      .accent { fill: #d9a857; }
+    }
+  </style>
+</svg>

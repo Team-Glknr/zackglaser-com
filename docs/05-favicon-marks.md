@@ -1,6 +1,6 @@
 # zackglaser.com — favicon & mark system spec
 
-Status: Mark A shipped (build log entry 012 ✓); Mark B and wordmark lockups remain proposals for the brand pass (entry 013) · Last updated: 2026-07-26
+Status: Both marks and both wordmark lockups shipped (entries 012–014 ✓) — Mark A + lockup, then Mark B + lockup once the Buttondown account existed · Last updated: 2026-07-26
 Owner: Zack Glaser
 Companion to: `docs/01-site-brief.md` §7 · `src/styles/theme.css` (token source of truth)
 
@@ -90,8 +90,8 @@ Rules:
 1. `public/favicon.svg` — Mark A with dark-mode media query (replaces the current file, which is still **Astro's default logo**). ✓ entry 012
 2. `public/favicon.ico` — Mark A rasterized at 32 and 16 (replaces default). ✓ entry 012
 3. `apple-touch-icon.png` (180×180) — Mark A on solid `--color-paper`, margins widened to 3/32 per side (iOS crops tight). ✓ entry 012
-4. Knolling mark (Mark B) — SVG + rasters for Buttondown header and social avatars, deferred until the account exists.
-5. Wordmark lockups (mark + "zackglaser.com" / mark + "Knolling") — brand pass, entry 013.
+4. Knolling mark (Mark B) — ✓ entry 014 (`public/brand/mark-knolling.svg`). Rasters shipped too: `public/brand/knolling-avatar.png` (512×512, social) and `public/brand/knolling-header.png` (480×168 @3x, Buttondown/email use).
+5. Wordmark lockups: mark + "zackglaser.com" ✓ entry 013 (`public/brand/wordmark-zackglaser.svg`). Mark + "Knolling" ✓ entry 014 (`public/brand/wordmark-knolling.svg`).
 
 ## 6. Extending the family
 
@@ -103,3 +103,7 @@ The grid is the system; cell contents are the variable. Future marks (a series m
 - Accent placement: bottom-right is where the eye lands last (reading order) — intentional "the interesting part is at the end." Confirm or move.
 - Motion: parts drifting from scattered to knolled (~150ms, `--motion-fast`) as a header hover/load moment. Favicon stays static regardless.
 - Whether Mark A at 16px reads "grid app" out of context — the asymmetric gold part is the current answer; Design may have a better one.
+
+## 8. Note for whoever rasterizes these next
+
+`magick` on this machine delegates SVG rendering to `rsvg-convert`, and that path rendered every asymmetric-margin composition here off-center — content that's mathematically centered in the source SVG came out shifted toward the top-left in the raster, silently. Symmetric marks (Mark A alone, no added margin) happened to render fine, which is exactly what let the bug through the first time. Verify any new raster's content bounding box against its expected margins before shipping it; don't just eyeball the preview. Browser-based rendering (Chrome headless via Puppeteer, screenshotting the actual SVG) did not have this bug and is the safer default. Full account: build log entry 014.

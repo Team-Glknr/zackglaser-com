@@ -84,7 +84,7 @@ tags:         []   # fine-grained topics (ai, woodworking); not promoted to stru
 
 **Authorship is provenance, not a third axis** (decided 2026-07-26; build log entry 009): most content here is AI-drafted under Zack's direction, and every post says so via a stamp — celebrated, not disclaimed. It never drives navigation. The rule that makes it safe: the voice doc governs the bots, not vice versa. Full spec: `docs/04-ai-first.md`.
 
-**The newsletter is a format, not a pillar.** **Knolling** (named 2026-07-26; build log entry 011) names the newsletter itself. Every issue is written in the `teardown` format, but the two words split jobs for good: **Knolling** refers to the newsletter as a place/product — nav, footer, subscribe cards, issue copy; **teardown** (lowercase) stays the taxonomy word for the disassembly method, used wherever the site names the idea rather than the destination — the format pill on a post, `/teardowns` as its archive route. `/teardowns` isn't renaming to `/knolling`: it's an archive of a format, not a synonym for the newsletter. The former working title survives as the tagline: *"taking things apart to see how they work"* (gut-check at the brand pass, entry 013). Each issue files under one pillar; `/teardowns` is its archive. Logs and takes are site-only content between issues — which also answers "what do I publish when a teardown isn't ready."
+**The newsletter is a format, not a pillar.** **Knolling** (named 2026-07-26; build log entry 011) names the newsletter itself. Every issue is written in the `teardown` format, but the two words split jobs for good: **Knolling** refers to the newsletter as a place/product — nav, footer, subscribe cards, issue copy; **teardown** (lowercase) stays the taxonomy word for the disassembly method, used wherever the site names the idea rather than the destination — the format pill on a post, `/teardowns` as its archive route. `/teardowns` isn't renaming to `/knolling`: it's an archive of a format, not a synonym for the newsletter. The former working title survives as the tagline: *"taking things apart to see how they work"* (whether it holds is still open — not addressed in entry 013, no entry assigned yet). Each issue files under one pillar; `/teardowns` is its archive. Logs and takes are site-only content between issues — which also answers "what do I publish when a teardown isn't ready."
 
 Cadence commitment: regular (target weekly-ish; the format doc governs the build-log series specifically).
 
@@ -93,13 +93,14 @@ Cadence commitment: regular (target weekly-ish; the format doc governs the build
 - One design system at the hub; each pillar gets an accent color within it, not its own identity.
 - Workbench aesthetic over corporate polish: photos of real projects, sketches, honest numbers.
 - Typography-first, fast, minimal chrome. The content is the design.
+- Color palette and type pairing: decided and shipped in `src/styles/theme.css` (build log entry 007 ✓) — neutrals + one accent per pillar, Literata/Space Mono/Archivo. Not open questions; already live on every page.
 - Favicon shipped (build log entry 012 ✓): the "knolling grid" mark — four squares, one workshop-gold accent, light/dark aware. Spec: `docs/05-favicon-marks.md`.
-- Deliverables still needed: color palette, type pairing, wordmark lockups, Mark B (the Knolling mark) — build log entry 013.
+- Wordmark lockups shipped (entries 013 ✓, 014 ✓): `public/brand/wordmark-zackglaser.svg` (site) and `public/brand/wordmark-knolling.svg` (newsletter), both light/dark aware. Mark B shipped too (`public/brand/mark-knolling.svg`), plus rasters for the Buttondown account (`knolling-avatar.png`, `knolling-header.png`) now that it exists — `buttondown.com/knolling`.
 
 ## 8. Technical requirements
 
 - Static-first with SSR available. Stack: **Astro** (content collections map 1:1 to pillars). Decided in build log entry 004.
-- Newsletter platform: **Buttondown**, name: **Knolling** (both decided 2026-07-26; build log entry 011 ✓ — claim the `buttondown.com/knolling` handle at account creation; it appeared unclaimed at decision time). Markdown-native with a full REST API, so issues live as markdown in the repo and `/teardowns` on our own domain is the archive — one source of truth. Checks every requirement (custom domain, API, archives, tagging), starts free/$9-a-month at this list size, and subscriber export is trivial so there's no lock-in. Kit and beehiiv optimize for commerce and ad-driven growth respectively — both non-goals (§3).
+- Newsletter platform: **Buttondown**, name: **Knolling** (both decided 2026-07-26; build log entry 011 ✓). Account created and `buttondown.com/knolling` secured 2026-07-26 (entry 014 ✓). Not yet wired into the site (subscribe forms are still non-functional placeholders). Markdown-native with a full REST API, so issues live as markdown in the repo and `/teardowns` on our own domain is the archive — one source of truth. Checks every requirement (custom domain, API, archives, tagging), starts free/$9-a-month at this list size, and subscriber export is trivial so there's no lock-in. Kit and beehiiv optimize for commerce and ad-driven growth respectively — both non-goals (§3).
 - Analytics: privacy-friendly (Plausible/Fathom-class), watch pillar crossover specifically.
 - **Members-area future-proofing**: no v1 build, but stack must not preclude gated content. Astro SSR + middleware + drop-in auth (Clerk/Auth.js/Supabase) covers gated archives and course-style content. If members ever means an interactive app (dashboards, UGC), stand up a separate app — that's the legitimate use of a subdomain.
 - Booking form on /speaking must notify immediately (email at minimum). Zero friction: no accounts, no multi-step.
@@ -122,7 +123,7 @@ Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podca
 | Phase | Scope | Exit criteria |
 |-------|-------|---------------|
 | 0. Foundation (now) | Briefs, build log running, decisions logged | This doc + entries 001–002 ✓ |
-| 1. Decisions | Stack (004) ✓, taxonomy (005) ✓, GitHub on-ramp (006) ✓, AI-first (009) ✓, newsletter name/platform (011) ✓, favicon (012) ✓, brand basics (013) | Each is a build log entry |
+| 1. Decisions | Stack (004) ✓, taxonomy (005) ✓, GitHub on-ramp (006) ✓, AI-first (009) ✓, newsletter name/platform (011) ✓, favicon (012) ✓, brand basics (013) ✓ | Each is a build log entry |
 | 2. Build | Hub, pillar pages, /speaking, newsletter wired up, GitHub on-ramp (docs/03) | Site deployable; speaking page reviewed against §9; repo public with comments + edit links live |
 | 3. Launch | Publish build-log series retroactively, announce, first newsletter issue | Live + issue 001 sent |
 | 4. Habit | Weekly-ish issues, quarterly review of metrics (§10) | 12 consecutive issues |
@@ -131,5 +132,6 @@ Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podca
 
 - Affinity/Lawyerist positioning line (§9) — resolve before /speaking.
 - ~~Newsletter name~~ — resolved 2026-07-26: **Knolling** (§6, entry 011). *Taking Things Apart* demoted to working tagline.
-- Section naming — the subject/method conflation is resolved (pillar vs. format, entry 005), but whether "workshop" and "field notes" *read* as subjects to visitors is still a gut-check for the brand entry. Slugs stay put either way; only display names would change.
+- ~~Section naming~~ — resolved 2026-07-26 (entry 013): "workshop" and "field notes" keep their display names as-is. Both already read as subjects alongside "legal tech" and "running" in the nav/footer lists.
+- ~~Colophon slug~~ — resolved 2026-07-26 (entry 013): `/how-this-site-is-made`, not "colophon." Already the live link in `AuthorshipStamp.astro`; matches the teaching-voice brand (§2).
 - Whether one rotating newsletter retains single-pillar subscribers — the bet to watch in metrics.
