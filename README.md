@@ -6,14 +6,7 @@ Live at [zackglaser.com](https://zackglaser.com), deployed on Vercel (personal a
 
 ## Where things stand
 
-Shipped and live: Hub, all four pillar pages, individual post pages, `/now`, `/about`, nav/footer chrome with the motion logo, the full brand system (favicon, wordmark lockups, Knolling marks), Knolling's Buttondown subscribe forms, the GitHub on-ramp's footer link + suggest-an-edit links, and a real social share image on every page.
-
-**One thing needs your action to finish:** GitHub comments (rung 2 of the on-ramp, `docs/03-github-onramp.md`). `Comments.astro` is built and ready — it just isn't mounted anywhere yet. To activate it:
-
-1. Install the giscus GitHub App at [github.com/apps/giscus](https://github.com/apps/giscus) on `thirdth/zackglaser-com`
-2. Create a Discussion category named `Comments`, type **Announcement**
-3. Generate the embed config at [giscus.app](https://giscus.app) (mapping = `pathname`, strict matching on, lazy loading on)
-4. Send the resulting `repo-id` / `category-id` values over — I'll drop them into `Comments.astro`'s props and mount it in the post layout
+Shipped and live: Hub, all four pillar pages, individual post pages, `/now`, `/about`, nav/footer chrome with the motion logo, the full brand system (favicon, wordmark lockups, Knolling marks), Knolling's Buttondown subscribe forms, the full GitHub on-ramp (footer link, suggest-an-edit links, and GitHub-Discussions-backed comments via giscus), and a real social share image on every page.
 
 **Tabled, deliberately not started:**
 - `/speaking` — needs the Affinity/Lawyerist positioning line worked out first (brief §9); this is the one open *strategy* question left, not a build task

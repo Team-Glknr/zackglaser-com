@@ -1,9 +1,7 @@
 ---
-// GitHub on-ramp rung 2 — docs/03-github-onramp.md §5.2. NOT YET wired into
-// any page template: repoId/categoryId below are placeholders until
-// giscus.app generates real values, which needs the giscus GitHub App
-// installed on thirdth/zackglaser-com and a "Comments" Discussion category
-// (type Announcement) created first — both one-time, browser-only steps.
+// GitHub on-ramp rung 2 — docs/03-github-onramp.md §5.2. Mounted in
+// src/pages/[...id].astro with the real repo-id/category-id from the
+// giscus app install + "Comments" Discussion category on thirdth/zackglaser-com.
 // Zero client JS shipped by us; the script below is giscus's own, lazy-loaded.
 interface Props {
   repoId: string;

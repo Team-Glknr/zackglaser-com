@@ -1,14 +1,13 @@
 ---
 // Structure/tokens ported from docs/design-system/Post Page.dc.html.
-// Comments (giscus) are deliberately absent — rung 2 of the GitHub on-ramp
-// (docs/03) needs a repo-id/category-id from giscus.app that don't exist
-// yet. "Suggest an edit" (rung 3) is wired up below. Same for the hero
-// image slot: there's no image field in the schema yet, nothing to render
-// honestly.
+// Comments (giscus) and "suggest an edit" (rungs 2 + 3 of the GitHub
+// on-ramp, docs/03) are both wired up below. Hero image slot stays absent:
+// there's no image field in the schema yet, nothing to render honestly.
 import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import NewsletterCard from "../components/NewsletterCard.astro";
 import AuthorshipStamp from "../components/AuthorshipStamp.astro";
+import Comments from "../components/Comments.astro";
 import { pillars } from "../lib/pillars";
 
 export async function getStaticPaths() {
@@ -104,6 +103,8 @@ const dateMeta = post.data.newsletter ? `${formattedDate} · issue ${post.data.n
         </div>
       )
     }
+
+    <Comments repoId="R_kgDOTkCnPg" categoryId="DIC_kwDOTkCnPs4DCHEn" />
 
     <NewsletterCard eyebrow={`get ${pillarInfo.label} in your inbox`} tag={pillarInfo.id} />
   </div>
