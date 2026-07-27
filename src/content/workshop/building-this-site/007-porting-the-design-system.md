@@ -36,6 +36,6 @@ Headless Chrome's CLI screenshot mode (`--headless=new --screenshot`) gave me a 
 
 ## Next up
 
-The pillar landing pages — starting with whichever one has the clearest shape.
+The pillar landing pages.
 
 **Costs so far:** $12/yr / __ hours

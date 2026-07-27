@@ -5,15 +5,13 @@
 // to not feel fake, so they're deferred until that content exists.
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import NewsletterCard from "../components/NewsletterCard.astro";
+import EmptyState from "../components/EmptyState.astro";
 import { pillars } from "../lib/pillars";
+import { postMetaCrossPillar } from "../lib/postMeta";
 
 const allPosts = await getCollection("posts", ({ data }) => data.status === "published");
 const latestPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
-
-function postMeta(post: (typeof allPosts)[number]) {
-  const pillarLabel = pillars.find((p) => p.id === post.data.pillar)?.label ?? post.data.pillar;
-  return post.data.newsletter ? `${pillarLabel} · issue ${post.data.newsletter}` : `${pillarLabel} · ${post.data.format}`;
-}
 ---
 
 <Layout title="zackglaser.com">
@@ -47,7 +45,7 @@ function postMeta(post: (typeof allPosts)[number]) {
             <div class="post-card" style={`--accent:${pillarAccent}`}>
               <div class="post-tag">{pillars.find((p) => p.id === post.data.pillar)?.label}</div>
               <div class="post-title">{post.data.title}</div>
-              <div class="post-meta">{postMeta(post)}</div>
+              <div class="post-meta">{postMetaCrossPillar(post)}</div>
               <a href={`/${post.data.pillar}/${post.id}`} class="post-link">
                 read the teardown →
               </a>
@@ -56,31 +54,11 @@ function postMeta(post: (typeof allPosts)[number]) {
         })}
       </div>
     ) : (
-      <div class="empty-wrap">
-        <div class="empty-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M4,8 V4 H8 M16,4 H20 V8 M20,16 V20 H16 M8,20 H4 V16"
-              stroke="currentColor"
-              stroke-width="1.25"
-              stroke-linecap="square"
-            />
-          </svg>
-        </div>
-        <div class="empty-title">Nothing here yet</div>
-        <p class="empty-sub">The first teardown is still on the bench. Subscribe below and it'll land in your inbox the day it's published.</p>
-      </div>
+      <EmptyState message="The first teardown is still on the bench. Subscribe below and it'll land in your inbox the day it's published." />
     )
   }
 
-  <div class="newsletter-card">
-    <div class="newsletter-eyebrow">the newsletter — taking things apart</div>
-    <div class="newsletter-headline">One thing, taken apart. Every week-ish.</div>
-    <form class="newsletter-form-row">
-      <input type="email" class="newsletter-input" placeholder="you@email.com" />
-      <button type="submit" class="subscribe-btn">[ subscribe ]</button>
-    </form>
-  </div>
+  <NewsletterCard />
 </Layout>
 
 <style>
@@ -197,96 +175,6 @@ function postMeta(post: (typeof allPosts)[number]) {
   }
   .post-link:hover {
     text-decoration: underline;
-  }
-
-  .empty-wrap {
-    text-align: center;
-    padding: var(--space-6) var(--space-4) var(--space-7);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-6);
-    border-bottom: 1px solid var(--color-line);
-    color: var(--color-ink);
-  }
-  .empty-icon {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-card);
-    margin-bottom: var(--space-1);
-  }
-  .empty-title {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 20px;
-  }
-  .empty-sub {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    color: var(--color-ink-soft);
-    margin: 0;
-    max-width: 420px;
-    line-height: 1.6;
-  }
-
-  .newsletter-card {
-    background: var(--color-raised);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-card);
-    padding: var(--space-6);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    margin-bottom: var(--space-8);
-  }
-  .newsletter-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .newsletter-headline {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 28px;
-    color: var(--color-ink);
-    line-height: 1.3;
-  }
-  .newsletter-form-row {
-    display: flex;
-    gap: var(--space-3);
-    max-width: 420px;
-  }
-  .newsletter-input {
-    flex: 1;
-    min-width: 0;
-    background: var(--color-paper);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-input);
-    padding: 10px 14px;
-    font-family: var(--font-sans);
-    font-size: 14px;
-    color: var(--color-ink);
-  }
-  .subscribe-btn {
-    background: transparent;
-    border: 1px solid var(--color-line);
-    color: var(--color-ink);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    cursor: pointer;
-    padding: 8px 14px;
-    border-radius: var(--radius-input);
-    flex-shrink: 0;
-  }
-  .subscribe-btn:hover {
-    border-color: var(--color-ink);
   }
 
   @media (max-width: 900px) {

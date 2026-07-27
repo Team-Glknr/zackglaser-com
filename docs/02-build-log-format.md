@@ -56,8 +56,9 @@ tags: []
 - 005 — Pillars vs. formats: untangling the taxonomy ✓
 - 006 — The GitHub on-ramp: the repo goes public, and the site starts teaching GitHub (docs/03-github-onramp.md) ✓
 - 007 — Porting the design system: theme, chrome, and the Hub ✓
-- 008 — Naming the newsletter
-- 009 — Brand: colors, type, and the logo question (incl. section display-name gut-check)
-- 010 — The speaking page (and the Lawyerist/Affinity line — brief §9)
-- 011 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 012 — Launch
+- 008 — The pillar pages, as one template ✓
+- 009 — Naming the newsletter
+- 010 — Brand: colors, type, and the logo question (incl. section display-name gut-check)
+- 011 — The speaking page (and the Lawyerist/Affinity line — brief §9)
+- 012 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 013 — Launch

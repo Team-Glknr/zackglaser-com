@@ -94,7 +94,7 @@ Cadence commitment: regular (target weekly-ish; the format doc governs the build
 ## 8. Technical requirements
 
 - Static-first with SSR available. Stack: **Astro** (content collections map 1:1 to pillars). Decided in build log entry 004.
-- Newsletter platform must support: custom domain, API access, web archive, tagging (Buttondown/ConvertKit-class; decide alongside stack).
+- Newsletter platform: **Buttondown** (decided 2026-07-26; to be written up with the naming decision, build log entry 009). Markdown-native with a full REST API, so issues live as markdown in the repo and `/teardowns` on our own domain is the archive — one source of truth. Checks every requirement (custom domain, API, archives, tagging), starts free/$9-a-month at this list size, and subscriber export is trivial so there's no lock-in. Kit and beehiiv optimize for commerce and ad-driven growth respectively — both non-goals (§3).
 - Analytics: privacy-friendly (Plausible/Fathom-class), watch pillar crossover specifically.
 - **Members-area future-proofing**: no v1 build, but stack must not preclude gated content. Astro SSR + middleware + drop-in auth (Clerk/Auth.js/Supabase) covers gated archives and course-style content. If members ever means an interactive app (dashboards, UGC), stand up a separate app — that's the legitimate use of a subdomain.
 - Booking form on /speaking must notify immediately (email at minimum). Zero friction: no accounts, no multi-step.
@@ -116,7 +116,7 @@ Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podca
 | Phase | Scope | Exit criteria |
 |-------|-------|---------------|
 | 0. Foundation (now) | Briefs, build log running, decisions logged | This doc + entries 001–002 ✓ |
-| 1. Decisions | Stack (004) ✓, taxonomy (005) ✓, GitHub on-ramp (006), newsletter name/platform (007), brand basics (008) | Each is a build log entry |
+| 1. Decisions | Stack (004) ✓, taxonomy (005) ✓, GitHub on-ramp (006) ✓, newsletter name/platform (009), brand basics (010) | Each is a build log entry |
 | 2. Build | Hub, pillar pages, /speaking, newsletter wired up, GitHub on-ramp (docs/03) | Site deployable; speaking page reviewed against §9; repo public with comments + edit links live |
 | 3. Launch | Publish build-log series retroactively, announce, first newsletter issue | Live + issue 001 sent |
 | 4. Habit | Weekly-ish issues, quarterly review of metrics (§10) | 12 consecutive issues |
