@@ -1,7 +1,7 @@
 ---
 // Structure/tokens ported from docs/design-system/Site Nav & Footer.dc.html
-// TODO: "elsewhere" links (podcast, rss, email) and the newsletter form
-// are placeholders until the newsletter platform is decided (brief §12).
+// TODO: "elsewhere" links (podcast, rss, email) still placeholders — no
+// real destinations decided yet. Newsletter form is wired to Buttondown.
 import { pillars } from "../lib/pillars";
 const year = new Date().getFullYear();
 ---
@@ -33,10 +33,19 @@ const year = new Date().getFullYear();
     </div>
     <div class="footer-col footer-newsletter-col">
       <div class="footer-col-label">knolling</div>
-      <form class="footer-newsletter-row">
-        <input type="email" class="footer-input" placeholder="you@email.com" />
+      <form
+        action="https://buttondown.com/api/emails/embed-subscribe/knolling"
+        method="post"
+        class="embeddable-buttondown-form footer-newsletter-row"
+      >
+        <label for="bd-email-footer" class="sr-only">Enter your email</label>
+        <input type="email" name="email" id="bd-email-footer" required class="footer-input" placeholder="you@email.com" />
+        <input type="hidden" name="tag" value="footer" />
         <button type="submit" class="footer-go-btn">[ go ]</button>
       </form>
+      <a href="https://buttondown.com/refer/knolling" target="_blank" rel="noopener" class="footer-powered-by">
+        Powered by Buttondown.
+      </a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -109,6 +118,18 @@ const year = new Date().getFullYear();
   }
   .footer-go-btn:hover {
     border-color: var(--color-ink);
+  }
+  .footer-powered-by {
+    display: block;
+    margin-top: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    width: fit-content;
+  }
+  .footer-powered-by:hover {
+    color: var(--color-ink);
   }
   .footer-bottom {
     display: flex;

@@ -7,6 +7,12 @@ import { pillars } from "../lib/pillars";
 
 <nav class="site-nav">
   <a href="/" class="wordmark">
+    <svg class="nav-mark" viewBox="-24 -24 80 80" width="22" height="22" aria-hidden="true">
+      <g class="mark-part p1"><rect x="1" y="1" width="13" height="13" rx="1.5" class="mark-ink" /></g>
+      <g class="mark-part p2"><rect x="18" y="1" width="13" height="13" rx="1.5" class="mark-ink" /></g>
+      <g class="mark-part p3"><rect x="1" y="18" width="13" height="13" rx="1.5" class="mark-ink" /></g>
+      <g class="mark-part p4"><rect x="18" y="18" width="13" height="13" rx="1.5" class="mark-accent" /></g>
+    </svg>
     <span class="wordmark-zack">zack</span><span class="wordmark-glaser">glaser</span>
   </a>
 
@@ -70,11 +76,84 @@ import { pillars } from "../lib/pillars";
   }
 
   .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 18px;
     flex-shrink: 0;
     margin-right: var(--space-2);
     text-decoration: none;
   }
+
+  /* Motion logo — docs/design-system/motion/knolling-motion-preview.html.
+     Plays once on load, settles knolled. Reduced motion is handled globally
+     (theme.css) — animation is disabled, parts simply render already-assembled. */
+  .nav-mark {
+    overflow: visible;
+    flex-shrink: 0;
+  }
+  .mark-ink {
+    fill: var(--color-ink);
+  }
+  .mark-accent {
+    fill: var(--pillar-workshop);
+  }
+  .mark-part {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation-duration: 700ms;
+    animation-timing-function: cubic-bezier(0.22, 0.61, 0.32, 1);
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+  .p1 {
+    animation-name: knoll-p1;
+  }
+  .p2 {
+    animation-name: knoll-p2;
+    animation-delay: 0.09s;
+  }
+  .p3 {
+    animation-name: knoll-p3;
+    animation-delay: 0.18s;
+  }
+  .p4 {
+    animation-name: knoll-p4;
+    animation-delay: 0.27s;
+  }
+  @keyframes knoll-p1 {
+    0% {
+      transform: translate(-18px, -22px) rotate(-10deg);
+    }
+    100% {
+      transform: none;
+    }
+  }
+  @keyframes knoll-p2 {
+    0% {
+      transform: translate(20px, -14px) rotate(7deg);
+    }
+    100% {
+      transform: none;
+    }
+  }
+  @keyframes knoll-p3 {
+    0% {
+      transform: translate(-16px, 18px) rotate(11deg);
+    }
+    100% {
+      transform: none;
+    }
+  }
+  @keyframes knoll-p4 {
+    0% {
+      transform: translate(18px, 20px) rotate(-8deg);
+    }
+    100% {
+      transform: none;
+    }
+  }
+
   .wordmark-zack {
     font-family: var(--font-serif);
     font-style: italic;

@@ -1,0 +1,166 @@
+---
+// Structure/tokens ported from docs/design-system/About Page.dc.html —
+// photo hero and gallery omitted (no real images yet); text content
+// unchanged in shape.
+import Layout from "../layouts/Layout.astro";
+import NewsletterCard from "../components/NewsletterCard.astro";
+
+const arcSteps = [
+  { year: "2004", label: "Religion degree (BA)", detail: "Studying why people believe what they believe." },
+  { year: "2011", label: "JD", detail: "Practicing law — asking why a system is built the way it is." },
+  { year: "2017", label: "Fullstack certificate", detail: "Learning what actually happens under a button click." },
+  { year: "now", label: "Zack Glaser", detail: "Legal Tech Advisor, runner, tinkerer, one newsletter." },
+];
+---
+
+<Layout
+  title="About — zackglaser.com"
+  description="Zack Glaser: Legal Tech Advisor at Lawyerist/Affinity, runner, tinkerer. Religion degree, JD, fullstack certificate — one instinct, three subjects."
+>
+  <div class="about-container">
+    <div class="intro">
+      <div class="eyebrow">about</div>
+      <h1>I take things apart to see how they work.</h1>
+      <p>
+        That's true of legal software, of a marathon training block, of a workbench, and — this part took longer to
+        admit — of my own career. I have a religion degree, a JD, and a fullstack certificate, in that order, and
+        for a long time I thought that was three separate people.
+      </p>
+      <p>
+        It's one instinct. Studying religion is asking why people believe what they believe. Practicing law is
+        asking why a system is built the way it's built. Learning to code is asking what's actually happening under
+        a button click. Different subjects, same question.
+      </p>
+    </div>
+
+    <div class="section-label">the arc</div>
+    <div class="arc-row">
+      {
+        arcSteps.map((step, i) => (
+          <div class="arc-node" class:list={{ "arc-node-first": i === 0 }}>
+            <div class="arc-year">{step.year}</div>
+            <div class="arc-label">{step.label}</div>
+            <div class="arc-detail">{step.detail}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="section-label">now, on the record</div>
+    <p class="record-p">
+      I'm the Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podcast — that's the day job, and
+      this site deliberately doesn't compete with it. What lives here is everything else: the running log, the
+      workbench, the essays, and a newsletter that rotates through all of it. If you only know one side of this, the
+      other three are one click away.
+    </p>
+
+    <NewsletterCard tag="about" />
+  </div>
+</Layout>
+
+<style>
+  .about-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .intro {
+    max-width: 640px;
+    margin-bottom: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.25;
+    color: var(--color-ink);
+    margin: 0;
+  }
+  .intro p {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 var(--space-5);
+  }
+
+  .arc-row {
+    display: flex;
+    margin-bottom: var(--space-8);
+    flex-wrap: wrap;
+  }
+  .arc-node {
+    flex: 1;
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: 0 var(--space-5);
+    border-left: 1px solid var(--color-line);
+  }
+  .arc-node-first {
+    border-left: none;
+    padding-left: 0;
+  }
+  .arc-year {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+  }
+  .arc-label {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--color-ink);
+  }
+  .arc-detail {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+  }
+
+  .record-p {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-8);
+    max-width: 640px;
+  }
+
+  @media (max-width: 720px) {
+    .arc-row {
+      flex-direction: column;
+    }
+    .arc-node {
+      border-left: none;
+      border-top: 1px solid var(--color-line);
+      padding: var(--space-4) 0 0;
+    }
+    .arc-node-first {
+      border-top: none;
+      padding-top: 0;
+    }
+  }
+</style>

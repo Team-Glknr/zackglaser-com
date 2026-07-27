@@ -1,17 +1,31 @@
 ---
+// Posts to Buttondown's HTML-form embed endpoint — exact markup confirmed
+// against the real account's own generated snippet, not just the generic docs.
+// `tag` (optional) records where the signup came from, for the pillar-crossover
+// metric in brief §10.
 interface Props {
   eyebrow?: string;
+  tag?: string;
 }
-const { eyebrow = "knolling — the newsletter" } = Astro.props;
+const { eyebrow = "knolling — the newsletter", tag } = Astro.props;
 ---
 
 <div class="newsletter-card">
   <div class="newsletter-eyebrow">{eyebrow}</div>
   <div class="newsletter-headline">One thing, taken apart. Every week-ish.</div>
-  <form class="newsletter-form-row">
-    <input type="email" class="newsletter-input" placeholder="you@email.com" />
+  <form
+    action="https://buttondown.com/api/emails/embed-subscribe/knolling"
+    method="post"
+    class="embeddable-buttondown-form newsletter-form-row"
+  >
+    <label for="bd-email-card" class="sr-only">Enter your email</label>
+    <input type="email" name="email" id="bd-email-card" required class="newsletter-input" placeholder="you@email.com" />
+    {tag && <input type="hidden" name="tag" value={tag} />}
     <button type="submit" class="subscribe-btn">[ subscribe ]</button>
   </form>
+  <a href="https://buttondown.com/refer/knolling" target="_blank" rel="noopener" class="powered-by">
+    Powered by Buttondown.
+  </a>
 </div>
 
 <style>
@@ -68,5 +82,15 @@ const { eyebrow = "knolling — the newsletter" } = Astro.props;
   }
   .subscribe-btn:hover {
     border-color: var(--color-ink);
+  }
+  .powered-by {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    width: fit-content;
+  }
+  .powered-by:hover {
+    color: var(--color-ink);
   }
 </style>

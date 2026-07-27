@@ -101,7 +101,7 @@ The grid is the system; cell contents are the variable. Future marks (a series m
 
 - Mark B's circle — keep the deliberate break, or keep the family 100% rectilinear?
 - Accent placement: bottom-right is where the eye lands last (reading order) — intentional "the interesting part is at the end." Confirm or move.
-- Motion: parts drifting from scattered to knolled (~150ms, `--motion-fast`) as a header hover/load moment. Favicon stays static regardless.
+- ~~Motion~~ — resolved 2026-07-27 (entry 017): Mark A plays a scattered-to-knolled reveal once on page load in the nav, 700ms with a staggered 90ms cascade per part, then holds. Reference: `docs/design-system/motion/knolling-motion-preview.html`; implementation: `Nav.astro`. Favicon itself stays static, as originally scoped.
 - Whether Mark A at 16px reads "grid app" out of context — the asymmetric gold part is the current answer; Design may have a better one.
 
 ## 8. Note for whoever rasterizes these next

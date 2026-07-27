@@ -64,6 +64,9 @@ tags: []
 - 012 — Shipping the favicon: Mark A live, Mark B + wordmark lockups still pending (docs/05-favicon-marks.md) ✓
 - 013 — Brand pass: section-naming and colophon-slug gut-checks, wordmark lockup (Mark B + its lockup still deferred — docs/05-favicon-marks.md) ✓
 - 014 — Mark B, Knolling shipped for real (Buttondown account secured), and a rasterizer bug caught in the already-shipped favicon assets ✓
-- 015 — The speaking page (and the Lawyerist/Affinity line — brief §9)
-- 016 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 017 — Launch
+- 015 — Wiring Knolling's subscribe forms to Buttondown, for real ✓
+- 016 — The last dead links: /now and /about ✓
+- 017 — The motion logo: Mark A knolls into place in the nav (docs/05-favicon-marks.md §7 motion question, resolved) ✓
+- 018 — The speaking page (and the Lawyerist/Affinity line — brief §9)
+- 019 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 020 — Launch
