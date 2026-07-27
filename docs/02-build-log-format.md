@@ -60,8 +60,8 @@ tags: []
 - 008 — The pillar pages, as one template ✓
 - 009 — AI-first, out loud: the bots build the site, and the site says so (docs/04-ai-first.md) ✓
 - 010 — Individual post pages (ships the authorship field + provenance stamp from entry 009) ✓
-- 011 — Naming the newsletter (platform decided: Buttondown — see brief §8)
-- 012 — Brand: colors, type, and the logo question (incl. section display-name and colophon-slug gut-checks)
+- 011 — Naming the newsletter: **Knolling** (platform: Buttondown — see brief §6/§8) ✓
+- 012 — Brand: colors, type, and the logo question (incl. section display-name and colophon-slug gut-checks; favicon/mark system proposed in docs/05-favicon-marks.md — the knolling grid, Marks A & B)
 - 013 — The speaking page (and the Lawyerist/Affinity line — brief §9)
 - 014 — A game as a front door (tabled; three prototypes in docs/mockups/)
 - 015 — Launch
