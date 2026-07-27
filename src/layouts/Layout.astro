@@ -1,0 +1,61 @@
+---
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/theme.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "zack glaser — legal tech advisor, runner, tinkerer." } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page-shell">
+      <Nav />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>
+
+<style>
+  .page-shell {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-6) var(--space-7) var(--space-8);
+  }
+  main {
+    min-height: 60vh;
+    margin-top: var(--space-8);
+  }
+
+  @media (max-width: 720px) {
+    .page-shell {
+      padding: var(--space-4) var(--space-4) var(--space-6);
+    }
+    main {
+      margin-top: var(--space-6);
+    }
+  }
+</style>

@@ -1,0 +1,137 @@
+---
+// Structure/tokens ported from docs/design-system/Site Nav & Footer.dc.html
+// TODO: "elsewhere" links (podcast, rss, email) and the newsletter form
+// are placeholders until the newsletter platform is decided (brief §12).
+import { pillars } from "../lib/pillars";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div class="footer-col">
+      <div class="footer-col-label">pillars</div>
+      {
+        pillars.map((p) => (
+          <a href={p.href} class="footer-link" style={`--hover-color:var(--pillar-${p.id})`}>
+            {p.label}
+          </a>
+        ))
+      }
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">site</div>
+      <a href="/legal-tech/speaking" class="footer-link">speaking</a>
+      <a href="/about" class="footer-link">about</a>
+      <a href="/now" class="footer-link">now</a>
+      <a href="/newsletter" class="footer-link">newsletter archive</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">elsewhere</div>
+      <a href="#" class="footer-link">lawyerist podcast ↗</a>
+      <a href="#" class="footer-link">rss</a>
+      <a href="#" class="footer-link">email</a>
+    </div>
+    <div class="footer-col footer-newsletter-col">
+      <div class="footer-col-label">the newsletter</div>
+      <form class="footer-newsletter-row">
+        <input type="email" class="footer-input" placeholder="you@email.com" />
+        <button type="submit" class="footer-go-btn">[ go ]</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <a href="/" class="footer-wordmark">
+      <span class="wordmark-zack">zack</span><span class="wordmark-glaser">glaser</span>
+    </a>
+    <div class="footer-copy">© {year} zack glaser — legal tech advisor, runner, tinkerer</div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-4);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-line);
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
+    margin-bottom: var(--space-8);
+  }
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .footer-col-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-1);
+  }
+  .footer-link {
+    color: var(--color-ink);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .footer-link:hover {
+    color: var(--hover-color, var(--color-ink-soft));
+  }
+  .footer-newsletter-row {
+    display: flex;
+    gap: var(--space-2);
+  }
+  .footer-input {
+    flex: 1;
+    min-width: 0;
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-input);
+    padding: 8px 12px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-ink);
+  }
+  .footer-go-btn {
+    background: transparent;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: var(--radius-input);
+    flex-shrink: 0;
+  }
+  .footer-go-btn:hover {
+    border-color: var(--color-ink);
+  }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-line);
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .footer-wordmark {
+    font-size: 16px;
+    text-decoration: none;
+  }
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 720px) {
+    .footer-cols {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

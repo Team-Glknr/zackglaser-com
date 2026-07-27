@@ -1,0 +1,107 @@
+/* Design tokens ported from docs/design-system/Style Guide.dc.html */
+
+:root {
+  --color-paper: #f2f4f6;
+  --color-raised: #fafbfc;
+  --color-ink: #1f2429;
+  --color-ink-soft: #616b75;
+  --color-line: #d6dbe0;
+  --color-error: #c2295a;
+
+  --pillar-legal-tech: #3b5ba5;
+  --pillar-running: #b23a3a;
+  --pillar-workshop: #a6792e;
+  --pillar-field-notes: #3f7d5c;
+
+  --font-serif: "Literata", serif;
+  --font-mono: "Space Mono", monospace;
+  --font-sans: "Archivo", sans-serif;
+
+  --text-display-xl: 64px;
+  --text-display: 48px;
+  --text-title: 32px;
+  --text-body-lg: 18px;
+  --text-body: 16px;
+  --text-mono-sm: 13px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  --radius-card: 6px;
+  --radius-input: 4px;
+  --radius-pill: 999px;
+
+  --shadow-elevation: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --motion-fast: 150ms ease-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: #161a1e;
+    --color-raised: #1f242a;
+    --color-ink: #edf0f2;
+    --color-ink-soft: #98a2ac;
+    --color-line: #323a42;
+    --color-error: #e8698f;
+
+    --pillar-legal-tech: #7c9bdb;
+    --pillar-running: #e1726c;
+    --pillar-workshop: #d9a857;
+    --pillar-field-notes: #6fbb94;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+::selection {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+a {
+  color: inherit;
+}
+
+/* one shared focus ring, per Style Guide §15 — never removed, never color-only */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

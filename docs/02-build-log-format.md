@@ -55,8 +55,9 @@ tags: []
 - 004 — Choosing the stack (Astro vs. Next; members-area question — see brief §8) ✓
 - 005 — Pillars vs. formats: untangling the taxonomy ✓
 - 006 — The GitHub on-ramp: the repo goes public, and the site starts teaching GitHub (docs/03-github-onramp.md) ✓
-- 007 — Naming the newsletter
-- 008 — Brand: colors, type, and the logo question (incl. section display-name gut-check)
-- 009 — The speaking page (and the Lawyerist/Affinity line — brief §9)
-- 010 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 011 — Launch
+- 007 — Porting the design system: theme, chrome, and the Hub ✓
+- 008 — Naming the newsletter
+- 009 — Brand: colors, type, and the logo question (incl. section display-name gut-check)
+- 010 — The speaking page (and the Lawyerist/Affinity line — brief §9)
+- 011 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 012 — Launch

@@ -36,6 +36,6 @@ Two things. First, `status: draft` hides posts from the site but not from a publ
 
 ## Next up
 
-Naming the newsletter — the teardown machine deserves better than a working title.
+Turning the design system into real code, starting with the shared chrome and the Hub.
 
 **Costs so far:** $12/yr / about an hour (planning and a settings toggle — the components ship with the Phase 2 build)

@@ -1,0 +1,266 @@
+---
+// Structure/tokens ported from docs/design-system/Site Nav & Footer.dc.html
+// and Mobile Nav.dc.html. Dropdown and mobile overlay use native
+// <details>/checkbox toggles — zero client JS, per brief §7 design direction.
+import { pillars } from "../lib/pillars";
+---
+
+<nav class="site-nav">
+  <a href="/" class="wordmark">
+    <span class="wordmark-zack">zack</span><span class="wordmark-glaser">glaser</span>
+  </a>
+
+  <details class="nav-pillars">
+    <summary class="nav-link">pillars</summary>
+    <div class="pillars-dropdown">
+      {
+        pillars.map((p) => (
+          <a href={p.href} class="pillar-item">
+            <span class="pillar-dot" style={`background:var(--pillar-${p.id})`} />
+            {p.label}
+          </a>
+        ))
+      }
+    </div>
+  </details>
+
+  <a href="/legal-tech/speaking" class="nav-link">speaking</a>
+  <a href="/newsletter" class="nav-link">newsletter</a>
+  <a href="/about" class="nav-link">about</a>
+  <a href="/newsletter" class="nav-subscribe">[ subscribe ]</a>
+
+  <input type="checkbox" id="mobile-nav-toggle" class="mobile-nav-toggle" />
+  <label for="mobile-nav-toggle" class="mobile-menu-btn" aria-label="Toggle menu">
+    <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path d="M4,7 H20 M4,12 H20 M4,17 H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+    </svg>
+    <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path d="M6,6 L18,18 M18,6 L6,18" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+    </svg>
+  </label>
+
+  <div class="mobile-overlay">
+    <div class="overlay-section-label">pillars</div>
+    {
+      pillars.map((p) => (
+        <a href={p.href} class="overlay-row">
+          <span class="pillar-dot pillar-dot-lg" style={`background:var(--pillar-${p.id})`} />
+          {p.label}
+        </a>
+      ))
+    }
+    <div class="overlay-divider"></div>
+    <a href="/legal-tech/speaking" class="overlay-row">speaking</a>
+    <a href="/newsletter" class="overlay-row">newsletter</a>
+    <a href="/about" class="overlay-row">about</a>
+    <a href="/newsletter" class="overlay-subscribe">[ subscribe ]</a>
+  </div>
+</nav>
+
+<style>
+  .site-nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    padding: 18px 28px;
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+
+  .wordmark {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-right: var(--space-2);
+    text-decoration: none;
+  }
+  .wordmark-zack {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .wordmark-glaser {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-link {
+    color: var(--color-ink);
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    white-space: nowrap;
+    cursor: pointer;
+    list-style: none;
+  }
+  .nav-link::-webkit-details-marker {
+    display: none;
+  }
+  .nav-link:hover {
+    border-bottom-color: var(--color-ink);
+  }
+
+  .nav-pillars {
+    position: relative;
+  }
+  .pillars-dropdown {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-elevation);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+    z-index: 2;
+  }
+  .pillar-item {
+    display: flex;
+    align-items: center;
+    color: var(--color-ink);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 8px 10px;
+    border-radius: var(--radius-input);
+  }
+  .pillar-item:hover {
+    background: var(--color-paper);
+  }
+  .pillar-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .nav-subscribe {
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: var(--radius-input);
+    flex-shrink: 0;
+  }
+  .nav-subscribe:hover {
+    border-color: var(--color-ink);
+  }
+
+  .mobile-nav-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .mobile-menu-btn {
+    display: none;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: auto;
+    color: var(--color-ink);
+  }
+  .icon-close {
+    display: none;
+  }
+  .mobile-nav-toggle:checked ~ .mobile-menu-btn .icon-menu {
+    display: none;
+  }
+  .mobile-nav-toggle:checked ~ .mobile-menu-btn .icon-close {
+    display: block;
+  }
+
+  .mobile-overlay {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-elevation);
+    padding: var(--space-5);
+    flex-direction: column;
+    gap: 2px;
+    z-index: 3;
+  }
+  .mobile-nav-toggle:checked ~ .mobile-overlay {
+    display: flex;
+  }
+  .overlay-section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 10px 4px 6px;
+  }
+  .overlay-divider {
+    height: 1px;
+    background: var(--color-line);
+    margin: 12px 0;
+  }
+  .overlay-row {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-decoration: none;
+    padding: 0 4px;
+  }
+  .pillar-dot-lg {
+    width: 9px;
+    height: 9px;
+    margin-right: 12px;
+  }
+  .overlay-subscribe {
+    margin-top: var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    text-decoration: none;
+    border-radius: var(--radius-card);
+    font-family: var(--font-mono);
+    font-size: 15px;
+  }
+
+  @media (max-width: 720px) {
+    .site-nav {
+      gap: var(--space-3);
+      padding: 14px 20px;
+    }
+    .nav-pillars,
+    .site-nav > .nav-link,
+    .nav-subscribe {
+      display: none;
+    }
+    .mobile-menu-btn {
+      display: flex;
+    }
+  }
+</style>
