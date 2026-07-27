@@ -1,0 +1,269 @@
+---
+// Structure/tokens ported from docs/design-system/Newsletter Page.dc.html,
+// with the mockup's working-title h1 ("Taking Things Apart") swapped for
+// the shipped name (entry 011) — the old title survives only as the dek's
+// closing line. Pillar filter chips are inert, same rationale as the pillar
+// pages: real filtering waits until there's enough issues to make it worth
+// building. Pagination ("load more") is dropped for the same reason — no
+// point paginating an archive that doesn't have a page's worth of issues
+// yet. Individual issue pages aren't wired up either; nothing links there
+// until one exists to link to.
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import EmptyState from "../components/EmptyState.astro";
+import { pillars } from "../lib/pillars";
+
+// src/content/newsletter/ is empty pre-launch (just .gitkeep) — Astro's
+// glob loader registers zero entries for an empty directory, and
+// getCollection() throws in that state rather than returning []. Guard
+// for it; once the first issue file lands this branch stops firing.
+let issues: CollectionEntry<"newsletter">[] = [];
+try {
+  issues = (await getCollection("newsletter", ({ data }) => data.status === "published")).sort(
+    (a, b) => b.data.newsletter - a.data.newsletter,
+  );
+} catch {
+  issues = [];
+}
+---
+
+<Layout
+  title="Knolling — the newsletter — zackglaser.com"
+  description="One issue, one thing taken apart. The subject rotates across legal tech, running, and the workshop; the method never does. Weekly-ish, free, no fluff."
+>
+  <div class="hero">
+    <div class="eyebrow">the newsletter</div>
+    <h1 class="h1">Knolling</h1>
+    <p class="dek">
+      One issue, one thing taken apart — a piece of legal software, a training block, a workbench, an idea. The
+      subject rotates across all four pillars; the method never does. Weekly-ish, free, no fluff — taking things
+      apart to see how they work.
+    </p>
+    <form
+      action="https://buttondown.com/api/emails/embed-subscribe/knolling"
+      method="post"
+      class="embeddable-buttondown-form hero-form-row"
+    >
+      <label for="bd-email-newsletter" class="sr-only">Enter your email</label>
+      <input
+        type="email"
+        name="email"
+        id="bd-email-newsletter"
+        required
+        class="hero-input"
+        placeholder="you@email.com"
+      />
+      <input type="hidden" name="tag" value="newsletter" />
+      <button type="submit" class="hero-subscribe-btn">[ subscribe ]</button>
+    </form>
+    <a href="https://buttondown.com/refer/knolling" target="_blank" rel="noopener" class="powered-by">
+      Powered by Buttondown. Unsubscribe anytime.
+    </a>
+  </div>
+
+  <div class="section-label">the archive</div>
+  <div class="filter-row">
+    <span class="filter-active">all</span>
+    {pillars.map((p) => <span class="filter-chip">{p.label}</span>)}
+  </div>
+
+  {
+    issues.length > 0 ? (
+      <div class="issue-list">
+        {issues.map((issue) => {
+          const pillarLabel = pillars.find((p) => p.id === issue.data.pillar)?.label ?? issue.data.pillar;
+          const date = issue.data.date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+          return (
+            <a href={`/${issue.id}`} class="issue-row">
+              <div class="issue-left">
+                <span class="issue-no">{String(issue.data.newsletter).padStart(3, "0")}</span>
+                <div>
+                  <div class="issue-title">{issue.data.title}</div>
+                  <div class="issue-pillar">{pillarLabel}</div>
+                </div>
+              </div>
+              <div class="issue-date">{date}</div>
+            </a>
+          );
+        })}
+      </div>
+    ) : (
+      <EmptyState message="Issue one hasn't shipped yet. Subscribe above and it'll land in your inbox the day it's published." />
+    )
+  }
+</Layout>
+
+<style>
+  .hero {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto var(--space-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .h1 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 40px;
+    color: var(--color-ink);
+    margin: 0;
+  }
+  .dek {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+  .hero-form-row {
+    display: flex;
+    gap: var(--space-3);
+    width: 100%;
+    max-width: 400px;
+    margin-top: var(--space-2);
+  }
+  .hero-input {
+    flex: 1;
+    min-width: 0;
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-input);
+    padding: 12px 16px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-ink);
+  }
+  .hero-subscribe-btn {
+    background: transparent;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 12px 20px;
+    border-radius: var(--radius-input);
+    flex-shrink: 0;
+  }
+  .hero-subscribe-btn:hover {
+    border-color: var(--color-ink);
+  }
+  .powered-by {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+  }
+  .powered-by:hover {
+    color: var(--color-ink);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-5);
+  }
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+    flex-wrap: wrap;
+  }
+  .filter-active {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-paper);
+    background: var(--color-ink);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+  }
+  .filter-chip {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+  }
+
+  .issue-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    margin-bottom: var(--space-6);
+  }
+  .issue-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--color-line);
+    text-decoration: none;
+    color: var(--color-ink);
+    background: var(--color-raised);
+  }
+  .issue-row:last-child {
+    border-bottom: none;
+  }
+  .issue-row:hover {
+    background: var(--color-paper);
+  }
+  .issue-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-width: 0;
+  }
+  .issue-no {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    flex-shrink: 0;
+  }
+  .issue-title {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    color: var(--color-ink);
+    line-height: 1.3;
+  }
+  .issue-pillar {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    margin-top: 2px;
+  }
+  .issue-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 560px) {
+    .h1 {
+      font-size: 30px;
+    }
+    .issue-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-2);
+    }
+  }
+</style>
