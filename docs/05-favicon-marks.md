@@ -1,6 +1,6 @@
 # zackglaser.com — favicon & mark system spec
 
-Status: proposal for the brand pass (build log entry 012) · Last updated: 2026-07-26
+Status: Mark A shipped (build log entry 012 ✓); Mark B and wordmark lockups remain proposals for the brand pass (entry 013) · Last updated: 2026-07-26
 Owner: Zack Glaser
 Companion to: `docs/01-site-brief.md` §7 · `src/styles/theme.css` (token source of truth)
 
@@ -87,11 +87,11 @@ Rules:
 
 ## 5. Deliverables checklist
 
-1. `public/favicon.svg` — Mark A with dark-mode media query (replaces the current file, which is still **Astro's default logo**).
-2. `public/favicon.ico` — Mark A rasterized at 32 and 16 (replaces default).
-3. `apple-touch-icon.png` (180×180) — Mark A on solid `--color-paper`, margins widened to 3/32 per side (iOS crops tight).
+1. `public/favicon.svg` — Mark A with dark-mode media query (replaces the current file, which is still **Astro's default logo**). ✓ entry 012
+2. `public/favicon.ico` — Mark A rasterized at 32 and 16 (replaces default). ✓ entry 012
+3. `apple-touch-icon.png` (180×180) — Mark A on solid `--color-paper`, margins widened to 3/32 per side (iOS crops tight). ✓ entry 012
 4. Knolling mark (Mark B) — SVG + rasters for Buttondown header and social avatars, deferred until the account exists.
-5. Wordmark lockups (mark + "zackglaser.com" / mark + "Knolling") — brand pass, entry 012.
+5. Wordmark lockups (mark + "zackglaser.com" / mark + "Knolling") — brand pass, entry 013.
 
 ## 6. Extending the family
 

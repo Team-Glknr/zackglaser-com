@@ -61,7 +61,8 @@ tags: []
 - 009 — AI-first, out loud: the bots build the site, and the site says so (docs/04-ai-first.md) ✓
 - 010 — Individual post pages (ships the authorship field + provenance stamp from entry 009) ✓
 - 011 — Naming the newsletter: **Knolling** (platform: Buttondown — see brief §6/§8) ✓
-- 012 — Brand: colors, type, and the logo question (incl. section display-name and colophon-slug gut-checks; favicon/mark system proposed in docs/05-favicon-marks.md — the knolling grid, Marks A & B)
-- 013 — The speaking page (and the Lawyerist/Affinity line — brief §9)
-- 014 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 015 — Launch
+- 012 — Shipping the favicon: Mark A live, Mark B + wordmark lockups still pending (docs/05-favicon-marks.md) ✓
+- 013 — Brand: colors, type, and the logo question (incl. section display-name and colophon-slug gut-checks; Mark B + wordmark lockups from docs/05-favicon-marks.md)
+- 014 — The speaking page (and the Lawyerist/Affinity line — brief §9)
+- 015 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 016 — Launch

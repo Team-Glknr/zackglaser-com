@@ -84,7 +84,7 @@ tags:         []   # fine-grained topics (ai, woodworking); not promoted to stru
 
 **Authorship is provenance, not a third axis** (decided 2026-07-26; build log entry 009): most content here is AI-drafted under Zack's direction, and every post says so via a stamp — celebrated, not disclaimed. It never drives navigation. The rule that makes it safe: the voice doc governs the bots, not vice versa. Full spec: `docs/04-ai-first.md`.
 
-**The newsletter is a format, not a pillar.** **Knolling** (named 2026-07-26; build log entry 011) names the newsletter itself. Every issue is written in the `teardown` format, but the two words split jobs for good: **Knolling** refers to the newsletter as a place/product — nav, footer, subscribe cards, issue copy; **teardown** (lowercase) stays the taxonomy word for the disassembly method, used wherever the site names the idea rather than the destination — the format pill on a post, `/teardowns` as its archive route. `/teardowns` isn't renaming to `/knolling`: it's an archive of a format, not a synonym for the newsletter. The former working title survives as the tagline: *"taking things apart to see how they work"* (gut-check at the brand pass, entry 012). Each issue files under one pillar; `/teardowns` is its archive. Logs and takes are site-only content between issues — which also answers "what do I publish when a teardown isn't ready."
+**The newsletter is a format, not a pillar.** **Knolling** (named 2026-07-26; build log entry 011) names the newsletter itself. Every issue is written in the `teardown` format, but the two words split jobs for good: **Knolling** refers to the newsletter as a place/product — nav, footer, subscribe cards, issue copy; **teardown** (lowercase) stays the taxonomy word for the disassembly method, used wherever the site names the idea rather than the destination — the format pill on a post, `/teardowns` as its archive route. `/teardowns` isn't renaming to `/knolling`: it's an archive of a format, not a synonym for the newsletter. The former working title survives as the tagline: *"taking things apart to see how they work"* (gut-check at the brand pass, entry 013). Each issue files under one pillar; `/teardowns` is its archive. Logs and takes are site-only content between issues — which also answers "what do I publish when a teardown isn't ready."
 
 Cadence commitment: regular (target weekly-ish; the format doc governs the build-log series specifically).
 
@@ -93,7 +93,8 @@ Cadence commitment: regular (target weekly-ish; the format doc governs the build
 - One design system at the hub; each pillar gets an accent color within it, not its own identity.
 - Workbench aesthetic over corporate polish: photos of real projects, sketches, honest numbers.
 - Typography-first, fast, minimal chrome. The content is the design.
-- Deliverables needed: color palette, type pairing, simple wordmark (logo question deferred — build log entry).
+- Favicon shipped (build log entry 012 ✓): the "knolling grid" mark — four squares, one workshop-gold accent, light/dark aware. Spec: `docs/05-favicon-marks.md`.
+- Deliverables still needed: color palette, type pairing, wordmark lockups, Mark B (the Knolling mark) — build log entry 013.
 
 ## 8. Technical requirements
 
@@ -121,7 +122,7 @@ Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podca
 | Phase | Scope | Exit criteria |
 |-------|-------|---------------|
 | 0. Foundation (now) | Briefs, build log running, decisions logged | This doc + entries 001–002 ✓ |
-| 1. Decisions | Stack (004) ✓, taxonomy (005) ✓, GitHub on-ramp (006) ✓, AI-first (009) ✓, newsletter name/platform (011) ✓, brand basics (012) | Each is a build log entry |
+| 1. Decisions | Stack (004) ✓, taxonomy (005) ✓, GitHub on-ramp (006) ✓, AI-first (009) ✓, newsletter name/platform (011) ✓, favicon (012) ✓, brand basics (013) | Each is a build log entry |
 | 2. Build | Hub, pillar pages, /speaking, newsletter wired up, GitHub on-ramp (docs/03) | Site deployable; speaking page reviewed against §9; repo public with comments + edit links live |
 | 3. Launch | Publish build-log series retroactively, announce, first newsletter issue | Live + issue 001 sent |
 | 4. Habit | Weekly-ish issues, quarterly review of metrics (§10) | 12 consecutive issues |
