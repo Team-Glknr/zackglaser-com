@@ -67,6 +67,8 @@ tags: []
 - 015 — Wiring Knolling's subscribe forms to Buttondown, for real ✓
 - 016 — The last dead links: /now and /about ✓
 - 017 — The motion logo: Mark A knolls into place in the nav (docs/05-favicon-marks.md §7 motion question, resolved) ✓
-- 018 — The speaking page (and the Lawyerist/Affinity line — brief §9)
-- 019 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 020 — Launch
+- 018 — The GitHub on-ramp, for real: rungs 1 and 3 live, rung 2 built but waiting on the giscus App install (docs/03-github-onramp.md) ✓
+- 019 — Social share images: one PNG per post, generated at build time (docs/design-system/Social Share Image.dc.html) ✓
+- 020 — The speaking page (tabled; the Lawyerist/Affinity line — brief §9 — needs deep work before this ships)
+- 021 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 022 — Launch

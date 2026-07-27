@@ -124,7 +124,7 @@ Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podca
 |-------|-------|---------------|
 | 0. Foundation (now) | Briefs, build log running, decisions logged | This doc + entries 001–002 ✓ |
 | 1. Decisions | Stack (004) ✓, taxonomy (005) ✓, GitHub on-ramp (006) ✓, AI-first (009) ✓, newsletter name/platform (011) ✓, favicon (012) ✓, brand basics (013) ✓ | Each is a build log entry |
-| 2. Build | Hub ✓, pillar pages ✓, post pages ✓, /now ✓, /about ✓, newsletter wired up ✓, /speaking, GitHub on-ramp (docs/03) | Site deployable; speaking page reviewed against §9; repo public with comments + edit links live |
+| 2. Build | Hub ✓, pillar pages ✓, post pages ✓, /now ✓, /about ✓, newsletter wired up ✓, GitHub on-ramp rungs 1+3 ✓ (docs/03; rung 2 waits on giscus App install), OG images ✓, /speaking | Site deployable; speaking page reviewed against §9; repo public with comments + edit links live |
 | 3. Launch | Publish build-log series retroactively, announce, first newsletter issue | Live + issue 001 sent |
 | 4. Habit | Weekly-ish issues, quarterly review of metrics (§10) | 12 consecutive issues |
 

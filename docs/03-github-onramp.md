@@ -16,11 +16,11 @@ The pitch to lawyers, in their own language: a commit history is a redline trail
 
 Three features, ordered by commitment required from the reader:
 
-| Rung | Feature | What the reader does | GitHub concept learned |
-|------|---------|----------------------|------------------------|
-| 1 | Site-as-example (footer) | Clicks "see the source & every change ever made" | Repos, commits, history |
-| 2 | Comments via giscus | Creates a GitHub account to leave a comment | Accounts, Discussions |
-| 3 | "Suggest an edit" links | Edits a page in the browser; GitHub walks them through fork → branch → PR | Forks, branches, pull requests |
+| Rung | Feature | What the reader does | GitHub concept learned | Status |
+|------|---------|----------------------|------------------------|--------|
+| 1 | Site-as-example (footer) | Clicks "see the source & every change ever made" | Repos, commits, history | ✓ shipped, entry 018 |
+| 2 | Comments via giscus | Creates a GitHub account to leave a comment | Accounts, Discussions | Component built (`Comments.astro`), not mounted — waiting on the giscus App install + embed config (§4.3–5) |
+| 3 | "Suggest an edit" links | Edits a page in the browser; GitHub walks them through fork → branch → PR | Forks, branches, pull requests | ✓ shipped, entry 018 |
 
 Each rung is useful on its own; together they take a reader from lurker to first pull request without ever using the word "fork" up front.
 
@@ -32,11 +32,11 @@ Cost: both require readers to sign in with a GitHub account to comment. For this
 
 ## 4. Prerequisites (one-time setup)
 
-1. **Make `thirdth/zackglaser-com` public.** Pre-flight completed 2026-07-26: `.env.local` has never been tracked and the history (3 commits at time of check) contains no secrets. Re-run `git log --all -p -- .env*` before flipping the switch if more commits have landed.
-2. **Enable Discussions** on the repo (Settings → Features → Discussions).
-3. **Install the giscus GitHub App** on the repo (github.com/apps/giscus).
+1. ✓ **Repo is public.** Re-checked 2026-07-27 (entry 018): `git log --all -p -- .env*` across all 12 commits, still nothing — clean.
+2. ✓ **Discussions enabled** 2026-07-27 via the GitHub API (entry 018).
+3. **Install the giscus GitHub App** on the repo (github.com/apps/giscus) — needs the repo owner in a browser; not scriptable.
 4. **Create a Discussion category** named `Comments`, type **Announcement** — so only giscus (not drive-by visitors) can open new threads.
-5. **Generate the embed config** at giscus.app: mapping = `pathname`, strict matching on, lazy loading on. Capture the `data-repo-id` and `data-category-id` values it emits.
+5. **Generate the embed config** at giscus.app: mapping = `pathname`, strict matching on, lazy loading on. Capture the `data-repo-id` and `data-category-id` values it emits, then drop them into `Comments.astro`'s props and mount the component in the post layout.
 
 ## 5. Implementation (Astro)
 

@@ -1,0 +1,47 @@
+---
+// GitHub on-ramp rung 2 — docs/03-github-onramp.md §5.2. NOT YET wired into
+// any page template: repoId/categoryId below are placeholders until
+// giscus.app generates real values, which needs the giscus GitHub App
+// installed on thirdth/zackglaser-com and a "Comments" Discussion category
+// (type Announcement) created first — both one-time, browser-only steps.
+// Zero client JS shipped by us; the script below is giscus's own, lazy-loaded.
+interface Props {
+  repoId: string;
+  categoryId: string;
+}
+const { repoId, categoryId } = Astro.props;
+---
+
+<section class="comments">
+  <p class="comments-note">
+    Comments run on GitHub Discussions. You'll need a (free) GitHub account — which is rather the point around here.
+  </p>
+  <script
+    is:inline
+    src="https://giscus.app/client.js"
+    data-repo="thirdth/zackglaser-com"
+    data-repo-id={repoId}
+    data-category="Comments"
+    data-category-id={categoryId}
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="1"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+</section>
+
+<style>
+  .comments {
+    margin-bottom: var(--space-8);
+  }
+  .comments-note {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-4);
+  }
+</style>

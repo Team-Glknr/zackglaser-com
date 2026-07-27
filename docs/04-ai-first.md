@@ -62,7 +62,7 @@ The build log's cost-honesty rule extends: entries report tokens/dollars of AI s
 2. Provenance stamp component in the post layout, linking to the colophon.
 3. `/how-this-site-is-made` page (§5).
 4. Agent instructions updated so bot commits carry `Co-Authored-By` trailers.
-5. Colophon linked from the site footer, next to the "this site lives on GitHub" line (docs/03 §5.1) — the two disclosures belong side by side.
+5. Colophon linked from the site footer, next to the "this site lives on GitHub" line (docs/03 §5.1) — the two disclosures sit side by side. ✓ entry 018: the link exists (`/how-this-site-is-made`); the page behind it doesn't yet.
 
 ## 9. Open questions
 
