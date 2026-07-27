@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">pillar page — /legal-tech</span>
+    <div style="{{ demoControlsStyle }}">
+      <sc-for list="{{ pillarPicker }}" as="p" hint-placeholder-count="4">
+        <button style="{{ p.pickerBtnStyle }}" onClick="{{ p.onPick }}">{{ p.label }}</button>
+      </sc-for>
+      <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+    </div>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <nav style="{{ navStyle }}">
+      <div style="{{ navWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <div style="{{ navDropdownWrapStyle }}">
+        <button style="{{ navLinkBtnStyle }}" style-focus="{{ focusRingStyle }}" onClick="{{ toggleDropdown }}">pillars {{ dropdownCaret }}</button>
+        <sc-if value="{{ dropdownOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ dropdownPanelStyle }}">
+            <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+              <a href="#" style="{{ p.dropdownItemStyle }}" style-hover="{{ p.dropdownItemHoverStyle }}"><span style="{{ p.dotStyle }}"></span>{{ p.label }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">speaking</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">newsletter</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">about</a>
+      <button style="{{ navSubscribeBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+    </nav>
+
+    <div style="{{ pillarHeaderStyle }}">
+      <div style="{{ pillarLabelStyle }}">{{ current.label }}</div>
+      <p style="{{ pillarDekStyle }}">{{ current.dek }}</p>
+    </div>
+
+    <div style="{{ filterRowStyle }}">
+      <span style="{{ filterActiveStyle }}">all</span>
+      <sc-for list="{{ formats }}" as="f" hint-placeholder-count="3">
+        <span style="{{ filterChipStyle }}">{{ f }}</span>
+      </sc-for>
+    </div>
+
+    <div style="{{ postListStyle }}">
+      <sc-for list="{{ current.posts }}" as="post" hint-placeholder-count="6">
+        <a href="#" style="{{ postRowStyle }}" style-hover="{{ postRowHoverStyle }}">
+          <div style="{{ postRowLeftStyle }}">
+            <span style="{{ formatPillStyle }}">{{ post.format }}</span>
+            <div style="{{ postTitleStyle }}">{{ post.title }}</div>
+          </div>
+          <div style="{{ postMetaStyle }}">{{ post.meta }}</div>
+        </a>
+      </sc-for>
+    </div>
+
+    <div style="{{ paginationRowStyle }}">
+      <span style="{{ pageInfoStyle }}">showing {{ current.posts.length }} of {{ current.total }}</span>
+      <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ load more ]</button>
+    </div>
+
+    <div style="{{ newsletterCardStyle }}">
+      <div style="{{ newsletterEyebrowStyle }}">get {{ current.label }} in your inbox</div>
+      <div style="{{ newsletterHeadlineStyle }}">One thing, taken apart. Every week-ish.</div>
+      <div style="{{ newsletterFormRowStyle }}">
+        <input style="{{ newsletterInputStyle }}" placeholder="you@email.com" style-focus="{{ focusRingStyle }}" />
+        <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ subscribe ]</button>
+      </div>
+    </div>
+
+    <footer style="{{ footerWrapStyle }}">
+      <div style="{{ footerBottomStyle }}">
+        <div style="{{ footerWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ footerCopyStyle }}">© {{ year }} zack glaser — legal tech advisor, runner, tinkerer</div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;},&quot;pillar&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;legal-tech&quot;,&quot;options&quot;:[&quot;legal-tech&quot;,&quot;running&quot;,&quot;workshop&quot;,&quot;field-notes&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const PILLARS_DEF = [
+  { id:'legal-tech', label:'legal tech', light:'#3B5BA5', dark:'#7C9BDB',
+    dek:"Tools, takes, and industry commentary — what's actually inside the software law firms buy.",
+    total:24,
+    posts:[
+      { format:'teardown', title:'What law firm software actually costs', meta:'issue 014 · Mar 2026' },
+      { format:'take', title:'AI drafting tools, three months in', meta:'Feb 2026' },
+      { format:'take', title:'Why every vendor demo looks the same', meta:'Feb 2026' },
+      { format:'teardown', title:'Inside a document automation stack', meta:'issue 010 · Jan 2026' },
+      { format:'log', title:'Rebuilding my own client intake form', meta:'Dec 2025' },
+      { format:'take', title:'The ethics of AI-assisted drafting', meta:'Nov 2025' }
+    ] },
+  { id:'running', label:'running', light:'#B23A3A', dark:'#E1726C',
+    dek:'Training logs and race reports — plans built, tested, and rebuilt in public.',
+    total:31,
+    posts:[
+      { format:'log', title:'Week 6 of the fall block', meta:'training log · Mar 2026' },
+      { format:'teardown', title:'Rebuilding a training block from scratch', meta:'issue 011 · Feb 2026' },
+      { format:'take', title:'The shoe tech ban, briefly', meta:'Jan 2026' },
+      { format:'log', title:'Chicago Marathon race report', meta:'Oct 2025' },
+      { format:'take', title:'Zone 2 training, minus the hype', meta:'Sep 2025' },
+      { format:'log', title:'Week 1 of the fall block', meta:'training log · Aug 2025' }
+    ] },
+  { id:'workshop', label:'workshop', light:'#A6792E', dark:'#D9A857',
+    dek:'Builds, code, and the site itself — including how it got made.',
+    total:19,
+    posts:[
+      { format:'log', title:'Why this site is built the way it is', meta:'entry 007 · Mar 2026' },
+      { format:'take', title:'Choosing Astro over Next', meta:'Feb 2026' },
+      { format:'log', title:'The build-in-public series, entry 006', meta:'Feb 2026' },
+      { format:'teardown', title:'How my workbench dust collection actually works', meta:'issue 008 · Jan 2026' },
+      { format:'log', title:'The build-in-public series, entry 005', meta:'Dec 2025' },
+      { format:'take', title:'A new router table, briefly', meta:'Nov 2025' }
+    ] },
+  { id:'field-notes', label:'field notes', light:'#3F7D5C', dark:'#6FBB94',
+    dek:'Essays and open questions — the thinking behind the other three.',
+    total:14,
+    posts:[
+      { format:'teardown', title:'On taking things apart as a way of thinking', meta:'issue 009 · Feb 2026' },
+      { format:'take', title:'A short case for range', meta:'Jan 2026' },
+      { format:'teardown', title:'What a religion degree taught me about software', meta:'issue 006 · Dec 2025' },
+      { format:'take', title:'On being asked "but what do you actually do"', meta:'Oct 2025' },
+      { format:'teardown', title:'Work-life balance, taken apart', meta:'issue 004 · Sep 2025' },
+      { format:'take', title:'The case against niching down', meta:'Aug 2025' }
+    ] }
+];
+const FORMATS = ['teardown', 'log', 'take'];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark', dropdownOpen:false, currentPillar: this.props.pillar ?? 'legal-tech' };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const demoControlsStyle = { display:'flex', alignItems:'center', gap:'8px' };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'1000px', margin:'0 auto', padding:'32px 40px 0' };
+
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const navStyle = { display:'flex', alignItems:'center', gap:'28px', padding:'18px 28px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'48px' };
+    const navWordmarkStyle = { fontSize:'18px', flexShrink:0, marginRight:'8px' };
+    const navLinkStyle = { color:n.ink, textDecoration:'none', fontFamily:sans, fontSize:'15px', fontWeight:500, lineHeight:'1', borderBottom:'1px solid transparent', paddingBottom:'2px', whiteSpace:'nowrap', display:'inline-block' };
+    const navLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const navLinkBtnStyle = { ...navLinkStyle, background:'transparent', border:'none', margin:0, cursor:'pointer' };
+    const navDropdownWrapStyle = { position:'relative', display:'flex', alignItems:'center' };
+    const focusRingStyle = { outline:`2px solid ${n.ink}`, outlineOffset:'2px', borderRadius:'2px' };
+    const dropdownPanelStyle = { position:'absolute', top:'28px', left:0, background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', boxShadow:'0 8px 24px rgba(0,0,0,0.16)', padding:'6px', display:'flex', flexDirection:'column', minWidth:'160px', zIndex:2 };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', padding:'8px 14px', borderRadius:'4px', flexShrink:0 };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+    const navSubscribeBtnStyle = { ...bracketBtnStyle, marginLeft:'auto' };
+
+    const currentPillarId = this.state.currentPillar;
+    const currentDef = PILLARS_DEF.find(p => p.id === currentPillarId);
+    const currentHex = dark ? currentDef.dark : currentDef.light;
+
+    const pillarHeaderStyle = { marginBottom:'32px', maxWidth:'640px' };
+    const pillarLabelStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'36px', color:n.ink, marginBottom:'10px', borderBottom:`3px solid ${currentHex}`, display:'inline-block', paddingBottom:'6px' };
+    const pillarDekStyle = { fontFamily:sans, fontSize:'15px', color:n.inkSoft, lineHeight:1.55, margin:0 };
+
+    const filterRowStyle = { display:'flex', alignItems:'center', gap:'10px', marginBottom:'28px' };
+    const filterActiveStyle = { fontFamily:mono, fontSize:'12px', color:n.paper, background:n.ink, borderRadius:'999px', padding:'6px 14px' };
+    const filterChipStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, border:`1px solid ${n.line}`, borderRadius:'999px', padding:'6px 14px' };
+
+    const postListStyle = { display:'flex', flexDirection:'column', border:`1px solid ${n.line}`, borderRadius:'6px', overflow:'hidden', marginBottom:'24px' };
+    const postRowStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', gap:'16px', padding:'16px 20px', borderBottom:`1px solid ${n.line}`, textDecoration:'none', color:n.ink, background:n.raised };
+    const postRowHoverStyle = { background:n.paper };
+    const postRowLeftStyle = { display:'flex', alignItems:'center', gap:'14px', minWidth:0 };
+    const formatPillStyle = { fontFamily:mono, fontSize:'10px', color:n.inkSoft, border:`1px solid ${n.line}`, borderRadius:'999px', padding:'2px 9px', flexShrink:0 };
+    const postTitleStyle = { fontFamily:serif, fontSize:'17px', color:n.ink, lineHeight:1.3 };
+    const postMetaStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, whiteSpace:'nowrap', flexShrink:0 };
+
+    const paginationRowStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'56px' };
+    const pageInfoStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+
+    const newsletterCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'32px', display:'flex', flexDirection:'column', gap:'16px', marginBottom:'56px' };
+    const newsletterEyebrowStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em' };
+    const newsletterHeadlineStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'26px', color:n.ink, lineHeight:1.3 };
+    const newsletterFormRowStyle = { display:'flex', gap:'12px', maxWidth:'420px' };
+    const newsletterInputStyle = { flex:1, background:n.paper, border:`1px solid ${n.line}`, borderRadius:'4px', padding:'10px 14px', fontFamily:sans, fontSize:'14px', color:n.ink };
+
+    const footerWrapStyle = { paddingTop:'32px', paddingBottom:'48px' };
+    const footerBottomStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}` };
+    const footerWordmarkStyle = { fontSize:'16px' };
+    const footerCopyStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    const pillars = PILLARS_DEF.map(p => {
+      const hex = dark ? p.dark : p.light;
+      return {
+        label:p.label,
+        dotStyle:{ display:'inline-block', width:'8px', height:'8px', borderRadius:'50%', background:hex, marginRight:'10px' },
+        dropdownItemStyle:{ display:'flex', alignItems:'center', color:n.ink, textDecoration:'none', fontFamily:mono, fontSize:'13px', padding:'8px 10px', borderRadius:'4px' },
+        dropdownItemHoverStyle:{ background:n.paper }
+      };
+    });
+
+    const pillarPicker = PILLARS_DEF.map(p => ({
+      label:p.label,
+      pickerBtnStyle:{ fontFamily:mono, fontSize:'11px', color: p.id === currentPillarId ? n.paper : n.inkSoft, background: p.id === currentPillarId ? n.ink : 'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 10px', cursor:'pointer' },
+      onPick: () => this.setState({ currentPillar: p.id })
+    }));
+
+    return {
+      pageStyle, demoBarStyle, demoControlsStyle, metaLabelStyle, toggleBtnStyle, containerStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      pillarPicker,
+      wordmarkZackStyle, wordmarkGlaserStyle,
+      navStyle, navWordmarkStyle, navLinkStyle, navLinkHoverStyle, navLinkBtnStyle, navDropdownWrapStyle, focusRingStyle,
+      dropdownOpen: this.state.dropdownOpen, dropdownCaret: this.state.dropdownOpen ? '▴' : '▾',
+      toggleDropdown: () => this.setState(s => ({ dropdownOpen: !s.dropdownOpen })),
+      dropdownPanelStyle, bracketBtnStyle, bracketBtnHoverStyle, navSubscribeBtnStyle,
+      pillars,
+      current: currentDef,
+      pillarHeaderStyle, pillarLabelStyle, pillarDekStyle,
+      filterRowStyle, filterActiveStyle, filterChipStyle, formats: FORMATS,
+      postListStyle, postRowStyle, postRowHoverStyle, postRowLeftStyle, formatPillStyle, postTitleStyle, postMetaStyle,
+      paginationRowStyle, pageInfoStyle,
+      newsletterCardStyle, newsletterEyebrowStyle, newsletterHeadlineStyle, newsletterFormRowStyle, newsletterInputStyle,
+      footerWrapStyle, footerBottomStyle, footerWordmarkStyle, footerCopyStyle,
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

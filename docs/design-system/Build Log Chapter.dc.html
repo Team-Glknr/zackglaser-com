@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">build log chapter — scroll/click to move between chapters</span>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <nav style="{{ navStyle }}">
+      <div style="{{ navWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">speaking</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">newsletter</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">about</a>
+      <button style="{{ navSubscribeBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+    </nav>
+
+    <a href="#" style="{{ breadcrumbStyle }}">← building this site — project view</a>
+
+    <div style="{{ tocRowStyle }}">
+      <sc-for list="{{ tocChapters }}" as="tc" hint-placeholder-count="3">
+        <button style="{{ tc.tocBtnStyle }}" onClick="{{ tc.onGo }}">
+          <span style="{{ tc.tocRangeStyle }}">{{ tc.range }}</span>
+          <span style="{{ tc.tocTitleStyle }}">{{ tc.title }}</span>
+        </button>
+      </sc-for>
+    </div>
+
+  </div>
+
+  <div style="{{ viewportStyle }}" onWheel="{{ onWheel }}">
+    <div style="{{ trackStyle }}">
+      <sc-for list="{{ chapters }}" as="ch" hint-placeholder-count="3">
+        <div style="{{ ch.panelStyle }}">
+          <div style="{{ containerStyle }}">
+            <div style="{{ articleHeaderStyle }}">
+              <div style="{{ metaRowStyle }}">
+                <span style="{{ pillarTagStyle }}">workshop</span>
+                <span style="{{ formatPillStyle }}">chapter · entries {{ ch.range }}</span>
+              </div>
+              <h1 style="{{ h1Style }}">{{ ch.title }}</h1>
+            </div>
+
+            <div style="{{ statsRowStyle }}">
+              <div style="{{ statBoxStyle }}"><div style="{{ statLabelStyle }}">cost</div><div style="{{ statValStyle }}">{{ ch.moneyCost }}</div></div>
+              <div style="{{ statBoxStyle }}"><div style="{{ statLabelStyle }}">time</div><div style="{{ statValStyle }}">{{ ch.timeCost }}</div></div>
+              <div style="{{ statBoxStyle }}"><div style="{{ statLabelStyle }}">entries</div><div style="{{ statValStyle }}">{{ ch.entryCount }}</div></div>
+            </div>
+
+            <article style="{{ articleBodyStyle }}">
+              <sc-for list="{{ ch.paragraphs }}" as="p" hint-placeholder-count="3">
+                <p style="{{ pStyle }}">{{ p }}</p>
+              </sc-for>
+            </article>
+
+            <div style="{{ lessonsGridStyle }}">
+              <div>
+                <div style="{{ lessonLabelStyle }}">main takeaways</div>
+                <sc-for list="{{ ch.takeaways }}" as="t" hint-placeholder-count="2">
+                  <div style="{{ lessonRowStyle }}"><span style="{{ lessonMarkStyle }}">→</span>{{ t }}</div>
+                </sc-for>
+              </div>
+              <div>
+                <div style="{{ lessonLabelStyle }}">what I got wrong</div>
+                <sc-for list="{{ ch.mistakes }}" as="m" hint-placeholder-count="2">
+                  <div style="{{ lessonRowStyle }}"><span style="{{ lessonMarkStyle }}">→</span>{{ m }}</div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="{{ drilldownLabelStyle }}">the entries — 001 by 001</div>
+            <div style="{{ accordionWrapStyle }}">
+              <sc-for list="{{ ch.entries }}" as="e" hint-placeholder-count="3">
+                <div style="{{ e.rowWrapStyle }}">
+                  <button style="{{ e.rowHeaderStyle }}" onClick="{{ e.onToggle }}">
+                    <span style="{{ e.noStyle }}">{{ e.no }}</span>
+                    <div style="{{ e.headerTextColStyle }}">
+                      <div style="{{ e.titleStyle }}">{{ e.title }}</div>
+                      <sc-if value="{{ e.collapsed }}" hint-placeholder-val="{{ true }}">
+                        <div style="{{ e.decisionPreviewStyle }}">{{ e.decision }}</div>
+                      </sc-if>
+                    </div>
+                    <span style="{{ e.caretStyle }}">{{ e.caret }}</span>
+                  </button>
+                  <sc-if value="{{ e.expanded }}" hint-placeholder-val="{{ false }}">
+                    <div style="{{ e.bodyStyle }}">
+                      <div style="{{ e.partLabelStyle }}">the decision</div>
+                      <p style="{{ e.decisionFullStyle }}">{{ e.decision }}</p>
+                      <div style="{{ e.partLabelStyle }}">how I took it apart</div>
+                      <p style="{{ e.entryPStyle }}">{{ e.teardown }}</p>
+                      <div style="{{ e.partLabelStyle }}">what I got wrong</div>
+                      <p style="{{ e.entryPStyle }}">{{ e.wrong }}</p>
+                      <a href="#" style="{{ e.permalinkStyle }}">open as its own page →</a>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="{{ containerStyle }}">
+    <div style="{{ seriesNavStyle }}">
+      <button style="{{ prevBtnStyle }}" onClick="{{ goPrev }}" disabled="{{ atStart }}">
+        <div style="{{ seriesNavLabelStyle }}">← previous chapter</div>
+        <div style="{{ seriesNavTitleStyle }}">{{ prevTitle }}</div>
+      </button>
+      <button style="{{ nextBtnStyle }}" onClick="{{ goNext }}" disabled="{{ atEnd }}">
+        <div style="{{ seriesNavLabelStyle }}">next chapter →</div>
+        <div style="{{ seriesNavTitleStyle }}">{{ nextTitle }}</div>
+      </button>
+    </div>
+
+    <footer style="{{ footerWrapStyle }}">
+      <div style="{{ footerBottomStyle }}">
+        <div style="{{ footerWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ footerCopyStyle }}">© {{ year }} zack glaser — legal tech advisor, runner, tinkerer</div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;},&quot;startChapter&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const CHAPTERS_DEF = [
+  { range:'001–003', title:'Why, and where it lives', moneyCost:'$0', timeCost:'~4 hrs', entryCount:'3',
+    paragraphs:[
+      "Before any code, the real question was whether this site was worth building at all versus just posting to LinkedIn and calling it done. The case that won: a newsletter needs a home that isn't rented, and four unrelated interests need one address instead of four scattered profiles.",
+      "The architecture followed from that — one repo, one Astro site, four content collections acting as rooms in the same house rather than four separate sites pretending to be related. That decision made every later one easier, including where the code itself would live long-term.",
+      "None of this was glamorous. It's the plumbing that makes the rest of the build possible, and it's exactly the kind of decision that's invisible when it's right and expensive when it's wrong."
+    ],
+    takeaways:['One repo, one Astro site, four content collections beats four separate sites.', 'Naming the GitHub account mattered more than expected — "thirdth" had to feel permanent.'],
+    mistakes:['Almost started with a CMS before realizing markdown files were plenty for launch.'],
+    entries:[
+      {no:'001', title:"Why I'm building this", decision:'Build a real site instead of only posting to LinkedIn.', teardown:'Weighed the cost of a rented platform against owning the address a newsletter lives at. Four unrelated interests made one home more valuable than four scattered profiles.', wrong:"Didn't budget enough early time for the plumbing (repo, hosting) before wanting to jump to design."},
+      {no:'002', title:'One house, four rooms', decision:'One repo, one Astro site, four content collections \u2014 not four separate sites.', teardown:'Considered separate sites per pillar for cleaner branding, but that fights the "one person, one method" premise. One house won.', wrong:'Initially underestimated how much the navigation would need to work to keep four rooms feeling like one house.'},
+      {no:'003', title:'Where the code lives', decision:'GitHub, under the "thirdth" account.', teardown:'Picked a name meant to feel permanent rather than tied to any single pillar or employer.', wrong:'Spent longer than expected on the account name itself \u2014 a decision that should have been quick.'}
+    ] },
+  { range:'004–006', title:'Picking the stack and the look', moneyCost:'$0', timeCost:'~14 hrs', entryCount:'3',
+    paragraphs:[
+      "This stretch covered three decisions that don't look related on the surface — what framework runs the site, what the newsletter is called, and what the whole thing looks like — but all three turned out to be the same question asked three ways: what does this site actually want to be?",
+      "Astro won over Next for a reason that had nothing to do with performance benchmarks. Four pillars meant four collections of markdown content that mostly don't need client-side interactivity. Astro's content collections modeled that directly, and the members-area question could wait for a later, harder decision instead of forcing the framework choice now.",
+      "Naming the newsletter took longer than expected, mostly because the obvious candidates all leaned too hard on one pillar. \"Taking Things Apart\" won because it describes the method, not a subject.",
+      "The brand pass is where most of the real work happened. The first color attempt used oklch() with round percentage values and looked engineered rather than chosen. Rebuilding the palette in plain hex, with a cool gray neutral instead of a warm brown one, was the fix. The wordmark got the same \"mixed instincts\" treatment as the rest of the brand — half serif italic, half mono, one lowercase word.",
+      "None of these three entries would have justified their own spotlight on their own. Together they're the moment the site stopped being an idea and started having a face."
+    ],
+    takeaways:['Astro\u2019s content collections fit a four-pillar site better than a Next app-router setup did.', 'Cool gray neutrals read as intentional; warm/brown neutrals read as dated next to a bold accent.', 'A two-font wordmark (serif italic + mono) does more brand work than a single safe typeface.'],
+    mistakes:['First color pass used oklch() percentages and looked generated, not chosen \u2014 redid it in plain hex.', 'Underestimated how long naming the newsletter would take relative to picking the stack.'],
+    entries:[
+      {no:'004', title:'Choosing the stack', decision:'Astro over Next \u2014 content collections fit four pillars better than an app router.', teardown:'Weighed Next\u2019s ecosystem against Astro\u2019s content-first model. Most pages here are markdown with no interactivity, which Astro treats as a first-class case.', wrong:'Almost let the members-area question force this decision \u2014 deferred it instead, correctly.'},
+      {no:'005', title:'Naming the newsletter', decision:'"Taking Things Apart" \u2014 describes the method, not one pillar.', teardown:'Early candidates leaned on legal tech or running specifically and boxed the other pillars out. Needed a name that worked for all four.', wrong:"Spent almost as long on this as on the stack decision \u2014 didn't expect naming to be the hard part."},
+      {no:'006', title:'Brand: colors, type, the logo question', decision:'Cool gray neutrals, hex-defined palette, two-font wordmark (serif italic + mono).', teardown:'First pass used oklch() percentages and warm neutrals \u2014 looked generated and slightly dated next to the accent colors. Rebuilt in plain hex with cool gray instead.', wrong:'The oklch() palette needed a full redo, not a tweak \u2014 should have sanity-checked it against real content sooner.'}
+    ] },
+  { range:'007–008', title:'Making the case, and launching', moneyCost:'$0', timeCost:'~9 hrs', entryCount:'2',
+    paragraphs:[
+      "The speaking page turned out to need a strategy conversation before it needed a design — what the page is actually for changed mid-build, from \"get booked\" to \"be visibly credible, with booking made easy.\" That reframing is worth its own entry, separate from the visual execution.",
+      "The Lawyerist/Affinity relationship needed a clear, simple line rather than a paragraph of hedging — readers and program chairs both just want to know the day job in one sentence.",
+      "Launch is the entry that makes every draft before it public at once — the pre-launch log had been accumulating in draft status, and flipping that switch is its own small decision about how much of the mess to show."
+    ],
+    takeaways:['Leading the speaking page with credibility, not a booking form, needed its own strategy pass before design.', 'Launching retroactively publishes the whole pre-launch log at once \u2014 plan the reveal, not just the button.'],
+    mistakes:['Treated speaking as a simple page before realizing it needed its own goal-ranking discussion first.'],
+    entries:[
+      {no:'007', title:'The speaking page', decision:'Reframe as "visible expert," booking made easy but not the sole ask.', teardown:"Started designing a booking form; realized the real job was credibility first. Needed a strategy pass before the page's design made sense.", wrong:'Treated speaking as a simple page before realizing it needed its own goal-ranking discussion first.'},
+      {no:'008', title:'Launch', decision:'Flip every draft entry to published at once.', teardown:'The pre-launch log accumulated in draft status; launch is the entry that makes the whole backlog public in one motion.', wrong:'Underestimated how much the reveal itself needed planning, not just the technical publish step.'}
+    ] }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark', current: this.props.startChapter ?? 1, wheelLock:false, expandedIds:{} };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+    const accent = dark ? '#D9A857' : '#A6792E';
+    const current = this.state.current;
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh', overflow:'hidden' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'760px', margin:'0 auto', padding:'0 40px' };
+
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const navStyle = { display:'flex', alignItems:'center', gap:'28px', padding:'18px 28px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', margin:'32px 0 24px' };
+    const navWordmarkStyle = { fontSize:'18px', flexShrink:0, marginRight:'8px' };
+    const navLinkStyle = { color:n.ink, textDecoration:'none', fontFamily:sans, fontSize:'15px', fontWeight:500, lineHeight:'1', borderBottom:'1px solid transparent', paddingBottom:'2px', whiteSpace:'nowrap', display:'inline-block' };
+    const navLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', padding:'8px 14px', borderRadius:'4px', flexShrink:0 };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+    const navSubscribeBtnStyle = { ...bracketBtnStyle, marginLeft:'auto' };
+
+    const breadcrumbStyle = { display:'inline-block', fontFamily:mono, fontSize:'12px', color:n.inkSoft, textDecoration:'none', marginBottom:'20px' };
+
+    const tocRowStyle = { display:'flex', gap:'8px', marginBottom:'8px', paddingBottom:'20px', borderBottom:`1px solid ${n.line}` };
+
+    const tocChapters = CHAPTERS_DEF.map((ch, i) => {
+      const active = i === current;
+      return {
+        range: ch.range, title: ch.title,
+        tocBtnStyle:{ display:'flex', flexDirection:'column', gap:'4px', flex:1, textAlign:'left', background: active ? n.raised : 'transparent', border:`1px solid ${active ? accent : n.line}`, borderRadius:'6px', padding:'10px 14px', cursor:'pointer' },
+        tocRangeStyle:{ fontFamily:mono, fontSize:'10px', color: active ? accent : n.inkSoft, textTransform:'uppercase', letterSpacing:'0.04em' },
+        tocTitleStyle:{ fontFamily:serif, fontStyle:'italic', fontSize:'13px', color:n.ink, lineHeight:1.3 },
+        onGo: () => this.setState({ current: i })
+      };
+    });
+
+    const viewportStyle = { overflow:'hidden' };
+    const trackStyle = { display:'flex', width:`${CHAPTERS_DEF.length * 100}%`, transform:`translateX(-${current * (100 / CHAPTERS_DEF.length)}%)`, transition:'transform 420ms cubic-bezier(0.22, 1, 0.36, 1)' };
+
+    const articleHeaderStyle = { marginBottom:'24px', paddingTop:'8px' };
+    const metaRowStyle = { display:'flex', alignItems:'center', gap:'10px', marginBottom:'16px', flexWrap:'wrap' };
+    const pillarTagStyle = { fontFamily:mono, fontSize:'11px', color:accent, textTransform:'uppercase', letterSpacing:'0.04em' };
+    const formatPillStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, border:`1px solid ${n.line}`, borderRadius:'999px', padding:'1px 9px' };
+    const h1Style = { fontFamily:serif, fontStyle:'italic', fontSize:'32px', lineHeight:1.25, color:n.ink, margin:0, fontWeight:500 };
+
+    const statsRowStyle = { display:'flex', gap:'10px', marginBottom:'32px' };
+    const statBoxStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'10px 16px', minWidth:'100px' };
+    const statLabelStyle = { fontFamily:mono, fontSize:'10px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:'4px' };
+    const statValStyle = { fontFamily:serif, fontSize:'16px', color:n.ink };
+
+    const articleBodyStyle = { marginBottom:'40px' };
+    const pStyle = { fontFamily:serif, fontSize:'17px', lineHeight:1.75, color:n.ink, margin:'0 0 20px' };
+
+    const lessonsGridStyle = { display:'grid', gridTemplateColumns:'1fr 1fr', gap:'24px', marginBottom:'40px', paddingTop:'32px', borderTop:`1px solid ${n.line}` };
+    const lessonLabelStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.04em', marginBottom:'10px' };
+    const lessonRowStyle = { display:'flex', gap:'8px', fontFamily:sans, fontSize:'13px', lineHeight:1.5, color:n.ink, marginBottom:'6px' };
+    const lessonMarkStyle = { color:accent, flexShrink:0 };
+
+    const drilldownLabelStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.04em', marginBottom:'10px' };
+    const accordionWrapStyle = { border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'20px', overflow:'hidden' };
+
+    const expandedIds = this.state.expandedIds;
+    const makeAccordionEntry = (e) => {
+      const key = e.no;
+      const expanded = !!expandedIds[key];
+      return {
+        no:e.no, title:e.title, decision:e.decision,
+        collapsed: !expanded, expanded,
+        caret: expanded ? '−' : '+',
+        rowWrapStyle:{ borderBottom:`1px solid ${n.line}` },
+        rowHeaderStyle:{ display:'flex', alignItems:'center', gap:'16px', width:'100%', textAlign:'left', background: expanded ? n.raised : 'transparent', border:'none', padding:'16px 18px', cursor:'pointer', fontFamily:'inherit' },
+        noStyle:{ fontFamily:mono, fontSize:'13px', color:accent, flexShrink:0, width:'28px' },
+        headerTextColStyle:{ flex:1, display:'flex', flexDirection:'column', gap:'4px' },
+        titleStyle:{ fontFamily:serif, fontStyle:'italic', fontSize:'16px', color:n.ink },
+        decisionPreviewStyle:{ fontFamily:sans, fontSize:'12px', color:n.inkSoft, lineHeight:1.4 },
+        caretStyle:{ fontFamily:mono, fontSize:'16px', color:n.inkSoft, flexShrink:0 },
+        bodyStyle:{ padding:'0 18px 24px 62px', display:'flex', flexDirection:'column', gap:'4px', background:n.raised },
+        partLabelStyle:{ fontFamily:mono, fontSize:'10px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em', marginTop:'10px' },
+        decisionFullStyle:{ fontFamily:serif, fontStyle:'italic', fontSize:'15px', color:n.ink, margin:0, fontWeight:500 },
+        entryPStyle:{ fontFamily:sans, fontSize:'13px', lineHeight:1.65, color:n.ink, margin:0, maxWidth:'560px' },
+        permalinkStyle:{ fontFamily:mono, fontSize:'11px', color:accent, textDecoration:'none', marginTop:'14px', display:'inline-block' },
+        teardown:e.teardown, wrong:e.wrong,
+        onToggle: () => this.setState(s => ({ expandedIds: { ...s.expandedIds, [key]: !s.expandedIds[key] } }))
+      };
+    };
+
+    const chapters = CHAPTERS_DEF.map(ch => ({
+      ...ch,
+      panelStyle:{ width:`${100 / CHAPTERS_DEF.length}%`, flexShrink:0, paddingBottom:'8px' },
+      entries: ch.entries.map(makeAccordionEntry)
+    }));
+
+    const atStart = current === 0;
+    const atEnd = current === CHAPTERS_DEF.length - 1;
+    const prevTitle = atStart ? '—' : CHAPTERS_DEF[current - 1].title;
+    const nextTitle = atEnd ? '—' : CHAPTERS_DEF[current + 1].title;
+
+    const seriesNavStyle = { display:'grid', gridTemplateColumns:'1fr 1fr', gap:'16px', margin:'8px 0 48px' };
+    const navBtnBase = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'18px 20px', cursor:'pointer', display:'flex', flexDirection:'column', gap:'6px', fontFamily:'inherit' };
+    const prevBtnStyle = { ...navBtnBase, textAlign:'left', opacity: atStart ? 0.4 : 1, cursor: atStart ? 'default' : 'pointer' };
+    const nextBtnStyle = { ...navBtnBase, textAlign:'right', alignItems:'flex-end', opacity: atEnd ? 0.4 : 1, cursor: atEnd ? 'default' : 'pointer' };
+    const seriesNavLabelStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+    const seriesNavTitleStyle = { fontFamily:serif, fontSize:'15px', color:n.ink, lineHeight:1.3 };
+
+    const footerWrapStyle = { paddingTop:'32px', paddingBottom:'48px' };
+    const footerBottomStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}` };
+    const footerWordmarkStyle = { fontSize:'16px' };
+    const footerCopyStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    const goNext = () => { if (!atEnd) this.setState(s => ({ current: s.current + 1 })); };
+    const goPrev = () => { if (!atStart) this.setState(s => ({ current: s.current - 1 })); };
+
+    const onWheel = (e) => {
+      if (this.state.wheelLock) return;
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) < 30) return;
+      this.setState({ wheelLock: true });
+      if (delta > 0) goNext(); else goPrev();
+      setTimeout(() => this.setState({ wheelLock: false }), 500);
+    };
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle, containerStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      wordmarkZackStyle, wordmarkGlaserStyle,
+      navStyle, navWordmarkStyle, navLinkStyle, navLinkHoverStyle, bracketBtnHoverStyle, navSubscribeBtnStyle,
+      breadcrumbStyle,
+      tocRowStyle, tocChapters,
+      viewportStyle, trackStyle, onWheel,
+      chapters,
+      articleHeaderStyle, metaRowStyle, pillarTagStyle, formatPillStyle, h1Style,
+      statsRowStyle, statBoxStyle, statLabelStyle, statValStyle,
+      articleBodyStyle, pStyle,
+      lessonsGridStyle, lessonLabelStyle, lessonRowStyle, lessonMarkStyle,
+      drilldownLabelStyle, accordionWrapStyle,
+      seriesNavStyle, prevBtnStyle, nextBtnStyle, seriesNavLabelStyle, seriesNavTitleStyle,
+      goNext, goPrev, atStart, atEnd, prevTitle, nextTitle,
+      footerWrapStyle, footerBottomStyle, footerWordmarkStyle, footerCopyStyle,
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

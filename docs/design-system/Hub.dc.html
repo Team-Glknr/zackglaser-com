@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">hub — v1</span>
+    <div style="{{ heroPickerRowStyle }}">
+      <span style="{{ metaLabelStyle }}">hero:</span>
+      <sc-for list="{{ heroOptions }}" as="ho" hint-placeholder-count="3">
+        <button style="{{ ho.chipStyle }}" onClick="{{ ho.onPick }}">{{ ho.label }}</button>
+      </sc-for>
+    </div>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <nav style="{{ navStyle }}">
+      <div style="{{ navWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <div style="{{ navDropdownWrapStyle }}">
+        <button style="{{ navLinkBtnStyle }}" style-focus="{{ focusRingStyle }}" onClick="{{ toggleDropdown }}">pillars {{ dropdownCaret }}</button>
+        <sc-if value="{{ dropdownOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ dropdownPanelStyle }}">
+            <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+              <a href="#" style="{{ p.dropdownItemStyle }}" style-hover="{{ p.dropdownItemHoverStyle }}">
+                <span style="{{ p.dotStyle }}"></span>{{ p.label }}
+              </a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}" style-focus="{{ focusRingStyle }}">speaking</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}" style-focus="{{ focusRingStyle }}">newsletter</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}" style-focus="{{ focusRingStyle }}">about</a>
+      <button style="{{ navSubscribeBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ subscribe ]</button>
+    </nav>
+
+    <sc-if value="{{ heroIsPlain }}" hint-placeholder-val="{{ true }}">
+      <div style="{{ heroStyle }}">
+        <p style="{{ heroTextStyle }}">I'm Zack — a legal tech advisor by day, a runner and tinkerer the rest of the time. This site is where I take things apart: software, training plans, workbenches — to see how they work, and show you the pieces.</p>
+        <a href="#" style="{{ nowLinkStyle }}" style-hover="{{ nowLinkHoverStyle }}">what I'm up to right now →</a>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ heroIsCta }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ ctaHeroStyle }}">
+        <div style="{{ ctaTextColStyle }}">
+          <p style="{{ heroTextStyle }}">I'm Zack — a legal tech advisor by day, a runner and tinkerer the rest of the time. This site is where I take things apart to see how they work.</p>
+          <a href="#" style="{{ nowLinkStyle }}" style-hover="{{ nowLinkHoverStyle }}">what I'm up to right now →</a>
+        </div>
+        <div style="{{ ctaBoxStyle }}">
+          <div style="{{ ctaEyebrowStyle }}">the newsletter</div>
+          <div style="{{ ctaHeadlineStyle }}">One thing, taken apart. Every week-ish.</div>
+          <div style="{{ ctaFormRowStyle }}">
+            <input style="{{ newsletterInputStyle }}" placeholder="you@email.com" style-focus="{{ focusRingStyle }}" />
+            <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ subscribe ]</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ heroIsWizard }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ wizardWrapStyle }}">
+        <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+          <div style="{{ wizardEyebrowStyle }}">not sure where to start?</div>
+          <div style="{{ wizardQuestionStyle }}">What are you here for?</div>
+          <div style="{{ wizardOptionsGridStyle }}">
+            <sc-for list="{{ step1Options }}" as="opt" hint-placeholder-count="4">
+              <button style="{{ opt.tileStyle }}" style-hover="{{ tileHoverStyle }}" onClick="{{ opt.onSelect }}">{{ opt.label }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ wizardEyebrowStyle }}">got it — {{ answer1Label }}</div>
+          <div style="{{ wizardQuestionStyle }}">Got 2 minutes, or 20?</div>
+          <div style="{{ wizardOptionsGridStyle }}">
+            <button style="{{ quickTileStyle }}" style-hover="{{ tileHoverStyle }}" onClick="{{ pickQuick }}">
+              <div style="{{ tileHeadStyle }}">2 minutes</div>
+              <div style="{{ tileSubStyle }}">a quick take</div>
+            </button>
+            <button style="{{ deepTileStyle }}" style-hover="{{ tileHoverStyle }}" onClick="{{ pickDeep }}">
+              <div style="{{ tileHeadStyle }}">20 minutes</div>
+              <div style="{{ tileSubStyle }}">a full teardown</div>
+            </button>
+          </div>
+          <button style="{{ backLinkStyle }}" onClick="{{ resetWizard }}">← start over</button>
+        </sc-if>
+        <sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ wizardEyebrowStyle }}">start here</div>
+          <div style="{{ resultTitleStyle }}">{{ resultTitle }}</div>
+          <div style="{{ resultMetaStyle }}">{{ resultMeta }}</div>
+          <div style="{{ resultRowStyle }}">
+            <a href="#" style="{{ resultLinkStyle }}">read it →</a>
+            <button style="{{ backLinkStyle }}" onClick="{{ resetWizard }}">← try another answer</button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ heroIsLatestProject }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ spotlightWrapStyle }}">
+        <div style="{{ spotlightEyebrowStyle }}">currently taking apart</div>
+        <div style="{{ spotlightTitleStyle }}">What law firm software actually costs</div>
+        <div style="{{ spotlightDekStyle }}">Six vendors, six pricing models, one spreadsheet — legal tech · issue 014</div>
+        <a href="#" style="{{ spotlightLinkStyle }}">read it →</a>
+      </div>
+    </sc-if>
+
+    <div style="{{ doorsGridStyle }}">
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+        <a href="#" style="{{ p.doorCardStyle }}" style-hover="{{ p.doorCardHoverStyle }}">
+          <div style="{{ p.doorLabelStyle }}">{{ p.label }}</div>
+          <div style="{{ p.doorDescStyle }}">{{ p.doorDesc }}</div>
+          <div style="{{ p.doorEnterStyle }}">enter →</div>
+        </a>
+      </sc-for>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">latest</div>
+    <div style="{{ latestGridStyle }}">
+      <sc-for list="{{ latestPosts }}" as="post" hint-placeholder-count="3">
+        <div style="{{ post.cardStyle }}">
+          <div style="{{ post.tagStyle }}">{{ post.pillarLabel }}</div>
+          <div style="{{ post.titleStyle }}">{{ post.title }}</div>
+          <div style="{{ post.metaStyle }}">{{ post.meta }}</div>
+          <a href="#" style="{{ post.linkStyle }}" style-hover="{{ post.linkHoverStyle }}">read the teardown →</a>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="{{ newsletterCardStyle }}">
+      <div style="{{ newsletterEyebrowStyle }}">the newsletter — taking things apart</div>
+      <div style="{{ newsletterHeadlineStyle }}">One thing, taken apart. Every week-ish.</div>
+      <div style="{{ newsletterFormRowStyle }}">
+        <input style="{{ newsletterInputStyle }}" placeholder="you@email.com" style-focus="{{ focusRingStyle }}" />
+        <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ subscribe ]</button>
+      </div>
+    </div>
+
+    <footer style="{{ footerWrapStyle }}">
+      <div style="{{ footerColsStyle }}">
+        <div style="{{ footerColStyle }}">
+          <div style="{{ footerColLabelStyle }}">pillars</div>
+          <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+            <a href="#" style="{{ p.footerLinkStyle }}" style-hover="{{ p.footerLinkHoverStyle }}">{{ p.label }}</a>
+          </sc-for>
+        </div>
+        <div style="{{ footerColStyle }}">
+          <div style="{{ footerColLabelStyle }}">site</div>
+          <a href="#" style="{{ footerLinkNeutralStyle }}" style-hover="{{ footerLinkNeutralHoverStyle }}">speaking</a>
+          <a href="#" style="{{ footerLinkNeutralStyle }}" style-hover="{{ footerLinkNeutralHoverStyle }}">about</a>
+          <a href="#" style="{{ footerLinkNeutralStyle }}" style-hover="{{ footerLinkNeutralHoverStyle }}">now</a>
+          <a href="#" style="{{ footerLinkNeutralStyle }}" style-hover="{{ footerLinkNeutralHoverStyle }}">newsletter archive</a>
+        </div>
+        <div style="{{ footerColStyle }}">
+          <div style="{{ footerColLabelStyle }}">elsewhere</div>
+          <a href="#" style="{{ footerLinkNeutralStyle }}" style-hover="{{ footerLinkNeutralHoverStyle }}">lawyerist podcast ↗</a>
+          <a href="#" style="{{ footerLinkNeutralStyle }}" style-hover="{{ footerLinkNeutralHoverStyle }}">rss</a>
+          <a href="#" style="{{ footerLinkNeutralStyle }}" style-hover="{{ footerLinkNeutralHoverStyle }}">email</a>
+        </div>
+      </div>
+      <div style="{{ footerBottomStyle }}">
+        <div style="{{ footerWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ footerCopyStyle }}">© {{ year }} zack glaser — legal tech advisor, runner, tinkerer</div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;},&quot;heroVariant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;plain&quot;,&quot;options&quot;:[&quot;plain&quot;,&quot;cta&quot;,&quot;wizard&quot;,&quot;latest-project&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const PILLARS_DEF = [
+  { id:'legal-tech', label:'legal tech', light:'#3B5BA5', dark:'#7C9BDB',
+    doorDesc:"Tools, takes, and industry commentary — what's actually inside the software law firms buy.",
+    postTitle:'What law firm software actually costs', postMeta:'legal tech · issue 014',
+    quickTitle:'AI drafting tools, three months in', quickMeta:'legal tech · take',
+    deepTitle:'What law firm software actually costs', deepMeta:'legal tech · issue 014' },
+  { id:'running', label:'running', light:'#B23A3A', dark:'#E1726C',
+    doorDesc:'Training logs and race reports — plans built, tested, and rebuilt in public.',
+    postTitle:'Rebuilding a training block from scratch', postMeta:'running · issue 011',
+    quickTitle:'Week 6 of the fall block', quickMeta:'running · log',
+    deepTitle:'Rebuilding a training block from scratch', deepMeta:'running · issue 011' },
+  { id:'workshop', label:'workshop', light:'#A6792E', dark:'#D9A857',
+    doorDesc:'Builds, code, and the site itself — including how it got made.',
+    postTitle:'Why this site is built the way it is', postMeta:'workshop · entry 007',
+    quickTitle:'Choosing Astro over Next', quickMeta:'workshop · take',
+    deepTitle:'Why this site is built the way it is', deepMeta:'workshop · entry 007' },
+  { id:'field-notes', label:'field notes', light:'#3F7D5C', dark:'#6FBB94',
+    doorDesc:'Essays and open questions — the thinking behind the other three.',
+    postTitle:'On taking things apart as a way of thinking', postMeta:'field notes · issue 009',
+    quickTitle:'A short case for range', quickMeta:'field notes · take',
+    deepTitle:'On taking things apart as a way of thinking', deepMeta:'field notes · issue 009' }
+];
+const STEP1_OPTIONS = [
+  { key:'booking', label:'Booking a speaker', pillarId:'legal-tech' },
+  { key:'legal', label:'Legal tech reading', pillarId:'legal-tech' },
+  { key:'running', label:'Running', pillarId:'running' },
+  { key:'making', label:'Building things', pillarId:'workshop' }
+];
+const HERO_OPTIONS = [
+  { key:'plain', label:'plain' },
+  { key:'cta', label:'CTA' },
+  { key:'wizard', label:'wizard' },
+  { key:'latest-project', label:'latest project' }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark', dropdownOpen: false, heroVariant: this.props.heroVariant ?? 'plain', wizardStep:1, answer1:null };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'1200px', margin:'0 auto', padding:'32px 40px 0' };
+
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+
+    const navStyle = { display:'flex', alignItems:'center', gap:'32px', padding:'18px 28px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'56px' };
+    const navWordmarkStyle = { fontSize:'18px', flexShrink:0, marginRight:'8px' };
+    const navLinkStyle = { color:n.ink, textDecoration:'none', fontFamily:sans, fontSize:'15px', fontWeight:500, lineHeight:'1', borderBottom:'1px solid transparent', paddingBottom:'2px', whiteSpace:'nowrap', display:'inline-block' };
+    const navLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const navLinkBtnStyle = { ...navLinkStyle, background:'transparent', border:'none', margin:0, cursor:'pointer' };
+    const navDropdownWrapStyle = { position:'relative', display:'flex', alignItems:'center' };
+    const focusRingStyle = { outline:`2px solid ${n.ink}`, outlineOffset:'2px', borderRadius:'2px' };
+    const dropdownPanelStyle = { position:'absolute', top:'28px', left:0, background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', boxShadow:'0 8px 24px rgba(0,0,0,0.16)', padding:'6px', display:'flex', flexDirection:'column', minWidth:'160px', zIndex:2 };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', padding:'8px 14px', borderRadius:'4px', flexShrink:0 };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+    const navSubscribeBtnStyle = { ...bracketBtnStyle, marginLeft:'auto' };
+
+    const heroVariant = this.state.heroVariant;
+    const heroPickerRowStyle = { display:'flex', alignItems:'center', gap:'6px' };
+    const heroOptions = HERO_OPTIONS.map(o => ({
+      label:o.label,
+      chipStyle:{ fontFamily:mono, fontSize:'11px', color: heroVariant === o.key ? n.paper : n.ink, background: heroVariant === o.key ? n.ink : 'transparent', border:`1px solid ${n.line}`, borderRadius:'999px', padding:'4px 10px', cursor:'pointer' },
+      onPick: () => this.setState({ heroVariant: o.key, wizardStep:1, answer1:null })
+    }));
+    const heroIsPlain = heroVariant === 'plain';
+    const heroIsCta = heroVariant === 'cta';
+    const heroIsWizard = heroVariant === 'wizard';
+    const heroIsLatestProject = heroVariant === 'latest-project';
+
+    const heroStyle = { maxWidth:'680px', marginBottom:'64px' };
+    const heroTextStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'26px', lineHeight:1.5, color:n.ink, margin:'0 0 20px' };
+    const nowLinkStyle = { fontFamily:mono, fontSize:'13px', color:n.inkSoft, textDecoration:'none', borderBottom:'1px solid transparent' };
+    const nowLinkHoverStyle = { color:n.ink, borderBottom:`1px solid ${n.ink}` };
+
+    const ctaHeroStyle = { display:'grid', gridTemplateColumns:'1.3fr 1fr', gap:'32px', marginBottom:'64px', alignItems:'start' };
+    const ctaTextColStyle = { maxWidth:'520px' };
+    const ctaBoxStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'28px', display:'flex', flexDirection:'column', gap:'14px' };
+    const ctaEyebrowStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em' };
+    const ctaHeadlineStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'22px', color:n.ink, lineHeight:1.3 };
+    const ctaFormRowStyle = { display:'flex', gap:'10px' };
+
+    const wizardWrapStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'8px', padding:'40px', marginBottom:'64px', minHeight:'220px' };
+    const wizardEyebrowStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:'10px' };
+    const wizardQuestionStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'28px', color:n.ink, marginBottom:'24px' };
+    const wizardOptionsGridStyle = { display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'12px' };
+    const tileBase = { display:'flex', flexDirection:'column', gap:'6px', background:n.paper, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'18px', fontFamily:sans, fontSize:'14px', fontWeight:500, color:n.ink, cursor:'pointer', textAlign:'left' };
+    const tileHoverStyle = { borderColor:n.ink };
+    const tileHeadStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'17px' };
+    const tileSubStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+    const backLinkStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, background:'transparent', border:'none', cursor:'pointer', marginTop:'20px', padding:0 };
+    const step1Options = STEP1_OPTIONS.map(o => ({ label:o.label, tileStyle:{ ...tileBase }, onSelect: () => this.setState({ wizardStep:2, answer1:o }) }));
+    const answer1 = this.state.answer1;
+    const isStep1 = this.state.wizardStep === 1;
+    const isStep2 = this.state.wizardStep === 2;
+    const isResult = this.state.wizardStep === 3;
+    const pdefForAnswer = answer1 ? PILLARS_DEF.find(p => p.id === answer1.pillarId) : null;
+    let resultTitle = '', resultMeta = '', resultLinkStyle = {};
+    if (isResult && pdefForAnswer) {
+      const hex = dark ? pdefForAnswer.dark : pdefForAnswer.light;
+      const quick = this.state.pickedQuick;
+      resultTitle = quick ? pdefForAnswer.quickTitle : pdefForAnswer.deepTitle;
+      resultMeta = quick ? pdefForAnswer.quickMeta : pdefForAnswer.deepMeta;
+      resultLinkStyle = { fontFamily:mono, fontSize:'13px', color:hex, textDecoration:'none', borderBottom:`1px solid ${hex}` };
+    }
+    const resultTitleStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'30px', color:n.ink, marginBottom:'8px', maxWidth:'600px' };
+    const resultMetaStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, marginBottom:'20px' };
+    const resultRowStyle = { display:'flex', alignItems:'center', gap:'20px' };
+
+    const spotlightWrapStyle = { display:'flex', flexDirection:'column', gap:'12px', paddingBottom:'40px', marginBottom:'24px', borderBottom:`1px solid ${n.line}` };
+    const spotlightEyebrowStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em' };
+    const spotlightTitleStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'34px', color:n.ink, lineHeight:1.2, maxWidth:'640px' };
+    const spotlightDekStyle = { fontFamily:sans, fontSize:'15px', color:n.inkSoft };
+    const spotlightLinkStyle = { fontFamily:mono, fontSize:'13px', color:n.ink, textDecoration:'none', width:'fit-content', borderBottom:`1px solid ${n.ink}` };
+
+    const doorsGridStyle = { display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'16px', marginBottom:'64px' };
+    const sectionLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, letterSpacing:'0.06em', textTransform:'uppercase', marginBottom:'20px' };
+    const latestGridStyle = { display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'16px', marginBottom:'64px' };
+
+    const pillars = PILLARS_DEF.map(p => {
+      const hex = dark ? p.dark : p.light;
+      return {
+        label:p.label, hex, doorDesc:p.doorDesc,
+        dotStyle:{ display:'inline-block', width:'8px', height:'8px', borderRadius:'50%', background:hex, marginRight:'10px' },
+        dropdownItemStyle:{ display:'flex', alignItems:'center', color:n.ink, textDecoration:'none', fontFamily:mono, fontSize:'13px', padding:'8px 10px', borderRadius:'4px' },
+        dropdownItemHoverStyle:{ background:n.paper },
+        doorCardStyle:{ display:'flex', flexDirection:'column', gap:'10px', background:n.raised, border:`1px solid ${n.line}`, borderTop:`3px solid ${hex}`, borderRadius:'6px', padding:'24px', textDecoration:'none', color:n.ink },
+        doorCardHoverStyle:{ borderColor:hex },
+        doorLabelStyle:{ fontFamily:serif, fontStyle:'italic', fontSize:'20px', color:n.ink },
+        doorDescStyle:{ fontFamily:sans, fontSize:'13px', color:n.inkSoft, lineHeight:1.5, flex:1 },
+        doorEnterStyle:{ fontFamily:mono, fontSize:'12px', color:hex },
+        footerLinkStyle:{ display:'flex', alignItems:'center', gap:'8px', color:n.ink, textDecoration:'none', fontFamily:mono, fontSize:'13px' },
+        footerLinkHoverStyle:{ color:hex }
+      };
+    });
+
+    const latestPosts = PILLARS_DEF.slice(0, 3).map(p => {
+      const hex = dark ? p.dark : p.light;
+      return {
+        pillarLabel:p.label, title:p.postTitle, meta:p.postMeta,
+        cardStyle:{ background:n.raised, border:`1px solid ${n.line}`, borderTop:`3px solid ${hex}`, borderRadius:'6px', padding:'20px', display:'flex', flexDirection:'column', gap:'10px' },
+        tagStyle:{ fontFamily:mono, fontSize:'11px', color:hex, textTransform:'uppercase', letterSpacing:'0.04em' },
+        titleStyle:{ fontFamily:serif, fontSize:'20px', color:n.ink, lineHeight:1.3 },
+        metaStyle:{ fontFamily:mono, fontSize:'11px', color:n.inkSoft },
+        linkStyle:{ color:hex, textDecoration:'none', fontFamily:mono, fontSize:'13px' },
+        linkHoverStyle:{ textDecoration:'underline' }
+      };
+    });
+
+    const newsletterCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'32px', display:'flex', flexDirection:'column', gap:'16px', marginBottom:'64px' };
+    const newsletterEyebrowStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em' };
+    const newsletterHeadlineStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'28px', color:n.ink, lineHeight:1.3 };
+    const newsletterFormRowStyle = { display:'flex', gap:'12px', maxWidth:'420px' };
+    const newsletterInputStyle = { flex:1, background:n.paper, border:`1px solid ${n.line}`, borderRadius:'4px', padding:'10px 14px', fontFamily:sans, fontSize:'14px', color:n.ink };
+
+    const footerWrapStyle = { paddingTop:'32px', borderTop:`1px solid ${n.line}`, paddingBottom:'48px' };
+    const footerColsStyle = { display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'24px', marginBottom:'40px' };
+    const footerColStyle = { display:'flex', flexDirection:'column', gap:'12px' };
+    const footerColLabelStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:'4px' };
+    const footerLinkNeutralStyle = { color:n.ink, textDecoration:'none', fontFamily:mono, fontSize:'13px' };
+    const footerLinkNeutralHoverStyle = { color:n.inkSoft };
+    const footerBottomStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}` };
+    const footerWordmarkStyle = { fontSize:'16px' };
+    const footerCopyStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle, containerStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      wordmarkZackStyle, wordmarkGlaserStyle,
+      navStyle, navWordmarkStyle, navLinkStyle, navLinkHoverStyle, navLinkBtnStyle, navDropdownWrapStyle, focusRingStyle,
+      dropdownOpen: this.state.dropdownOpen, dropdownCaret: this.state.dropdownOpen ? '▴' : '▾',
+      toggleDropdown: () => this.setState(s => ({ dropdownOpen: !s.dropdownOpen })),
+      dropdownPanelStyle, bracketBtnStyle, bracketBtnHoverStyle, navSubscribeBtnStyle,
+      heroPickerRowStyle, heroOptions, heroIsPlain, heroIsCta, heroIsWizard, heroIsLatestProject,
+      heroStyle, heroTextStyle, nowLinkStyle, nowLinkHoverStyle,
+      ctaHeroStyle, ctaTextColStyle, ctaBoxStyle, ctaEyebrowStyle, ctaHeadlineStyle, ctaFormRowStyle,
+      wizardWrapStyle, wizardEyebrowStyle, wizardQuestionStyle, wizardOptionsGridStyle,
+      isStep1, isStep2, isResult, step1Options, tileHoverStyle, tileHeadStyle, tileSubStyle, backLinkStyle,
+      answer1Label: answer1 ? answer1.label.toLowerCase() : '',
+      quickTileStyle: tileBase, deepTileStyle: tileBase,
+      pickQuick: () => this.setState({ wizardStep:3, pickedQuick:true }),
+      pickDeep: () => this.setState({ wizardStep:3, pickedQuick:false }),
+      resetWizard: () => this.setState({ wizardStep:1, answer1:null }),
+      resultTitle, resultMeta, resultTitleStyle, resultMetaStyle, resultRowStyle, resultLinkStyle,
+      spotlightWrapStyle, spotlightEyebrowStyle, spotlightTitleStyle, spotlightDekStyle, spotlightLinkStyle,
+      doorsGridStyle, sectionLabelStyle, latestGridStyle,
+      pillars, latestPosts,
+      newsletterCardStyle, newsletterEyebrowStyle, newsletterHeadlineStyle, newsletterFormRowStyle, newsletterInputStyle,
+      footerWrapStyle, footerColsStyle, footerColStyle, footerColLabelStyle,
+      footerLinkNeutralStyle, footerLinkNeutralHoverStyle,
+      footerBottomStyle, footerWordmarkStyle, footerCopyStyle,
+      year: new Date().getFullYear()
+    };
+  }
+}
+</script>
+</body>
+</html>

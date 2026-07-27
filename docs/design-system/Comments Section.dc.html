@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">comments — giscus, restyled to match the system</span>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <div style="{{ sectionLabelStyle }}">01 — with comments</div>
+    <div style="{{ commentsWrapStyle }}">
+      <div style="{{ commentsHeaderRowStyle }}">
+        <div style="{{ commentsTitleStyle }}">discussion</div>
+        <div style="{{ commentsCountStyle }}">{{ comments.length }} comments · via GitHub Discussions</div>
+      </div>
+
+      <div style="{{ reactionRowStyle }}">
+        <sc-for list="{{ reactions }}" as="r" hint-placeholder-count="3">
+          <button style="{{ r.chipStyle }}">{{ r.emoji }} {{ r.count }}</button>
+        </sc-for>
+      </div>
+
+      <div style="{{ threadListStyle }}">
+        <sc-for list="{{ comments }}" as="c" hint-placeholder-count="3">
+          <div style="{{ c.rowStyle }}">
+            <div style="{{ c.avatarStyle }}">{{ c.initials }}</div>
+            <div style="{{ c.bodyColStyle }}">
+              <div style="{{ c.metaRowStyle }}">
+                <span style="{{ c.nameStyle }}">{{ c.name }}</span>
+                <span style="{{ c.timeStyle }}">{{ c.time }}</span>
+              </div>
+              <p style="{{ c.textStyle }}">{{ c.text }}</p>
+              <div style="{{ c.actionsRowStyle }}">
+                <button style="{{ actionBtnStyle }}">↑ {{ c.upvotes }}</button>
+                <button style="{{ actionBtnStyle }}">reply</button>
+              </div>
+              <sc-if value="{{ c.hasReply }}" hint-placeholder-val="{{ false }}">
+                <div style="{{ replyWrapStyle }}">
+                  <div style="{{ c.replyAvatarStyle }}">zg</div>
+                  <div style="{{ c.bodyColStyle }}">
+                    <div style="{{ c.metaRowStyle }}">
+                      <span style="{{ c.nameStyle }}">Zack Glaser</span>
+                      <span style="{{ authorBadgeStyle }}">author</span>
+                      <span style="{{ c.timeStyle }}">{{ c.replyTime }}</span>
+                    </div>
+                    <p style="{{ c.textStyle }}">{{ c.replyText }}</p>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="{{ signinRowStyle }}">
+        <span style="{{ signinTextStyle }}">Comments run on GitHub Discussions.</span>
+        <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ sign in with GitHub to comment ]</button>
+      </div>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">02 — empty (be the first)</div>
+    <div style="{{ commentsWrapStyle }}">
+      <div style="{{ commentsHeaderRowStyle }}">
+        <div style="{{ commentsTitleStyle }}">discussion</div>
+        <div style="{{ commentsCountStyle }}">0 comments · via GitHub Discussions</div>
+      </div>
+      <div style="{{ emptyStateStyle }}">
+        <div style="{{ emptyTitleStyle }}">No comments yet</div>
+        <p style="{{ emptySubStyle }}">Be the first to take this apart with me.</p>
+        <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ sign in with GitHub to comment ]</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const REACTIONS_DEF = [ { emoji:'👍', count:12 }, { emoji:'💡', count:5 }, { emoji:'🔥', count:3 } ];
+const COMMENTS_DEF = [
+  { name:'Dana K.', initials:'DK', time:'2 days ago', text:'The migration cost breakdown alone was worth the read \u2014 forwarding this to our office manager.', upvotes:8,
+    hasReply:true, replyTime:'2 days ago', replyText:'Migration is genuinely where I see firms get burned most \u2014 glad it was useful.' },
+  { name:'Marcus T.', initials:'MT', time:'3 days ago', text:'Curious whether the fixed-fee migration quote trick works with smaller regional vendors too, or just the big players.', upvotes:4, hasReply:false },
+  { name:'Priya S.', initials:'PS', time:'4 days ago', text:'This matches what we found evaluating case management software last year almost line for line.', upvotes:2, hasReply:false }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark' };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+    const accent = dark ? '#7C9BDB' : '#3B5BA5';
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'720px', margin:'0 auto', padding:'40px 40px 96px' };
+    const sectionLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, letterSpacing:'0.06em', textTransform:'uppercase', margin:'0 0 20px' };
+
+    const commentsWrapStyle = { border:`1px solid ${n.line}`, borderRadius:'6px', padding:'28px', marginBottom:'48px' };
+    const commentsHeaderRowStyle = { display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:'16px', flexWrap:'wrap', gap:'8px' };
+    const commentsTitleStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'20px', color:n.ink };
+    const commentsCountStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    const reactionRowStyle = { display:'flex', gap:'8px', marginBottom:'24px', paddingBottom:'24px', borderBottom:`1px solid ${n.line}` };
+    const reactions = REACTIONS_DEF.map(r => ({
+      emoji:r.emoji, count:r.count,
+      chipStyle:{ fontFamily:mono, fontSize:'12px', color:n.ink, background:n.raised, border:`1px solid ${n.line}`, borderRadius:'999px', padding:'6px 12px', cursor:'pointer' }
+    }));
+
+    const threadListStyle = { display:'flex', flexDirection:'column', gap:'24px', marginBottom:'24px' };
+    const avatarBase = { width:'36px', height:'36px', borderRadius:'50%', background:n.raised, border:`1px solid ${n.line}`, display:'flex', alignItems:'center', justifyContent:'center', fontFamily:mono, fontSize:'12px', color:n.inkSoft, flexShrink:0 };
+    const metaRowStyle = { display:'flex', alignItems:'center', gap:'10px', marginBottom:'4px', flexWrap:'wrap' };
+    const nameStyle = { fontFamily:sans, fontSize:'13px', fontWeight:600, color:n.ink };
+    const timeStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+    const textStyle = { fontFamily:sans, fontSize:'14px', lineHeight:1.55, color:n.ink, margin:'0 0 8px' };
+    const actionsRowStyle = { display:'flex', gap:'14px' };
+    const actionBtnStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, background:'transparent', border:'none', cursor:'pointer', padding:0 };
+    const authorBadgeStyle = { fontFamily:mono, fontSize:'10px', color:accent, border:`1px solid ${accent}`, borderRadius:'999px', padding:'1px 8px' };
+    const replyWrapStyle = { display:'flex', gap:'12px', marginTop:'14px', paddingLeft:'20px', borderLeft:`2px solid ${n.line}` };
+
+    const comments = COMMENTS_DEF.map(c => ({
+      name:c.name, initials:c.initials, time:c.time, text:c.text, upvotes:c.upvotes,
+      hasReply:c.hasReply, replyTime:c.replyTime, replyText:c.replyText,
+      rowStyle:{ display:'flex', gap:'12px' },
+      avatarStyle:avatarBase,
+      replyAvatarStyle:{ ...avatarBase, background:accent, color:'#fff', borderColor:accent },
+      bodyColStyle:{ flex:1, minWidth:0 },
+      metaRowStyle, nameStyle, timeStyle, textStyle, actionsRowStyle
+    }));
+
+    const signinRowStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}`, flexWrap:'wrap', gap:'12px' };
+    const signinTextStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', padding:'8px 14px', borderRadius:'4px', flexShrink:0 };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+
+    const emptyStateStyle = { textAlign:'center', padding:'24px 0 8px', display:'flex', flexDirection:'column', alignItems:'center', gap:'8px' };
+    const emptyTitleStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'17px', color:n.ink };
+    const emptySubStyle = { fontFamily:sans, fontSize:'13px', color:n.inkSoft, margin:'0 0 8px' };
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle, containerStyle, sectionLabelStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      commentsWrapStyle, commentsHeaderRowStyle, commentsTitleStyle, commentsCountStyle,
+      reactionRowStyle, reactions,
+      threadListStyle, comments, authorBadgeStyle, replyWrapStyle, actionBtnStyle,
+      signinRowStyle, signinTextStyle, bracketBtnStyle, bracketBtnHoverStyle,
+      emptyStateStyle, emptyTitleStyle, emptySubStyle
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">speaking — v2, show don't tell</span>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <nav style="{{ navStyle }}">
+      <div style="{{ navWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <div style="{{ navDropdownWrapStyle }}">
+        <button style="{{ navLinkBtnStyle }}" style-focus="{{ focusRingStyle }}" onClick="{{ toggleDropdown }}">pillars {{ dropdownCaret }}</button>
+        <sc-if value="{{ dropdownOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ dropdownPanelStyle }}">
+            <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+              <a href="#" style="{{ p.dropdownItemStyle }}" style-hover="{{ p.dropdownItemHoverStyle }}"><span style="{{ p.dotStyle }}"></span>{{ p.label }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <a href="#" style="{{ navLinkActiveStyle }}">speaking</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">newsletter</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">about</a>
+      <button style="{{ navSubscribeBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+    </nav>
+
+    <div style="{{ heroRowStyle }}">
+      <div style="{{ heroTextColStyle }}">
+        <div style="{{ eyebrowStyle }}">speaking</div>
+        <h1 style="{{ h1Style }}">I've spent a career taking legal software apart in public — now I do it on stage.</h1>
+        <p style="{{ heroSubStyle }}">Legal Tech Advisor at Lawyerist/Affinity, host of the Lawyerist Podcast. Below: what I've actually delivered, what I can bring to your room, and who it's for.</p>
+      </div>
+      <div style="{{ heroImageColStyle }}">
+        <image-slot id="speaking-headshot" shape="rounded" radius="8" placeholder="Drop a headshot"></image-slot>
+      </div>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">where I've spoken</div>
+    <div style="{{ ticketGridStyle }}">
+      <sc-for list="{{ events }}" as="e" hint-placeholder-count="4">
+        <div style="{{ ticketCardStyle }}">
+          <div style="{{ ticketTopRowStyle }}">
+            <span style="{{ ticketNoStyle }}">{{ e.no }}</span>
+            <span style="{{ ticketYearStyle }}">{{ e.year }}</span>
+          </div>
+          <div style="{{ ticketNameStyle }}">{{ e.name }}</div>
+          <div style="{{ ticketDeliveredLabelStyle }}">delivered</div>
+          <div style="{{ ticketTopicStyle }}">{{ e.topic }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">what I can talk about</div>
+    <sc-for list="{{ topicGroups }}" as="group" hint-placeholder-count="3">
+      <div style="{{ topicGroupWrapStyle }}">
+        <div style="{{ topicGroupLabelStyle }}">{{ group.label }}</div>
+        <div style="{{ topicGroupRowStyle }}">
+          <sc-for list="{{ group.items }}" as="t" hint-placeholder-count="2">
+            <div style="{{ topicCardStyle }}">
+              <div style="{{ topicTitleStyle }}">{{ t.title }}</div>
+              <div style="{{ topicDescStyle }}">{{ t.desc }}</div>
+              <div style="{{ topicAudienceRowStyle }}">
+                <sc-for list="{{ t.audiences }}" as="aud" hint-placeholder-count="2">
+                  <span style="{{ audienceChipStyle }}">{{ aud }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+
+    <div style="{{ sectionLabelStyle }}">who I talk to</div>
+    <div style="{{ audienceGridStyle }}">
+      <sc-for list="{{ audienceSegments }}" as="seg" hint-placeholder-count="4">
+        <div style="{{ audienceCardStyle }}">
+          <div style="{{ audienceNameStyle }}">{{ seg.name }}</div>
+          <div style="{{ audienceDescStyle }}">{{ seg.desc }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="{{ oneSheetRowStyle }}">
+      <div>
+        <div style="{{ oneSheetTitleStyle }}">Need the one-sheet?</div>
+        <div style="{{ oneSheetSubStyle }}">Bio, topics, headshots, and past appearances in one PDF — everything a program chair needs to say yes.</div>
+      </div>
+      <a href="#" style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ download one-sheet ]</a>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">book me</div>
+    <div style="{{ bookingSplitStyle }}">
+      <div style="{{ bookingCardStyle }}">
+        <div style="{{ bookingCardTitleStyle }}">For an event</div>
+        <div style="{{ bookingCardSubStyle }}">Keynote, CLE session, or workshop — in person or remote.</div>
+        <div style="{{ formGridStyle }}">
+          <input style="{{ inputStyle }}" style-focus="{{ focusRingStyle }}" placeholder="event / organization" />
+          <input style="{{ inputStyle }}" style-focus="{{ focusRingStyle }}" placeholder="date (if known)" />
+          <input style="{{ inputFullStyle }}" style-focus="{{ focusRingStyle }}" placeholder="email" />
+          <button style="{{ submitBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ send ]</button>
+        </div>
+      </div>
+      <div style="{{ bookingCardStyle }}">
+        <div style="{{ bookingCardTitleStyle }}">For your podcast</div>
+        <div style="{{ bookingCardSubStyle }}">Long-form conversation, no stump speech required.</div>
+        <div style="{{ formGridStyle }}">
+          <input style="{{ inputStyle }}" style-focus="{{ focusRingStyle }}" placeholder="show name" />
+          <input style="{{ inputStyle }}" style-focus="{{ focusRingStyle }}" placeholder="typical episode length" />
+          <input style="{{ inputFullStyle }}" style-focus="{{ focusRingStyle }}" placeholder="email" />
+          <button style="{{ submitBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ send ]</button>
+        </div>
+      </div>
+    </div>
+
+    <footer style="{{ footerWrapStyle }}">
+      <div style="{{ footerBottomStyle }}">
+        <div style="{{ footerWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ footerCopyStyle }}">© {{ year }} zack glaser — legal tech advisor, runner, tinkerer</div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const PILLARS_DEF = [
+  { id:'legal-tech', label:'legal tech', light:'#3B5BA5', dark:'#7C9BDB' },
+  { id:'running', label:'running', light:'#B23A3A', dark:'#E1726C' },
+  { id:'workshop', label:'workshop', light:'#A6792E', dark:'#D9A857' },
+  { id:'field-notes', label:'field notes', light:'#3F7D5C', dark:'#6FBB94' }
+];
+const EVENTS_DEF = [
+  { no:'014', year:'2025', name:'ABA Techshow', topic:'What your case management software is actually doing' },
+  { no:'011', year:'2024', name:'Clio Cloud Conference', topic:'AI in legal practice, minus the hype' },
+  { no:'009', year:'2024', name:'State Bar CLE Series', topic:'The ethics of AI-assisted drafting' },
+  { no:'005', year:'2023', name:'Legalweek', topic:'Building in public as a solo practitioner' }
+];
+const TOPIC_GROUPS_DEF = [
+  { label:'Keynote', items:[
+    { title:'What your case management software is actually doing', desc:'A live teardown of a common legal tech stack — what the vendor pitch leaves out.', audiences:['Legal tech conferences', 'In-house teams'] }
+  ]},
+  { label:'CLE session', items:[
+    { title:'AI in legal practice, minus the hype', desc:'A practical framework for evaluating AI tools without the buzzword panic.', audiences:['Bar associations', 'CLE providers'] },
+    { title:'The ethics of AI-assisted drafting', desc:'Where the professional responsibility lines actually sit, with real examples.', audiences:['Bar associations'] }
+  ]},
+  { label:'Workshop', items:[
+    { title:'Building in public as a solo practitioner', desc:'What running a build-log taught me about client trust and marketing.', audiences:['Legal tech conferences', 'Podcasts'] }
+  ]}
+];
+const AUDIENCE_SEGMENTS_DEF = [
+  { name:'Bar associations & CLE providers', desc:"Ethics-focused sessions that satisfy credit requirements without putting the room to sleep." },
+  { name:'Legal tech conferences', desc:'Tool teardowns and industry commentary for a room that already knows the buzzwords.' },
+  { name:'In-house & firm teams', desc:'Practical workshops for teams deciding what to actually adopt.' },
+  { name:'Podcasts & media', desc:"Long-form conversation, not a stump speech — I'll go wherever the mic is." }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark', dropdownOpen:false };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'1200px', margin:'0 auto', padding:'32px 40px 0' };
+
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const navStyle = { display:'flex', alignItems:'center', gap:'28px', padding:'18px 28px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'56px' };
+    const navWordmarkStyle = { fontSize:'18px', flexShrink:0, marginRight:'8px' };
+    const navLinkStyle = { color:n.ink, textDecoration:'none', fontFamily:sans, fontSize:'15px', fontWeight:500, lineHeight:'1', borderBottom:'1px solid transparent', paddingBottom:'2px', whiteSpace:'nowrap', display:'inline-block' };
+    const navLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const navLinkActiveStyle = { ...navLinkStyle, borderBottom:`1px solid ${n.ink}` };
+    const navLinkBtnStyle = { ...navLinkStyle, background:'transparent', border:'none', margin:0, cursor:'pointer' };
+    const navDropdownWrapStyle = { position:'relative', display:'flex', alignItems:'center' };
+    const focusRingStyle = { outline:`2px solid ${n.ink}`, outlineOffset:'2px', borderRadius:'2px' };
+    const dropdownPanelStyle = { position:'absolute', top:'28px', left:0, background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', boxShadow:'0 8px 24px rgba(0,0,0,0.16)', padding:'6px', display:'flex', flexDirection:'column', minWidth:'160px', zIndex:2 };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', padding:'10px 16px', borderRadius:'4px', flexShrink:0, textDecoration:'none', display:'inline-block' };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+    const navSubscribeBtnStyle = { ...bracketBtnStyle, marginLeft:'auto' };
+
+    const heroRowStyle = { display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:'48px', marginBottom:'72px', alignItems:'start' };
+    const heroTextColStyle = { display:'flex', flexDirection:'column', gap:'18px' };
+    const eyebrowStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em' };
+    const h1Style = { fontFamily:serif, fontStyle:'italic', fontSize:'34px', lineHeight:1.25, color:n.ink, margin:0, fontWeight:500 };
+    const heroSubStyle = { fontFamily:sans, fontSize:'16px', lineHeight:1.6, color:n.inkSoft, margin:0, maxWidth:'520px' };
+    const heroImageColStyle = { aspectRatio:'4/5', width:'100%' };
+
+    const sectionLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, letterSpacing:'0.06em', textTransform:'uppercase', margin:'0 0 20px' };
+
+    const ticketGridStyle = { display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'14px', marginBottom:'64px' };
+    const ticketCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'18px', display:'flex', flexDirection:'column', gap:'8px' };
+    const ticketTopRowStyle = { display:'flex', justifyContent:'space-between', fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+    const ticketNoStyle = {};
+    const ticketYearStyle = {};
+    const ticketNameStyle = { fontFamily:mono, fontSize:'13px', color:n.ink, fontWeight:700, borderTop:`1px solid ${n.line}`, borderBottom:`1px solid ${n.line}`, padding:'8px 0' };
+    const ticketDeliveredLabelStyle = { fontFamily:mono, fontSize:'10px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em' };
+    const ticketTopicStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'15px', color:n.ink, lineHeight:1.35, flex:1 };
+
+    const topicGroupWrapStyle = { marginBottom:'28px' };
+    const topicGroupLabelStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:'12px' };
+    const topicGroupRowStyle = { display:'flex', gap:'16px', flexWrap:'wrap' };
+    const topicCardStyle = { flex:'1 1 320px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'22px', display:'flex', flexDirection:'column', gap:'10px' };
+    const topicTitleStyle = { fontFamily:serif, fontSize:'19px', color:n.ink, lineHeight:1.3 };
+    const topicDescStyle = { fontFamily:sans, fontSize:'14px', color:n.inkSoft, lineHeight:1.5, flex:1 };
+    const topicAudienceRowStyle = { display:'flex', gap:'8px', flexWrap:'wrap' };
+    const audienceChipStyle = { fontFamily:mono, fontSize:'10px', color:n.inkSoft, border:`1px solid ${n.line}`, borderRadius:'999px', padding:'3px 10px' };
+
+    const audienceGridStyle = { display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'14px', marginBottom:'56px' };
+    const audienceCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'20px', display:'flex', flexDirection:'column', gap:'8px' };
+    const audienceNameStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'16px', color:n.ink, lineHeight:1.3 };
+    const audienceDescStyle = { fontFamily:sans, fontSize:'13px', color:n.inkSoft, lineHeight:1.5 };
+
+    const oneSheetRowStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', gap:'24px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'24px 28px', marginBottom:'56px' };
+    const oneSheetTitleStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'18px', color:n.ink, marginBottom:'4px' };
+    const oneSheetSubStyle = { fontFamily:sans, fontSize:'13px', color:n.inkSoft, maxWidth:'460px' };
+
+    const bookingSplitStyle = { display:'grid', gridTemplateColumns:'1fr 1fr', gap:'16px', marginBottom:'64px' };
+    const bookingCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'28px', display:'flex', flexDirection:'column', gap:'12px' };
+    const bookingCardTitleStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'20px', color:n.ink };
+    const bookingCardSubStyle = { fontFamily:sans, fontSize:'13px', color:n.inkSoft, marginBottom:'8px' };
+    const formGridStyle = { display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px' };
+    const inputStyle = { background:n.paper, border:`1px solid ${n.line}`, borderRadius:'4px', padding:'9px 12px', fontFamily:sans, fontSize:'13px', color:n.ink };
+    const inputFullStyle = { ...inputStyle, gridColumn:'1 / -1' };
+    const submitBtnStyle = { ...bracketBtnStyle, gridColumn:'1 / -1', width:'fit-content', marginTop:'4px' };
+
+    const footerWrapStyle = { paddingTop:'32px', paddingBottom:'48px' };
+    const footerBottomStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}` };
+    const footerWordmarkStyle = { fontSize:'16px' };
+    const footerCopyStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    const pillars = PILLARS_DEF.map(p => {
+      const hex = dark ? p.dark : p.light;
+      return {
+        label:p.label,
+        dotStyle:{ display:'inline-block', width:'8px', height:'8px', borderRadius:'50%', background:hex, marginRight:'10px' },
+        dropdownItemStyle:{ display:'flex', alignItems:'center', color:n.ink, textDecoration:'none', fontFamily:mono, fontSize:'13px', padding:'8px 10px', borderRadius:'4px' },
+        dropdownItemHoverStyle:{ background:n.paper }
+      };
+    });
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle, containerStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      wordmarkZackStyle, wordmarkGlaserStyle,
+      navStyle, navWordmarkStyle, navLinkStyle, navLinkHoverStyle, navLinkActiveStyle, navLinkBtnStyle, navDropdownWrapStyle, focusRingStyle,
+      dropdownOpen: this.state.dropdownOpen, dropdownCaret: this.state.dropdownOpen ? '▴' : '▾',
+      toggleDropdown: () => this.setState(s => ({ dropdownOpen: !s.dropdownOpen })),
+      dropdownPanelStyle, bracketBtnStyle, bracketBtnHoverStyle, navSubscribeBtnStyle,
+      pillars,
+      heroRowStyle, heroTextColStyle, eyebrowStyle, h1Style, heroSubStyle, heroImageColStyle,
+      sectionLabelStyle,
+      events: EVENTS_DEF, ticketGridStyle, ticketCardStyle, ticketTopRowStyle, ticketNoStyle, ticketYearStyle, ticketNameStyle, ticketDeliveredLabelStyle, ticketTopicStyle,
+      topicGroups: TOPIC_GROUPS_DEF, topicGroupWrapStyle, topicGroupLabelStyle, topicGroupRowStyle, topicCardStyle, topicTitleStyle, topicDescStyle, topicAudienceRowStyle, audienceChipStyle,
+      audienceSegments: AUDIENCE_SEGMENTS_DEF, audienceGridStyle, audienceCardStyle, audienceNameStyle, audienceDescStyle,
+      oneSheetRowStyle, oneSheetTitleStyle, oneSheetSubStyle,
+      bookingSplitStyle, bookingCardStyle, bookingCardTitleStyle, bookingCardSubStyle, formGridStyle, inputStyle, inputFullStyle, submitBtnStyle,
+      footerWrapStyle, footerBottomStyle, footerWordmarkStyle, footerCopyStyle,
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">build log — project view</span>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <nav style="{{ navStyle }}">
+      <div style="{{ navWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">speaking</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">newsletter</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">about</a>
+      <button style="{{ navSubscribeBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+    </nav>
+
+    <div style="{{ headerStyle }}">
+      <div style="{{ eyebrowStyle }}">workshop · project</div>
+      <h1 style="{{ h1Style }}">Building this site</h1>
+      <p style="{{ subStyle }}">The whole project, rolled up — every chapter, every entry, every dollar and hour it took, in one read. Drill into any chapter for the full story, or any entry for the raw log.</p>
+    </div>
+
+    <div style="{{ totalsRowStyle }}">
+      <div style="{{ totalBoxStyle }}"><div style="{{ totalLabelStyle }}">total cost</div><div style="{{ totalValStyle }}">{{ totals.money }}</div></div>
+      <div style="{{ totalBoxStyle }}"><div style="{{ totalLabelStyle }}">total time</div><div style="{{ totalValStyle }}">{{ totals.time }}</div></div>
+      <div style="{{ totalBoxStyle }}"><div style="{{ totalLabelStyle }}">chapters</div><div style="{{ totalValStyle }}">{{ totals.chapters }}</div></div>
+      <div style="{{ totalBoxStyle }}"><div style="{{ totalLabelStyle }}">entries</div><div style="{{ totalValStyle }}">{{ totals.entries }}</div></div>
+    </div>
+
+    <article style="{{ recapBodyStyle }}">
+      <p style="{{ pStyle }}">Eight logged decisions, three chapters, zero dollars spent — the whole build lived in time, not budget. The shape of it: figure out why the site should exist and where the code lives, pick a stack and a look that actually fit four unrelated interests, then make the case for showing up in public before flipping the switch.</p>
+      <p style="{{ pStyle }}">The throughline across all three chapters is the same one the site itself is about: taking a thing apart to see what it's really made of. That happened literally with the color palette (oklch() percentages that looked generated, rebuilt in plain hex) and figuratively with the speaking page (a booking form that turned out to need a credibility strategy first).</p>
+    </article>
+
+    <div style="{{ progressBarWrapStyle }}">
+      <div style="{{ progressBarLabelRowStyle }}">
+        <span>{{ totals.publishedEntries }} of {{ totals.entries }} entries published</span>
+        <span>{{ totals.percentDone }}%</span>
+      </div>
+      <div style="{{ progressTrackStyle }}"><div style="{{ progressFillStyle }}"></div></div>
+    </div>
+
+    <div style="{{ chaptersListStyle }}">
+      <sc-for list="{{ chapters }}" as="ch" hint-placeholder-count="3">
+        <a href="#" style="{{ chapterRowStyle }}" style-hover="{{ chapterRowHoverStyle }}">
+          <div style="{{ chapterRowLeftStyle }}">
+            <span style="{{ chapterNoStyle }}">{{ ch.no }}</span>
+            <div>
+              <div style="{{ chapterRowTitleStyle }}">{{ ch.title }}</div>
+              <div style="{{ chapterRowRangeStyle }}">entries {{ ch.range }}</div>
+            </div>
+          </div>
+          <div style="{{ chapterRowStatsStyle }}">
+            <span>{{ ch.moneyCost }}</span>
+            <span>{{ ch.timeCost }}</span>
+            <span style="{{ chapterRowArrowStyle }}">→</span>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+
+    <footer style="{{ footerWrapStyle }}">
+      <div style="{{ footerBottomStyle }}">
+        <div style="{{ footerWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ footerCopyStyle }}">© {{ year }} zack glaser — legal tech advisor, runner, tinkerer</div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const CHAPTERS_DEF = [
+  { no:'01', range:'001–003', title:'Why, and where it lives', moneyCost:'$0', timeCost:'~4 hrs' },
+  { no:'02', range:'004–006', title:'Picking the stack and the look', moneyCost:'$0', timeCost:'~14 hrs' },
+  { no:'03', range:'007–008', title:'Making the case, and launching', moneyCost:'$0', timeCost:'~9 hrs' }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark' };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+    const accent = dark ? '#D9A857' : '#A6792E';
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'760px', margin:'0 auto', padding:'32px 40px 0' };
+
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const navStyle = { display:'flex', alignItems:'center', gap:'28px', padding:'18px 28px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'40px' };
+    const navWordmarkStyle = { fontSize:'18px', flexShrink:0, marginRight:'8px' };
+    const navLinkStyle = { color:n.ink, textDecoration:'none', fontFamily:sans, fontSize:'15px', fontWeight:500, lineHeight:'1', borderBottom:'1px solid transparent', paddingBottom:'2px', whiteSpace:'nowrap', display:'inline-block' };
+    const navLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', padding:'8px 14px', borderRadius:'4px', flexShrink:0 };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+    const navSubscribeBtnStyle = { ...bracketBtnStyle, marginLeft:'auto' };
+
+    const headerStyle = { marginBottom:'32px', maxWidth:'620px' };
+    const eyebrowStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:'12px' };
+    const h1Style = { fontFamily:serif, fontStyle:'italic', fontSize:'34px', color:n.ink, margin:'0 0 14px', fontWeight:500 };
+    const subStyle = { fontFamily:sans, fontSize:'15px', lineHeight:1.6, color:n.inkSoft, margin:0 };
+
+    const totalsRowStyle = { display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'10px', marginBottom:'32px' };
+    const totalBoxStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'16px' };
+    const totalLabelStyle = { fontFamily:mono, fontSize:'10px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:'6px' };
+    const totalValStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'22px', color:n.ink };
+
+    const recapBodyStyle = { marginBottom:'32px' };
+    const pStyle = { fontFamily:serif, fontSize:'17px', lineHeight:1.75, color:n.ink, margin:'0 0 20px' };
+
+    const progressBarWrapStyle = { marginBottom:'40px' };
+    const progressBarLabelRowStyle = { display:'flex', justifyContent:'space-between', fontFamily:mono, fontSize:'11px', color:n.inkSoft, marginBottom:'8px' };
+    const progressTrackStyle = { height:'6px', background:n.line, borderRadius:'999px', overflow:'hidden' };
+    const progressFillStyle = { height:'100%', width:'100%', background:accent, borderRadius:'999px' };
+
+    const chaptersListStyle = { display:'flex', flexDirection:'column', border:`1px solid ${n.line}`, borderRadius:'6px', overflow:'hidden', marginBottom:'56px' };
+    const chapterRowStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', gap:'16px', padding:'20px 22px', borderBottom:`1px solid ${n.line}`, textDecoration:'none', color:n.ink, background:n.raised };
+    const chapterRowHoverStyle = { background:n.paper };
+    const chapterRowLeftStyle = { display:'flex', alignItems:'center', gap:'18px' };
+    const chapterNoStyle = { fontFamily:mono, fontSize:'20px', color:accent, flexShrink:0 };
+    const chapterRowTitleStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'18px', color:n.ink, marginBottom:'2px' };
+    const chapterRowRangeStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+    const chapterRowStatsStyle = { display:'flex', alignItems:'center', gap:'16px', fontFamily:mono, fontSize:'12px', color:n.inkSoft, flexShrink:0 };
+    const chapterRowArrowStyle = { color:n.ink };
+
+    const footerWrapStyle = { paddingTop:'32px', paddingBottom:'48px' };
+    const footerBottomStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}` };
+    const footerWordmarkStyle = { fontSize:'16px' };
+    const footerCopyStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle, containerStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      wordmarkZackStyle, wordmarkGlaserStyle,
+      navStyle, navWordmarkStyle, navLinkStyle, navLinkHoverStyle, bracketBtnHoverStyle, navSubscribeBtnStyle,
+      headerStyle, eyebrowStyle, h1Style, subStyle,
+      totals:{ money:'$0', time:'~27 hrs', chapters:'3', entries:'8', publishedEntries:'6', percentDone:75 },
+      totalsRowStyle, totalBoxStyle, totalLabelStyle, totalValStyle,
+      recapBodyStyle, pStyle,
+      progressBarWrapStyle, progressBarLabelRowStyle, progressTrackStyle, progressFillStyle,
+      chapters: CHAPTERS_DEF, chaptersListStyle, chapterRowStyle, chapterRowHoverStyle, chapterRowLeftStyle, chapterNoStyle, chapterRowTitleStyle, chapterRowRangeStyle, chapterRowStatsStyle, chapterRowArrowStyle,
+      footerWrapStyle, footerBottomStyle, footerWordmarkStyle, footerCopyStyle,
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

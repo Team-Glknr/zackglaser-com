@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">build log series — /workshop/building-this-site</span>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <nav style="{{ navStyle }}">
+      <div style="{{ navWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">speaking</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">newsletter</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">about</a>
+      <button style="{{ navSubscribeBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+    </nav>
+
+    <div style="{{ headerStyle }}">
+      <div style="{{ eyebrowStyle }}">workshop · series</div>
+      <h1 style="{{ h1Style }}">Building this site</h1>
+      <p style="{{ subStyle }}">Every real decision behind zackglaser.com, logged as it happened — grouped here into chapters so the shape of the build reads at a glance. Every entry still exists on its own for anyone who wants the granular version.</p>
+    </div>
+
+    <div style="{{ chaptersListStyle }}">
+      <sc-for list="{{ chapters }}" as="ch" hint-placeholder-count="4">
+        <div style="{{ chapterWrapStyle }}">
+          <a href="#" style="{{ chapterHeaderLinkStyle }}">
+            <div style="{{ chapterRangeStyle }}">{{ ch.range }} · {{ ch.timeCost }} · {{ ch.entryCount }} entries</div>
+            <div style="{{ chapterTitleStyle }}">{{ ch.title }}</div>
+          </a>
+          <p style="{{ chapterSummaryStyle }}">{{ ch.teaser }}</p>
+          <a href="#" style="{{ readChapterLinkStyle }}">read the chapter →</a>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="{{ toggleRowStyle }}">
+      <button style="{{ granularBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ view every entry, ungrouped ]</button>
+    </div>
+
+    <footer style="{{ footerWrapStyle }}">
+      <div style="{{ footerBottomStyle }}">
+        <div style="{{ footerWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ footerCopyStyle }}">© {{ year }} zack glaser — legal tech advisor, runner, tinkerer</div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const CHAPTERS_DEF = [
+  { range:'001–003', title:'Why, and where it lives', moneyCost:'$0', timeCost:'~4 hrs', entryCount:'3',
+    teaser:'The case for building this at all, and the unglamorous groundwork — repo, hosting, the architecture of one house with four rooms.' },
+  { range:'004–006', title:'Picking the stack and the look', moneyCost:'$0', timeCost:'~14 hrs', entryCount:'3',
+    teaser:'Astro over Next, the newsletter name, and the full visual system — palette, type, the wordmark. Three small decisions that add up to "what this actually looks like."' },
+  { range:'007–008', title:'Making the case, and launching', moneyCost:'$0', timeCost:'~9 hrs', entryCount:'2',
+    teaser:'The speaking page and the Lawyerist/Affinity line, then the actual launch — the entry that makes every draft before it public at once.' }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark' };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+    const accent = dark ? '#D9A857' : '#A6792E';
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'820px', margin:'0 auto', padding:'32px 40px 0' };
+
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const navStyle = { display:'flex', alignItems:'center', gap:'28px', padding:'18px 28px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'48px' };
+    const navWordmarkStyle = { fontSize:'18px', flexShrink:0, marginRight:'8px' };
+    const navLinkStyle = { color:n.ink, textDecoration:'none', fontFamily:sans, fontSize:'15px', fontWeight:500, lineHeight:'1', borderBottom:'1px solid transparent', paddingBottom:'2px', whiteSpace:'nowrap', display:'inline-block' };
+    const navLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', padding:'8px 14px', borderRadius:'4px', flexShrink:0 };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+    const navSubscribeBtnStyle = { ...bracketBtnStyle, marginLeft:'auto' };
+    const focusRingStyle = { outline:`2px solid ${n.ink}`, outlineOffset:'2px', borderRadius:'2px' };
+
+    const headerStyle = { marginBottom:'48px', maxWidth:'620px' };
+    const eyebrowStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:'12px' };
+    const h1Style = { fontFamily:serif, fontStyle:'italic', fontSize:'34px', color:n.ink, margin:'0 0 14px', fontWeight:500 };
+    const subStyle = { fontFamily:sans, fontSize:'15px', lineHeight:1.6, color:n.inkSoft, margin:0 };
+
+    const chaptersListStyle = { display:'flex', flexDirection:'column', gap:'0px', marginBottom:'32px' };
+    const chapterWrapStyle = { padding:'32px 0', borderTop:`1px solid ${n.line}` };
+    const chapterHeaderLinkStyle = { textDecoration:'none', display:'block', marginBottom:'12px' };
+    const chapterRangeStyle = { fontFamily:mono, fontSize:'11px', color:accent, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:'8px' };
+    const chapterTitleStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'24px', color:n.ink, fontWeight:500 };
+    const chapterSummaryStyle = { fontFamily:sans, fontSize:'14px', lineHeight:1.6, color:n.inkSoft, margin:'0 0 14px', maxWidth:'620px' };
+    const readChapterLinkStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, textDecoration:'none', borderBottom:`1px solid ${n.ink}` };
+    const entryChipStyle = { display:'flex', alignItems:'center', gap:'8px', fontFamily:mono, fontSize:'12px', color:n.ink, textDecoration:'none', border:`1px solid ${n.line}`, borderRadius:'6px', padding:'8px 14px', background:n.raised };
+    const entryChipHoverStyle = { borderColor:n.ink };
+    const entryChipNoStyle = { color:n.inkSoft };
+    const entryChipTitleStyle = {};
+
+    const toggleRowStyle = { marginBottom:'56px' };
+    const granularBtnStyle = { ...bracketBtnStyle };
+
+    const footerWrapStyle = { paddingTop:'32px', paddingBottom:'48px' };
+    const footerBottomStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}` };
+    const footerWordmarkStyle = { fontSize:'16px' };
+    const footerCopyStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle, containerStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      wordmarkZackStyle, wordmarkGlaserStyle,
+      navStyle, navWordmarkStyle, navLinkStyle, navLinkHoverStyle, bracketBtnHoverStyle, navSubscribeBtnStyle, focusRingStyle,
+      headerStyle, eyebrowStyle, h1Style, subStyle,
+      chapters: CHAPTERS_DEF, chaptersListStyle, chapterWrapStyle, chapterHeaderLinkStyle, chapterRangeStyle, chapterTitleStyle, chapterSummaryStyle, readChapterLinkStyle,
+      toggleRowStyle, granularBtnStyle,
+      footerWrapStyle, footerBottomStyle, footerWordmarkStyle, footerCopyStyle,
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

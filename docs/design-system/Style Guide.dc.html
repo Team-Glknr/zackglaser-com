@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: 'Literata'; src: local('Literata'); }
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+
+  <div style="{{ headerStyle }}">
+    <div style="{{ wordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+    <div style="{{ headerRightStyle }}">
+      <span style="{{ metaLabelStyle }}">core style guide — v1</span>
+      <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+    </div>
+  </div>
+
+  <div style="{{ premiseStyle }}">
+    <p style="{{ premiseTextStyle }}">"Zack takes things apart to see how they work — software stacks, training plans, workbenches, beliefs — and shows people the pieces."</p>
+    <div style="{{ pillarRowStyle }}">
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+        <span style="{{ p.chipStyle }}">{{ p.label }}</span>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">01 — wordmark</div>
+    <div style="{{ specimenCardStyle }}">
+      <div style="{{ bigWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <div style="{{ wordmarkSubStyle }}">warm serif italic + technical mono, set tight, always lowercase — the two halves of the mix, in one word.</div>
+    </div>
+    <div style="{{ wordmarkRulesGridStyle }}">
+      <div style="{{ ruleCardStyle }}">
+        <div style="{{ ruleLabelStyle }}">min size</div>
+        <div style="{{ ruleValStyle }}">18px tall</div>
+      </div>
+      <div style="{{ ruleCardStyle }}">
+        <div style="{{ ruleLabelStyle }}">clear space</div>
+        <div style="{{ ruleValStyle }}">1 cap-height, all sides</div>
+      </div>
+      <div style="{{ ruleCardStyle }}">
+        <div style="{{ ruleLabelStyle }}">case</div>
+        <div style="{{ ruleValStyle }}">always lowercase, no logo box</div>
+      </div>
+      <div style="{{ ruleCardStyle }}">
+        <div style="{{ ruleLabelStyle }}">color</div>
+        <div style="{{ ruleValStyle }}">ink only — never an accent</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">02 — color</div>
+    <div style="{{ colorGroupLabelStyle }}">neutrals</div>
+    <div style="{{ swatchRowStyle }}">
+      <sc-for list="{{ neutralSwatches }}" as="s" hint-placeholder-count="5">
+        <div style="{{ s.cardStyle }}">
+          <div style="{{ s.chipStyle }}"></div>
+          <div style="{{ s.nameStyle }}">{{ s.name }}</div>
+          <div style="{{ s.valStyle }}">{{ s.value }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="{{ colorGroupLabelStyle }}">pillar accents — one per section, rest of the system stays identical</div>
+    <div style="{{ swatchRowStyle }}">
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+        <div style="{{ p.cardStyle }}">
+          <div style="{{ p.chipBigStyle }}"></div>
+          <div style="{{ p.nameStyle }}">{{ p.label }}</div>
+          <div style="{{ p.valStyle }}">{{ p.hex }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">03 — type</div>
+    <div style="{{ typeSpecimenGridStyle }}">
+      <div style="{{ typeCardStyle }}">
+        <div style="{{ typeCardLabelStyle }}">display — literata italic</div>
+        <div style="{{ displaySpecimenStyle }}">Taking things apart.</div>
+      </div>
+      <div style="{{ typeCardStyle }}">
+        <div style="{{ typeCardLabelStyle }}">body — archivo</div>
+        <div style="{{ bodySpecimenStyle }}">This week I rebuilt the training plan the same way I'd refactor a bad API — cut the parts doing two jobs, and see what's left.</div>
+      </div>
+      <div style="{{ typeCardStyle }}">
+        <div style="{{ typeCardLabelStyle }}">mono — space mono</div>
+        <div style="{{ monoSpecimenStyle }}">pillar: workshop · entry 007 · status: published</div>
+      </div>
+    </div>
+    <div style="{{ scaleLadderStyle }}">
+      <sc-for list="{{ typeScale }}" as="t" hint-placeholder-count="6">
+        <div style="{{ t.rowStyle }}">
+          <div style="{{ t.labelStyle }}">{{ t.name }} / {{ t.px }}</div>
+          <div style="{{ t.sampleStyle }}">Zg</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">04 — spacing</div>
+    <div style="{{ spacingRowStyle }}">
+      <sc-for list="{{ spacingScale }}" as="sp" hint-placeholder-count="8">
+        <div style="{{ sp.itemStyle }}">
+          <div style="{{ sp.barStyle }}"></div>
+          <div style="{{ sp.labelStyle }}">{{ sp.px }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">05 — in use</div>
+    <div style="{{ inUseGridStyle }}">
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+        <div style="{{ p.postCardStyle }}">
+          <div style="{{ p.postTagStyle }}">{{ p.label }}</div>
+          <div style="{{ p.postTitleStyle }}">{{ p.sampleTitle }}</div>
+          <div style="{{ p.postMetaStyle }}">{{ p.sampleMeta }}</div>
+          <a href="#" style="{{ p.linkStyle }}" style-hover="{{ p.linkHoverStyle }}">read the teardown →</a>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">06 — mark</div>
+    <div style="{{ markRowStyle }}">
+      <div style="{{ markTileStyle }}">z</div>
+      <div style="{{ markNotesStyle }}">
+        <div style="{{ ruleLabelStyle }}">used for</div>
+        <div style="{{ ruleValStyle }}">favicon, social avatar, anywhere under 24px tall — never a stand-in for the wordmark in body content</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">07 — imagery</div>
+    <div style="{{ imageryGridStyle }}">
+      <div style="{{ imageryTileStyle }}">
+        <div style="{{ imageryPhWideStyle }}">photo</div>
+        <div style="{{ imageryCaptionStyle }}">fig. 01 — workbench, austin tx</div>
+      </div>
+      <div style="{{ imageryTileSquareStyle }}">
+        <div style="{{ imageryPhSquareStyle }}">photo</div>
+        <div style="{{ imageryCaptionStyle }}">fig. 02 — mile 18</div>
+      </div>
+    </div>
+    <div style="{{ wordmarkRulesGridStyle }}">
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">source</div><div style="{{ ruleValStyle }}">real photos only — no stock</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">treatment</div><div style="{{ ruleValStyle }}">true color, no filters or gradients</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">frame</div><div style="{{ ruleValStyle }}">square corners, 1px border, full-bleed on wide layouts</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">caption</div><div style="{{ ruleValStyle }}">mono, small, below image — like a lab label</div></div>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">08 — iconography</div>
+    <div style="{{ specimenCardStyle }}">
+      <div style="{{ bodySpecimenStyle }}">no icon system. affordances are typographic: → for links, + / – for expand, · for separators.</div>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">09 — links &amp; buttons</div>
+    <div style="{{ linksButtonsRowStyle }}">
+      <a href="#" style="{{ inlineLinkStyle }}" style-hover="{{ inlineLinkHoverStyle }}">a body link, underlined on hover</a>
+      <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">10 — tags</div>
+    <div style="{{ pillarRowStyle }}">
+      <span style="{{ neutralTagStyle }}">gear review</span>
+      <span style="{{ neutralTagStyle }}">race report</span>
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+        <span style="{{ p.chipStyle }}">{{ p.label }}</span>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">11 — newsletter block</div>
+    <div style="{{ newsletterCardStyle }}">
+      <div style="{{ newsletterEyebrowStyle }}">the newsletter — taking things apart</div>
+      <div style="{{ newsletterHeadlineStyle }}">One thing, taken apart. Every week-ish.</div>
+      <div style="{{ newsletterFormRowStyle }}">
+        <input style="{{ newsletterInputStyle }}" placeholder="you@email.com" />
+        <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">12 — layout grid</div>
+    <div style="{{ gridDemoStyle }}">
+      <div style="{{ gridBarWideStyle }}">1200px — hub / grids</div>
+      <div style="{{ gridBarReadingStyle }}">680px — reading column</div>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">13 — motion</div>
+    <div style="{{ specimenCardStyle }}">
+      <div style="{{ bodySpecimenStyle }}">hover/focus only — color, border, opacity, 150ms ease-out. no scroll-triggered effects, no bounce, no parallax. theme switch crossfades background and text color.</div>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">14 — icon system</div>
+    <div style="{{ iconExploreNoteStyle }}">pillar mark, expand, link-out, close, menu. pillar mark shown in the {{ demoPillarLabel }} accent — all others stay ink.</div>
+    <div style="{{ iconRowStyle }}">
+      <div style="{{ iconTileAStyle }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4,8 V4 H8 M16,4 H20 V8 M20,16 V20 H16 M8,20 H4 V16" stroke="{{ iconAccentColor }}" stroke-width="1.25" stroke-linecap="square"></path></svg></div>
+      <div style="{{ iconTileAStyle }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6,9 L12,15 L18,9" stroke="{{ inkColor }}" stroke-width="1.25" stroke-linecap="square"></path></svg></div>
+      <div style="{{ iconTileAStyle }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7,17 L17,7 M10,7 H17 V14" stroke="{{ inkColor }}" stroke-width="1.25" stroke-linecap="square"></path></svg></div>
+      <div style="{{ iconTileAStyle }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6,6 L18,18 M18,6 L6,18" stroke="{{ inkColor }}" stroke-width="1.25" stroke-linecap="square"></path></svg></div>
+      <div style="{{ iconTileAStyle }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4,7 H20 M4,12 H20 M4,17 H20" stroke="{{ inkColor }}" stroke-width="1.25" stroke-linecap="square"></path></svg></div>
+    </div>
+    <div style="{{ wordmarkRulesGridStyle }}">
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">grid</div><div style="{{ ruleValStyle }}">24×24, 1.25px stroke, square caps &amp; joins</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">fill</div><div style="{{ ruleValStyle }}">stroke only, no fills</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">color</div><div style="{{ ruleValStyle }}">ink by default; accent only on the pillar mark</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">min size</div><div style="{{ ruleValStyle }}">18px — don't scale the stroke below 1px</div></div>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">15 — accessibility</div>
+    <div style="{{ a11yDemoRowStyle }}">
+      <button style="{{ bracketBtnStyle }}" style-focus="{{ focusRingStyle }}">[ focus me — tab to it ]</button>
+    </div>
+    <div style="{{ wordmarkRulesGridStyle }}">
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">focus ring</div><div style="{{ ruleValStyle }}">2px solid ink, 2px offset — never removed, never replaced with just a color change</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">contrast</div><div style="{{ ruleValStyle }}">ink/inkSoft on paper/raised hold AA at minimum in both themes</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">hit targets</div><div style="{{ ruleValStyle }}">44px minimum on touch, incl. nav and form controls</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">color independence</div><div style="{{ ruleValStyle }}">pillar accent never the only signal — always paired with a text label</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">motion</div><div style="{{ ruleValStyle }}">honors prefers-reduced-motion — transitions drop to instant</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">structure</div><div style="{{ ruleValStyle }}">real headings, landmarks, alt text on every photo — no div soup</div></div>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">16 — form &amp; states</div>
+    <div style="{{ formStatesGridStyle }}">
+      <div style="{{ formFieldColStyle }}">
+        <div style="{{ ruleLabelStyle }}">default</div>
+        <input style="{{ newsletterInputStyle }}" placeholder="you@email.com" />
+      </div>
+      <div style="{{ formFieldColStyle }}">
+        <div style="{{ ruleLabelStyle }}">focus</div>
+        <input style="{{ inputFocusDemoStyle }}" placeholder="you@email.com" />
+      </div>
+      <div style="{{ formFieldColStyle }}">
+        <div style="{{ ruleLabelStyle }}">error</div>
+        <input style="{{ inputErrorStyle }}" placeholder="you@email.com" value="not an email" />
+        <div style="{{ errorMsgStyle }}">enter a valid email address</div>
+      </div>
+      <div style="{{ formFieldColStyle }}">
+        <div style="{{ ruleLabelStyle }}">disabled</div>
+        <input style="{{ inputDisabledStyle }}" placeholder="submitting…" disabled="{{ true }}" />
+      </div>
+    </div>
+  </div>
+
+  <div style="{{ sectionStyle }}">
+    <div style="{{ sectionLabelStyle }}">17 — dropdown / elevation</div>
+    <div style="{{ dropdownDemoWrapStyle }}">
+      <button style="{{ bracketBtnStyle }}">[ pillars ▾ ]</button>
+      <div style="{{ dropdownPanelStyle }}">
+        <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+          <div style="{{ dropdownItemStyle }}">{{ p.label }}</div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="{{ wordmarkRulesGridStyle }}">
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">when</div><div style="{{ ruleValStyle }}">only for transient overlays — nav dropdowns, tooltips. never on static cards</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">shadow</div><div style="{{ ruleValStyle }}">one soft, low-spread shadow token — the only shadow in the system</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">open/close</div><div style="{{ ruleValStyle }}">opacity + 4px translateY, 150ms ease-out</div></div>
+      <div style="{{ ruleCardStyle }}"><div style="{{ ruleLabelStyle }}">radius</div><div style="{{ ruleValStyle }}">6px, matching cards</div></div>
+    </div>
+  </div>
+
+  <div style="{{ footerStyle }}">zackglaser.com — core style guide, {{ themeName }} mode</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;},&quot;demoPillar&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;legal-tech&quot;,&quot;options&quot;:[&quot;legal-tech&quot;,&quot;running&quot;,&quot;workshop&quot;,&quot;field-notes&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const PILLARS_DEF = [
+  { id:'legal-tech', label:'legal tech', light:'#3B5BA5', dark:'#7C9BDB', sampleTitle:'What law firm software actually costs', sampleMeta:'legal tech · issue 014' },
+  { id:'running', label:'running', light:'#B23A3A', dark:'#E1726C', sampleTitle:'Rebuilding a training block from scratch', sampleMeta:'running · issue 011' },
+  { id:'workshop', label:'workshop', light:'#A6792E', dark:'#D9A857', sampleTitle:'Why this site is built the way it is', sampleMeta:'workshop · entry 007' },
+  { id:'field-notes', label:'field notes', light:'#3F7D5C', dark:'#6FBB94', sampleTitle:'On taking things apart as a way of thinking', sampleMeta:'field notes · issue 009' }
+];
+const TYPE_SCALE = [
+  { name:'display-xl', px:64 }, { name:'display', px:48 }, { name:'title', px:32 },
+  { name:'body-lg', px:18 }, { name:'body', px:16 }, { name:'mono-sm', px:13 }
+];
+const SPACING = [4,8,12,16,24,32,48,64,96,128];
+
+function accentHex(p, dark) {
+  return dark ? p.dark : p.light;
+}
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark', demoPillar: this.props.demoPillar ?? 'workshop' };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh', padding:'56px 64px 96px', transition:'background 0.25s ease, color 0.25s ease', boxSizing:'border-box' };
+    const headerStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'40px', paddingBottom:'24px', borderBottom:`1px solid ${n.line}` };
+    const wordmarkStyle = { fontSize:'22px' };
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const headerRightStyle = { display:'flex', alignItems:'center', gap:'20px' };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, letterSpacing:'0.02em' };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+
+    const premiseStyle = { maxWidth:'640px', marginBottom:'64px' };
+    const premiseTextStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'22px', lineHeight:1.5, color:n.ink, margin:'0 0 20px' };
+    const pillarRowStyle = { display:'flex', gap:'8px', flexWrap:'wrap' };
+
+    const sectionStyle = { marginBottom:'64px' };
+    const sectionLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, letterSpacing:'0.06em', textTransform:'uppercase', marginBottom:'20px' };
+
+    const specimenCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'48px', display:'flex', flexDirection:'column', alignItems:'center', gap:'16px', marginBottom:'20px' };
+    const bigWordmarkStyle = { fontSize:'56px' };
+    const wordmarkSubStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, textAlign:'center' };
+    const wordmarkRulesGridStyle = { display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'12px' };
+    const ruleCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'14px 16px' };
+    const ruleLabelStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, marginBottom:'4px' };
+    const ruleValStyle = { fontFamily:sans, fontSize:'14px', color:n.ink };
+
+    const colorGroupLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, margin:'0 0 12px' };
+    const swatchRowStyle = { display:'flex', gap:'12px', flexWrap:'wrap', marginBottom:'28px' };
+    const swatchCard = (bg) => ({ width:'150px' });
+
+    const neutralSwatches = ['paper','raised','ink','inkSoft','line'].map(key => ({
+      name:key, value:n[key],
+      cardStyle:{ width:'150px' },
+      chipStyle:{ height:'64px', borderRadius:'6px', background:n[key], border:`1px solid ${n.line}`, marginBottom:'8px' },
+      nameStyle:{ fontFamily:mono, fontSize:'12px', color:n.ink },
+      valStyle:{ fontFamily:mono, fontSize:'11px', color:n.inkSoft }
+    }));
+
+    const linkFor = (hex) => ({ color:hex, textDecoration:'none', fontFamily:mono, fontSize:'13px' });
+
+    const pillars = PILLARS_DEF.map(p => {
+      const hex = accentHex(p, dark);
+      return {
+        id:p.id, label:p.label, hex, sampleTitle:p.sampleTitle, sampleMeta:p.sampleMeta,
+        chipStyle:{ fontFamily:mono, fontSize:'12px', color:hex, border:`1px solid ${hex}`, borderRadius:'999px', padding:'4px 12px' },
+        cardStyle:{ width:'150px' },
+        chipBigStyle:{ height:'64px', borderRadius:'6px', background:hex, marginBottom:'8px' },
+        nameStyle:{ fontFamily:mono, fontSize:'12px', color:n.ink },
+        valStyle:{ fontFamily:mono, fontSize:'11px', color:n.inkSoft },
+        postCardStyle:{ background:n.raised, border:`1px solid ${n.line}`, borderTop:`3px solid ${hex}`, borderRadius:'6px', padding:'20px', display:'flex', flexDirection:'column', gap:'10px' },
+        postTagStyle:{ fontFamily:mono, fontSize:'11px', color:hex, textTransform:'uppercase', letterSpacing:'0.04em' },
+        postTitleStyle:{ fontFamily:serif, fontSize:'20px', color:n.ink, lineHeight:1.3 },
+        postMetaStyle:{ fontFamily:mono, fontSize:'11px', color:n.inkSoft },
+        linkStyle:linkFor(hex),
+        linkHoverStyle:{ textDecoration:'underline' }
+      };
+    });
+
+    const typeSpecimenGridStyle = { display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'16px', marginBottom:'28px' };
+    const typeCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'24px' };
+    const typeCardLabelStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, marginBottom:'14px' };
+    const displaySpecimenStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'26px', color:n.ink, lineHeight:1.25 };
+    const bodySpecimenStyle = { fontFamily:sans, fontSize:'16px', color:n.ink, lineHeight:1.55 };
+    const monoSpecimenStyle = { fontFamily:mono, fontSize:'13px', color:n.ink };
+
+    const scaleLadderStyle = { display:'flex', flexDirection:'column', gap:'10px' };
+    const typeScale = TYPE_SCALE.map(t => ({
+      name:t.name, px:t.px + 'px',
+      rowStyle:{ display:'flex', alignItems:'baseline', gap:'20px', borderBottom:`1px solid ${n.line}`, paddingBottom:'10px' },
+      labelStyle:{ fontFamily:mono, fontSize:'11px', color:n.inkSoft, width:'110px', flexShrink:0 },
+      sampleStyle:{ fontFamily:serif, fontStyle:'italic', fontSize:t.px+'px', color:n.ink }
+    }));
+
+    const spacingRowStyle = { display:'flex', alignItems:'flex-end', gap:'20px', flexWrap:'wrap' };
+    const spacingScale = SPACING.map(px => ({
+      px:px+'px',
+      itemStyle:{ display:'flex', flexDirection:'column', alignItems:'center', gap:'8px' },
+      barStyle:{ width:'24px', height:px+'px', background:n.inkSoft, borderRadius:'2px' },
+      labelStyle:{ fontFamily:mono, fontSize:'11px', color:n.inkSoft }
+    }));
+
+    const inUseGridStyle = { display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))', gap:'16px' };
+
+    const footerStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, marginTop:'40px', textAlign:'center' };
+
+    const markRowStyle = { display:'flex', alignItems:'center', gap:'20px' };
+    const markTileStyle = { width:'56px', height:'56px', background:n.ink, color:n.paper, display:'flex', alignItems:'center', justifyContent:'center', fontFamily:mono, fontWeight:700, fontSize:'24px', borderRadius:'4px', flexShrink:0 };
+    const markNotesStyle = { display:'flex', flexDirection:'column', gap:'4px' };
+
+    const imageryGridStyle = { display:'flex', gap:'16px', flexWrap:'wrap', marginBottom:'20px' };
+    const imageryTileStyle = { width:'260px', display:'flex', flexDirection:'column', gap:'8px' };
+    const imageryTileSquareStyle = { width:'160px', display:'flex', flexDirection:'column', gap:'8px' };
+    const imageryPhBase = { background:n.raised, border:`1px solid ${n.line}`, display:'flex', alignItems:'center', justifyContent:'center', color:n.inkSoft, fontFamily:mono, fontSize:'11px', textTransform:'uppercase', letterSpacing:'0.06em' };
+    const imageryPhWideStyle = { ...imageryPhBase, height:'160px' };
+    const imageryPhSquareStyle = { ...imageryPhBase, height:'160px' };
+    const imageryCaptionStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    const linksButtonsRowStyle = { display:'flex', alignItems:'center', gap:'32px', flexWrap:'wrap' };
+    const inlineLinkStyle = { color:n.ink, textDecoration:'none', borderBottom:'1px solid transparent', fontFamily:sans, fontSize:'16px', paddingBottom:'1px' };
+    const inlineLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const bracketBtnStyle = { background:'transparent', border:'none', color:n.ink, fontFamily:mono, fontSize:'14px', cursor:'pointer', padding:'4px 0' };
+    const bracketBtnHoverStyle = { color:n.inkSoft };
+
+    const neutralTagStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, border:`1px solid ${n.line}`, borderRadius:'999px', padding:'4px 12px' };
+
+    const newsletterCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'32px', display:'flex', flexDirection:'column', gap:'16px', maxWidth:'560px' };
+    const newsletterEyebrowStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em' };
+    const newsletterHeadlineStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'28px', color:n.ink, lineHeight:1.3 };
+    const newsletterFormRowStyle = { display:'flex', gap:'12px' };
+    const newsletterInputStyle = { flex:1, background:n.paper, border:`1px solid ${n.line}`, borderRadius:'4px', padding:'10px 14px', fontFamily:sans, fontSize:'14px', color:n.ink };
+
+    const gridDemoStyle = { display:'flex', flexDirection:'column', gap:'12px' };
+    const gridBarBase = { height:'40px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'4px', display:'flex', alignItems:'center', paddingLeft:'12px', fontFamily:mono, fontSize:'12px', color:n.inkSoft, boxSizing:'border-box' };
+    const gridBarWideStyle = { ...gridBarBase, width:'100%' };
+    const gridBarReadingStyle = { ...gridBarBase, width:'57%' };
+
+    const iconAccentColor = pillars.find(p => p.id === this.state.demoPillar)?.hex || n.ink;
+    const demoPillarLabel = pillars.find(p => p.id === this.state.demoPillar)?.label || 'workshop';
+
+    const iconExploreNoteStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, marginBottom:'20px' };
+    const iconRowStyle = { display:'flex', gap:'10px', flexWrap:'wrap', marginBottom:'20px' };
+    const iconTileAStyle = { width:'44px', height:'44px', borderRadius:'4px', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, background:n.paper, border:`1px solid ${n.line}` };
+
+    const errorColor = dark ? '#E8698F' : '#C2295A';
+    const a11yDemoRowStyle = { marginBottom:'20px' };
+    const focusRingStyle = { outline:`2px solid ${n.ink}`, outlineOffset:'2px', borderRadius:'2px' };
+
+    const formStatesGridStyle = { display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'16px' };
+    const formFieldColStyle = { display:'flex', flexDirection:'column', gap:'8px' };
+    const inputFocusDemoStyle = { ...newsletterInputStyle, outline:`2px solid ${n.ink}`, outlineOffset:'2px', border:`1px solid ${n.ink}` };
+    const inputErrorStyle = { ...newsletterInputStyle, border:`1px solid ${errorColor}`, background:n.paper };
+    const errorMsgStyle = { fontFamily:mono, fontSize:'11px', color:errorColor };
+    const inputDisabledStyle = { ...newsletterInputStyle, background:n.line, color:n.inkSoft, cursor:'not-allowed' };
+
+    const dropdownDemoWrapStyle = { display:'flex', flexDirection:'column', gap:'8px', alignItems:'flex-start', marginBottom:'20px' };
+    const dropdownPanelStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', boxShadow:'0 8px 24px rgba(0,0,0,0.16)', padding:'8px', display:'flex', flexDirection:'column', minWidth:'160px' };
+    const dropdownItemStyle = { fontFamily:mono, fontSize:'13px', color:n.ink, padding:'8px 10px', borderRadius:'4px' };
+
+    return {
+      inkColor:n.ink, paperColor:n.paper, iconAccentColor, demoPillarLabel,
+      a11yDemoRowStyle, focusRingStyle,
+      formStatesGridStyle, formFieldColStyle, inputFocusDemoStyle, inputErrorStyle, errorMsgStyle, inputDisabledStyle,
+      dropdownDemoWrapStyle, dropdownPanelStyle, dropdownItemStyle,
+      iconExploreNoteStyle, iconRowStyle, iconTileAStyle,
+      markRowStyle, markTileStyle, markNotesStyle,
+      imageryGridStyle, imageryTileStyle, imageryTileSquareStyle, imageryPhWideStyle, imageryPhSquareStyle, imageryCaptionStyle,
+      linksButtonsRowStyle, inlineLinkStyle, inlineLinkHoverStyle, bracketBtnStyle, bracketBtnHoverStyle,
+      neutralTagStyle,
+      newsletterCardStyle, newsletterEyebrowStyle, newsletterHeadlineStyle, newsletterFormRowStyle, newsletterInputStyle,
+      gridDemoStyle, gridBarWideStyle, gridBarReadingStyle,
+      pageStyle, headerStyle, wordmarkStyle, wordmarkZackStyle, wordmarkGlaserStyle, headerRightStyle, metaLabelStyle, toggleBtnStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light', themeName: dark ? 'dark' : 'light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      premiseStyle, premiseTextStyle, pillarRowStyle,
+      sectionStyle, sectionLabelStyle,
+      specimenCardStyle, bigWordmarkStyle, wordmarkSubStyle, wordmarkRulesGridStyle, ruleCardStyle, ruleLabelStyle, ruleValStyle,
+      colorGroupLabelStyle, swatchRowStyle, neutralSwatches, pillars,
+      typeSpecimenGridStyle, typeCardStyle, typeCardLabelStyle, displaySpecimenStyle, bodySpecimenStyle, monoSpecimenStyle,
+      scaleLadderStyle, typeScale,
+      spacingRowStyle, spacingScale,
+      inUseGridStyle,
+      footerStyle
+    };
+  }
+}
+</script>
+</body>
+</html>

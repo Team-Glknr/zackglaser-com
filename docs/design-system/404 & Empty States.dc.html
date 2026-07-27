@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">404 &amp; empty states</span>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <nav style="{{ navStyle }}">
+      <div style="{{ navWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">speaking</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">newsletter</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">about</a>
+      <button style="{{ navSubscribeBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+    </nav>
+
+    <div style="{{ sectionLabelStyle }}">01 — 404 not found</div>
+    <div style="{{ notFoundWrapStyle }}">
+      <div style="{{ notFoundCodeStyle }}">404</div>
+      <h1 style="{{ notFoundH1Style }}">Hey y'all — this page took itself apart.</h1>
+      <p style="{{ notFoundSubStyle }}">Whatever used to be here has been moved, renamed, or was never actually built. Happens on a workbench too.</p>
+      <div style="{{ notFoundLinksRowStyle }}">
+        <a href="#" style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ back to the hub ]</a>
+        <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+          <a href="#" style="{{ p.pillarChipStyle }}"><span style="{{ p.dotStyle }}"></span>{{ p.label }}</a>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">02 — empty pillar (no posts yet)</div>
+    <div style="{{ emptyWrapStyle }}">
+      <div style="{{ emptyIconStyle }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4,8 V4 H8 M16,4 H20 V8 M20,16 V20 H16 M8,20 H4 V16" stroke="{{ inkColor }}" stroke-width="1.25" stroke-linecap="square"></path></svg></div>
+      <div style="{{ emptyTitleStyle }}">Nothing here yet</div>
+      <p style="{{ emptySubStyle }}">This pillar's first teardown is still on the bench. Subscribe and it'll land in your inbox the day it's published.</p>
+      <div style="{{ emptyFormRowStyle }}">
+        <input style="{{ newsletterInputStyle }}" placeholder="you@email.com" style-focus="{{ focusRingStyle }}" />
+        <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ subscribe ]</button>
+      </div>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">03 — empty /now (nothing updated recently)</div>
+    <div style="{{ emptyWrapStyle }}">
+      <div style="{{ emptyTitleStyle }}">Nothing's changed lately</div>
+      <p style="{{ emptySubStyle }}">The last real update was {{ lastNowUpdate }}. Check the build log for what's happening behind the scenes instead.</p>
+      <a href="#" style="{{ inlineLinkStyle }}" style-hover="{{ inlineLinkHoverStyle }}">→ building this site</a>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">04 — no search / filter results</div>
+    <div style="{{ emptyWrapStyle }}">
+      <div style="{{ emptyTitleStyle }}">No entries match "{{ searchTerm }}"</div>
+      <p style="{{ emptySubStyle }}">Try a different pillar, format, or clear the filter to see everything.</p>
+      <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ clear filters ]</button>
+    </div>
+
+    <footer style="{{ footerWrapStyle }}">
+      <div style="{{ footerBottomStyle }}">
+        <div style="{{ footerWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ footerCopyStyle }}">© {{ year }} zack glaser — legal tech advisor, runner, tinkerer</div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const PILLARS_DEF = [
+  { id:'legal-tech', label:'legal tech', light:'#3B5BA5', dark:'#7C9BDB' },
+  { id:'running', label:'running', light:'#B23A3A', dark:'#E1726C' },
+  { id:'workshop', label:'workshop', light:'#A6792E', dark:'#D9A857' },
+  { id:'field-notes', label:'field notes', light:'#3F7D5C', dark:'#6FBB94' }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark' };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'720px', margin:'0 auto', padding:'32px 40px 0' };
+
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const navStyle = { display:'flex', alignItems:'center', gap:'28px', padding:'18px 28px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'56px' };
+    const navWordmarkStyle = { fontSize:'18px', flexShrink:0, marginRight:'8px' };
+    const navLinkStyle = { color:n.ink, textDecoration:'none', fontFamily:sans, fontSize:'15px', fontWeight:500, lineHeight:'1', borderBottom:'1px solid transparent', paddingBottom:'2px', whiteSpace:'nowrap', display:'inline-block' };
+    const navLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', textDecoration:'none', display:'inline-block', padding:'8px 14px', borderRadius:'4px', flexShrink:0 };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+    const navSubscribeBtnStyle = { ...bracketBtnStyle, marginLeft:'auto' };
+    const focusRingStyle = { outline:`2px solid ${n.ink}`, outlineOffset:'2px', borderRadius:'2px' };
+
+    const sectionLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, letterSpacing:'0.06em', textTransform:'uppercase', margin:'0 0 20px' };
+
+    const notFoundWrapStyle = { textAlign:'center', padding:'40px 20px 56px', display:'flex', flexDirection:'column', alignItems:'center', gap:'14px', marginBottom:'16px', borderBottom:`1px solid ${n.line}` };
+    const notFoundCodeStyle = { fontFamily:mono, fontSize:'14px', color:n.inkSoft, letterSpacing:'0.1em' };
+    const notFoundH1Style = { fontFamily:serif, fontStyle:'italic', fontSize:'30px', color:n.ink, margin:0, maxWidth:'520px', lineHeight:1.3, fontWeight:500 };
+    const notFoundSubStyle = { fontFamily:sans, fontSize:'14px', color:n.inkSoft, margin:0, maxWidth:'440px', lineHeight:1.6 };
+    const notFoundLinksRowStyle = { display:'flex', gap:'10px', flexWrap:'wrap', justifyContent:'center', marginTop:'8px' };
+
+    const emptyWrapStyle = { textAlign:'center', padding:'32px 20px 48px', display:'flex', flexDirection:'column', alignItems:'center', gap:'10px', marginBottom:'16px', borderBottom:`1px solid ${n.line}` };
+    const emptyIconStyle = { width:'44px', height:'44px', display:'flex', alignItems:'center', justifyContent:'center', border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'6px' };
+    const emptyTitleStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'20px', color:n.ink };
+    const emptySubStyle = { fontFamily:sans, fontSize:'14px', color:n.inkSoft, margin:0, maxWidth:'420px', lineHeight:1.6 };
+    const emptyFormRowStyle = { display:'flex', gap:'10px', marginTop:'8px' };
+    const newsletterInputStyle = { flex:1, background:n.raised, border:`1px solid ${n.line}`, borderRadius:'4px', padding:'10px 14px', fontFamily:sans, fontSize:'14px', color:n.ink };
+    const inlineLinkStyle = { color:n.ink, textDecoration:'none', borderBottom:`1px solid ${n.line}`, fontFamily:mono, fontSize:'13px' };
+    const inlineLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+
+    const footerWrapStyle = { paddingTop:'32px', paddingBottom:'48px' };
+    const footerBottomStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}` };
+    const footerWordmarkStyle = { fontSize:'16px' };
+    const footerCopyStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    const pillars = PILLARS_DEF.map(p => {
+      const hex = dark ? p.dark : p.light;
+      return {
+        label:p.label,
+        dotStyle:{ display:'inline-block', width:'7px', height:'7px', borderRadius:'50%', background:hex, marginRight:'8px' },
+        pillarChipStyle:{ display:'flex', alignItems:'center', fontFamily:mono, fontSize:'12px', color:n.ink, textDecoration:'none', border:`1px solid ${n.line}`, borderRadius:'999px', padding:'8px 14px' }
+      };
+    });
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle, containerStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      wordmarkZackStyle, wordmarkGlaserStyle,
+      navStyle, navWordmarkStyle, navLinkStyle, navLinkHoverStyle, bracketBtnHoverStyle, navSubscribeBtnStyle, focusRingStyle,
+      sectionLabelStyle,
+      notFoundWrapStyle, notFoundCodeStyle, notFoundH1Style, notFoundSubStyle, notFoundLinksRowStyle, bracketBtnStyle,
+      pillars,
+      emptyWrapStyle, emptyIconStyle, emptyTitleStyle, emptySubStyle, emptyFormRowStyle, newsletterInputStyle,
+      inlineLinkStyle, inlineLinkHoverStyle,
+      inkColor:n.ink, lastNowUpdate:'March 3, 2026', searchTerm:'espresso machines',
+      footerWrapStyle, footerBottomStyle, footerWordmarkStyle, footerCopyStyle,
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">social share / OG image — 1200×630, one per pillar</span>
+    <div style="{{ pickerRowStyle }}">
+      <sc-for list="{{ pillarPicker }}" as="p" hint-placeholder-count="4">
+        <button style="{{ p.pickerBtnStyle }}" onClick="{{ p.onPick }}">{{ p.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="{{ stageStyle }}">
+    <div style="{{ cardStyle }}">
+      <div style="{{ cardTopRowStyle }}">
+        <div style="{{ wordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ pillarTagStyle }}"><span style="{{ dotStyle }}"></span>{{ current.label }}</div>
+      </div>
+
+      <div style="{{ titleWrapStyle }}">
+        <div style="{{ formatPillStyle }}">{{ current.format }}</div>
+        <h1 style="{{ titleStyle }}">{{ current.title }}</h1>
+      </div>
+
+      <div style="{{ cardBottomRowStyle }}">
+        <div style="{{ metaStyle }}">{{ current.meta }}</div>
+        <div style="{{ urlStyle }}">zackglaser.com</div>
+      </div>
+
+      <div style="{{ accentBarStyle }}"></div>
+    </div>
+
+    <div style="{{ specNoteStyle }}">1200×630px · same layout for every post, pillar accent + format swap · title auto-sizes down for long headlines</div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;pillar&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;legal-tech&quot;,&quot;options&quot;:[&quot;legal-tech&quot;,&quot;running&quot;,&quot;workshop&quot;,&quot;field-notes&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' };
+const PILLARS_DEF = [
+  { id:'legal-tech', label:'legal tech', hex:'#7C9BDB', format:'teardown · issue 014', title:'What law firm software actually costs', meta:'zack glaser · legal tech advisor' },
+  { id:'running', label:'running', hex:'#E1726C', format:'log', title:'Week 6 of the fall block', meta:'zack glaser · training log' },
+  { id:'workshop', label:'workshop', hex:'#D9A857', format:'log · entry 006', title:'Brand: colors, type, and the logo question', meta:'zack glaser · building this site' },
+  { id:'field-notes', label:'field notes', hex:'#6FBB94', format:'teardown · issue 009', title:'On taking things apart as a way of thinking', meta:'zack glaser · field notes' }
+];
+
+class Component extends DCLogic {
+  state = { currentPillar: this.props.pillar ?? 'legal-tech' };
+
+  renderVals() {
+    const n = NEUTRAL;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+    const current = PILLARS_DEF.find(p => p.id === this.state.currentPillar);
+
+    const pageStyle = { background:'#0E1114', color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const pickerRowStyle = { display:'flex', gap:'6px' };
+
+    const stageStyle = { display:'flex', flexDirection:'column', alignItems:'center', gap:'16px', padding:'48px 24px' };
+    const cardStyle = { position:'relative', width:'1200px', height:'auto', maxWidth:'100%', aspectRatio:'1200/630', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'12px', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'space-between', padding:'64px', boxSizing:'border-box' };
+
+    const cardTopRowStyle = { display:'flex', justifyContent:'space-between', alignItems:'center' };
+    const wordmarkStyle = { fontSize:'28px' };
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, color:n.ink };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, color:n.ink };
+    const pillarTagStyle = { display:'flex', alignItems:'center', fontFamily:mono, fontSize:'20px', color:n.ink, border:`2px solid ${current.hex}`, borderRadius:'999px', padding:'8px 20px' };
+    const dotStyle = { width:'12px', height:'12px', borderRadius:'50%', background:current.hex, marginRight:'12px' };
+
+    const titleWrapStyle = { display:'flex', flexDirection:'column', gap:'20px', maxWidth:'950px' };
+    const formatPillStyle = { fontFamily:mono, fontSize:'18px', color:current.hex };
+    const titleFontSize = current.title.length > 55 ? '52px' : '64px';
+    const titleStyle = { fontFamily:serif, fontStyle:'italic', fontSize:titleFontSize, lineHeight:1.15, color:n.ink, margin:0, fontWeight:500 };
+
+    const cardBottomRowStyle = { display:'flex', justifyContent:'space-between', alignItems:'flex-end' };
+    const metaStyle = { fontFamily:mono, fontSize:'18px', color:n.inkSoft };
+    const urlStyle = { fontFamily:mono, fontSize:'18px', color:n.inkSoft };
+    const accentBarStyle = { position:'absolute', bottom:0, left:0, right:0, height:'10px', background:current.hex };
+
+    const specNoteStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, textAlign:'center', maxWidth:'600px' };
+
+    const pillarPicker = PILLARS_DEF.map(p => ({
+      label:p.label,
+      pickerBtnStyle:{ fontFamily:mono, fontSize:'11px', color: p.id === current.id ? '#0E1114' : n.inkSoft, background: p.id === current.id ? p.hex : 'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 10px', cursor:'pointer' },
+      onPick: () => this.setState({ currentPillar: p.id })
+    }));
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, pickerRowStyle, pillarPicker,
+      stageStyle, cardStyle, cardTopRowStyle, wordmarkStyle, wordmarkZackStyle, wordmarkGlaserStyle,
+      pillarTagStyle, dotStyle, titleWrapStyle, formatPillStyle, titleStyle,
+      cardBottomRowStyle, metaStyle, urlStyle, accentBarStyle, specNoteStyle,
+      current
+    };
+  }
+}
+
+</script>
+</body>
+</html>

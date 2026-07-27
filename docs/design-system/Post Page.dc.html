@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">post page — teardown format</span>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <nav style="{{ navStyle }}">
+      <div style="{{ navWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <div style="{{ navDropdownWrapStyle }}">
+        <button style="{{ navLinkBtnStyle }}" style-focus="{{ focusRingStyle }}" onClick="{{ toggleDropdown }}">pillars {{ dropdownCaret }}</button>
+        <sc-if value="{{ dropdownOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ dropdownPanelStyle }}">
+            <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+              <a href="#" style="{{ p.dropdownItemStyle }}" style-hover="{{ p.dropdownItemHoverStyle }}"><span style="{{ p.dotStyle }}"></span>{{ p.label }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">speaking</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">newsletter</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">about</a>
+      <button style="{{ navSubscribeBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+    </nav>
+
+    <a href="#" style="{{ breadcrumbStyle }}">← legal tech</a>
+
+    <div style="{{ articleHeaderStyle }}">
+      <div style="{{ metaRowStyle }}">
+        <span style="{{ pillarTagStyle }}">legal tech</span>
+        <span style="{{ formatPillStyle }}">teardown</span>
+        <span style="{{ dateStyle }}">March 3, 2026 · issue 014</span>
+      </div>
+      <h1 style="{{ h1Style }}">What law firm software actually costs</h1>
+      <p style="{{ dekStyle }}">Six vendors, six pricing models, one spreadsheet — a real accounting of what a case management system costs once you add seats, migration, and the modules they don't mention in the demo.</p>
+    </div>
+
+    <div style="{{ heroImageWrapStyle }}">
+      <image-slot id="post-hero" shape="rect" placeholder="Drop a hero image"></image-slot>
+    </div>
+
+    <article style="{{ articleBodyStyle }}">
+      <p style="{{ pStyle }}">Every vendor demo starts the same way: a clean dashboard, a friendly rep, and a number that sounds reasonable until you ask what it doesn't include. I asked six vendors the same six questions and built the spreadsheet they were hoping I wouldn't.</p>
+      <h2 style="{{ h2Style }}">The base price is the least of it</h2>
+      <p style="{{ pStyle }}">Per-seat pricing looks simple until you account for the modules that get bundled in the sales call but billed separately at renewal. Document automation, e-signature, and client portals are routinely quoted as included, then itemized in year two.</p>
+      <blockquote style="{{ quoteStyle }}">"The demo shows you the car. The invoice shows you the car, the extended warranty, and the undercoating you didn't ask for."</blockquote>
+      <h2 style="{{ h2Style }}">Migration is where budgets die</h2>
+      <p style="{{ pStyle }}">Every firm I talked to underestimated migration cost by at least half. The vendors know this. Ask for a fixed-fee migration quote in writing before you sign anything — not an estimate.</p>
+      <div style="{{ pullQuoteStyle }}">The mix is the point: the same teardown instinct that finds the hidden line-item works on a training plan or a workbench too.</div>
+      <p style="{{ pStyle }}">None of this means the software is bad. It means the pricing model is built to be evaluated one feature at a time, and firms that ask for the total cost of ownership up front consistently negotiate better terms.</p>
+    </article>
+
+    <div style="{{ tagsRowStyle }}">
+      <span style="{{ tagChipStyle }}">legal tech</span>
+      <span style="{{ tagChipStyle }}">pricing</span>
+      <span style="{{ tagChipStyle }}">case management</span>
+    </div>
+
+    <div style="{{ authorRowStyle }}">
+      <image-slot id="post-author" shape="circle" style="{{ authorAvatarStyle }}" placeholder="headshot"></image-slot>
+      <div>
+        <div style="{{ authorNameStyle }}">Zack Glaser</div>
+        <div style="{{ authorBioStyle }}">Legal Tech Advisor at Lawyerist/Affinity, host of the Lawyerist Podcast. Takes things apart to see how they work.</div>
+      </div>
+    </div>
+
+    <div style="{{ nextPrevRowStyle }}">
+      <a href="#" style="{{ nextPrevCardStyle }}">
+        <div style="{{ nextPrevLabelStyle }}">← previous</div>
+        <div style="{{ nextPrevTitleStyle }}">Inside a document automation stack</div>
+      </a>
+      <a href="#" style="{{ nextPrevCardRightStyle }}">
+        <div style="{{ nextPrevLabelStyle }}">next →</div>
+        <div style="{{ nextPrevTitleStyle }}">AI drafting tools, three months in</div>
+      </a>
+    </div>
+
+    <div style="{{ newsletterCardStyle }}">
+      <div style="{{ newsletterEyebrowStyle }}">the newsletter — taking things apart</div>
+      <div style="{{ newsletterHeadlineStyle }}">One thing, taken apart. Every week-ish.</div>
+      <div style="{{ newsletterFormRowStyle }}">
+        <input style="{{ newsletterInputStyle }}" placeholder="you@email.com" style-focus="{{ focusRingStyle }}" />
+        <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ subscribe ]</button>
+      </div>
+    </div>
+
+    <footer style="{{ footerWrapStyle }}">
+      <div style="{{ footerBottomStyle }}">
+        <div style="{{ footerWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ footerCopyStyle }}">© {{ year }} zack glaser — legal tech advisor, runner, tinkerer</div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const PILLARS_DEF = [
+  { id:'legal-tech', label:'legal tech', light:'#3B5BA5', dark:'#7C9BDB' },
+  { id:'running', label:'running', light:'#B23A3A', dark:'#E1726C' },
+  { id:'workshop', label:'workshop', light:'#A6792E', dark:'#D9A857' },
+  { id:'field-notes', label:'field notes', light:'#3F7D5C', dark:'#6FBB94' }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark', dropdownOpen:false };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+    const accent = dark ? '#7C9BDB' : '#3B5BA5';
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'760px', margin:'0 auto', padding:'32px 40px 0' };
+
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const navStyle = { display:'flex', alignItems:'center', gap:'28px', padding:'18px 28px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'40px' };
+    const navWordmarkStyle = { fontSize:'18px', flexShrink:0, marginRight:'8px' };
+    const navLinkStyle = { color:n.ink, textDecoration:'none', fontFamily:sans, fontSize:'15px', fontWeight:500, lineHeight:'1', borderBottom:'1px solid transparent', paddingBottom:'2px', whiteSpace:'nowrap', display:'inline-block' };
+    const navLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const navLinkBtnStyle = { ...navLinkStyle, background:'transparent', border:'none', margin:0, cursor:'pointer' };
+    const navDropdownWrapStyle = { position:'relative', display:'flex', alignItems:'center' };
+    const focusRingStyle = { outline:`2px solid ${n.ink}`, outlineOffset:'2px', borderRadius:'2px' };
+    const dropdownPanelStyle = { position:'absolute', top:'28px', left:0, background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', boxShadow:'0 8px 24px rgba(0,0,0,0.16)', padding:'6px', display:'flex', flexDirection:'column', minWidth:'160px', zIndex:2 };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', padding:'8px 14px', borderRadius:'4px', flexShrink:0 };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+    const navSubscribeBtnStyle = { ...bracketBtnStyle, marginLeft:'auto' };
+
+    const breadcrumbStyle = { display:'inline-block', fontFamily:mono, fontSize:'12px', color:n.inkSoft, textDecoration:'none', marginBottom:'20px' };
+
+    const articleHeaderStyle = { marginBottom:'32px' };
+    const metaRowStyle = { display:'flex', alignItems:'center', gap:'10px', marginBottom:'16px', flexWrap:'wrap' };
+    const pillarTagStyle = { fontFamily:mono, fontSize:'11px', color:accent, textTransform:'uppercase', letterSpacing:'0.04em' };
+    const formatPillStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, border:`1px solid ${n.line}`, borderRadius:'999px', padding:'1px 9px' };
+    const dateStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+    const h1Style = { fontFamily:serif, fontStyle:'italic', fontSize:'38px', lineHeight:1.2, color:n.ink, margin:'0 0 14px', fontWeight:500 };
+    const dekStyle = { fontFamily:sans, fontSize:'17px', lineHeight:1.6, color:n.inkSoft, margin:0 };
+
+    const heroImageWrapStyle = { aspectRatio:'16/9', width:'100%', marginBottom:'40px' };
+
+    const articleBodyStyle = { marginBottom:'48px' };
+    const pStyle = { fontFamily:serif, fontSize:'18px', lineHeight:1.75, color:n.ink, margin:'0 0 24px' };
+    const h2Style = { fontFamily:serif, fontStyle:'italic', fontSize:'24px', color:n.ink, margin:'40px 0 18px', fontWeight:500 };
+    const quoteStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'20px', lineHeight:1.5, color:n.ink, borderLeft:`2px solid ${accent}`, paddingLeft:'24px', margin:'32px 0' };
+    const pullQuoteStyle = { fontFamily:mono, fontSize:'14px', color:n.inkSoft, background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'20px 24px', margin:'32px 0', lineHeight:1.6 };
+
+    const tagsRowStyle = { display:'flex', gap:'8px', marginBottom:'32px', paddingBottom:'32px', borderBottom:`1px solid ${n.line}` };
+    const tagChipStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, border:`1px solid ${n.line}`, borderRadius:'999px', padding:'4px 12px' };
+
+    const authorRowStyle = { display:'flex', gap:'16px', alignItems:'center', marginBottom:'48px' };
+    const authorAvatarStyle = { width:'52px', height:'52px', flexShrink:0 };
+    const authorNameStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'16px', color:n.ink, marginBottom:'4px' };
+    const authorBioStyle = { fontFamily:sans, fontSize:'13px', color:n.inkSoft, lineHeight:1.5, maxWidth:'560px' };
+
+    const nextPrevRowStyle = { display:'grid', gridTemplateColumns:'1fr 1fr', gap:'16px', marginBottom:'48px' };
+    const nextPrevCardBase = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'18px 20px', textDecoration:'none', color:n.ink, display:'flex', flexDirection:'column', gap:'6px' };
+    const nextPrevCardStyle = { ...nextPrevCardBase };
+    const nextPrevCardRightStyle = { ...nextPrevCardBase, textAlign:'right', alignItems:'flex-end' };
+    const nextPrevLabelStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+    const nextPrevTitleStyle = { fontFamily:serif, fontSize:'15px', color:n.ink, lineHeight:1.3 };
+
+    const newsletterCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'32px', display:'flex', flexDirection:'column', gap:'16px', marginBottom:'48px' };
+    const newsletterEyebrowStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em' };
+    const newsletterHeadlineStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'26px', color:n.ink, lineHeight:1.3 };
+    const newsletterFormRowStyle = { display:'flex', gap:'12px', maxWidth:'420px' };
+    const newsletterInputStyle = { flex:1, background:n.paper, border:`1px solid ${n.line}`, borderRadius:'4px', padding:'10px 14px', fontFamily:sans, fontSize:'14px', color:n.ink };
+
+    const footerWrapStyle = { paddingTop:'32px', paddingBottom:'48px' };
+    const footerBottomStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}` };
+    const footerWordmarkStyle = { fontSize:'16px' };
+    const footerCopyStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    const pillars = PILLARS_DEF.map(p => {
+      const hex = dark ? p.dark : p.light;
+      return {
+        label:p.label,
+        dotStyle:{ display:'inline-block', width:'8px', height:'8px', borderRadius:'50%', background:hex, marginRight:'10px' },
+        dropdownItemStyle:{ display:'flex', alignItems:'center', color:n.ink, textDecoration:'none', fontFamily:mono, fontSize:'13px', padding:'8px 10px', borderRadius:'4px' },
+        dropdownItemHoverStyle:{ background:n.paper }
+      };
+    });
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle, containerStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      wordmarkZackStyle, wordmarkGlaserStyle,
+      navStyle, navWordmarkStyle, navLinkStyle, navLinkHoverStyle, navLinkBtnStyle, navDropdownWrapStyle, focusRingStyle,
+      dropdownOpen: this.state.dropdownOpen, dropdownCaret: this.state.dropdownOpen ? '▴' : '▾',
+      toggleDropdown: () => this.setState(s => ({ dropdownOpen: !s.dropdownOpen })),
+      dropdownPanelStyle, bracketBtnStyle, bracketBtnHoverStyle, navSubscribeBtnStyle,
+      pillars,
+      breadcrumbStyle,
+      articleHeaderStyle, metaRowStyle, pillarTagStyle, formatPillStyle, dateStyle, h1Style, dekStyle,
+      heroImageWrapStyle,
+      articleBodyStyle, pStyle, h2Style, quoteStyle, pullQuoteStyle,
+      tagsRowStyle, tagChipStyle,
+      authorRowStyle, authorAvatarStyle, authorNameStyle, authorBioStyle,
+      nextPrevRowStyle, nextPrevCardStyle, nextPrevCardRightStyle, nextPrevLabelStyle, nextPrevTitleStyle,
+      newsletterCardStyle, newsletterEyebrowStyle, newsletterHeadlineStyle, newsletterFormRowStyle, newsletterInputStyle,
+      footerWrapStyle, footerBottomStyle, footerWordmarkStyle, footerCopyStyle,
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

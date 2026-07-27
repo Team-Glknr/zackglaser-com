@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">about page — v1</span>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <nav style="{{ navStyle }}">
+      <div style="{{ navWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <div style="{{ navDropdownWrapStyle }}">
+        <button style="{{ navLinkBtnStyle }}" style-focus="{{ focusRingStyle }}" onClick="{{ toggleDropdown }}">pillars {{ dropdownCaret }}</button>
+        <sc-if value="{{ dropdownOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ dropdownPanelStyle }}">
+            <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+              <a href="#" style="{{ p.dropdownItemStyle }}" style-hover="{{ p.dropdownItemHoverStyle }}"><span style="{{ p.dotStyle }}"></span>{{ p.label }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">speaking</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">newsletter</a>
+      <a href="#" style="{{ navLinkActiveStyle }}">about</a>
+      <button style="{{ navSubscribeBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+    </nav>
+
+    <div style="{{ heroRowStyle }}">
+      <div style="{{ heroImgColStyle }}">
+        <image-slot id="about-photo" shape="rounded" radius="8" placeholder="Drop a photo"></image-slot>
+      </div>
+      <div style="{{ heroTextColStyle }}">
+        <div style="{{ eyebrowStyle }}">about</div>
+        <h1 style="{{ h1Style }}">I take things apart to see how they work.</h1>
+        <p style="{{ pStyle }}">That's true of legal software, of a marathon training block, of a workbench, and — this part took longer to admit — of my own career. I have a religion degree, a JD, and a fullstack certificate, in that order, and for a long time I thought that was three separate people.</p>
+        <p style="{{ pStyle }}">It's one instinct. Studying religion is asking why people believe what they believe. Practicing law is asking why a system is built the way it's built. Learning to code is asking what's actually happening under a button click. Different subjects, same question.</p>
+      </div>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">the arc</div>
+    <div style="{{ arcRowStyle }}">
+      <sc-for list="{{ arcSteps }}" as="step" hint-placeholder-count="4">
+        <div style="{{ step.nodeStyle }}">
+          <div style="{{ arcYearStyle }}">{{ step.year }}</div>
+          <div style="{{ arcLabelStyle }}">{{ step.label }}</div>
+          <div style="{{ arcDetailStyle }}">{{ step.detail }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">now, on the record</div>
+    <p style="{{ pStyle }}">I'm the Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podcast — that's the day job, and this site deliberately doesn't compete with it. What lives here is everything else: the running log, the workbench, the essays, and a newsletter that rotates through all of it. If you only know one side of this, the other three are one click away.</p>
+
+    <div style="{{ galleryRowStyle }}">
+      <sc-for list="{{ galleryIds }}" as="gid" hint-placeholder-count="3">
+        <image-slot id="{{ gid }}" shape="rect" placeholder="Drop a photo" style="{{ galleryTileStyle }}"></image-slot>
+      </sc-for>
+    </div>
+
+    <div style="{{ newsletterCardStyle }}">
+      <div style="{{ newsletterEyebrowStyle }}">the newsletter — taking things apart</div>
+      <div style="{{ newsletterHeadlineStyle }}">One thing, taken apart. Every week-ish.</div>
+      <div style="{{ newsletterFormRowStyle }}">
+        <input style="{{ newsletterInputStyle }}" placeholder="you@email.com" style-focus="{{ focusRingStyle }}" />
+        <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ subscribe ]</button>
+      </div>
+    </div>
+
+    <footer style="{{ footerWrapStyle }}">
+      <div style="{{ footerBottomStyle }}">
+        <div style="{{ footerWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ footerCopyStyle }}">© {{ year }} zack glaser — legal tech advisor, runner, tinkerer</div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const PILLARS_DEF = [
+  { id:'legal-tech', label:'legal tech', light:'#3B5BA5', dark:'#7C9BDB' },
+  { id:'running', label:'running', light:'#B23A3A', dark:'#E1726C' },
+  { id:'workshop', label:'workshop', light:'#A6792E', dark:'#D9A857' },
+  { id:'field-notes', label:'field notes', light:'#3F7D5C', dark:'#6FBB94' }
+];
+const ARC_STEPS_DEF = [
+  { year:'2011', label:'Religion degree', detail:'Studying why people believe what they believe.' },
+  { year:'2015', label:'JD', detail:'Practicing law — asking why a system is built the way it is.' },
+  { year:'2021', label:'Fullstack certificate', detail:'Learning what actually happens under a button click.' },
+  { year:'now', label:'Zack Glaser', detail:'Legal Tech Advisor, runner, tinkerer, one newsletter.' }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark', dropdownOpen:false };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'1000px', margin:'0 auto', padding:'32px 40px 0' };
+
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const navStyle = { display:'flex', alignItems:'center', gap:'28px', padding:'18px 28px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'56px' };
+    const navWordmarkStyle = { fontSize:'18px', flexShrink:0, marginRight:'8px' };
+    const navLinkStyle = { color:n.ink, textDecoration:'none', fontFamily:sans, fontSize:'15px', fontWeight:500, lineHeight:'1', borderBottom:'1px solid transparent', paddingBottom:'2px', whiteSpace:'nowrap', display:'inline-block' };
+    const navLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const navLinkActiveStyle = { ...navLinkStyle, borderBottom:`1px solid ${n.ink}` };
+    const navLinkBtnStyle = { ...navLinkStyle, background:'transparent', border:'none', margin:0, cursor:'pointer' };
+    const navDropdownWrapStyle = { position:'relative', display:'flex', alignItems:'center' };
+    const focusRingStyle = { outline:`2px solid ${n.ink}`, outlineOffset:'2px', borderRadius:'2px' };
+    const dropdownPanelStyle = { position:'absolute', top:'28px', left:0, background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', boxShadow:'0 8px 24px rgba(0,0,0,0.16)', padding:'6px', display:'flex', flexDirection:'column', minWidth:'160px', zIndex:2 };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', padding:'8px 14px', borderRadius:'4px', flexShrink:0 };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+    const navSubscribeBtnStyle = { ...bracketBtnStyle, marginLeft:'auto' };
+
+    const heroRowStyle = { display:'grid', gridTemplateColumns:'1fr 1.4fr', gap:'40px', marginBottom:'64px', alignItems:'start' };
+    const heroImgColStyle = { aspectRatio:'4/5', width:'100%' };
+    const heroTextColStyle = { display:'flex', flexDirection:'column', gap:'16px' };
+    const eyebrowStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em' };
+    const h1Style = { fontFamily:serif, fontStyle:'italic', fontSize:'32px', lineHeight:1.25, color:n.ink, margin:0, fontWeight:500 };
+    const pStyle = { fontFamily:sans, fontSize:'16px', lineHeight:1.65, color:n.inkSoft, margin:0, maxWidth:'640px' };
+
+    const sectionLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, letterSpacing:'0.06em', textTransform:'uppercase', margin:'0 0 20px' };
+
+    const arcRowStyle = { display:'flex', gap:'0px', marginBottom:'56px' };
+    const arcSteps = ARC_STEPS_DEF.map((s, i) => ({
+      year:s.year, label:s.label, detail:s.detail,
+      nodeStyle:{ flex:1, display:'flex', flexDirection:'column', gap:'8px', padding:'0 20px', borderLeft: i === 0 ? 'none' : `1px solid ${n.line}` }
+    }));
+    const arcYearStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const arcLabelStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'19px', color:n.ink };
+    const arcDetailStyle = { fontFamily:sans, fontSize:'13px', color:n.inkSoft, lineHeight:1.5 };
+
+    const galleryRowStyle = { display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'12px', margin:'32px 0 56px' };
+    const galleryTileStyle = { aspectRatio:'4/3' };
+
+    const newsletterCardStyle = { background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', padding:'32px', display:'flex', flexDirection:'column', gap:'16px', marginBottom:'56px' };
+    const newsletterEyebrowStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em' };
+    const newsletterHeadlineStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'26px', color:n.ink, lineHeight:1.3 };
+    const newsletterFormRowStyle = { display:'flex', gap:'12px', maxWidth:'420px' };
+    const newsletterInputStyle = { flex:1, background:n.paper, border:`1px solid ${n.line}`, borderRadius:'4px', padding:'10px 14px', fontFamily:sans, fontSize:'14px', color:n.ink };
+
+    const footerWrapStyle = { paddingTop:'32px', paddingBottom:'48px' };
+    const footerBottomStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}` };
+    const footerWordmarkStyle = { fontSize:'16px' };
+    const footerCopyStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    const pillars = PILLARS_DEF.map(p => {
+      const hex = dark ? p.dark : p.light;
+      return {
+        label:p.label,
+        dotStyle:{ display:'inline-block', width:'8px', height:'8px', borderRadius:'50%', background:hex, marginRight:'10px' },
+        dropdownItemStyle:{ display:'flex', alignItems:'center', color:n.ink, textDecoration:'none', fontFamily:mono, fontSize:'13px', padding:'8px 10px', borderRadius:'4px' },
+        dropdownItemHoverStyle:{ background:n.paper }
+      };
+    });
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle, containerStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      wordmarkZackStyle, wordmarkGlaserStyle,
+      navStyle, navWordmarkStyle, navLinkStyle, navLinkHoverStyle, navLinkActiveStyle, navLinkBtnStyle, navDropdownWrapStyle, focusRingStyle,
+      dropdownOpen: this.state.dropdownOpen, dropdownCaret: this.state.dropdownOpen ? '▴' : '▾',
+      toggleDropdown: () => this.setState(s => ({ dropdownOpen: !s.dropdownOpen })),
+      dropdownPanelStyle, bracketBtnStyle, bracketBtnHoverStyle, navSubscribeBtnStyle,
+      pillars,
+      heroRowStyle, heroImgColStyle, heroTextColStyle, eyebrowStyle, h1Style, pStyle,
+      sectionLabelStyle, arcRowStyle, arcSteps, arcYearStyle, arcLabelStyle, arcDetailStyle,
+      galleryRowStyle, galleryTileStyle, galleryIds:['about-gallery-1', 'about-gallery-2', 'about-gallery-3'],
+      newsletterCardStyle, newsletterEyebrowStyle, newsletterHeadlineStyle, newsletterFormRowStyle, newsletterInputStyle,
+      footerWrapStyle, footerBottomStyle, footerWordmarkStyle, footerCopyStyle,
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

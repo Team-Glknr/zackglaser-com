@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">newsletter page — v1</span>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ containerStyle }}">
+
+    <nav style="{{ navStyle }}">
+      <div style="{{ navWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+      <div style="{{ navDropdownWrapStyle }}">
+        <button style="{{ navLinkBtnStyle }}" style-focus="{{ focusRingStyle }}" onClick="{{ toggleDropdown }}">pillars {{ dropdownCaret }}</button>
+        <sc-if value="{{ dropdownOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ dropdownPanelStyle }}">
+            <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+              <a href="#" style="{{ p.dropdownItemStyle }}" style-hover="{{ p.dropdownItemHoverStyle }}"><span style="{{ p.dotStyle }}"></span>{{ p.label }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">speaking</a>
+      <a href="#" style="{{ navLinkActiveStyle }}">newsletter</a>
+      <a href="#" style="{{ navLinkStyle }}" style-hover="{{ navLinkHoverStyle }}">about</a>
+      <button style="{{ navSubscribeBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}">[ subscribe ]</button>
+    </nav>
+
+    <div style="{{ heroStyle }}">
+      <div style="{{ eyebrowStyle }}">the newsletter</div>
+      <h1 style="{{ h1Style }}">Taking Things Apart</h1>
+      <p style="{{ pStyle }}">One issue, one thing taken apart — a piece of legal software, a training block, a workbench, an idea. The subject rotates across all four pillars; the method never does. Weekly-ish, free, no fluff.</p>
+      <div style="{{ heroFormRowStyle }}">
+        <input style="{{ heroInputStyle }}" placeholder="you@email.com" style-focus="{{ focusRingStyle }}" />
+        <button style="{{ heroSubmitStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ subscribe ]</button>
+      </div>
+      <div style="{{ subCountStyle }}">joined by 1,240+ readers · unsubscribe anytime</div>
+    </div>
+
+    <div style="{{ sectionLabelStyle }}">the archive</div>
+    <div style="{{ filterRowStyle }}">
+      <span style="{{ filterActiveStyle }}">all</span>
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+        <span style="{{ p.filterChipStyle }}">{{ p.label }}</span>
+      </sc-for>
+    </div>
+
+    <div style="{{ issueListStyle }}">
+      <sc-for list="{{ issues }}" as="iss" hint-placeholder-count="6">
+        <a href="#" style="{{ issueRowStyle }}" style-hover="{{ issueRowHoverStyle }}">
+          <div style="{{ issueLeftStyle }}">
+            <span style="{{ issueNoStyle }}">{{ iss.no }}</span>
+            <div>
+              <div style="{{ issueTitleStyle }}">{{ iss.title }}</div>
+              <div style="{{ issuePillarStyle }}">{{ iss.pillar }}</div>
+            </div>
+          </div>
+          <div style="{{ issueDateStyle }}">{{ iss.date }}</div>
+        </a>
+      </sc-for>
+    </div>
+
+    <div style="{{ paginationRowStyle }}">
+      <span style="{{ pageInfoStyle }}">showing 6 of 14 issues</span>
+      <button style="{{ bracketBtnStyle }}" style-hover="{{ bracketBtnHoverStyle }}" style-focus="{{ focusRingStyle }}">[ load more ]</button>
+    </div>
+
+    <footer style="{{ footerWrapStyle }}">
+      <div style="{{ footerBottomStyle }}">
+        <div style="{{ footerWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <div style="{{ footerCopyStyle }}">© {{ year }} zack glaser — legal tech advisor, runner, tinkerer</div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const PILLARS_DEF = [
+  { id:'legal-tech', label:'legal tech', light:'#3B5BA5', dark:'#7C9BDB' },
+  { id:'running', label:'running', light:'#B23A3A', dark:'#E1726C' },
+  { id:'workshop', label:'workshop', light:'#A6792E', dark:'#D9A857' },
+  { id:'field-notes', label:'field notes', light:'#3F7D5C', dark:'#6FBB94' }
+];
+const ISSUES_DEF = [
+  { no:'014', title:'What law firm software actually costs', pillar:'legal tech', date:'Mar 3, 2026' },
+  { no:'013', title:'Rebuilding a training block from scratch', pillar:'running', date:'Feb 24, 2026' },
+  { no:'012', title:'How my workbench dust collection actually works', pillar:'workshop', date:'Feb 17, 2026' },
+  { no:'011', title:'On taking things apart as a way of thinking', pillar:'field notes', date:'Feb 10, 2026' },
+  { no:'010', title:'Inside a document automation stack', pillar:'legal tech', date:'Feb 3, 2026' },
+  { no:'009', title:'What a religion degree taught me about software', pillar:'field notes', date:'Jan 27, 2026' }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark', dropdownOpen:false };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+    const containerStyle = { maxWidth:'800px', margin:'0 auto', padding:'32px 40px 0' };
+
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const navStyle = { display:'flex', alignItems:'center', gap:'28px', padding:'18px 28px', background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', marginBottom:'56px' };
+    const navWordmarkStyle = { fontSize:'18px', flexShrink:0, marginRight:'8px' };
+    const navLinkStyle = { color:n.ink, textDecoration:'none', fontFamily:sans, fontSize:'15px', fontWeight:500, lineHeight:'1', borderBottom:'1px solid transparent', paddingBottom:'2px', whiteSpace:'nowrap', display:'inline-block' };
+    const navLinkHoverStyle = { borderBottom:`1px solid ${n.ink}` };
+    const navLinkActiveStyle = { ...navLinkStyle, borderBottom:`1px solid ${n.ink}` };
+    const navLinkBtnStyle = { ...navLinkStyle, background:'transparent', border:'none', margin:0, cursor:'pointer' };
+    const navDropdownWrapStyle = { position:'relative', display:'flex', alignItems:'center' };
+    const focusRingStyle = { outline:`2px solid ${n.ink}`, outlineOffset:'2px', borderRadius:'2px' };
+    const dropdownPanelStyle = { position:'absolute', top:'28px', left:0, background:n.raised, border:`1px solid ${n.line}`, borderRadius:'6px', boxShadow:'0 8px 24px rgba(0,0,0,0.16)', padding:'6px', display:'flex', flexDirection:'column', minWidth:'160px', zIndex:2 };
+    const bracketBtnStyle = { background:'transparent', border:`1px solid ${n.line}`, color:n.ink, fontFamily:mono, fontSize:'13px', cursor:'pointer', padding:'8px 14px', borderRadius:'4px', flexShrink:0 };
+    const bracketBtnHoverStyle = { borderColor:n.ink };
+    const navSubscribeBtnStyle = { ...bracketBtnStyle, marginLeft:'auto' };
+
+    const heroStyle = { textAlign:'center', maxWidth:'560px', margin:'0 auto 64px', display:'flex', flexDirection:'column', alignItems:'center', gap:'16px' };
+    const eyebrowStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.06em' };
+    const h1Style = { fontFamily:serif, fontStyle:'italic', fontSize:'40px', color:n.ink, margin:0, fontWeight:500 };
+    const pStyle = { fontFamily:sans, fontSize:'16px', lineHeight:1.6, color:n.inkSoft, margin:0 };
+    const heroFormRowStyle = { display:'flex', gap:'10px', width:'100%', maxWidth:'400px', marginTop:'8px' };
+    const heroInputStyle = { flex:1, background:n.raised, border:`1px solid ${n.line}`, borderRadius:'4px', padding:'12px 16px', fontFamily:sans, fontSize:'14px', color:n.ink };
+    const heroSubmitStyle = { ...bracketBtnStyle, padding:'12px 20px' };
+    const subCountStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    const sectionLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, letterSpacing:'0.06em', textTransform:'uppercase', margin:'0 0 20px' };
+    const filterRowStyle = { display:'flex', gap:'10px', marginBottom:'24px', flexWrap:'wrap' };
+    const filterActiveStyle = { fontFamily:mono, fontSize:'12px', color:n.paper, background:n.ink, borderRadius:'999px', padding:'6px 14px' };
+
+    const issueListStyle = { display:'flex', flexDirection:'column', border:`1px solid ${n.line}`, borderRadius:'6px', overflow:'hidden', marginBottom:'24px' };
+    const issueRowStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', gap:'16px', padding:'16px 20px', borderBottom:`1px solid ${n.line}`, textDecoration:'none', color:n.ink, background:n.raised };
+    const issueRowHoverStyle = { background:n.paper };
+    const issueLeftStyle = { display:'flex', alignItems:'center', gap:'16px', minWidth:0 };
+    const issueNoStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, flexShrink:0 };
+    const issueTitleStyle = { fontFamily:serif, fontSize:'16px', color:n.ink, lineHeight:1.3 };
+    const issuePillarStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, marginTop:'2px' };
+    const issueDateStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, whiteSpace:'nowrap', flexShrink:0 };
+
+    const paginationRowStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'56px' };
+    const pageInfoStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+
+    const footerWrapStyle = { paddingTop:'32px', paddingBottom:'48px' };
+    const footerBottomStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'20px', borderTop:`1px solid ${n.line}` };
+    const footerWordmarkStyle = { fontSize:'16px' };
+    const footerCopyStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft };
+
+    const pillars = PILLARS_DEF.map(p => {
+      const hex = dark ? p.dark : p.light;
+      return {
+        label:p.label,
+        dotStyle:{ display:'inline-block', width:'8px', height:'8px', borderRadius:'50%', background:hex, marginRight:'10px' },
+        dropdownItemStyle:{ display:'flex', alignItems:'center', color:n.ink, textDecoration:'none', fontFamily:mono, fontSize:'13px', padding:'8px 10px', borderRadius:'4px' },
+        dropdownItemHoverStyle:{ background:n.paper },
+        filterChipStyle:{ fontFamily:mono, fontSize:'12px', color:n.inkSoft, border:`1px solid ${n.line}`, borderRadius:'999px', padding:'6px 14px' }
+      };
+    });
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle, containerStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      wordmarkZackStyle, wordmarkGlaserStyle,
+      navStyle, navWordmarkStyle, navLinkStyle, navLinkHoverStyle, navLinkActiveStyle, navLinkBtnStyle, navDropdownWrapStyle, focusRingStyle,
+      dropdownOpen: this.state.dropdownOpen, dropdownCaret: this.state.dropdownOpen ? '▴' : '▾',
+      toggleDropdown: () => this.setState(s => ({ dropdownOpen: !s.dropdownOpen })),
+      dropdownPanelStyle, bracketBtnStyle, bracketBtnHoverStyle, navSubscribeBtnStyle,
+      pillars,
+      heroStyle, eyebrowStyle, h1Style, pStyle, heroFormRowStyle, heroInputStyle, heroSubmitStyle, subCountStyle,
+      sectionLabelStyle, filterRowStyle, filterActiveStyle,
+      issues: ISSUES_DEF, issueListStyle, issueRowStyle, issueRowHoverStyle, issueLeftStyle, issueNoStyle, issueTitleStyle, issuePillarStyle, issueDateStyle,
+      paginationRowStyle, pageInfoStyle,
+      footerWrapStyle, footerBottomStyle, footerWordmarkStyle, footerCopyStyle,
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

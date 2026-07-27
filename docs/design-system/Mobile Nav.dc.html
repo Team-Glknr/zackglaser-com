@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<style>
+body { margin: 0; }
+::selection { background: rgba(0,0,0,0.15); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Space+Mono:wght@400;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="{{ pageStyle }}">
+  <div style="{{ demoBarStyle }}">
+    <span style="{{ metaLabelStyle }}">mobile nav — tap the menu icon</span>
+    <button style="{{ toggleBtnStyle }}" onClick="{{ toggleTheme }}">{{ themeToggleLabel }}</button>
+  </div>
+
+  <div style="{{ stageStyle }}">
+
+    <div style="{{ frameStyle }}">
+      <div style="{{ frameBarStyle }}">
+        <div style="{{ frameWordmarkStyle }}"><span style="{{ wordmarkZackStyle }}">zack</span><span style="{{ wordmarkGlaserStyle }}">glaser</span></div>
+        <button style="{{ menuBtnStyle }}" style-focus="{{ focusRingStyle }}" onClick="{{ toggleMenu }}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+              <path d="M6,6 L18,18 M18,6 L6,18" stroke="{{ inkColor }}" stroke-width="1.5" stroke-linecap="square"></path>
+            </sc-if>
+            <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}">
+              <path d="M4,7 H20 M4,12 H20 M4,17 H20" stroke="{{ inkColor }}" stroke-width="1.5" stroke-linecap="square"></path>
+            </sc-if>
+          </svg>
+        </button>
+      </div>
+
+      <div style="{{ pageContentStyle }}">
+        <div style="{{ contentEyebrowStyle }}">hub</div>
+        <div style="{{ contentHeadlineStyle }}">I'm Zack — a legal tech advisor by day, a runner and tinkerer the rest of the time.</div>
+        <div style="{{ contentGhostRowStyle }}"></div>
+        <div style="{{ contentGhostRowStyle }}"></div>
+        <div style="{{ contentGhostRowShortStyle }}"></div>
+      </div>
+
+      <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="{{ overlayStyle }}">
+          <div style="{{ overlaySectionLabelStyle }}">pillars</div>
+          <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+            <a href="#" style="{{ p.overlayRowStyle }}"><span style="{{ p.dotStyle }}"></span>{{ p.label }}</a>
+          </sc-for>
+          <div style="{{ overlayDividerStyle }}"></div>
+          <a href="#" style="{{ overlayLinkRowStyle }}">speaking</a>
+          <a href="#" style="{{ overlayLinkRowStyle }}">newsletter</a>
+          <a href="#" style="{{ overlayLinkRowStyle }}">about</a>
+          <button style="{{ overlaySubscribeStyle }}">[ subscribe ]</button>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="{{ notesColStyle }}">
+      <div style="{{ noteLabelStyle }}">why this shape</div>
+      <p style="{{ noteTextStyle }}">Pillars stay a single flat list — no nested accordion — matching the desktop dropdown. Every row is 52px tall, well over the 44px minimum hit target. The menu is a full-panel overlay, not a slide-in drawer, so it never fights with page content underneath. Subscribe stays the one visually distinct button, same as desktop.</p>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;light&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;'light'|'dark'&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+
+const NEUTRAL = {
+  light: { paper:'#F2F4F6', raised:'#FAFBFC', ink:'#1F2429', inkSoft:'#616B75', line:'#D6DBE0' },
+  dark:  { paper:'#161A1E', raised:'#1F242A', ink:'#EDF0F2', inkSoft:'#98A2AC', line:'#323A42' }
+};
+const PILLARS_DEF = [
+  { id:'legal-tech', label:'legal tech', light:'#3B5BA5', dark:'#7C9BDB' },
+  { id:'running', label:'running', light:'#B23A3A', dark:'#E1726C' },
+  { id:'workshop', label:'workshop', light:'#A6792E', dark:'#D9A857' },
+  { id:'field-notes', label:'field notes', light:'#3F7D5C', dark:'#6FBB94' }
+];
+
+class Component extends DCLogic {
+  state = { dark: (this.props.defaultTheme ?? 'light') === 'dark', menuOpen:false };
+
+  renderVals() {
+    const dark = this.state.dark;
+    const n = dark ? NEUTRAL.dark : NEUTRAL.light;
+    const serif = "'Literata', serif";
+    const mono = "'Space Mono', monospace";
+    const sans = "'Archivo', sans-serif";
+
+    const pageStyle = { background:n.paper, color:n.ink, fontFamily:sans, minHeight:'100vh' };
+    const demoBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'12px 24px', borderBottom:`1px solid ${n.line}` };
+    const metaLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft };
+    const toggleBtnStyle = { fontFamily:mono, fontSize:'12px', color:n.ink, background:'transparent', border:`1px solid ${n.line}`, borderRadius:'3px', padding:'6px 12px', cursor:'pointer' };
+
+    const stageStyle = { display:'flex', gap:'56px', padding:'48px', alignItems:'flex-start', justifyContent:'center', flexWrap:'wrap' };
+
+    const frameStyle = { position:'relative', width:'375px', height:'720px', background:n.paper, border:`1px solid ${n.line}`, borderRadius:'20px', overflow:'hidden', boxShadow:'0 12px 32px rgba(0,0,0,0.12)', flexShrink:0 };
+    const frameBarStyle = { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'18px 20px', borderBottom:`1px solid ${n.line}`, background:n.raised };
+    const frameWordmarkStyle = { fontSize:'16px' };
+    const wordmarkZackStyle = { fontFamily:serif, fontStyle:'italic', fontWeight:500, letterSpacing:'-0.01em' };
+    const wordmarkGlaserStyle = { fontFamily:mono, fontWeight:700, letterSpacing:'-0.02em' };
+    const menuBtnStyle = { width:'44px', height:'44px', display:'flex', alignItems:'center', justifyContent:'center', background:'transparent', border:'none', cursor:'pointer', flexShrink:0 };
+    const focusRingStyle = { outline:`2px solid ${n.ink}`, outlineOffset:'2px', borderRadius:'2px' };
+
+    const pageContentStyle = { padding:'28px 24px', display:'flex', flexDirection:'column', gap:'14px' };
+    const contentEyebrowStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em' };
+    const contentHeadlineStyle = { fontFamily:serif, fontStyle:'italic', fontSize:'20px', lineHeight:1.4, color:n.ink };
+    const contentGhostRowStyle = { height:'12px', borderRadius:'3px', background:n.line, opacity:0.5, width:'100%' };
+    const contentGhostRowShortStyle = { ...contentGhostRowStyle, width:'60%' };
+
+    const overlayStyle = { position:'absolute', top:'64px', left:0, right:0, bottom:0, background:n.paper, padding:'20px', display:'flex', flexDirection:'column', gap:'2px', overflowY:'auto' };
+    const overlaySectionLabelStyle = { fontFamily:mono, fontSize:'11px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em', padding:'10px 4px 6px' };
+    const overlayDividerStyle = { height:'1px', background:n.line, margin:'12px 0' };
+    const overlayLinkRowStyle = { display:'flex', alignItems:'center', minHeight:'52px', fontFamily:sans, fontSize:'17px', fontWeight:500, color:n.ink, textDecoration:'none', padding:'0 4px' };
+    const overlaySubscribeStyle = { marginTop:'16px', width:'100%', minHeight:'52px', background:n.ink, color:n.paper, border:'none', borderRadius:'6px', fontFamily:mono, fontSize:'15px', cursor:'pointer' };
+
+    const pillars = PILLARS_DEF.map(p => {
+      const hex = dark ? p.dark : p.light;
+      return {
+        label:p.label,
+        dotStyle:{ display:'inline-block', width:'9px', height:'9px', borderRadius:'50%', background:hex, marginRight:'12px', flexShrink:0 },
+        overlayRowStyle:{ display:'flex', alignItems:'center', minHeight:'52px', fontFamily:sans, fontSize:'17px', fontWeight:500, color:n.ink, textDecoration:'none', padding:'0 4px' }
+      };
+    });
+
+    const notesColStyle = { maxWidth:'340px', paddingTop:'16px' };
+    const noteLabelStyle = { fontFamily:mono, fontSize:'12px', color:n.inkSoft, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:'12px' };
+    const noteTextStyle = { fontFamily:sans, fontSize:'14px', lineHeight:1.6, color:n.inkSoft, margin:0 };
+
+    return {
+      pageStyle, demoBarStyle, metaLabelStyle, toggleBtnStyle,
+      themeToggleLabel: dark ? '☾ dark' : '☀ light',
+      toggleTheme: () => this.setState(s => ({ dark: !s.dark })),
+      stageStyle, frameStyle, frameBarStyle, frameWordmarkStyle, wordmarkZackStyle, wordmarkGlaserStyle,
+      menuBtnStyle, focusRingStyle, inkColor:n.ink,
+      menuOpen: this.state.menuOpen, menuClosed: !this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      pageContentStyle, contentEyebrowStyle, contentHeadlineStyle, contentGhostRowStyle, contentGhostRowShortStyle,
+      overlayStyle, overlaySectionLabelStyle, overlayDividerStyle, overlayLinkRowStyle, overlaySubscribeStyle,
+      pillars,
+      notesColStyle, noteLabelStyle, noteTextStyle
+    };
+  }
+}
+
+</script>
+</body>
+</html>
