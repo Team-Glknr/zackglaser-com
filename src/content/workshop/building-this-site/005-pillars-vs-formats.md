@@ -5,10 +5,9 @@ status: draft
 pillar: workshop
 format: log
 series: building-this-site
+authorship: duet
 tags: [taxonomy, content-model, architecture]
 ---
-
-# Pillars vs. formats: untangling the taxonomy
 
 ## What's on the bench
 

@@ -41,6 +41,7 @@ One site, path-based sections, no subdomains. Rationale: preserves consolidated 
 /                       Hub: 30-second intro, four doors, latest 3 posts (any pillar), newsletter CTA
 /now                    What Zack is building / training for / reading right now
 /about                  Longer story, photos, the arc
+/how-this-site-is-made  Colophon: the bots, the models, the supervision loop (slug provisional; docs/04)
 /legal-tech             Pillar: tools, takes, industry commentary
 /legal-tech/speaking    Credibility page first, booking made easy second: topics, appearances, press, one-sheet, headshots, booking form
 /running                Pillar: training logs, race reports
@@ -77,8 +78,11 @@ pillar:       legal-tech | running | workshop | field-notes   # subject — exac
 format:       teardown | log | take                           # method — exactly one
 series:       optional (e.g. building-this-site)
 newsletter:   optional issue number, if the post ran as an issue
+authorship:   human | duet | bot   # provenance, not taxonomy — who typed it; see docs/04-ai-first.md
 tags:         []   # fine-grained topics (ai, woodworking); not promoted to structure until a tag earns it
 ```
+
+**Authorship is provenance, not a third axis** (decided 2026-07-26; build log entry 009): most content here is AI-drafted under Zack's direction, and every post says so via a stamp — celebrated, not disclaimed. It never drives navigation. The rule that makes it safe: the voice doc governs the bots, not vice versa. Full spec: `docs/04-ai-first.md`.
 
 **The newsletter is a format, not a pillar.** *Taking Things Apart* = the teardown format, full stop. Each issue files under one pillar; `/teardowns` is its archive. Logs and takes are site-only content between issues — which also answers "what do I publish when a teardown isn't ready."
 
@@ -94,10 +98,11 @@ Cadence commitment: regular (target weekly-ish; the format doc governs the build
 ## 8. Technical requirements
 
 - Static-first with SSR available. Stack: **Astro** (content collections map 1:1 to pillars). Decided in build log entry 004.
-- Newsletter platform: **Buttondown** (decided 2026-07-26; to be written up with the naming decision, build log entry 009). Markdown-native with a full REST API, so issues live as markdown in the repo and `/teardowns` on our own domain is the archive — one source of truth. Checks every requirement (custom domain, API, archives, tagging), starts free/$9-a-month at this list size, and subscriber export is trivial so there's no lock-in. Kit and beehiiv optimize for commerce and ad-driven growth respectively — both non-goals (§3).
+- Newsletter platform: **Buttondown** (decided 2026-07-26; to be written up with the naming decision, build log entry 011). Markdown-native with a full REST API, so issues live as markdown in the repo and `/teardowns` on our own domain is the archive — one source of truth. Checks every requirement (custom domain, API, archives, tagging), starts free/$9-a-month at this list size, and subscriber export is trivial so there's no lock-in. Kit and beehiiv optimize for commerce and ad-driven growth respectively — both non-goals (§3).
 - Analytics: privacy-friendly (Plausible/Fathom-class), watch pillar crossover specifically.
 - **Members-area future-proofing**: no v1 build, but stack must not preclude gated content. Astro SSR + middleware + drop-in auth (Clerk/Auth.js/Supabase) covers gated archives and course-style content. If members ever means an interactive app (dashboards, UGC), stand up a separate app — that's the legitimate use of a subdomain.
 - Booking form on /speaking must notify immediately (email at minimum). Zero friction: no accounts, no multi-step.
+- **AI-first, out loud** (decided 2026-07-26; build log entry 009): `authorship` field enforced in the content config and provenance stamp component shipped in entry 010 ✓. `Co-Authored-By` trailers on bot commits already in place (every commit since entry 001). Colophon page still pending — the public repo doubles as the disclosure audit trail once it lands. Full spec: `docs/04-ai-first.md`.
 - **GitHub on-ramp** (decided 2026-07-26; build log entry 006): the repo goes public and the site itself teaches GitHub to attorneys — footer links to source and commit history, comments via giscus (GitHub Discussions), and a "suggest an edit" link on every post that walks readers into their first pull request. Full spec: `docs/03-github-onramp.md`. Note the accepted tradeoff: `status: draft` posts are visible in the public repo.
 
 ## 9. Positioning guardrail
@@ -116,7 +121,7 @@ Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podca
 | Phase | Scope | Exit criteria |
 |-------|-------|---------------|
 | 0. Foundation (now) | Briefs, build log running, decisions logged | This doc + entries 001–002 ✓ |
-| 1. Decisions | Stack (004) ✓, taxonomy (005) ✓, GitHub on-ramp (006) ✓, newsletter name/platform (009), brand basics (010) | Each is a build log entry |
+| 1. Decisions | Stack (004) ✓, taxonomy (005) ✓, GitHub on-ramp (006) ✓, AI-first (009) ✓, newsletter name/platform (011), brand basics (012) | Each is a build log entry |
 | 2. Build | Hub, pillar pages, /speaking, newsletter wired up, GitHub on-ramp (docs/03) | Site deployable; speaking page reviewed against §9; repo public with comments + edit links live |
 | 3. Launch | Publish build-log series retroactively, announce, first newsletter issue | Live + issue 001 sent |
 | 4. Habit | Weekly-ish issues, quarterly review of metrics (§10) | 12 consecutive issues |

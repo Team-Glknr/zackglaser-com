@@ -5,10 +5,9 @@ status: draft
 pillar: workshop
 format: log
 series: building-this-site
+authorship: duet
 tags: [meta, goals]
 ---
-
-# Why I'm building this
 
 ## What's on the bench
 

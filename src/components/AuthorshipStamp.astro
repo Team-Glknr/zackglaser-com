@@ -1,0 +1,49 @@
+---
+// Provenance stamp — docs/04-ai-first.md §3. "Styled like a maker's plate
+// on furniture — workbench aesthetic, not a warning label." Links to the
+// colophon (/how-this-site-is-made), which doesn't exist yet — same
+// forward-linking pattern as /now, /about, /speaking elsewhere on the site.
+interface Props {
+  authorship: "human" | "duet" | "bot";
+}
+const { authorship } = Astro.props;
+
+const DESCRIPTIONS: Record<Props["authorship"], string> = {
+  human: "written by hand",
+  duet: "ai-drafted, human-edited",
+  bot: "agent-generated, human-reviewed",
+};
+---
+
+<a href="/how-this-site-is-made" class="stamp">
+  <span class="stamp-mode">{authorship}</span>
+  <span class="stamp-desc">{DESCRIPTIONS[authorship]}</span>
+</a>
+
+<style>
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-input);
+    padding: 6px 12px;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    width: fit-content;
+  }
+  .stamp:hover {
+    border-color: var(--color-ink);
+  }
+  .stamp-mode {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-ink);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .stamp-desc {
+    font-size: 11px;
+    color: var(--color-ink-soft);
+  }
+</style>

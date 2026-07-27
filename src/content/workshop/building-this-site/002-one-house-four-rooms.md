@@ -5,10 +5,9 @@ status: draft
 pillar: workshop
 format: log
 series: building-this-site
+authorship: duet
 tags: [architecture, seo, newsletter]
 ---
-
-# The architecture: one house, four rooms
 
 ## What's on the bench
 

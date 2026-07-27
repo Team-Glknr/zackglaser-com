@@ -5,10 +5,9 @@ status: draft
 pillar: workshop
 format: log
 series: building-this-site
+authorship: duet
 tags: [astro, design-system, frontend]
 ---
-
-# Porting the design system: theme, chrome, and the Hub
 
 ## What's on the bench
 

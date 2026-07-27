@@ -11,6 +11,8 @@ const postSchema = z.object({
   format: z.enum(['teardown', 'log', 'take']),
   series: z.string().optional(),
   newsletter: z.number().optional(),
+  // Provenance, not a third axis — who typed it, never drives navigation. docs/04-ai-first.md §3.
+  authorship: z.enum(['human', 'duet', 'bot']),
   tags: z.array(z.string()).default([]),
 });
 

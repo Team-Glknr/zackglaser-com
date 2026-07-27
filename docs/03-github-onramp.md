@@ -104,5 +104,5 @@ Ships with Phase 2 (Build) of the brief's roadmap — the footer and edit links 
 
 ## 8. Open questions
 
-- Copy for the three touchpoints — current drafts above are placeholders pending the brand voice pass (build log entry 008).
+- Copy for the three touchpoints — current drafts above are placeholders pending the brand voice pass (build log entry 012).
 - Whether rung 3 eventually earns a fourth rung: a short "your first pull request happened here" explainer page linked from the PR confirmation. Defer until someone actually submits one.

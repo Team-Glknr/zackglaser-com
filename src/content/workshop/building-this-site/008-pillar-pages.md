@@ -5,10 +5,9 @@ status: draft
 pillar: workshop
 format: log
 series: building-this-site
+authorship: duet
 tags: [astro, design-system, frontend]
 ---
-
-# The pillar pages, as one template
 
 ## What's on the bench
 

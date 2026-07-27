@@ -34,6 +34,7 @@ status: draft        # draft | published
 pillar: workshop
 format: log          # the series is log-format; see brief §6 for the pillar/format axes
 series: building-this-site
+authorship: duet     # human | duet | bot — who typed it; see docs/04-ai-first.md
 tags: []
 ---
 ```
@@ -57,8 +58,10 @@ tags: []
 - 006 — The GitHub on-ramp: the repo goes public, and the site starts teaching GitHub (docs/03-github-onramp.md) ✓
 - 007 — Porting the design system: theme, chrome, and the Hub ✓
 - 008 — The pillar pages, as one template ✓
-- 009 — Naming the newsletter
-- 010 — Brand: colors, type, and the logo question (incl. section display-name gut-check)
-- 011 — The speaking page (and the Lawyerist/Affinity line — brief §9)
-- 012 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 013 — Launch
+- 009 — AI-first, out loud: the bots build the site, and the site says so (docs/04-ai-first.md) ✓
+- 010 — Individual post pages (ships the authorship field + provenance stamp from entry 009) ✓
+- 011 — Naming the newsletter (platform decided: Buttondown — see brief §8)
+- 012 — Brand: colors, type, and the logo question (incl. section display-name and colophon-slug gut-checks)
+- 013 — The speaking page (and the Lawyerist/Affinity line — brief §9)
+- 014 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 015 — Launch

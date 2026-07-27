@@ -5,10 +5,9 @@ status: draft
 pillar: workshop
 format: log
 series: building-this-site
+authorship: duet
 tags: [github, version-control, community]
 ---
-
-# The GitHub on-ramp: going public
 
 ## What's on the bench
 

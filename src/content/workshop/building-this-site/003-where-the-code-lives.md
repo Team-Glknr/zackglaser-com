@@ -5,10 +5,9 @@ status: draft
 pillar: workshop
 format: log
 series: building-this-site
+authorship: duet
 tags: [tooling, version-control]
 ---
-
-# Where the code lives
 
 ## What's on the bench
 

@@ -46,7 +46,7 @@ const latestPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
               <div class="post-tag">{pillars.find((p) => p.id === post.data.pillar)?.label}</div>
               <div class="post-title">{post.data.title}</div>
               <div class="post-meta">{postMetaCrossPillar(post)}</div>
-              <a href={`/${post.data.pillar}/${post.id}`} class="post-link">
+              <a href={`/${post.id}`} class="post-link">
                 read the teardown →
               </a>
             </div>

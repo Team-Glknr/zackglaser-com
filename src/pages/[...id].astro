@@ -1,0 +1,301 @@
+---
+// Structure/tokens ported from docs/design-system/Post Page.dc.html.
+// Comments (giscus) are deliberately absent — the mockup itself doesn't
+// include them either; they're wired up alongside the rest of the GitHub
+// on-ramp (docs/03), not here. Same for the hero image slot: there's no
+// image field in the schema yet, so nothing to render honestly.
+import { getCollection, render } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import NewsletterCard from "../components/NewsletterCard.astro";
+import AuthorshipStamp from "../components/AuthorshipStamp.astro";
+import { pillars } from "../lib/pillars";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => data.status === "published");
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const pillarInfo = pillars.find((p) => p.id === post.data.pillar)!;
+
+const siblings = (
+  await getCollection("posts", ({ data }) => data.status === "published" && data.pillar === post.data.pillar)
+).sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+const idx = siblings.findIndex((p) => p.id === post.id);
+const prevPost = idx > 0 ? siblings[idx - 1] : null;
+const nextPost = idx < siblings.length - 1 ? siblings[idx + 1] : null;
+
+const formattedDate = post.data.date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+const dateMeta = post.data.newsletter ? `${formattedDate} · issue ${post.data.newsletter}` : formattedDate;
+---
+
+<Layout title={`${post.data.title} — zackglaser.com`}>
+  <div class="post-container" style={`--accent:var(--pillar-${post.data.pillar})`}>
+    <a href={pillarInfo.href} class="breadcrumb">← {pillarInfo.label}</a>
+
+    <div class="article-header">
+      <div class="meta-row">
+        <span class="pillar-tag">{pillarInfo.label}</span>
+        <span class="format-pill">{post.data.format}</span>
+        <span class="date">{dateMeta}</span>
+      </div>
+      <h1 class="h1">{post.data.title}</h1>
+    </div>
+
+    <article class="article-body">
+      <Content />
+    </article>
+
+    {
+      post.data.tags.length > 0 && (
+        <div class="tags-row">
+          {post.data.tags.map((tag) => (
+            <span class="tag-chip">{tag}</span>
+          ))}
+        </div>
+      )
+    }
+
+    <div class="author-row">
+      <div>
+        <div class="author-name">Zack Glaser</div>
+        <div class="author-bio">
+          Legal Tech Advisor at Lawyerist/Affinity, host of the Lawyerist Podcast. Takes things apart to see how they
+          work.
+        </div>
+      </div>
+      <AuthorshipStamp authorship={post.data.authorship} />
+    </div>
+
+    {
+      (prevPost || nextPost) && (
+        <div class="next-prev-row">
+          {prevPost ? (
+            <a href={`/${prevPost.id}`} class="next-prev-card">
+              <div class="next-prev-label">← previous</div>
+              <div class="next-prev-title">{prevPost.data.title}</div>
+            </a>
+          ) : (
+            <div />
+          )}
+          {nextPost ? (
+            <a href={`/${nextPost.id}`} class="next-prev-card next-prev-card-right">
+              <div class="next-prev-label">next →</div>
+              <div class="next-prev-title">{nextPost.data.title}</div>
+            </a>
+          ) : (
+            <div />
+          )}
+        </div>
+      )
+    }
+
+    <NewsletterCard eyebrow={`get ${pillarInfo.label} in your inbox`} />
+  </div>
+</Layout>
+
+<style>
+  .post-container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .breadcrumb {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    margin-bottom: var(--space-5);
+  }
+  .breadcrumb:hover {
+    color: var(--color-ink);
+  }
+
+  .article-header {
+    margin-bottom: var(--space-6);
+  }
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .pillar-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .format-pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 1px 9px;
+  }
+  .date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+  }
+  .h1 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 1.2;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .article-body {
+    margin-bottom: var(--space-8);
+  }
+  .article-body :global(p) {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--color-ink);
+    margin: 0 0 var(--space-5);
+  }
+  .article-body :global(h2) {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--color-ink);
+    margin: var(--space-8) 0 var(--space-4);
+  }
+  .article-body :global(h3) {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--color-ink);
+    margin: var(--space-6) 0 var(--space-3);
+  }
+  .article-body :global(blockquote) {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--color-ink);
+    border-left: 2px solid var(--accent);
+    padding-left: var(--space-5);
+    margin: var(--space-6) 0;
+  }
+  .article-body :global(strong) {
+    font-weight: 600;
+  }
+  .article-body :global(a) {
+    color: var(--color-ink);
+    text-decoration-color: var(--color-line);
+  }
+  .article-body :global(a:hover) {
+    text-decoration-color: var(--color-ink);
+  }
+  .article-body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: 3px;
+    padding: 1px 5px;
+  }
+  .article-body :global(ul),
+  .article-body :global(ol) {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--color-ink);
+    margin: 0 0 var(--space-5);
+    padding-left: 1.3em;
+  }
+
+  .tags-row {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-line);
+    flex-wrap: wrap;
+  }
+  .tag-chip {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 4px 12px;
+  }
+
+  .author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    flex-wrap: wrap;
+  }
+  .author-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--color-ink);
+    margin-bottom: 4px;
+  }
+  .author-bio {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+    max-width: 420px;
+  }
+
+  .next-prev-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+  .next-prev-card {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-4) var(--space-5);
+    text-decoration: none;
+    color: var(--color-ink);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .next-prev-card-right {
+    text-align: right;
+    align-items: flex-end;
+  }
+  .next-prev-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+  }
+  .next-prev-title {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    color: var(--color-ink);
+    line-height: 1.3;
+  }
+
+  @media (max-width: 560px) {
+    .h1 {
+      font-size: 28px;
+    }
+    .next-prev-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

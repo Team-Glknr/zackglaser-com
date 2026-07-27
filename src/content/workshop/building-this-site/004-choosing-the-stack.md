@@ -5,10 +5,9 @@ status: draft
 pillar: workshop
 format: log
 series: building-this-site
+authorship: duet
 tags: [stack, tooling]
 ---
-
-# Choosing the stack
 
 ## What's on the bench
 

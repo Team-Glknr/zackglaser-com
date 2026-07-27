@@ -38,7 +38,7 @@ const FORMATS = ["teardown", "log", "take"];
     posts.length > 0 ? (
       <div class="post-list">
         {posts.map((post) => (
-          <a href={`/${pillar.id}/${post.id}`} class="post-row">
+          <a href={`/${post.id}`} class="post-row">
             <div class="post-row-left">
               <span class="format-pill">{post.data.format}</span>
               <div class="post-title">{post.data.title}</div>
