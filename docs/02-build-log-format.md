@@ -71,6 +71,7 @@ tags: []
 - 019 — Social share images: one PNG per post, generated at build time (docs/design-system/Social Share Image.dc.html) ✓
 - 020 — The default OG image: every page gets a real social card now, not just posts ✓
 - 021 — Comments go live: rung 2 of the GitHub on-ramp, closed ✓
-- 022 — The speaking page (tabled; the Lawyerist/Affinity line — brief §9 — needs deep work before this ships)
-- 023 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 024 — Launch
+- 022 — Wiring up /newsletter: hero, subscribe, archive ✓
+- 023 — The speaking page, and pulling the placeholders (brief §9 resolved and built; headshot and testimonials dropped rather than placeholder'd, clip quotes kept as text, episode count/Affinity URL/booking backend still pending) ✓
+- 024 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 025 — Launch

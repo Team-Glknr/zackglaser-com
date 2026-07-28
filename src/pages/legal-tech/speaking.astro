@@ -4,13 +4,15 @@
 // (both resolved 2026-07-27). Two sections the mockup never had — clips
 // and the sample teardown — are the actual proof mechanism; the ticket
 // wall and topic cards keep the mockup's shape with real data swapped in.
-// Video/headshot/testimonial content doesn't exist yet (unshot, uncut,
-// unrequested) — MediaPlaceholder marks those honestly rather than
-// showing broken embeds or fabricated quotes. The Lawyerist Podcast's
-// real episode count isn't known yet either; its ticket shows "HOST" /
-// "ONGOING" instead of a guessed number.
+// No headshot, cut clips, or testimonial quotes exist yet — rather than
+// placeholder those (an earlier pass tried that and reversed it), they're
+// dropped entirely until real: nothing to render honestly, same call the
+// About page already made for its own photo hero. The clip quotes/
+// attribution are real (sourced from actual episodes, docs/06) and stay
+// as text; only the video embed itself is missing. The Lawyerist
+// Podcast's real episode count isn't known yet either; its ticket shows
+// "HOST" / "ONGOING" instead of a guessed number.
 import Layout from "../../layouts/Layout.astro";
-import MediaPlaceholder from "../../components/MediaPlaceholder.astro";
 
 const clips = [
   {
@@ -125,11 +127,6 @@ const tickets = [
   },
 ];
 
-const testimonialTargets = [
-  { org: "Tennessee Bar Association", context: "CLE organizer, Estate Planning & Probate Forum — 250-person room" },
-  { org: "Bradley Arant Boult Cummings LLP", context: "Solo GC Roundtable organizer — 15-person room" },
-  { org: "A podcast host", context: "Knackly or Newfangled Lawyer — media-side proof" },
-];
 ---
 
 <Layout
@@ -138,17 +135,12 @@ const testimonialTargets = [
 >
   <div class="speaking-page" style="--accent:var(--pillar-legal-tech)">
     <div class="hero-row">
-      <div class="hero-text-col">
-        <div class="eyebrow">speaking</div>
-        <h1 class="h1">I take legal technology apart for a living — in writing, on a podcast, and now on stage.</h1>
-        <p class="hero-sub">
-          Legal Tech Advisor at Lawyerist/Affinity, host of the Lawyerist Podcast. What that actually looks like is
-          below — not a resume, a recording.
-        </p>
-      </div>
-      <div class="hero-image-col">
-        <MediaPlaceholder label="[ headshot pending ]" aspect="4/5" />
-      </div>
+      <div class="eyebrow">speaking</div>
+      <h1 class="h1">I take legal technology apart for a living — in writing, on a podcast, and now on stage.</h1>
+      <p class="hero-sub">
+        Legal Tech Advisor at Lawyerist/Affinity, host of the Lawyerist Podcast. What that actually looks like is
+        below — not a resume, a recording.
+      </p>
     </div>
 
     <div class="section-label">watch me work</div>
@@ -156,7 +148,6 @@ const testimonialTargets = [
       {
         clips.map((clip) => (
           <div class="clip-card">
-            <MediaPlaceholder label="[ video pending ]" aspect="16/9" />
             <div class="clip-tag">{clip.tag}</div>
             <p class="clip-quote">"{clip.quote}"</p>
             <div class="clip-attribution">{clip.attribution}</div>
@@ -238,17 +229,14 @@ const testimonialTargets = [
       </a>
     </div>
 
-    <div class="section-label">what rooms say afterward</div>
-    <div class="testimonial-grid">
-      {
-        testimonialTargets.map((tt) => (
-          <div class="testimonial-card">
-            <MediaPlaceholder label="[ quote pending ]" aspect="3/1" />
-            <div class="testimonial-org">{tt.org}</div>
-            <div class="testimonial-context">{tt.context}</div>
-          </div>
-        ))
-      }
+    <div class="one-sheet-row">
+      <div>
+        <div class="one-sheet-title">Need the one-sheet?</div>
+        <div class="one-sheet-sub">
+          Bio, topics, headshots, and past appearances in one PDF — everything a program chair needs to say yes.
+        </div>
+      </div>
+      <button type="button" class="one-sheet-btn" disabled>[ coming soon ]</button>
     </div>
 
     <div id="book" class="section-label">book me</div>
@@ -286,16 +274,11 @@ const testimonialTargets = [
 
   /* Hero */
   .hero-row {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: var(--space-7);
-    margin-bottom: var(--space-8);
-    align-items: start;
-  }
-  .hero-text-col {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    max-width: 720px;
+    margin-bottom: var(--space-8);
   }
   .eyebrow {
     font-family: var(--font-mono);
@@ -504,33 +487,43 @@ const testimonialTargets = [
     flex: 1;
   }
 
-  /* Testimonials */
-  .testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
-    margin-bottom: var(--space-8);
-  }
-  .testimonial-card {
+  /* One-sheet */
+  .one-sheet-row {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-5);
     background: var(--color-raised);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
-    padding: var(--space-4);
+    padding: var(--space-5) var(--space-6);
+    margin-bottom: var(--space-8);
+    flex-wrap: wrap;
   }
-  .testimonial-org {
+  .one-sheet-title {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 16px;
+    font-size: 18px;
     color: var(--color-ink);
+    margin-bottom: 4px;
   }
-  .testimonial-context {
+  .one-sheet-sub {
     font-family: var(--font-sans);
     font-size: 13px;
     color: var(--color-ink-soft);
+    max-width: 460px;
     line-height: 1.5;
+  }
+  .one-sheet-btn {
+    background: transparent;
+    border: 1px dashed var(--color-line);
+    color: var(--color-ink-soft);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 10px 16px;
+    border-radius: var(--radius-input);
+    flex-shrink: 0;
+    cursor: not-allowed;
   }
 
   /* Booking */
@@ -608,20 +601,11 @@ const testimonialTargets = [
   }
 
   @media (max-width: 900px) {
-    .hero-row {
-      grid-template-columns: 1fr;
-    }
-    .hero-image-col {
-      max-width: 280px;
-    }
     .clip-grid {
       grid-template-columns: 1fr;
     }
     .ticket-grid {
       grid-template-columns: repeat(2, 1fr);
-    }
-    .testimonial-grid {
-      grid-template-columns: 1fr;
     }
   }
   @media (max-width: 560px) {

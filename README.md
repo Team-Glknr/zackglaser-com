@@ -6,15 +6,16 @@ Live at [zackglaser.com](https://zackglaser.com), deployed on Vercel (personal a
 
 ## Where things stand
 
-Shipped and live: Hub, all four pillar pages, individual post pages, `/now`, `/about`, nav/footer chrome with the motion logo, the full brand system (favicon, wordmark lockups, Knolling marks), Knolling's Buttondown subscribe forms, the full GitHub on-ramp (footer link, suggest-an-edit links, and GitHub-Discussions-backed comments via giscus), and a real social share image on every page.
+Shipped and live: Hub, all four pillar pages, individual post pages, `/now`, `/about`, `/newsletter`, nav/footer chrome with the motion logo, the full brand system (favicon, wordmark lockups, Knolling marks), Knolling's Buttondown subscribe forms, the full GitHub on-ramp (footer link, suggest-an-edit links, and GitHub-Discussions-backed comments via giscus), and a real social share image on every page.
+
+`/legal-tech/speaking` is live too, but not finished. The positioning strategy (brief §9) is resolved and the page is built with real ticket-wall and topic data, plus three real podcast clip quotes and a written sample teardown. No headshot or testimonials section yet — dropped rather than placeholder'd, same call `about.astro` already made for its own photo hero — and the clips run as text only until real video exists. Also still pending: the Lawyerist Podcast's real episode count, a real Affinity referral URL, and a booking-form backend.
 
 **Tabled, deliberately not started:**
-- `/speaking` — needs the Affinity/Lawyerist positioning line worked out first (brief §9); this is the one open *strategy* question left, not a build task
 - "A game as a front door" — three prototypes sit in `docs/mockups/`, untouched
 
 **Not started yet:** Launch (publish the build log retroactively, announce, first newsletter issue).
 
-Full decision-by-decision history: `docs/02-build-log-format.md`'s entry backlog, or the entries themselves in `src/content/workshop/building-this-site/` (currently 001–020, all `status: draft` until launch).
+Full decision-by-decision history: `docs/02-build-log-format.md`'s entry backlog, or the entries themselves in `src/content/workshop/building-this-site/` (currently 001–023, all `status: draft` until launch).
 
 ## Repo map
 
