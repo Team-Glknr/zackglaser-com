@@ -73,8 +73,14 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
       {
         entries.map((post) => (
           <a href={`/${post.id}`} class="entry-row">
-            <span class="entry-no">{String(entryNumber(post)).padStart(3, "0")}</span>
-            <span class="entry-title">{post.data.title}</span>
+            <div class="entry-row-left">
+              <span class="entry-no">{String(entryNumber(post)).padStart(3, "0")}</span>
+              <span class="format-pill">{post.data.format}</span>
+              <span class="entry-title">{post.data.title}</span>
+            </div>
+            <span class="entry-date">
+              {post.data.date.toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+            </span>
           </a>
         ))
       }
@@ -231,6 +237,7 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
   }
   .entry-row {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: var(--space-4);
     padding: var(--space-4) var(--space-5);
@@ -245,6 +252,12 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
   .entry-row:hover {
     background: var(--color-paper);
   }
+  .entry-row-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+  }
   .entry-no {
     font-family: var(--font-mono);
     font-size: 13px;
@@ -252,11 +265,27 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
     flex-shrink: 0;
     width: 28px;
   }
+  .format-pill {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 2px 9px;
+    flex-shrink: 0;
+  }
   .entry-title {
     font-family: var(--font-serif);
     font-style: italic;
     font-size: 16px;
     color: var(--color-ink);
+  }
+  .entry-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .chapter-nav-row {
