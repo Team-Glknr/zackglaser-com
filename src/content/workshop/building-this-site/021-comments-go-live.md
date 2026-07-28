@@ -1,7 +1,7 @@
 ---
 title: "Comments go live: rung 2 of the GitHub on-ramp, closed"
 date: 2026-07-27
-status: draft
+status: published
 pillar: workshop
 format: log
 series: building-this-site

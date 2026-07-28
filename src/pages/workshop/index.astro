@@ -1,0 +1,138 @@
+---
+// Workshop is structurally different from the other three pillars: it's a
+// list of build-log projects (each with chapters and numbered entries), not
+// a flat post feed. See /workshop/[series] for an individual project.
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import NewsletterCard from "../../components/NewsletterCard.astro";
+import EmptyState from "../../components/EmptyState.astro";
+import { pillars } from "../../lib/pillars";
+import { getProjectStats } from "../../lib/buildLog";
+
+const pillar = pillars.find((p) => p.id === "workshop")!;
+
+const projects = await getCollection("projects");
+const projectCards = await Promise.all(
+  projects.map(async (project) => ({ project, stats: await getProjectStats(project) }))
+);
+---
+
+<Layout title={`${pillar.label} — zackglaser.com`} description={pillar.doorDesc}>
+  <div class="pillar-header" style={`--accent:var(--pillar-${pillar.id})`}>
+    <h1 class="pillar-label">{pillar.label}</h1>
+    <p class="pillar-dek">{pillar.doorDesc}</p>
+  </div>
+
+  {
+    projectCards.length > 0 ? (
+      <div class="project-list">
+        {projectCards.map(({ project, stats }) => (
+          <a href={`/workshop/${project.data.series}`} class="project-row">
+            <div class="project-row-top">
+              <span class="project-status">{project.data.status}</span>
+              <div class="project-title">{project.data.title}</div>
+            </div>
+            <p class="project-teaser">{project.data.teaser}</p>
+            <div class="project-stats">
+              <span>{stats.totalChapters} chapters</span>
+              <span>{stats.totalEntries} entries</span>
+              <span>{project.data.cost}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <EmptyState message="This pillar's first project is still on the bench. Subscribe below and it'll land in your inbox the day it's published." />
+    )
+  }
+
+  <NewsletterCard eyebrow={`get ${pillar.label} in your inbox`} tag={pillar.id} />
+</Layout>
+
+<style>
+  .pillar-header {
+    margin-bottom: var(--space-6);
+    max-width: 640px;
+  }
+  .pillar-label {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 36px;
+    color: var(--color-ink);
+    margin: 0 0 10px;
+    border-bottom: 3px solid var(--accent);
+    display: inline-block;
+    padding-bottom: 6px;
+  }
+  .pillar-dek {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--color-ink-soft);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+  .project-row {
+    display: block;
+    padding: var(--space-5);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background: var(--color-raised);
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+  .project-row:hover {
+    background: var(--color-paper);
+  }
+  .project-row-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .project-status {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 2px 9px;
+  }
+  .project-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .project-teaser {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-3);
+    max-width: 560px;
+  }
+  .project-stats {
+    display: flex;
+    gap: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 560px) {
+    .pillar-label {
+      font-size: 28px;
+    }
+  }
+</style>

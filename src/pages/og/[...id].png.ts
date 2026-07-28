@@ -1,5 +1,5 @@
 // OG/social share image, one per post — docs/design-system/Social Share Image.dc.html.
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { pillars } from "../../lib/pillars";
 import { renderOgImage, PILLAR_ACCENT } from "../../lib/ogImage";
 
@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
 }
 
-export async function GET({ props }: { props: { post: Awaited<ReturnType<typeof getCollection>>[number] } }) {
+export async function GET({ props }: { props: { post: CollectionEntry<"posts"> } }) {
   const { post } = props;
   const pillarLabel = pillars.find((p) => p.id === post.data.pillar)?.label ?? post.data.pillar;
   const accent = PILLAR_ACCENT[post.data.pillar] ?? PILLAR_ACCENT["legal-tech"];

@@ -1,0 +1,254 @@
+---
+// The rollup for one build-log project: totals, recap prose, progress,
+// and a list of chapters linking down. /workshop lists every project;
+// this is what one project card links to.
+import { getCollection, render } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import NewsletterCard from "../../../components/NewsletterCard.astro";
+import { chapterRange, getProjectStats } from "../../../lib/buildLog";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({ params: { series: project.data.series }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const stats = await getProjectStats(project);
+---
+
+<Layout title={`${project.data.title} — zackglaser.com`} description={project.data.teaser}>
+  <a href="/workshop" class="breadcrumb">← workshop</a>
+
+  <div class="header">
+    <div class="eyebrow">workshop · project</div>
+    <h1 class="h1">{project.data.title}</h1>
+    <p class="sub">{project.data.teaser}</p>
+  </div>
+
+  <div class="totals-row">
+    <div class="total-box">
+      <div class="total-label">cost</div>
+      <div class="total-val">{project.data.cost}</div>
+    </div>
+    <div class="total-box">
+      <div class="total-label">time</div>
+      <div class="total-val">—</div>
+    </div>
+    <div class="total-box">
+      <div class="total-label">chapters</div>
+      <div class="total-val">{stats.totalChapters}</div>
+    </div>
+    <div class="total-box">
+      <div class="total-label">entries</div>
+      <div class="total-val">{stats.totalEntries}</div>
+    </div>
+  </div>
+
+  <article class="recap-body">
+    <Content />
+  </article>
+
+  <div class="progress-wrap">
+    <div class="progress-label-row">
+      <span>{stats.publishedEntries} of {stats.totalEntries} entries published</span>
+      <span>{stats.percentDone}%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style={`width:${stats.percentDone}%`} /></div>
+  </div>
+
+  <div class="chapters-list">
+    {
+      stats.chapters.map((chapter) => (
+        <a href={`/workshop/${project.data.series}/chapters/${chapter.data.order}`} class="chapter-row">
+          <div class="chapter-row-left">
+            <span class="chapter-no">{String(chapter.data.order).padStart(2, "0")}</span>
+            <div>
+              <div class="chapter-row-title">{chapter.data.title}</div>
+              <div class="chapter-row-range">entries {chapterRange(chapter)}</div>
+            </div>
+          </div>
+          <div class="chapter-row-stats">
+            <span>{chapter.data.cost}</span>
+            <span class="chapter-row-arrow">→</span>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+
+  <NewsletterCard eyebrow="get workshop in your inbox" tag="workshop" />
+</Layout>
+
+<style>
+  .breadcrumb {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    margin-bottom: var(--space-5);
+  }
+  .breadcrumb:hover {
+    color: var(--color-ink);
+  }
+
+  .header {
+    margin-bottom: var(--space-6);
+    max-width: 620px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-3);
+  }
+  .h1 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 34px;
+    color: var(--color-ink);
+    margin: 0 0 14px;
+  }
+  .sub {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  .totals-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+  .total-box {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+  }
+  .total-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .total-val {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--color-ink);
+  }
+
+  .recap-body {
+    margin-bottom: var(--space-6);
+  }
+  .recap-body :global(p) {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--color-ink);
+    margin: 0 0 var(--space-5);
+  }
+
+  .progress-wrap {
+    margin-bottom: var(--space-6);
+  }
+  .progress-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-2);
+  }
+  .progress-track {
+    height: 6px;
+    background: var(--color-line);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent, var(--pillar-workshop));
+    border-radius: var(--radius-pill);
+  }
+
+  .chapters-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    margin-bottom: var(--space-7);
+  }
+  .chapter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--color-line);
+    text-decoration: none;
+    color: var(--color-ink);
+    background: var(--color-raised);
+  }
+  .chapter-row:last-child {
+    border-bottom: none;
+  }
+  .chapter-row:hover {
+    background: var(--color-paper);
+  }
+  .chapter-row-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .chapter-no {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: var(--pillar-workshop);
+    flex-shrink: 0;
+  }
+  .chapter-row-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--color-ink);
+    margin-bottom: 2px;
+  }
+  .chapter-row-range {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+  }
+  .chapter-row-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    flex-shrink: 0;
+  }
+  .chapter-row-arrow {
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 560px) {
+    .h1 {
+      font-size: 26px;
+    }
+    .totals-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

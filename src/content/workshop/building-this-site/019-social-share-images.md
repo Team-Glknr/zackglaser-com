@@ -1,7 +1,7 @@
 ---
 title: "One OG image per post, generated at build time"
 date: 2026-07-27
-status: draft
+status: published
 pillar: workshop
 format: log
 series: building-this-site

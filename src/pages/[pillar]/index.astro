@@ -10,8 +10,9 @@ import EmptyState from "../../components/EmptyState.astro";
 import { pillars } from "../../lib/pillars";
 import { postMetaWithinPillar } from "../../lib/postMeta";
 
+// workshop has its own route (src/pages/workshop/) — it's a project index, not a flat post list.
 export function getStaticPaths() {
-  return pillars.map((p) => ({ params: { pillar: p.id }, props: { pillar: p } }));
+  return pillars.filter((p) => p.id !== "workshop").map((p) => ({ params: { pillar: p.id }, props: { pillar: p } }));
 }
 
 const { pillar } = Astro.props;

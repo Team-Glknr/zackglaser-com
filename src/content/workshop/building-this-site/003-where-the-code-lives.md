@@ -1,7 +1,7 @@
 ---
 title: "Where the code lives"
 date: 2026-07-26
-status: draft
+status: published
 pillar: workshop
 format: log
 series: building-this-site

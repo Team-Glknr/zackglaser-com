@@ -31,4 +31,33 @@ const newsletter = defineCollection({
   schema: postSchema.extend({ newsletter: z.number() }),
 });
 
-export const collections = { posts, newsletter };
+// A build-log project rolls up a `series` of posts (e.g. building-this-site).
+// /workshop lists projects; a project can exist before it has any chapters yet.
+const projects = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/workshop-projects' }),
+  schema: z.object({
+    title: z.string(),
+    series: z.string(),
+    status: z.enum(['active', 'done']),
+    teaser: z.string(),
+    cost: z.string(),
+    authorship: z.enum(['human', 'duet', 'bot']),
+  }),
+});
+
+// A chapter groups a numbered range of a project's entries under a rollup —
+// recap prose, takeaways, and mistakes live in the body (see docs/02 §entry structure).
+const chapters = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/workshop-chapters' }),
+  schema: z.object({
+    title: z.string(),
+    project: z.string(), // matches a projects entry's `series`
+    order: z.number(),
+    entryStart: z.number(),
+    entryEnd: z.number(),
+    cost: z.string(),
+    authorship: z.enum(['human', 'duet', 'bot']),
+  }),
+});
+
+export const collections = { posts, newsletter, projects, chapters };

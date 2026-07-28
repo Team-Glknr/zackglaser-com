@@ -1,7 +1,7 @@
 ---
 title: "Wiring up /newsletter: hero, subscribe, archive"
 date: 2026-07-27
-status: draft
+status: published
 pillar: workshop
 format: log
 series: building-this-site
