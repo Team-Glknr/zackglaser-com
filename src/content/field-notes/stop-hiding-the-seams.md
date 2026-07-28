@@ -14,7 +14,7 @@ The proxy was always shakier than it looked. Plenty of "single-author" writing a
 
 AI didn't break that fiction. It just made the examination unavoidable.
 
-Now the seam is impossible to hide, so most people are trying to hide it anyway. Scrub the tells, smooth the voice, ship it looking like it fell fully formed out of one person's head — the same move as always, just with a new thing to conceal. It's understandable. It's also the least interesting choice available, and I think it's the wrong one.
+Now the seam is impossible to hide, but most people are trying to hide it anyway. Scrub the tells, smooth the voice, ship it looking like it fell fully formed out of one person's head — the same move as always, just with a new thing to conceal. It's understandable. It's also the least interesting choice available, and I think it's the wrong one.
 
 **The seam is more useful than the smooth surface it's covering up.**
 
