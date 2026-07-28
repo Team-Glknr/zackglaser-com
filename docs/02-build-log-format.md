@@ -73,5 +73,7 @@ tags: []
 - 021 — Comments go live: rung 2 of the GitHub on-ramp, closed ✓
 - 022 — Wiring up /newsletter: hero, subscribe, archive ✓
 - 023 — The speaking page, and pulling the placeholders (brief §9 resolved and built; headshot and testimonials dropped rather than placeholder'd, clip quotes kept as text, episode count/Affinity URL/booking backend still pending) ✓
-- 024 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 025 — Launch
+- 024 — The colophon: /how-this-site-is-made ships (docs/04-ai-first.md §8's last checklist item; real links throughout, including the now-published "Stop hiding the seams" essay) ✓
+- 025 — The footer's elsewhere column, for real: Lawyerist Podcast, a real /rss.xml feed, LinkedIn and GitHub in place of email ✓
+- 026 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 027 — Launch

@@ -1,0 +1,368 @@
+---
+// Structure/tokens ported from ~/Downloads/Colophon Page.dc.html. Real
+// links throughout, not the mockup's placeholder "#" hrefs: the repo, the
+// live AGENTS.md, and the worked example in "the supervision loop" section
+// — the mockup already used "Stop hiding the seams" as its example essay
+// before that essay existed; it published for real this session, so the
+// link is no longer hypothetical. Stamp copy matches AuthorshipStamp.astro
+// and docs/04-ai-first.md §3 exactly rather than the mockup's own wording.
+// Last checklist item from docs/04 §8 — everything else there already shipped.
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+const seamsPost = (await getCollection("posts")).find((p) => p.id === "field-notes/stop-hiding-the-seams");
+
+const stamps = [
+  { name: "human", detail: "Zack wrote it. A bot may have fetched a link or fixed a typo." },
+  { name: "duet", detail: "AI drafted it under my direction; I reshaped and edited it. This is the default." },
+  {
+    name: "bot",
+    detail: "An agent generated it end to end (changelogs, data-driven posts); I reviewed it before it published.",
+  },
+];
+---
+
+<Layout
+  title="How this site is made — zackglaser.com"
+  description="The operating manual for this site's AI collaboration: what the bots do, what's mine alone, and the receipts that make it checkable, not just claimed."
+>
+  <div class="colophon-page" style="--accent:var(--pillar-workshop)">
+    <div class="hero">
+      <div class="eyebrow">colophon</div>
+      <h1 class="h1">How this site is made.</h1>
+      <p class="lead">
+        Most of the words on this site were drafted by AI, riding along with me. I don't hide that. This page is the
+        operating manual — what the bots actually do, what they're not allowed to touch, and what I catch when I
+        check their work.
+      </p>
+    </div>
+
+    <div class="two-col">
+      <div class="col-card">
+        <div class="col-label">what rides along</div>
+        <p>
+          Drafting, research, scaffolding, and most of the commits on this site come from AI assistants working
+          under direction — Claude, mainly, in a few different modes: chatting through an idea with me, or working
+          directly in the codebase with the repo open.
+        </p>
+        <p>
+          What they're allowed to do: propose structure, write first drafts, build components, fix bugs, commit
+          changes. What they're not allowed to do: decide what I believe, or ship anything I haven't read.
+        </p>
+      </div>
+      <div class="col-card col-card-mine">
+        <div class="col-label">what's mine</div>
+        <p>
+          Judgment is not delegated. Every position this site takes, every call on what publishes and when, and
+          anything that leans on my name has a human behind it — me.
+        </p>
+        <p>
+          A bot can draft an argument; whether the argument is one I'll stand behind is not a bot's decision. If
+          something here is wrong, that's on me, not on "the AI."
+        </p>
+      </div>
+    </div>
+
+    <div class="section-label">the supervision loop, with a real example</div>
+    <div class="example-card">
+      <p>
+        Here's an actual one, not a hypothetical. The essay{" "}
+        {seamsPost && (
+          <a href={`/${seamsPost.id}`} class="inline-link">
+            "Stop hiding the seams"
+          </a>
+        )}{" "}
+        started as a one-line prompt: I wanted to write about why this site treats AI collaboration as something to
+        celebrate rather than disguise. Claude drafted a structure and a full essay from that.
+      </p>
+      <p>
+        I made two calls before a word was written — which section of the site it belonged in, and how long it
+        should run — and the draft came back matching both. The editing after that wasn't about fixing the argument;
+        it was about making the <em>delivery</em> honest, too: making sure the essay's claim about auditable process
+        was actually true of the process that produced it, not just a claim the essay made about itself. That turned
+        into this page.
+      </p>
+      <div class="loop-strip">
+        <div class="loop-step">direction up front</div>
+        <div class="loop-arrow">→</div>
+        <div class="loop-step">a full draft</div>
+        <div class="loop-arrow">→</div>
+        <div class="loop-step loop-step-active">
+          a human read that checks whether it's <em>right</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">what the stamps mean</div>
+    <p class="stamps-intro">Every post on this site carries a small marker near the byline.</p>
+    <div class="stamps-row">
+      {
+        stamps.map((s) => (
+          <div class="stamp-card">
+            <div class="stamp-badge">{s.name}</div>
+            <p class="stamp-detail">{s.detail}</p>
+          </div>
+        ))
+      }
+    </div>
+    <p class="note">None of the three change who's accountable for what got published. That's always me.</p>
+
+    <div class="section-label">the receipts</div>
+    <div class="receipts-card">
+      <p>
+        This isn't a claim you have to take on trust. The repo behind this site is public, and every commit a bot
+        made carries a <code>Co-Authored-By</code> trailer, so you can see exactly which changes came from a bot and
+        which didn't.
+      </p>
+      <p>
+        The actual instructions the bots work under are public too —{" "}
+        <a href="https://github.com/thirdth/zackglaser-com/blob/main/AGENTS.md" target="_blank" rel="noopener" class="inline-link">
+          AGENTS.md
+        </a>{" "}
+        — which is rarer than it should be. Most sites that mention "AI-assisted" don't publish the instructions
+        their AI is running under. This one does.
+      </p>
+      <div class="receipt-links-row">
+        <a href="https://github.com/thirdth/zackglaser-com" target="_blank" rel="noopener" class="receipt-link">
+          [ view the repo ]
+        </a>
+        <a href="https://github.com/thirdth/zackglaser-com/blob/main/AGENTS.md" target="_blank" rel="noopener" class="receipt-link">
+          [ read AGENTS.md ]
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .colophon-page {
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  .hero {
+    max-width: 640px;
+    margin-bottom: var(--space-8);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-3);
+  }
+  .h1 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.2;
+    color: var(--color-ink);
+    margin: 0 0 var(--space-4);
+  }
+  .lead {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 var(--space-5);
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+  .col-card {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+  }
+  .col-card-mine {
+    border-top: 3px solid var(--accent);
+  }
+  .col-label {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--color-ink);
+    margin-bottom: var(--space-3);
+  }
+  .col-card p {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-3);
+  }
+  .col-card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .example-card {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+  .example-card p {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-3);
+  }
+  .example-card p:last-of-type {
+    margin-bottom: 0;
+  }
+  .inline-link {
+    color: var(--color-ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-ink-soft);
+    padding-bottom: 1px;
+  }
+  .inline-link:hover {
+    border-bottom-color: var(--color-ink);
+  }
+  .loop-strip {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-line);
+  }
+  .loop-step {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+  }
+  .loop-step-active {
+    color: var(--color-ink);
+    border-color: var(--accent);
+  }
+  .loop-arrow {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-ink-soft);
+  }
+
+  .stamps-intro {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-4);
+  }
+  .stamps-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  .stamp-card {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .stamp-badge {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-pill);
+    padding: 4px 12px;
+    align-self: flex-start;
+  }
+  .stamp-detail {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+  .note {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-8);
+  }
+
+  .receipts-card {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+  .receipts-card p {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-3);
+  }
+  .receipts-card p:last-of-type {
+    margin-bottom: 0;
+  }
+  .receipts-card code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: 3px;
+    padding: 2px 6px;
+  }
+  .receipt-links-row {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-top: var(--space-2);
+  }
+  .receipt-link {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-ink);
+    text-decoration: none;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-input);
+    padding: 8px 14px;
+  }
+  .receipt-link:hover {
+    border-color: var(--color-ink);
+  }
+
+  @media (max-width: 720px) {
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+    .stamps-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .h1 {
+      font-size: 28px;
+    }
+  }
+</style>

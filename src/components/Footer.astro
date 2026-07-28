@@ -1,7 +1,9 @@
 ---
-// Structure/tokens ported from docs/design-system/Site Nav & Footer.dc.html
-// TODO: "elsewhere" links (podcast, rss, email) still placeholders — no
-// real destinations decided yet. Newsletter form is wired to Buttondown.
+// Structure/tokens ported from docs/design-system/Site Nav & Footer.dc.html.
+// "Elsewhere" column: real destinations throughout — the Lawyerist Podcast,
+// the site's own /rss.xml feed, and LinkedIn/GitHub in place of a standalone
+// email link (the /speaking booking form already covers direct inquiries).
+// Newsletter form is wired to Buttondown.
 import { pillars } from "../lib/pillars";
 const year = new Date().getFullYear();
 ---
@@ -27,9 +29,10 @@ const year = new Date().getFullYear();
     </div>
     <div class="footer-col">
       <div class="footer-col-label">elsewhere</div>
-      <a href="#" class="footer-link">lawyerist podcast ↗</a>
-      <a href="#" class="footer-link">rss</a>
-      <a href="#" class="footer-link">email</a>
+      <a href="https://lawyerist.com/podcast" target="_blank" rel="noopener" class="footer-link">lawyerist podcast ↗</a>
+      <a href="/rss.xml" class="footer-link">rss</a>
+      <a href="https://www.linkedin.com/in/zackglaser/" target="_blank" rel="noopener" class="footer-link">linkedin ↗</a>
+      <a href="https://github.com/thirdth" target="_blank" rel="noopener" class="footer-link">github ↗</a>
     </div>
     <div class="footer-col footer-newsletter-col">
       <div class="footer-col-label">knolling</div>
