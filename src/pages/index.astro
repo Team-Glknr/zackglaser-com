@@ -10,8 +10,26 @@ import EmptyState from "../components/EmptyState.astro";
 import { pillars } from "../lib/pillars";
 import { postMetaCrossPillar } from "../lib/postMeta";
 
-const allPosts = await getCollection("posts", ({ data }) => data.status === "published");
-const latestPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+const allPosts = (
+  await getCollection("posts", ({ data }) => data.status === "published")
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const projects = await getCollection("projects");
+
+// A project's entries shouldn't each take their own "latest" slot — one
+// project reads as one item, linking to its rollup, not its newest entry.
+const seenSeries = new Set<string>();
+const latestItems = [];
+for (const post of allPosts) {
+  const project = post.data.series ? projects.find((p) => p.data.series === post.data.series) : undefined;
+  if (project) {
+    if (seenSeries.has(project.data.series)) continue;
+    seenSeries.add(project.data.series);
+    latestItems.push({ kind: "project" as const, project });
+  } else {
+    latestItems.push({ kind: "post" as const, post });
+  }
+  if (latestItems.length === 3) break;
+}
 ---
 
 <Layout title="zackglaser.com">
@@ -37,9 +55,23 @@ const latestPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
 
   <div class="section-label">latest</div>
   {
-    latestPosts.length > 0 ? (
+    latestItems.length > 0 ? (
       <div class="latest-grid">
-        {latestPosts.map((post) => {
+        {latestItems.map((item) => {
+          if (item.kind === "project") {
+            const { project } = item;
+            return (
+              <div class="post-card" style="--accent:var(--pillar-workshop)">
+                <div class="post-tag">workshop · project</div>
+                <div class="post-title">{project.data.title}</div>
+                <div class="post-meta">{project.data.status}</div>
+                <a href={`/workshop/${project.data.series}`} class="post-link">
+                  explore the project →
+                </a>
+              </div>
+            );
+          }
+          const { post } = item;
           const pillarAccent = `var(--pillar-${post.data.pillar})`;
           return (
             <div class="post-card" style={`--accent:${pillarAccent}`}>
