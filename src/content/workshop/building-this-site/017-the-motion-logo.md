@@ -1,7 +1,7 @@
 ---
 title: "The motion logo: Mark A knolls into place"
 date: 2026-07-27
-status: draft
+status: published
 pillar: workshop
 format: log
 series: building-this-site

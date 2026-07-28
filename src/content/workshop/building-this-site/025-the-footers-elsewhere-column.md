@@ -1,7 +1,7 @@
 ---
 title: "The footer's elsewhere column, for real"
 date: 2026-07-28
-status: draft
+status: published
 pillar: workshop
 format: log
 series: building-this-site
