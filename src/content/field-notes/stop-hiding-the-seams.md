@@ -1,5 +1,5 @@
 ---
-title: "Stop hiding the seams"
+title: "Stop hiding the seams: on AI, authorship, and showing your work"
 date: 2026-07-27
 status: draft
 pillar: field-notes
