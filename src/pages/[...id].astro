@@ -9,6 +9,7 @@ import NewsletterCard from "../components/NewsletterCard.astro";
 import AuthorshipStamp from "../components/AuthorshipStamp.astro";
 import Comments from "../components/Comments.astro";
 import { pillars } from "../lib/pillars";
+import { findEntryChapter } from "../lib/buildLog";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => data.status === "published");
@@ -19,6 +20,14 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const pillarInfo = pillars.find((p) => p.id === post.data.pillar)!;
+
+// Entries that belong to a build-log chapter crumb up to that chapter,
+// not all the way back to the pillar — the chapter page links up from there.
+const entryChapter = await findEntryChapter(post);
+const breadcrumbHref = entryChapter
+  ? `/workshop/${entryChapter.project.data.series}/chapters/${entryChapter.chapter.data.order}`
+  : pillarInfo.href;
+const breadcrumbLabel = entryChapter ? entryChapter.chapter.data.title : pillarInfo.label;
 
 const siblings = (
   await getCollection("posts", ({ data }) => data.status === "published" && data.pillar === post.data.pillar)
@@ -33,7 +42,7 @@ const dateMeta = post.data.newsletter ? `${formattedDate} · issue ${post.data.n
 
 <Layout title={`${post.data.title} — zackglaser.com`} image={`/og/${post.id}.png`}>
   <div class="post-container" style={`--accent:var(--pillar-${post.data.pillar})`}>
-    <a href={pillarInfo.href} class="breadcrumb">← {pillarInfo.label}</a>
+    <a href={breadcrumbHref} class="breadcrumb">← {breadcrumbLabel}</a>
 
     <div class="article-header">
       <div class="meta-row">

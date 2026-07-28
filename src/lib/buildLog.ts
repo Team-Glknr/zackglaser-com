@@ -35,6 +35,22 @@ export function chapterRange(chapter: CollectionEntry<"chapters">) {
     : `${pad(chapter.data.entryStart)}–${pad(chapter.data.entryEnd)}`;
 }
 
+export async function findEntryChapter(post: CollectionEntry<"posts">) {
+  if (!post.data.series) return null;
+  const projects = await getCollection("projects", ({ data }) => data.series === post.data.series);
+  const project = projects[0];
+  if (!project) return null;
+
+  const n = entryNumber(post);
+  if (n === null) return null;
+
+  const chapters = await getProjectChapters(project.data.series);
+  const chapter = chapters.find((c) => n >= c.data.entryStart && n <= c.data.entryEnd);
+  if (!chapter) return null;
+
+  return { project, chapter };
+}
+
 export async function getProjectStats(project: CollectionEntry<"projects">) {
   const entries = await getProjectEntries(project.data.series);
   const projectChapters = await getProjectChapters(project.data.series);
