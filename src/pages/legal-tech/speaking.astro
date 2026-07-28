@@ -1,0 +1,641 @@
+---
+// Structure ported from docs/design-system/Speaking.dc.html (v2, "show
+// don't tell"), reshaped per brief §9 and docs/06-speaking-page-copy.md
+// (both resolved 2026-07-27). Two sections the mockup never had — clips
+// and the sample teardown — are the actual proof mechanism; the ticket
+// wall and topic cards keep the mockup's shape with real data swapped in.
+// Video/headshot/testimonial content doesn't exist yet (unshot, uncut,
+// unrequested) — MediaPlaceholder marks those honestly rather than
+// showing broken embeds or fabricated quotes. The Lawyerist Podcast's
+// real episode count isn't known yet either; its ticket shows "HOST" /
+// "ONGOING" instead of a guessed number.
+import Layout from "../../layouts/Layout.astro";
+import MediaPlaceholder from "../../components/MediaPlaceholder.astro";
+
+const clips = [
+  {
+    tag: "complex, made simple",
+    quote:
+      "It's not actually entering the word document from the same door that we would go in... it's coming through the computer's VIP entrance.",
+    attribution: "Lawyerist Podcast — Sam Harden, on Claude Cowork",
+  },
+  {
+    tag: "an idea, landing live",
+    quote: "Folders really, from my perspective, become a way to secure things as opposed to a way to organize them.",
+    attribution: "Lawyerist Podcast — Charreau Bell",
+  },
+  {
+    tag: "candor and depth",
+    quote:
+      "When we're able to organize and set those things that are in our brain... it's on the list. Now I don't have to think about it. I think having that clarity allows you to exist in the moment for the big projects — the rocks — the things you really need to focus on.",
+    attribution: "Lawyerist Podcast — David Allen",
+  },
+];
+
+const topicGroups = [
+  {
+    label: "CLE session",
+    items: [
+      {
+        title: "Not So Secret Agents — Practical AI for Your Law Firm",
+        fact: "Delivered at the Tennessee Bar Association's Estate Planning & Probate Forum — 250 in the room.",
+        audiences: ["bar associations", "CLE providers"],
+      },
+      {
+        title: "How to Use AI Responsibly in Your Office",
+        fact: "Delivered as a webinar for the TBA Local Government Forum, Oct 2025.",
+        audiences: ["bar associations", "government agencies"],
+      },
+      {
+        title: "The ethics of AI-assisted drafting",
+        fact: "Not yet delivered under this title — ready to book.",
+        audiences: ["bar associations"],
+      },
+    ],
+  },
+  {
+    label: "Workshop",
+    items: [
+      {
+        title: "Validating Your Intake",
+        fact: "Delivered at Lawyerist LabCon.",
+        audiences: ["legal tech conferences"],
+      },
+    ],
+  },
+];
+
+// Room-size spread (250 down to 15) is real, not staged (§9) — carried in
+// the data, never asserted in copy. Numbered chronologically; the flagship
+// podcast and the closer card sit outside that sequence (see header note).
+const tickets = [
+  { no: "001", year: "2024", name: "USFNgage", topic: "AI for Risk Management and Compliance", format: "Webinar" },
+  {
+    no: "002",
+    year: "2024",
+    name: "Iowa Bar Association Annual Meeting",
+    topic: "CLE / annual meeting",
+    room: "~100",
+    format: "CLE",
+  },
+  {
+    no: "003",
+    year: "2024",
+    name: "TBA Annual Meeting",
+    topic: "AI's Impact on the Practice of Law in Tennessee",
+    format: "CLE",
+  },
+  {
+    no: "004",
+    year: "2025",
+    name: "TBA Local Government Forum",
+    topic: "From AI-Powered Research to Website Chatbots: How to Use AI Responsibly in Your Office",
+    format: "Webinar",
+  },
+  {
+    no: "005",
+    year: "2026",
+    name: "TBA Estate Planning & Probate Forum",
+    topic: "Not So Secret Agents — Practical AI for Your Law Firm",
+    room: "250",
+    format: "CLE",
+  },
+  {
+    no: "006",
+    year: "2026",
+    name: "Bradley Arant Boult Cummings LLP — Solo GC Roundtable",
+    topic: "The AI-Ready Legal Department: Building for Efficiency Before You Buy a Single Tool",
+    room: "15",
+    format: "In-house / roundtable",
+  },
+  { no: "007", year: "—", name: "Knackly Podcast", topic: "Guest appearance", format: "Podcast (guest)" },
+  {
+    no: "008",
+    year: "—",
+    name: "Newfangled Lawyer Podcast",
+    topic: "Creating the Future of Legal with Zack Glaser",
+    format: "Podcast (guest)",
+  },
+  {
+    no: "009",
+    year: "—",
+    name: "Allrize Podcast",
+    topic: "Common Tech Gaps in Law Firms... Lawyer Burnout",
+    format: "Podcast (guest)",
+  },
+];
+
+const testimonialTargets = [
+  { org: "Tennessee Bar Association", context: "CLE organizer, Estate Planning & Probate Forum — 250-person room" },
+  { org: "Bradley Arant Boult Cummings LLP", context: "Solo GC Roundtable organizer — 15-person room" },
+  { org: "A podcast host", context: "Knackly or Newfangled Lawyer — media-side proof" },
+];
+---
+
+<Layout
+  title="Speaking — zackglaser.com"
+  description="Legal Tech Advisor at Lawyerist/Affinity, host of the Lawyerist Podcast. What that actually looks like — clips, topics, and where I've spoken."
+>
+  <div class="speaking-page" style="--accent:var(--pillar-legal-tech)">
+    <div class="hero-row">
+      <div class="hero-text-col">
+        <div class="eyebrow">speaking</div>
+        <h1 class="h1">I take legal technology apart for a living — in writing, on a podcast, and now on stage.</h1>
+        <p class="hero-sub">
+          Legal Tech Advisor at Lawyerist/Affinity, host of the Lawyerist Podcast. What that actually looks like is
+          below — not a resume, a recording.
+        </p>
+      </div>
+      <div class="hero-image-col">
+        <MediaPlaceholder label="[ headshot pending ]" aspect="4/5" />
+      </div>
+    </div>
+
+    <div class="section-label">watch me work</div>
+    <div class="clip-grid">
+      {
+        clips.map((clip) => (
+          <div class="clip-card">
+            <MediaPlaceholder label="[ video pending ]" aspect="16/9" />
+            <div class="clip-tag">{clip.tag}</div>
+            <p class="clip-quote">"{clip.quote}"</p>
+            <div class="clip-attribution">{clip.attribution}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="section-label">a teardown, in writing</div>
+    <div class="teardown-card">
+      <p>
+        Ask your case management vendor where your client's file is, and you'll get a soothing word: the cloud.
+        Here's the actual answer. Your document lives in a data center — a warehouse, probably in Virginia — sliced
+        into pieces, copied three times, and scattered across machines that fail so often the whole system is built
+        to assume failure. The magic isn't that your file is somewhere safe. It's that it's nowhere in particular, on
+        purpose. Once you see that, the confidentiality questions get sharper — and the vendor conversations get
+        shorter.
+      </p>
+      <p>That's a teardown. Now imagine forty-five minutes and a slide clicker.</p>
+    </div>
+
+    <div class="section-label">what I can talk about</div>
+    {
+      topicGroups.map((group) => (
+        <div class="topic-group">
+          <div class="topic-group-label">{group.label}</div>
+          <div class="topic-row">
+            {group.items.map((t) => (
+              <div class="topic-card">
+                <div class="topic-title">{t.title}</div>
+                <div class="topic-fact">{t.fact}</div>
+                <div class="topic-audience-row">
+                  {t.audiences.map((aud) => (
+                    <span class="audience-chip">{aud}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+
+    <div class="section-label">where I've spoken</div>
+    <div class="ticket-grid">
+      <div class="ticket-card ticket-card-flagship">
+        <div class="ticket-top-row">
+          <span>HOST</span>
+          <span>ONGOING</span>
+        </div>
+        <div class="ticket-name">LAWYERIST PODCAST</div>
+        <div class="ticket-label">hosting</div>
+        <div class="ticket-topic">The show this whole page points back to.</div>
+      </div>
+      {
+        tickets.map((t) => (
+          <div class="ticket-card">
+            <div class="ticket-top-row">
+              <span>{t.no}</span>
+              <span>{t.year}</span>
+            </div>
+            <div class="ticket-name">{t.name}</div>
+            <div class="ticket-label">
+              delivered
+              {t.room && <span class="ticket-room"> · {t.room} in the room</span>}
+            </div>
+            <div class="ticket-topic">{t.topic}</div>
+          </div>
+        ))
+      }
+      <a href="#book" class="ticket-card ticket-card-empty">
+        <div class="ticket-top-row">
+          <span>010</span>
+          <span>—</span>
+        </div>
+        <div class="ticket-name">YOUR EVENT</div>
+        <div class="ticket-label">not delivered</div>
+        <div class="ticket-topic">Yet.</div>
+      </a>
+    </div>
+
+    <div class="section-label">what rooms say afterward</div>
+    <div class="testimonial-grid">
+      {
+        testimonialTargets.map((tt) => (
+          <div class="testimonial-card">
+            <MediaPlaceholder label="[ quote pending ]" aspect="3/1" />
+            <div class="testimonial-org">{tt.org}</div>
+            <div class="testimonial-context">{tt.context}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div id="book" class="section-label">book me</div>
+    <div class="booking-card">
+      <div class="booking-card-title">For an event or a podcast</div>
+      <div class="booking-card-sub">Keynote, CLE session, workshop, or a long-form conversation — in person or remote.</div>
+      <form class="form-grid">
+        <input class="form-input" placeholder="event / show name" />
+        <input class="form-input" placeholder="date (if known)" />
+        <input class="form-input form-input-full" placeholder="email" />
+        <button type="button" class="submit-btn">[ send ]</button>
+      </form>
+      <p class="affinity-line">
+        Looking for hands-on consulting instead? That's Affinity's work, not this page's —{" "}
+        <a href="#" class="inline-link">reach out to the team</a>.
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .speaking-page {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 var(--space-5);
+  }
+
+  /* Hero */
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-7);
+    margin-bottom: var(--space-8);
+    align-items: start;
+  }
+  .hero-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .h1 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 1.25;
+    color: var(--color-ink);
+    margin: 0;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: var(--space-3);
+    display: inline-block;
+  }
+  .hero-sub {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 0;
+    max-width: 520px;
+  }
+
+  /* Clips */
+  .clip-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+  .clip-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+  }
+  .clip-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .clip-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--color-ink);
+    margin: 0;
+    flex: 1;
+  }
+  .clip-attribution {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+  }
+
+  /* Teardown */
+  .teardown-card {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+    max-width: 760px;
+  }
+  .teardown-card p {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-ink);
+    margin: 0 0 var(--space-4);
+  }
+  .teardown-card p:last-child {
+    margin-bottom: 0;
+    font-style: italic;
+    color: var(--color-ink-soft);
+  }
+
+  /* Topics */
+  .topic-group {
+    margin-bottom: var(--space-6);
+  }
+  .topic-group-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-3);
+  }
+  .topic-row {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .topic-card {
+    flex: 1 1 300px;
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .topic-title {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--color-ink);
+    line-height: 1.3;
+  }
+  .topic-fact {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .topic-audience-row {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .audience-chip {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 3px 10px;
+  }
+
+  /* Ticket wall */
+  .ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+  .ticket-card {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: inherit;
+  }
+  .ticket-card-flagship {
+    border-color: var(--accent);
+    border-width: 2px;
+  }
+  .ticket-card-empty {
+    border-style: dashed;
+  }
+  .ticket-card-empty:hover {
+    border-color: var(--accent);
+  }
+  .ticket-top-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+  }
+  .ticket-name {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-ink);
+    font-weight: 700;
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    padding: var(--space-2) 0;
+  }
+  .ticket-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .ticket-room {
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  .ticket-topic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--color-ink);
+    line-height: 1.35;
+    flex: 1;
+  }
+
+  /* Testimonials */
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+  .testimonial-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+  }
+  .testimonial-org {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--color-ink);
+  }
+  .testimonial-context {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+  }
+
+  /* Booking */
+  .booking-card {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+  .booking-card-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--color-ink);
+  }
+  .booking-card-sub {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-2);
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+  .form-input {
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-input);
+    padding: 9px 12px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-ink);
+  }
+  .form-input-full {
+    grid-column: 1 / -1;
+  }
+  .submit-btn {
+    grid-column: 1 / -1;
+    width: fit-content;
+    margin-top: var(--space-1);
+    background: transparent;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: var(--radius-input);
+  }
+  .submit-btn:hover {
+    border-color: var(--color-ink);
+  }
+  .affinity-line {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: var(--space-2) 0 0;
+  }
+  .affinity-line .inline-link {
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .affinity-line .inline-link:hover {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-ink);
+  }
+
+  @media (max-width: 900px) {
+    .hero-row {
+      grid-template-columns: 1fr;
+    }
+    .hero-image-col {
+      max-width: 280px;
+    }
+    .clip-grid {
+      grid-template-columns: 1fr;
+    }
+    .ticket-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .testimonial-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .h1 {
+      font-size: 26px;
+    }
+    .ticket-grid {
+      grid-template-columns: 1fr;
+    }
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    .form-input-full {
+      grid-column: auto;
+    }
+  }
+</style>
