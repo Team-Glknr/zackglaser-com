@@ -1,0 +1,490 @@
+Lawyerist Podcast — Zack Glaser & Sam Harden on Claude, Claude Cowork, Claude for Legal
+Source: Riverside recording d40452d7-01b0-4f75-8532-c23eba955b79 ("Sam Harden - Part 1 & Part 2 Beginning")
+Downloaded 2026-07-27 for /speaking clip selection (brief §9)
+
+---
+
+Zack Glaser (0:0.164)
+This is one where I really kind of want to share the screen and be like, here's where ⁓ Claude for Legal is, here's what GitHub is. And we can do that if we really feel like it. ⁓ Anyway, ⁓ so we start these off, we'll do it like we normally do with, hi, I'm Sam and I, and then I'm just gonna do kind of a casual ⁓ introduction, bringing you in, ⁓ all that stuff, and then we'll just get started with the first question that is essentially gonna be, how dare you?
+
+Sam Harden (0:7.414)
+Okay.
+
+Zack Glaser (0:31.064)
+⁓
+Sorry. First of all, ⁓ how dare you? How dare you let them drop Claude for legal on us ⁓ on a day, on this week of all weeks. ⁓ So when all the legal tech people are busy and NetDocuments is creating stuff and ⁓ all that. ⁓ yeah. All right, whenever you are ready, just hi, I'm Sam and I. I don't think you need too much of an intro ⁓ because we'll...
+
+Sam Harden (0:34.552)
+First of all, how dare you?
+
+Zack Glaser (1:2.744)
+certainly put that in the ⁓ R intro and all that stuff and theoretically people should start to know by now.
+
+Sam Harden (1:10.926)
+⁓ Hi, I'm Sam. I am an innovation strategist here with Affinity Consulting.
+
+Zack Glaser (1:18.316)
+Sam, thanks for being with me. I feel like I, at some point we're not gonna have to do this, but I feel like I have to differentiate. ⁓ Sam Harden from Sam Glover, who was ⁓ one of our founders here at Lawyerist. But ⁓ thanks for being with me. You're one of our, ⁓ I guess you're with Affinity Consulting, which means that you're with Lawyerist. You help all the ⁓ Lawyerist people ⁓ with your expertise. ⁓ So thanks for being with me.
+I want ⁓ to talk Claude. ⁓ We actually ⁓ quickly got this episode out as quickly as we could ⁓ because, ⁓ man, Claude ⁓ for Legal, guess V2-ish ⁓ robust Claude for Legal dropped this week, the week of recording, which is probably about two weeks ⁓ before ⁓ this actually goes out.
+And kind of depending on who you ask, this is either the future of legal work or it's just like, nah, it's just AI doing AI things. It's AI announcements doing AI announcements things. What should ⁓ law firms actually pay attention to in this? ⁓ Like, this is a lot of stuff coming at me.
+
+Sam Harden (2:40.534)
+It's a lot. ⁓ It's a lot and it seems to be happening fast. ⁓ As you know, and ⁓ I think, I think many things. think it is an exciting time to be a lawyer who is invested in technology. I also think it's kind of a, I hate to use the term dangerous, but it's a, ⁓ a, an iffy time as well, because there's a lot of things out there. Claude.
+
+Zack Glaser (2:46.158)
+Yeah. Yeah.
+
+Sam Harden (3:9.494)
+launch this whole thing this week. There's, I'm sure next week we'll hold new announcements. I don't know anything about new announcements. So don't read that into what I'm saying, but just based on the pace of change. ⁓ yeah. If I, if I gambled, I would, I don't know how to even bet on that, but ⁓ yeah, ⁓ I think that ⁓ lawyers should be paying attention.
+
+Zack Glaser (3:20.071)
+Don't hold us to that.
+It's a good bet though.
+
+Zack Glaser (3:28.368)
+Mm-hmm. Mm.
+
+Sam Harden (3:36.310)
+to what is happening with Claude because I think it is kind of like a roadmap to where things could be going, right? Claude ⁓ launched the legal plugin this week, which is ⁓ a set of connectors ⁓ to a bunch of tools that lawyers are used to, ⁓ and then a bunch of ⁓ skills and plugins that ⁓ show lawyers how Claude can work inside a legal ecosystem. So those two things kind of
+
+Zack Glaser (4:7.504)
+Okay, let's take a step back real quick, because I realized that I just like, I jumped into talking to you like it's just you and me sitting here. ⁓ Let's start with what is Claude. ⁓ Anthropic, the big AI company has a product called Claude. Can you give us a quick description of kind of what that is?
+
+Sam Harden (4:28.792)
+So Claude is kind of one of the big three AI models, I would say. You have ChatGPT, you have Claude, and you have Google's Gemini, right? And we're all used to chatting with these AI models ⁓ in a chat interface. Kind of like texting with your friend is how it started out. You would send it a message in words and it would send the message back to you, right? They added, yeah.
+
+Zack Glaser (4:39.193)
+Okay.
+
+Zack Glaser (4:54.010)
+Yeah, and it'd be really nice to me.
+
+Sam Harden (4:57.900)
+Yeah, make it. Yeah. Tell me. Tell me good things about myself, right? Or write write a limerick, you know, about pirates or whatever you wanted it to do.
+
+Zack Glaser (5:3.972)
+Yeah, yeah. ⁓ That's a great idea, Zack. Here we go.
+
+Sam Harden (5:9.442)
+Yeah, I've never heard a better idea in my life. ⁓ But ⁓ they have the models that have added capability over time, right? You saw the ability to ⁓ have it generate images ⁓ with chat GBT, especially ⁓ upload files to it and ask questions about your files. This bit by bit.
+the companies have added these different features and abilities to the models because the models are really good at a lot of things. Claude is kind of unique at this point because Claude was watching what computer developers were doing with systems like Claude Code and seeing that they were using it to write computer code directly onto the hard drives. I know this is kind of like an out there thing, but bear with me.
+
+Zack Glaser (6:1.133)
+Yeah, yeah, ⁓ yeah. We got people that wanna know this,
+
+Sam Harden (6:2.765)
+Yeah.
+Yeah. And, and the Claude people looked at it and I think they thought, well, if Claude can write computer programs onto a hard drive, what is preventing Claude from creating Word documents and saving them on a hard drive? What is preventing Claude from creating PDFs and just saving them? What is preventing Claude from ⁓ doing everything is on a computer. Everything is computer. ⁓
+Right? ⁓ It's all computer files, all computer programs. And the models are really good at that. Right?
+
+Zack Glaser (6:36.717)
+Yeah, yeah. It's not like this is a paper file and this is tablet or something like that, yeah.
+
+Sam Harden (6:43.950)
+⁓ And so Claude took what the computer developers were doing and created a system called Claude Cowork. Instead of Claude Code, it's Claude Cowork. ⁓ And you can go in there and ask Claude to ⁓ create ⁓ these five Word documents for me. And Claude will go in and do it. ⁓ It will create PDFs, it will read PDFs, it will write comments on Word documents. ⁓
+If Claude can write the code to do something, it will write the code to do it, essentially. So just, you just have to ask it. ⁓
+
+Zack Glaser (7:22.063)
+Oh, okay. So, so it's not actually, um, and I think this might be important. It's not actually entering the word document in the same from the same door that we would go in. Like we would open up the word document and type the stuff in. It's coming in from a different entrance and saying, here's the code that I wrote in order to create this document or in order to manipulate this document. It's going, it's going through the computer's VIP entrance. Okay.
+
+Sam Harden (7:44.234)
+Exactly. Yeah.
+Mm-hmm. Yeah, yeah. It's coming in the side door. It's able to just ⁓ flip all the switches, turn all the knobs in a way that you or I as the human are doing it when we click on the buttons on the word toolbar. Claude is doing it behind the scenes when it's creating things or when it's editing things.
+
+Zack Glaser (7:56.055)
+Mm-hmm.
+
+Zack Glaser (8:5.208)
+Yeah.
+
+Zack Glaser (8:10.231)
+Okay. So the, the good folks over at, at, anthropic building Claude recognized from ⁓ what coders were doing from what the software developers were doing that, I mean, if we can write code, we can use that code to manipulate Microsoft word. can use that code to manipulate, ⁓ Adobe ⁓ Acrobat. can create PDFs. We can create all these files and we can let the user ⁓ of Claude kind of requests us to do this.
+Okay. And so that's, that's Claude cowork and, and ⁓ just to kind of add a little bit here, it works in folders ⁓ on your computer. ⁓ not, ⁓ well, I guess that's pretty important because Claude cowork at least right now, as far as I know, has to be on that local Claude, ⁓ app. You can't, it doesn't come out of the cloud app.
+And so you can't be on claw.ai. You have to be on the local app and then it can manipulate your computer within, you know, with guardrails, but it can manipulate your computer in certain ⁓ folders and folder structures. Okay.
+
+Sam Harden (9:19.694)
+Mm-hmm.
+
+Sam Harden (9:24.686)
+Yeah, yeah. And this is a very new thing. I just wanna make that clear. This is really, really recent within the last six months that we've seen this. And it is very powerful. Cloud can edit, delete, create things on your computer in a folder on your hard drive. Like that's something entirely new.
+
+Zack Glaser (9:36.516)
+Yeah.
+
+Zack Glaser (9:50.224)
+⁓ One of the things ⁓ that we ⁓ as a team really kind took to very quickly was that it could create PPTs and it could create PowerPoint presentations and slide decks ⁓ really, really quickly. ⁓ with, ⁓ really nicely, I put together a lot of PowerPoint presentations even before I kind of honed in on how it should be done. I put together a lot of them and. ⁓
+
+Sam Harden (10:1.710)
+Mm-hmm.
+
+Zack Glaser (10:19.811)
+They were, they looked sharp, looked professional, looked good. Okay, so Claude as a product, ⁓ and I wanna kind of ⁓ do this as well. So we've got Claude Chat, which doesn't ⁓ manipulate stuff on your computer specifically, but it does have the ability to create ⁓ Microsoft documents and ⁓ things like that. Like it can.
+Um, it works in HTTP a lot, um, which I want to be specific. That's not a programming language. It's a markup language. Um, otherwise I'm going to lose my nerd creds. Um, but it can, it HTML. Oh man. Already lost them right there. Live on the lawyers podcast. Um, yeah. So it'll write an HTML, um, and, mark things up in order to
+
+Sam Harden (11:1.614)
+I think I'm in HTML. You said HTTP. ⁓
+Yeah
+
+Sam Harden (11:12.152)
+Yeah.
+
+Zack Glaser (11:17.773)
+display it to you to where it looks nice. So that's Claude Chat and that's kind of our normal back and forth chat. And then another product inside that app is ⁓ Claude Cowork, which is what we're talking about where it'll manipulate these documents that already exist. It'll manipulate ⁓ things inside a specific folder structure. And then we've got Claude Code over here to the side that honestly like...
+Us as lawyers don't need to worry about too much, but it's the same kind of general idea as some of the Claude co-work. And really, in my opinion, it's kind of, it's giving us a little bit of like future casting. If you look over in Claude co-work, it's like, ⁓ this is stuff we didn't think that computers were gonna be able to do ⁓ for people 12 months ago or whatever. ⁓ Okay, so that's Claude.
+
+Sam Harden (11:47.470)
+Mm-hmm.
+
+Zack Glaser (12:12.175)
+⁓ broadly. And now what in the heck is this? What are you talking about with the legal plugin, the connectors, the plugin, the tools, all of that stuff?
+
+Sam Harden (12:24.494)
+Yeah, so there's different components, I would say. There are data connectors that allow Claude to go and get things from other places, as well as send things to other places. You can think of it that way. It's like giving Claude, yeah, I'm sorry.
+
+Zack Glaser (12:41.935)
+What do mean by other places?
+What do mean by other places? Like.
+
+Sam Harden (12:48.034)
+So other programs that you may use, right? So if you use, let's say, ⁓ Westlaw or you use NetDocuments or you use iManage or something like that, that, yeah, so you're storing data there, you're interacting with data on that system. The connectors ⁓ give Claude kind of a phone line in basically to your account with those systems.
+
+Zack Glaser (13:1.015)
+Okay. Okay.
+
+Sam Harden (13:18.186)
+So ⁓ imagine ⁓ that you have something in one of those systems that you've been working on or you need it to do something. The connectors let Claude make a phone call and say, hey, go and I need to talk to this system. So I'm going to go and call it without you having to take what you're doing in Claude ⁓ and go over to that other program and redo what you're doing. That's kind of the idea there.
+is instead of context switching, the connectors let you just keep everything or most things in Claude and then have Claude work with that system for you and bring it back into the chat in some cases. So a good example is there's a court listener plugin now. If you're familiar with court listener, it's a service that mirrors federal court dockets and has a bunch of
+filings from Pacer and things like that. So you can search it for federal cases. Now you can do that from within Claude. Instead of going to Court Listener and going, I need to remember the name of this case. I'm going to search for it. Let me read the docket. You can connect your Court Listener account to Claude and say, hey Claude, go and look at this case in Court Listener. Tell me what the latest entries are on the docket. And Claude will go and do that. You don't have to do it yourself. Claude can go and read the documents that are in that case.
+It can pull in stuff. can, you know, like there's so much now that it can do in some of these systems that it's kind of like Claude has, ⁓ I described it as a phone line, but it's almost like a ⁓ universal translator that it can go and just talk to this other system and bring back information for you.
+
+Zack Glaser (15:6.510)
+So I think importantly, it can do that across multiple things, right? So the connectors ⁓ you laid out, know, NetDocuments and iManage and CourtListener, ⁓ but we can also do like SharePoint ⁓ and Outlook. ⁓ I actually have a connector connecting into this platform that we are recording on. And I can have my Claude, I can say, hey, grab me the transcript.
+
+Sam Harden (15:12.130)
+Mm-hmm.
+
+Zack Glaser (15:35.769)
+from the Sam Harden and Zack Glaser ⁓ thing. I guess more importantly, I can say go look at that transcript and get me this information. Okay, so these connectors allow Claude to ⁓ kind of broaden its area of information of where it can get us. Okay, okay. So in Claude we've got connectors. Is that part of plugins?
+
+Sam Harden (16:5.720)
+They can be part of plugins. They kind of exist on their own at this point. So ⁓ if you are in Claude and you have a Claude account and you have to have the desktop app to really like see this well, ⁓ there's now a customized thing that shows connections, right? And you can go in and turn on and turn off connectors. And if you go through there, there are a lot of connectors. There's now a whole category that you can sort them by law. You can filter it.
+
+Zack Glaser (16:9.760)
+Okay. Okay.
+
+Sam Harden (16:35.744)
+and just select law to filter it and it shows you the ones that they've tagged as ⁓ legal connectors. There's a lot now. Yeah.
+
+Zack Glaser (16:43.286)
+my God. Yeah, I'm just pulling it up and it's the, the, filter is legal and it's court listener and box ⁓ and docu-sign. I manage work ⁓ and just the relativity, all the ever law Harvey legal zoom. ⁓ Okay. So these are, are these ones that, wow. All right. So ⁓ with that, these are the connectors ⁓ and that means that ⁓ I can have Claude essentially go into
+
+Sam Harden (17:0.790)
+Hmm. ⁓
+
+Zack Glaser (17:12.748)
+my ⁓ application of that ⁓ as me, essentially, ⁓ and ⁓ do ⁓ a lot of the things that I can do in that platform? Is it all the things that I can do? it limited? it... ⁓ That feels too awesome to be able to go, hey, ⁓ get...
+
+Sam Harden (17:36.878)
+You
+
+Zack Glaser (17:37.891)
+Go into, because I've been telling people to get the hell out of Box for years because it just hasn't really worked with things. But if I can ⁓ send my Claude into my client files in Box and say, because I know that my Box is secure and I know that my local Claude is secure, I could send it into my client files and say, what's the...
+What's the client that or get me the, give me a brief, quick little update on what all the documents for John Smith is.
+
+Sam Harden (18:14.126)
+⁓ Yeah, it depends on the connector and it will have different abilities, let's say, with different connectors. So some have a couple of abilities, things like search, things like find inside that system. Some have ⁓ writing capabilities. You can actually go in and create things in that system, which is really interesting. ⁓ A lot of them have ⁓
+
+Zack Glaser (18:18.605)
+Mm-hmm.
+
+Zack Glaser (18:23.640)
+Okay.
+
+Sam Harden (18:42.594)
+Like CourtListener, which I keep going back to, has a ton of actions that you can take inside CourtListener. Now you're not writing things to CourtListener because CourtListener is like a public data service, but they have equipped Claude with a bunch of different ways to extract and search and find data inside CourtListener. ⁓ So you just have to kind of read, it'll show you what you can do.
+inside the connector screen. Like what can you do inside different connections? What can you do inside there?
+
+Zack Glaser (19:15.854)
+⁓ I'll tell you what you can do inside court listener because yeah, so as we were talking, I pulled up Claude and I pulled up the connectors. ⁓ I sorted by legal and I went to court listener. And ⁓ just so people know it's in the area called tools ⁓ and in tools you see search, get endpoint schema, call endpoint, get endpoint item, get choices, get courts, get more results, extract citations, analyze citations, resume citation analysis, create search alert.
+delete search alert, subscribe to docket alert, unsubscribe from docket alert. And I said all those specifically because I wanna compare it to, let's say, ⁓ net documents. Net documents has search and fetch right now. Like those are the two that it has. you look at those ⁓ and then one that we use is HubSpot.
+HubSpot has search CRM objects, get user details, get properties, search properties, get CRM objects, and we're limited to what those things allow us to do. And that's, when people say MCP, Model Context Protocol, that's what we're talking about, right? So ⁓ connectors ⁓ are kind of Claude's way of saying MCP, and probably a better English, better normal human word than MCP.
+Okay, so I'm in here and I'm looking at connectors ⁓ and I'm in Claude. I'm in Claude cowork and I see ⁓ skills as well. So connectors are how I can. I do. want to say interact with a third party platform that I have an account for.
+
+Sam Harden (20:58.840)
+Mm-hmm.
+
+Zack Glaser (20:59.885)
+Or if it's public, don't have an account for it, but how I interact with a third party platform that I have an account for. And then in here, we also have skills.
+
+Sam Harden (21:9.858)
+Yeah.
+
+Zack Glaser (21:10.463)
+And I think once we get past that connector idea, that's, that's the data that I can get to and how I can ⁓ talk to me about ⁓ skills here. And, and ⁓ I want to caveat all this with we're not even in the Claude for legal conversation yet. This is just giving you the lay of the land of Claude cowork, which I think is important because I really think Claude cowork, as you've said a lot ⁓ is a bigger deal.
+
+Sam Harden (21:26.562)
+Right. ⁓
+
+Zack Glaser (21:36.235)
+than these specific kind of sets of skills. But we need to lay this down before we really talk about Claude Legal. So ⁓ what are the skills here? ⁓
+
+Sam Harden (21:46.510)
+So skills, if you're unfamiliar with skills, I think about them as prompting 2.0 or maybe prompting 3.0, right? You remember when, yeah, when we saw those news articles about our children will not go to school anymore because they will become prompt engineers. Do you remember that? I mean, I'm exaggerating, but there was this whole
+
+Zack Glaser (21:57.132)
+I like that, yeah. ⁓
+
+Zack Glaser (22:12.183)
+Yeah.
+
+Sam Harden (22:13.836)
+news ⁓ thing, this whole like hot take circus on, well, we don't need college anymore because we're all going to become prompt engineers and we're just going to spend our time, yeah, typing things into the AIs that we use until you are a very experienced doctor, know, or very experienced lawyer. That never happened, right? But good, but ⁓ the structure that we were told mattered in prompts.
+
+Zack Glaser (22:22.029)
+⁓ What's the point? Yeah.
+
+Sam Harden (22:41.496)
+kind of translated over to skills and skills are much more powerful. So imagine you could give an AI a job description and a manual for how you want it to do that job along with the assets that it needs to perform that task, right? Or set of tasks or set of different ⁓ job related duties that you want it to perform. That's a skill. You can think of it that way. So ⁓ a skill is ⁓ like a user manual.
+or a set of standard operating procedures ⁓ for... ⁓
+
+Zack Glaser (23:14.274)
+I was hoping you were gonna say SOPs. Okay, okay.
+
+Sam Harden (23:21.228)
+Yeah, so it's it's SOPs, right? So ⁓ one thing that ⁓ I think people need to understand is if that you don't have good SOPs for how you do your work right now, it's not the best idea to go into Claude and start creating a bunch of skills to do different things. Get ⁓ SOPs first and then take those. Yeah.
+
+Zack Glaser (23:39.790)
+Okay. And I'm going to, I'm going to take moment here to say we have a series of SOP videos ⁓ that I'm going to get a link to that Sam has done in order to go deeper into this. And so ⁓ we won't have to go off onto that tangent of get your SOPs in order you SOB ⁓ right now. But if you want to think, if you want to dig in further about like how your SOPs are really
+allowing you to do the things that we're talking about. We'll put a link in the show notes for you to go to that YouTube series as well. So sorry, please continue, Sam.
+
+Sam Harden (24:20.082)
+yeah. Yeah, so they're they're SOPs in essence. They are telling Claude ⁓ when you write this kind of document, I need you to always use this template to structure it in this way to put these things in a bullet pointed list to end with this kind of conclusory paragraph and Claude will follow those instructions when you tell it to use that skill, right? ⁓
+A good example is page line deposition summaries. This is what I always tell people because I'm used to having to do this. When I was an associate attorney, I did a lot of these. So you get a deposition ⁓ and you go through the deposition and you write out, here's what the witness said about X. Here is the page and here is the line where it's found, right? That's its most basic form. So you can give that structure to Claude and say, hey Claude, when you look at a deposition,
+
+Zack Glaser (24:56.641)
+Mm-hmm.
+
+Sam Harden (25:19.010)
+And I ask you to do a deposition summary. This is how I want you to do it. And it will follow that. Now you can get more and more complex and say, Claude, you need to know who the parties are. ⁓ You can't look at the deposition in isolation because that colors what the witness says and why what they say is important about different things, right? If it's a med mal case versus a family law case versus an eviction case versus a ⁓ federal tort case.
+
+Zack Glaser (25:40.033)
+Mm-hmm. Mm-hmm.
+
+Sam Harden (25:48.632)
+claim case. Those are all very different.
+
+Zack Glaser (25:49.677)
+⁓ Sam, can I use a connector ⁓ to get the skill to know the information about my client?
+
+Sam Harden (25:59.874)
+You can. ⁓ You can.
+
+Zack Glaser (26:1.020)
+Okay, okay. You can see the wheels turning here. ⁓ Anyway, sorry. I keep inter- I'm just gonna keep interrupting you on this, on this episode ⁓ and, just showing, showing my joy of all of this. But yeah, keep, keep going. Sorry.
+
+Sam Harden (26:4.332)
+Mm-hmm.
+
+Sam Harden (26:8.835)
+it's great.
+
+Sam Harden (26:14.732)
+Yeah. So you can tell Claude, ask me, when I tell you run this skill and you don't have the context to know this stuff, ask me, say, hey, before I do this, I need this information. ⁓ Or ⁓ use your connector to ⁓ X service and go and look for the case that this connects to and find that information. Cause I don't want to have to tell you, I just want you to go figure it out. And then ⁓ ask me if that's right, right? Because
+Claude may find the wrong case, right? We're not, as lawyers, I'm not great at keeping stuff structured in different files and folders and things like that. But that's kind of how skills work, is you can give Claude an SOP document. I think of it as, if you had a new person in your office who was really smart, but needed direction, and you wanted them to do a task, how would you tell them to do that task? What things would you give them?
+to do that task so that they could do it well because they want to do it well, they want to do a good job, but you have to equip them with the directions to do it.
+
+Zack Glaser (27:21.996)
+⁓ And so this is something that the skill then ⁓ as it relates to Claude, and I'm gonna say skill like all caps, ⁓ because that's how Claude delineates their skills. The skill then is saved ⁓ and ⁓ inside of Claude and I can call it. ⁓ can ⁓ say ⁓ use this skill, use ⁓ the deposition skill ⁓ and do this.
+
+Sam Harden (27:31.448)
+Mm-hmm.
+
+Sam Harden (27:41.720)
+Mm-hmm.
+
+Sam Harden (27:52.782)
+⁓ Yeah, you can say go and find the skill. Claude also will think about what skills it needs. ⁓ Whenever you ask it to do a task, it will say, do I have a skill for doing this? And go and look at its list of skills and find what it thinks is the right skill. That's another reason why it's important to figure out what skills you need before you go start writing skills. Because if you have 10 deposition summary skills,
+like deposition, summary one, summary two, summary three, Claude is going to go, I have no idea which one this person wants me to use. So I may just guess, or I don't have the right context to figure it out. you know, like you have to think about what you want it to do, right?
+
+Zack Glaser (28:38.891)
+Yeah.
+Yeah, ⁓ and to me that's one of those places because I think people are probably listening to this thing because every time I think every time that lawyers talk about AI the word hallucinations comes into our head like what what's it gonna hallucinate on what's it gonna hallucinate on ⁓ to me that's how or that's one of the ways that things hallucinate is that Claude doesn't know that I'm an idiot and it doesn't know that I have the ability to lie and So if I ask it to do something
+It thinks that it can. So if I say go use the singular deposition skill, it's gonna go in there and think that there's only one deposition skill and it's gonna figure it out. It's gonna do the best it can to make me happy. And ⁓ it's not gonna come back and say, hey, I know you're a moron. ⁓ So tell me which one of these to use. ⁓ In my experience with you,
+You have, you've made a lot of mistakes, Zack And so this feels like one of those. That to me is where ⁓ AI really hallucinates, is when it thinks I'm smarter than I am. ⁓ So, yeah, so we need to have some sort of structure to these ⁓ skills. ⁓ We need to have some sort of pre-ideas of what it is, because yeah, I have found if I create these things on the fly, they're...
+I wind up having to go back, delete, ⁓ manipulate, ⁓ make new ones. Like I can't tell you how many times I made ⁓ different skills related to branding, lawyerist branding or affinity branding or things like that just because I was doing something. But in a way that's really what we're doing is we're saying, here's what I would prompt you to do. I've created a good prompt. It's a thorough prompt. does all the things that prompts are supposed to do.
+
+Zack Glaser (30:39.998)
+Save that. ⁓ Because, and we're gonna get meta here, there's a skill creator skill.
+inside a cloud. Okay, I don't want to get too into the nitty-gritty of the skills and the connectors, but you can package those in a way like you had kind of gotten to into plugins. And I think you have likened plugins where skills are kind of a recipe of how to do something. You've likened plugins to a menu that one can choose from. And so,
+
+Sam Harden (31:6.316)
+Mm-hmm.
+
+Zack Glaser (31:19.178)
+We get these plugins that ⁓ if let's say I have a brand plugin, a marketing plugin, one of those plugins would be choosing, you know, ⁓ a brand guidelines plugin. Another would be how do we create ⁓ a PPT ⁓ our way? Another one would be what is our voice and tone or things like that? Just the related skills ⁓ in a menu of things that we would do. ⁓
+And again, if you want to know more about that, we have some Sam videos on skills and plugins. But I want to kind of get through that because we're, as I knew, we're running out of time a little bit here. That's where Claude for Legal comes in, right? That's where like Claude for Legal kind of of dovetails into this. Claude for Legal, as far as I can tell, and please correct me, don't treat me like AI treats me.
+is a plugin that I can bring into my cloud platform. Talk to me about that.
+
+Sam Harden (32:25.240)
+Yeah, so ⁓ I don't know if people watching this remember, but I think it was about two months ago, maybe two and a half months ago, the Claude people released their legal plugin and it made like it made all of the blogs, people on LinkedIn wrote a million posts about it. ⁓ It was, yeah, they were all amazing. I read every one. So you all did great ⁓ on your LinkedIn post. ⁓
+
+Zack Glaser (32:44.395)
+They were all brilliant.
+Yep, every single one of them. Mm-hmm, ⁓ mm-hmm, mm-hmm.
+
+Sam Harden (32:54.732)
+The legal plugin was pretty basic, honestly. It was things like, here's how you can get Claude to triage a non-disclosure agreement. here's when you say use your NDA triage skill. ⁓ Here's how you do a contract red line, things like that. But it was very basic, it was very generic. ⁓ And I it was really interesting that people sort of went up in arms about it. I'll put it that way.
+because it was so basic when you went in and looked at it, but it showed Claude's ability to do complex tasks repeatably according to a set of strong instructions. One of the things that Anthropic was clear on was this is not an end-stage product. This is not something that we're releasing to compete with things like Ironclad, with Harvey, with Westlaw. That's not our goal here. Our goal is to show you what's doable.
+inside a system like Claude and you should modify this to your own needs and requirements. That's what they have done with this. Let's call it legal plugin 2.0, right? Whereas the legal plugin 1.0 was pretty basic ⁓ and had just a couple of workflows in it. They released this new version of the legal plugin, which is only on GitHub right now. If you're unfamiliar with GitHub, buckle in.
+⁓ Yeah. ⁓ Yeah. So it's got, and I had to go and pull it up while we were talking. It's got ⁓ many, many, many more workflows in it across different practice areas. So it's got. Yeah. So now we have an entire section for commercial legal.
+
+Zack Glaser (34:23.795)
+Yeah, stop being unfamiliar with GitHub. If you're unfamiliar with GitHub, stop.
+
+Zack Glaser (34:41.803)
+There are 13 in the original one, just for context real quick. Yeah.
+
+Sam Harden (34:52.524)
+that has, ⁓ let's count the skills, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve skills just in commercial. ⁓ It's got one for intellectual property, it's got one for litigation, it's got one for privacy law, one for regulatory law, ⁓ one for employment law, one for ⁓ sections. Right, one section, yeah.
+
+Zack Glaser (35:16.491)
+And we're talking section, not skill. One section of skills that probably has 15 to 20, yeah. As law student.
+
+Sam Harden (35:23.884)
+Yeah, so it's law student. It's got one for doing legal clinics at a law school. That's how detailed they got.
+
+Zack Glaser (35:30.599)
+my goodness. Cold call prep. Man, ⁓ Iraq grader, Socratic drill sergeant. ⁓ my goodness. is, ⁓ and so for those of you that ⁓ want to follow along at home, we're on github.com slash anthropics slash Claude hyphen four hyphen legal. And you go to the readme of that and you can see all these things. We're going to drop that link ⁓ obviously in the show notes.
+
+Sam Harden (35:35.778)
+right?
+
+Sam Harden (35:42.616)
+Mm-hmm.
+
+Zack Glaser (35:59.978)
+Okay, so we've got ⁓ loads ⁓ and loads of new ⁓ skills that are pre-packaged. This was created from, mean, Anthropic created these things ⁓ and just we're like, here you go. ⁓ Okay, this is the scariest shit part. Do you have to be a lawyer to download this? Hell no, ⁓ you do not.
+
+Sam Harden (36:9.708)
+Mm-hmm.
+
+Sam Harden (36:25.526)
+No, you do not.
+
+Sam Harden (36:30.304)
+It's they can go and get it off GitHub no matter who you are.
+
+Zack Glaser (36:32.799)
+Holy ⁓ hand grenades, man. Okay, so ⁓ I'm a, let's use a real like scenario here. I'm a business owner and I'm savvy. ⁓ Because I know a lot of business owners that are savvy as hell. I mean like that's why they're owning their business. And they're smart and they're able to do things. They just don't always have the time to do stuff. And so they come in ⁓ and they're like, okay, well here's.
+Here's a leave tracker. Here's a higher reviewer. ⁓
+here's a NDA triager. Like I, ⁓ so I'm just, I just open up Zack Glazer's widgets, know, space lease sprockets. And I'm like, I want to deal with my own NDAs. I don't have to get a, ⁓ an attorney to do this, or I don't have to take this to my attorney that I crap tons of money to.
+⁓ my God. ⁓ Okay. Yes. Scare me more Sam.
+
+Sam Harden (37:33.742)
+Well here's the scarier thing. ⁓ The scarier thing is you're that business owner, you don't practice law, you go and say, you know what, I'm firing my lawyer. I'm getting Claude for legal because I've heard it's the ⁓ next best thing since sliced bread or refrigerated milk. Yeah, right, ⁓ Lawyers are talking all about this thing. So I'm gonna use it. ⁓ And I'm gonna get into a commercial dispute with this other business owner who, guess what?
+
+Zack Glaser (37:50.079)
+Cause my lawyer's using it.
+Yeah, yeah.
+
+Sam Harden (38:3.736)
+went into the exact same thing. Right? I mean, that ⁓ is a very, I guarantee you since Tuesday, that has happened somewhere ⁓ in the world. Yeah, I guarantee you.
+
+Zack Glaser (38:13.000)
+That's happened. That's happened. ⁓ Yeah. So this is like, this is like legal zoom, but with like a little dude that's like, it, do it, do it, get, get that contract ⁓ review with that guy. And like two legal zoom people like going back and forth. ⁓ I want to be very clear really quickly though, that like I have ⁓ like fundamentally from a structural standpoint, I don't have a problem with legal zoom. Like the idea of getting knowledge out into the world. And I don't have a problem with this.
+The idea of getting legal knowledge out in the world and getting people self help, but we as lawyers ⁓ need to understand that this, that that is a, ⁓ it's not just a possibility that like you said, that's happened. That has already happened to two people have gone back and forth doing a vendor agreement reviewer using both of them using Claude for legal already. Yeah. Okay. So I think this
+
+Sam Harden (39:7.470)
+Mm-hmm.
+
+Zack Glaser (39:12.362)
+We are 29 minutes into the recording of this. Hopefully it hasn't taken that long. For those of you who are listening, you can always listen to the lawyers podcast on 1.5 or two times speed, which is what I do while I ride the Peloton as I review these things. Okay. What does this mean for me as an attorney? Like what? So we've got, let me just kind of recap here. We've got Claude, which can do some stuff and
+do some stuff, which can really change the world. Inside of Claude, we have connectors, which can connect me to Harvey or various things. And inside of Claude, we have skills. And Claude Anthropic has just released this cache of skills that are all law related. And a lot of lawyers are looking up and going, oh my God. So what does this mean for us?
+I mean, I guess first, is this even really geared towards lawyers or is this geared towards companies?
+
+Sam Harden (40:18.668)
+I think it's, ⁓ the more I think about it, the more I think it's kind of in the middle, but it really is ⁓ geared toward lawyers. Yeah, sure. Anytime. Happy to do it. It depends. ⁓ It really is. It's marketed toward lawyers. It's if you read, if you go to GitHub, follow the link, look at the plugins, they are geared toward the way that lawyers work. Right? So ⁓ the other thing is Anthropic is not expecting and they don't
+
+Zack Glaser (40:24.060)
+thanks for hedging, Sam. Thanks for... It depends. It depends, Zack. ⁓
+
+Zack Glaser (40:41.352)
+Yeah, yeah.
+
+Sam Harden (40:48.482)
+want you to, I don't think, to go in and install this and just start using it as is. This is ⁓ right. ⁓ It's not intended to be an off the shelf, out of the box tool. My suspicion is that they want people to use this to see how powerful their product is ⁓ and modify these things to your specific needs. Right?
+
+Zack Glaser (40:55.398)
+out of the box. ⁓
+
+Sam Harden (41:17.964)
+The way that the litigation section of the new legal plugin does things is probably not going to be the way that you, ⁓ Lawyer A, B, or C, are doing your job right now. And just because the legal plugin says this is how you could do it doesn't mean that you need to change your practice to fit the legal plugins way of doing it. It means that you need to figure out what's working well for you.
+
+Zack Glaser (41:32.586)
+⁓ Mm-hmm.
+
+Sam Harden (41:48.014)
+and look at the legal plug-in and say, how does this, how could this be modified to work the way I need it to work in my practice because I have my special way of doing things. I have my expertise. I have my secret sauce. And I don't want to just go back to this vanilla baseline of how to do things. I want to do things my firm's way.
+my experience, whatever I have developed as part of my experience, right? I think that's the most important thing.
+
+Zack Glaser (42:24.372)
+So can ⁓ I then, I guess what I'm saying, can I build off of what exists here? Because like, I look at this ⁓ and I'm somebody that builds skills and bots and agents ⁓ all effing day. Like I have huge, you know, caches of skills and bots to do things. ⁓ I don't want to build all this stuff. Can I go in and manipulate this? Can I change it? Let's take for instance, the demand drafting skill.
+inside of the litigation area. And again, if you wanna follow along at home on GitHub, you can go into these things, can look literally at what, like this is open source, you you can look literally at what this thing says. ⁓ How do I go and make that ⁓ mine ⁓ if I ⁓ wanna change something? Or make it better?
+
+Sam Harden (43:14.946)
+The easiest way is just tell Claude, hey, I want you to change this. Here's how I want you to change it. Tell me what it does. ⁓ Tell me how this is going to go, Claude. Tell me, show me, show me how this works. Okay, great. Thank you, Claude. Now here's ⁓ how I do things. Can you change this ⁓ so that it fits the way that I do things instead of the way that this said it would do things?
+
+Zack Glaser (43:26.441)
+Okay?
+
+Zack Glaser (43:41.418)
+⁓ okay. So let's say this again, as an example, I pull up the demand draft ⁓ skill or I say, hey, Claude, I wanna draft a demand letter. here's my connection to SharePoint where my client files are. Here's where the discovery is. Go into this discovery, look at it, and I want you to draft a demand letter for me. And then it drafts it. And then I look at this and I say, you know, I'm in Tennessee.
+I always want you to draft this with a Tennessee jurisdiction. Can you change that portion of the skill? And it'll go and change that portion of the skill or update or now we've tweaked it?
+
+Sam Harden (44:26.242)
+Yeah, I mean it ⁓ you can get really involved here. I'll give that caveat where you can go down this path of going back and forth with Claude ⁓ on how to ⁓ do and redo and redo things and it takes a lot of time. So don't by no means am I saying this is like an hour long project and then you're set for life, right? This is ⁓ it's kind of like teaching a person when
+⁓ When you were an associate, Zack, when I was an associate, I was given a task and then I'd bring ⁓ the end product back that got redlined and torn up and written all over. And then I would take that back and I'd do it again. But I had learned, don't do that, don't do that other thing. ⁓ And slowly it got better. Think of it kind of that way, where when you're teaching Claude how to create or edit these skills, you're looking at the end product.
+or you're looking at the process and saying, here's ⁓ how I need it to happen.
+
+Zack Glaser (45:29.802)
+Okay, okay. So grabbing these things just out of the box, going and grabbing Club for Legal. Yeah, cool, neat. Also we need to understand that businesses are going to go do this and try to take some shortcuts because people do that. But if I go in here and I grab it out of the box and I start tweaking it, messing with it, making more, because this is ton of skills, but it is.
+absolutely not ⁓ all the skills that you will need for ⁓ your firm. ⁓ And so going in and making more skills. ⁓ want to ⁓ kind of ⁓ go to a different place here or show how ⁓ big of a deal this is because talk to me about sharing ⁓ skills because ⁓ I can make a skill.
+And now I know that I can do the thing the same way that I would do it over and over and over, but I can share these across my company as well. Talk to me about that a little bit.
+
+Sam Harden (46:39.586)
+So Claude has a feature now where if you're on a, I'll call it an organization plan, there's Claude Team and Claude Enterprise, which are similar in this way, right? They're for commercial enterprises. They're very different than the personal pro Claude Max personal, whatever they're calling it. The names change all the time, but it's the corporate Claude. Let's call it corporate Claude.
+
+Zack Glaser (46:49.363)
+Okay.
+
+Zack Glaser (47:1.320)
+Yeah.
+
+Zack Glaser (47:5.097)
+corporate clogged, yeah.
+
+Sam Harden (47:5.972)
+You can create a skill in your corporate cloud account ⁓ and you now have the ability to share it with other users of that corporate cloud account. So if somebody in the organization comes up with a really nice skill of how to do a task that lot of people do, right? Let's say you're in a litigation firm and you have a page line deposition summary skill that's really nice for, I don't know, employment discrimination cases.
+that ⁓ skill, whoever created that skill can go in and say, I'm going to share this with the other attorneys who ⁓ practice in this area or the paralegals who practice in this area. And then you avoid this problem that I anticipate where if you have a bunch of people creating their own skills to do the same thing, you're going to have instead of
+bunch of silos, which is the problem a lot of law firms have, is you're going to have silos within silos. You're going to quadruple, double, triple your silo problem. Yeah, so shared skills can be key here, in my opinion. They can really, really be very useful.
+
+Zack Glaser (48:11.632)
+God, okay, yeah.
+
+Zack Glaser (48:22.505)
+But again, I need to plan. I need to plan that. I need to have some strategy with this. ⁓ And that seems to me to be one of the bigger things here. It's like, okay, you need to understand what this is. ⁓ And it's really, it can be very, very cool and very, very helpful. ⁓ And I think you and I have talked about this concept before. I know we've talked about it with Ben Shor many times of if you,
+
+Sam Harden (48:25.442)
+Mm-hmm.
+always plan.
+
+Zack Glaser (48:52.559)
+just use AI to enhance a shitty process. It's just gonna do that process faster. ⁓ And thankfully you're breaking fast. You're finding out that it's broken faster. we're doing this on such a speed and such a scale now that we really need to be thoughtful about what we're doing. So.
+That brings me to this idea of kind of orchestrating this ⁓ in your office. Like I feel like you have to get, yes, Claude is there, Claude for Legal is there, these skills are there. And honestly, these skills can exist inside of Copilot. They can exist inside of various things. Skills are really just like markup language SOPs. ⁓ But I have to like elevate myself.
+out of that. have to abstract above that and really plan ⁓ what is going on across my company. Can you kind of talk to me a little bit about that? Because I know you're doing some strategic work with firms that ⁓ we work with to get them up and running or started or really going with Claude. Talk to me about some of the strategy there.
+
+Sam Harden (50:12.814)
+Unfortunately, I have to jump for one o'clock with a firm to talk about that So do you want to ⁓ you're good. Do we want to finish this up? I can do it at four if you want
+
+Zack Glaser (50:16.623)
+⁓ sorry, Sam. Yep. Go, go.

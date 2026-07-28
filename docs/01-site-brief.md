@@ -1,6 +1,6 @@
 # zackglaser.com — site brief
 
-Status: working draft · Last updated: 2026-07-26
+Status: working draft · Last updated: 2026-07-27
 Owner: Zack Glaser
 
 ---
@@ -109,7 +109,25 @@ Cadence commitment: regular (target weekly-ish; the format doc governs the build
 
 ## 9. Positioning guardrail
 
-Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podcast. The personal site complements, never competes: it links out to Lawyerist work, doesn't replicate its content categories, and the speaking page should be coordinated with (or at least not surprise) the team. Draw this line precisely before /speaking ships. **Open item.**
+Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podcast. The personal site complements, never competes: it links out to Lawyerist work and doesn't replicate its content categories.
+
+**The /speaking line (resolved 2026-07-27):** the badge is worn openly. The Lawyerist/Affinity title and podcast hosting are the page's core credential — hero-level, not bio-buried (the v2 mockup's stance, now confirmed). The page books **speaking and podcast appearances only**; consulting inquiries are explicitly referred to Affinity with a visible line and link, never absorbed here. That referral *is* the complement-not-compete mechanism: the page sends business toward the firm, not around it.
+
+**What the page proves (decided 2026-07-27):** not that Zack is *a* speaker but an *effective* one — holds large rooms, works small ones, funny, engaging, makes hard technical things simple. Never asserted in copy; proven four ways:
+
+1. **Clips first.** Three curated podcast excerpts, high on the page, directly under the hero (expanded from two — decided 2026-07-27): a complex thing made simple, an original idea landing live, and candor/depth. No clip is specifically "the funny one" — Zack's read is that his humor comes through regardless of clip topic, so it isn't force-assigned to a slot. Locked picks and timestamps live in `docs/06-speaking-page-copy.md`. A stage-video slot is designed in for when real talk footage exists.
+2. **The page performs the skill.** A written mini-teardown (~100 words) of one genuinely gnarly concept, styled as its own section — the free sample. The page demos the product instead of describing it.
+3. **Reaction-specific testimonials.** Quotes about what the *room* did ("kept a 4pm ethics slot laughing"), not generic praise. 2–3 to be requested before ship; section ships only when real quotes land.
+4. **Range in the metadata.** Each ticket carries room size (`room: 400` / `room: 14`) — large-room/intimate-setting claim made by the data, never the copy.
+
+Concept decisions made with the line:
+
+- "Show, don't tell" holds, but the ticket-wall unit widens from *stage talk* to **room held**: Lawyerist Podcast hosting is the flagship ticket (episode count as the number), joined by guest spots, webinars, CLEs, and panels. Real proof only — no faking, per the site's standing rule (entry 010). The wall closes with an empty "your event here" ticket linking to the booking form.
+- **Humor dial: one or two winks.** Copy stays professional with exactly two dry lines: the empty "your event here" ticket, and the sample teardown's closer ("Now imagine forty-five minutes and a slide clicker"). Forms stay straight. The page must never *say* it isn't boring. Drafted copy lives in `docs/06-speaking-page-copy.md`.
+- The page carries the **legal-tech accent**, matching its `/legal-tech/speaking` path (§7's one-accent-per-pillar rule).
+- Topic cards: the v2 mockup's titles stay as the working set, pending a pass to confirm which are real deliverable talks.
+
+Remaining before ship: clip selection from the podcast archive; the written sample teardown; testimonial requests out to 2–3 people; and the page should be coordinated with (or at least not surprise) the team.
 
 ## 10. Success metrics
 
@@ -130,7 +148,7 @@ Zack is Legal Tech Advisor at Lawyerist/Affinity and host of the Lawyerist Podca
 
 ## 12. Open questions
 
-- Affinity/Lawyerist positioning line (§9) — resolve before /speaking.
+- ~~Affinity/Lawyerist positioning line~~ — resolved 2026-07-27 (§9): badge worn openly; page books speaking + podcasts only; consulting referred to Affinity. Ticket unit = "room held." Legal-tech accent.
 - ~~Newsletter name~~ — resolved 2026-07-26: **Knolling** (§6, entry 011). *Taking Things Apart* demoted to working tagline.
 - ~~Section naming~~ — resolved 2026-07-26 (entry 013): "workshop" and "field notes" keep their display names as-is. Both already read as subjects alongside "legal tech" and "running" in the nav/footer lists.
 - ~~Colophon slug~~ — resolved 2026-07-26 (entry 013): `/how-this-site-is-made`, not "colophon." Already the live link in `AuthorshipStamp.astro`; matches the teaching-voice brand (§2).
