@@ -1,0 +1,298 @@
+---
+// Individual Knolling issue pages — the /newsletter archive has always
+// linked to `/${issue.id}`, but nothing ever generated a page there
+// (entry 022: "nothing links there until one exists to link to"). Now
+// that issue 001 exists, this closes that gap. Structure mirrors the
+// post page ([...id].astro) rather than reinventing one.
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import NewsletterCard from "../../components/NewsletterCard.astro";
+import AuthorshipStamp from "../../components/AuthorshipStamp.astro";
+import Comments from "../../components/Comments.astro";
+import { pillars } from "../../lib/pillars";
+
+export async function getStaticPaths() {
+  const issues = await getCollection("newsletter", ({ data }) => data.status === "published");
+  return issues.map((issue) => ({ params: { id: issue.id }, props: { issue } }));
+}
+
+const { issue } = Astro.props;
+const { Content } = await render(issue);
+
+const pillarInfo = pillars.find((p) => p.id === issue.data.pillar)!;
+
+const siblings = (await getCollection("newsletter", ({ data }) => data.status === "published")).sort(
+  (a, b) => a.data.newsletter - b.data.newsletter
+);
+const idx = siblings.findIndex((i) => i.id === issue.id);
+const prevIssue = idx > 0 ? siblings[idx - 1] : null;
+const nextIssue = idx < siblings.length - 1 ? siblings[idx + 1] : null;
+
+const formattedDate = issue.data.date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+---
+
+<Layout title={`${issue.data.title} — Knolling — zackglaser.com`}>
+  <div class="post-container" style={`--accent:var(--pillar-${issue.data.pillar})`}>
+    <a href="/newsletter" class="breadcrumb">← Knolling</a>
+
+    <div class="article-header">
+      <div class="meta-row">
+        <span class="pillar-tag">{pillarInfo.label}</span>
+        <span class="format-pill">issue {String(issue.data.newsletter).padStart(3, "0")}</span>
+        <span class="date">{formattedDate}</span>
+      </div>
+      <h1 class="h1">{issue.data.title}</h1>
+    </div>
+
+    <article class="article-body">
+      <Content />
+    </article>
+
+    {
+      issue.data.tags.length > 0 && (
+        <div class="tags-row">
+          {issue.data.tags.map((tag) => (
+            <span class="tag-chip">{tag}</span>
+          ))}
+        </div>
+      )
+    }
+
+    <div class="author-row">
+      <div>
+        <div class="author-name">Zack Glaser</div>
+        <div class="author-bio">
+          Legal Tech Advisor at Lawyerist/Affinity, host of the Lawyerist Podcast. Takes things apart to see how they
+          work.
+        </div>
+      </div>
+      <AuthorshipStamp authorship={issue.data.authorship} />
+    </div>
+
+    {
+      issue.filePath && (
+        <p class="edit-line">
+          Spot a typo or a bad take?{" "}
+          <a href={`https://github.com/thirdth/zackglaser-com/edit/main/${issue.filePath}`} class="inline-link">
+            Suggest an edit
+          </a>{" "}
+          — no coding required; GitHub will walk you through it.
+        </p>
+      )
+    }
+
+    {
+      (prevIssue || nextIssue) && (
+        <div class="next-prev-row">
+          {prevIssue ? (
+            <a href={`/newsletter/${prevIssue.id}`} class="next-prev-card">
+              <div class="next-prev-label">← previous issue</div>
+              <div class="next-prev-title">{prevIssue.data.title}</div>
+            </a>
+          ) : (
+            <div />
+          )}
+          {nextIssue ? (
+            <a href={`/newsletter/${nextIssue.id}`} class="next-prev-card next-prev-card-right">
+              <div class="next-prev-label">next issue →</div>
+              <div class="next-prev-title">{nextIssue.data.title}</div>
+            </a>
+          ) : (
+            <div />
+          )}
+        </div>
+      )
+    }
+
+    <Comments repoId="R_kgDOTkCnPg" categoryId="DIC_kwDOTkCnPs4DCHEn" />
+
+    <NewsletterCard eyebrow="get knolling in your inbox" tag="newsletter-issue" />
+  </div>
+</Layout>
+
+<style>
+  .post-container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .breadcrumb {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    margin-bottom: var(--space-5);
+  }
+  .breadcrumb:hover {
+    color: var(--color-ink);
+  }
+
+  .article-header {
+    margin-bottom: var(--space-6);
+  }
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .pillar-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .format-pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 1px 9px;
+  }
+  .date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+  }
+  .h1 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 1.2;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .article-body {
+    margin-bottom: var(--space-8);
+  }
+  .article-body :global(p) {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--color-ink);
+    margin: 0 0 var(--space-5);
+  }
+  .article-body :global(h2) {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--color-ink);
+    margin: var(--space-8) 0 var(--space-4);
+  }
+  .article-body :global(strong) {
+    font-weight: 600;
+  }
+  .article-body :global(a) {
+    color: var(--color-ink);
+    text-decoration-color: var(--color-line);
+  }
+  .article-body :global(a:hover) {
+    text-decoration-color: var(--color-ink);
+  }
+
+  .tags-row {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-line);
+    flex-wrap: wrap;
+  }
+  .tag-chip {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 4px 12px;
+  }
+
+  .author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    flex-wrap: wrap;
+  }
+  .author-name {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--color-ink);
+    margin-bottom: 4px;
+  }
+  .author-bio {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+    max-width: 420px;
+  }
+
+  .edit-line {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-8);
+  }
+  .edit-line .inline-link {
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .edit-line .inline-link:hover {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-ink);
+  }
+
+  .next-prev-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+  .next-prev-card {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-4) var(--space-5);
+    text-decoration: none;
+    color: var(--color-ink);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .next-prev-card-right {
+    text-align: right;
+    align-items: flex-end;
+  }
+  .next-prev-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+  }
+  .next-prev-title {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    color: var(--color-ink);
+    line-height: 1.3;
+  }
+
+  @media (max-width: 560px) {
+    .h1 {
+      font-size: 28px;
+    }
+    .next-prev-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
