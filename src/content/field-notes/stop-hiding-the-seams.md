@@ -1,7 +1,7 @@
 ---
 title: "Stop hiding the seams: on AI, authorship, and showing your work"
-date: 2026-07-27
-status: draft
+date: 2026-07-28
+status: published
 pillar: field-notes
 format: take
 authorship: duet
