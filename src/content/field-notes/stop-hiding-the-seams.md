@@ -18,7 +18,7 @@ Now the seam is impossible to hide, but most people are trying to hide it anyway
 
 **The seam is more useful than the smooth surface it's covering up.**
 
-If who-typed-it was never a reliable trust signal, the honest question is: what would be? I keep landing on the same answer — supervision. Who directed the work, what they checked before it went out, what they'd catch and what they'd miss. That's a real account of accountability, and unlike "I wrote every word," it's checkable. You can look at the commit history. You can see what changed between draft and publish. You can watch the editing happen instead of taking someone's word that it did.
+If who-typed-it was never a reliable trust signal, the honest question is: what would be? I keep landing on the same answer — supervision. Who directed the work, what they checked before it went out, what they'd catch and what they'd miss. That's real accountability, and unlike "I wrote every word," it's checkable. You can look at the commit history. You can see what changed between draft and publish. You can watch the editing happen instead of taking someone's word that it did.
 
 That's the trade this site is built around: instead of a footer disclaimer nobody reads and nobody can verify, the collaboration itself is on display — labeled, dated, and left open to inspection. Not because transparency is a nice value to gesture at, but because it's the only version of "trust me" that actually holds up when someone checks.
 
