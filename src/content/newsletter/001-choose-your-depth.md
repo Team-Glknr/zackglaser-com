@@ -23,6 +23,6 @@ The second is a completely separate project: the [build log behind this site](/w
 
 Neither of these exists because I'm unusually disciplined about information architecture. They exist because structuring a subject into real, navigable layers used to cost more time than almost anyone had free to spend — and AI assistance is what made building and maintaining that structure affordable enough to actually bother with. That's the whole update, not a grand claim about anything: some information is more fun to receive when you get to pick your own depth, and that's newly cheap enough to build for.
 
-That's the kind of thing this newsletter is going to keep an eye on going forward — not "did AI write this," but what having the help makes newly worth building around whatever gets written.
+That's the kind of thing this newsletter is going to keep an eye on going forward — not "did AI write this," instead we ask, "what can we do now?".
 
 — Zack
