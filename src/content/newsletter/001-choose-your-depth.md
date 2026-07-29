@@ -9,11 +9,13 @@ authorship: duet
 tags: [ai, structure, meta]
 ---
 
-I like being able to choose how deep I go into something. Some days I want the two-minute version — the take, the gist, someone else's judgment already applied. Other days I want to go all the way down and see the actual mess a decision came out of. Most published writing has only ever offered one of those, picked by the writer, not the reader.
+A conversation I recorded last week exists right now as a podcast episode, a YouTube video, a full transcript, and at least three short clips cut from the same hour. Same material, four different doors in. Pick the one that fits how you actually want to receive it today.
 
-AI is quietly changing that math, and I think it's mostly good news, not something to have a crisis about. It makes it newly practical to build more than one entry point into a subject, tuned to how much a given reader actually wants — which mostly just means information transfer gets to be more enjoyable, more curated to the person receiving it, instead of one size handed to everyone.
+That used to be a production budget problem. Now it's mostly a decision about whether to bother.
 
-Two things shipped on this site recently that show that two different ways — not two halves of one argument, just two separate examples of the same idea.
+The same logic applies to depth — not just which form, but how far in. Some days you want the two-minute version: the take, the gist, someone else's judgment already applied. Other days you want to go all the way down and see the actual mess a decision came out of. Most published information has only ever offered one of those, picked by the creator and handed to everyone the same way.
+
+Two things shipped on this site this week that show what that looks like — not two halves of one argument, just two separate examples of the same idea.
 
 The first is an essay: ["Stop hiding the seams"](/field-notes/stop-hiding-the-seams), a take on AI and authorship, written to be read start to finish in about five minutes. If that's all you want, that's the whole thing — you're done. But it also sits inside a bigger structure for anyone who wants more: the authorship stamp on every post, including that one, links to [the colophon](/how-this-site-is-made), which lays out the actual rules in plain terms, which itself links to the public repo and the literal instructions the AI works under. Skim the stamp. Read the colophon. Go read the source. Three depths, one subject — pick your floor.
 
@@ -21,6 +23,6 @@ The second is a completely separate project: the [build log behind this site](/w
 
 Neither of these exists because I'm unusually disciplined about information architecture. They exist because structuring a subject into real, navigable layers used to cost more time than almost anyone had free to spend — and AI assistance is what made building and maintaining that structure affordable enough to actually bother with. That's the whole update, not a grand claim about anything: some information is more fun to receive when you get to pick your own depth, and that's newly cheap enough to build for.
 
-That's the kind of thing this newsletter is going to keep an eye on going forward — not "did AI write this," but what having the help makes newly worth building around whatever gets written.
+That's the kind of thing this newsletter is going to keep an eye on going forward — not "did AI write this," instead we ask, "what can we do now?".
 
 — Zack
