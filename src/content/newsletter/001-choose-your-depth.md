@@ -9,6 +9,12 @@ authorship: duet
 tags: [ai, structure, meta]
 ---
 
+The question of whether or not people will use AI to make things is all but settled. It is a part of our lives now. It's in how we write, how we draw, how we sing, and how we paint. It is an embedded part of how we create and how we transfer information, whether you like it or not. But, and I think this is more important, it is also a part of how we ingest information, now.
+
+Arguments around whether or not AI use should be shamed, or somehow, inherently has less value, misses the point. AI is here. And it has fundamentally changed human communication. 
+
+For the first time (certainly in my life), we can communicate across multiple depths and pathways at the same time. Yes, we may lose some polish. But what we gain, if we approach it the right way, is a level of communication that could potentially be more honest---or at least, less proscribed and performative.
+
 I like being able to choose how deep I go into something. Some days I want the two-minute version — the take, the gist, someone else's judgment already applied. Other days I want to go all the way down and see the actual mess a decision came out of. Most published writing has only ever offered one of those, picked by the writer, not the reader.
 
 AI is quietly changing that math, and I think it's mostly good news, not something to have a crisis about. It makes it newly practical to build more than one entry point into a subject, tuned to how much a given reader actually wants — which mostly just means information transfer gets to be more enjoyable, more curated to the person receiving it, instead of one size handed to everyone.
