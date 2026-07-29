@@ -74,7 +74,7 @@ try {
           const pillarLabel = pillars.find((p) => p.id === issue.data.pillar)?.label ?? issue.data.pillar;
           const date = issue.data.date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
           return (
-            <a href={`/${issue.id}`} class="issue-row">
+            <a href={`/newsletter/${issue.id}`} class="issue-row">
               <div class="issue-left">
                 <span class="issue-no">{String(issue.data.newsletter).padStart(3, "0")}</span>
                 <div>
