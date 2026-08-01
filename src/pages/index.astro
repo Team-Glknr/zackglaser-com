@@ -94,9 +94,12 @@ for (const post of allPosts) {
 </Layout>
 
 <style>
+  :global(.page-shell) {
+    max-width: 1240px;
+  }
   .hero {
     max-width: 680px;
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-9);
   }
   .hero-text {
     font-family: var(--font-serif);
@@ -121,8 +124,8 @@ for (const post of allPosts) {
   .doors-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-4);
-    margin-bottom: var(--space-8);
+    gap: var(--space-5);
+    margin-bottom: var(--space-9);
   }
   .door-card {
     position: relative;
@@ -152,7 +155,7 @@ for (const post of allPosts) {
   }
   .door-label {
     font-family: var(--font-serif);
-    font-style: italic;
+    font-weight: 600;
     font-size: 20px;
   }
   .door-desc {
@@ -179,8 +182,8 @@ for (const post of allPosts) {
   .latest-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
-    margin-bottom: var(--space-8);
+    gap: var(--space-5);
+    margin-bottom: var(--space-9);
   }
   .post-card {
     background: var(--color-raised);
@@ -211,6 +214,7 @@ for (const post of allPosts) {
   }
   .post-title {
     font-family: var(--font-serif);
+    font-weight: 600;
     font-size: 20px;
     color: var(--color-ink);
     line-height: 1.3;

@@ -62,24 +62,30 @@ import { pillars } from "../lib/pillars";
     <a href="/newsletter" class="overlay-subscribe">[ subscribe ]</a>
   </div>
 </nav>
+<hr class="site-nav-rule" />
 
 <style>
   .site-nav {
     position: relative;
     display: flex;
     align-items: center;
-    gap: var(--space-6);
-    padding: 18px 28px;
-    background: var(--color-raised);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-card);
+    gap: 36px;
+    padding: 24px 32px 20px;
+    background: none;
+    border: none;
+    border-radius: 0;
+  }
+  .site-nav-rule {
+    border: none;
+    border-top: 1px solid var(--color-line);
+    margin: 0;
   }
 
   .wordmark {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 18px;
+    font-size: 22px;
     flex-shrink: 0;
     margin-right: var(--space-2);
     text-decoration: none;
@@ -155,7 +161,7 @@ import { pillars } from "../lib/pillars";
   }
 
   .wordmark-zack {
-    font-family: var(--font-serif);
+    font-family: var(--font-serif-logo);
     font-style: italic;
     font-weight: 500;
     letter-spacing: -0.01em;
@@ -170,7 +176,7 @@ import { pillars } from "../lib/pillars";
     color: var(--color-ink);
     text-decoration: none;
     font-family: var(--font-sans);
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 1;
     border-bottom: 1px solid transparent;
@@ -191,7 +197,7 @@ import { pillars } from "../lib/pillars";
   }
   .pillars-dropdown {
     position: absolute;
-    top: 28px;
+    top: 34px;
     left: 0;
     background: var(--color-raised);
     border: 1px solid var(--color-line);

@@ -13,9 +13,10 @@
   --pillar-workshop: #a6792e;
   --pillar-field-notes: #3f7a6e;
 
-  --font-serif: "Literata", serif;
+  --font-serif: "Source Serif 4", serif;
+  --font-serif-logo: "Literata", serif;
   --font-mono: "Space Mono", monospace;
-  --font-sans: "Archivo", sans-serif;
+  --font-sans: "Public Sans", sans-serif;
 
   --text-display-xl: 64px;
   --text-display: 48px;

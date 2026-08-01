@@ -50,14 +50,16 @@ const projectCards = await Promise.all(
 </Layout>
 
 <style>
+  :global(.page-shell) {
+    max-width: 1240px;
+  }
   .pillar-header {
     margin-bottom: var(--space-6);
     max-width: 640px;
   }
   .pillar-label {
     font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 36px;
     color: var(--color-ink);
     margin: 0 0 10px;
@@ -76,8 +78,8 @@ const projectCards = await Promise.all(
   .project-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
-    margin-bottom: var(--space-6);
+    gap: var(--space-5);
+    margin-bottom: var(--space-9);
   }
   .project-row {
     display: block;
@@ -110,9 +112,8 @@ const projectCards = await Promise.all(
   }
   .project-title {
     font-family: var(--font-serif);
-    font-style: italic;
     font-size: 22px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-ink);
   }
   .project-teaser {
