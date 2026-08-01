@@ -1,17 +1,17 @@
 /* Design tokens ported from docs/design-system/Style Guide.dc.html */
 
 :root {
-  --color-paper: #f2f4f6;
-  --color-raised: #fafbfc;
+  --color-paper: #faf9f5;
+  --color-raised: #ffffff;
   --color-ink: #1f2429;
   --color-ink-soft: #5b646e;
-  --color-line: #b0b8be;
-  --color-error: #c2295a;
+  --color-line: #e9e6dc;
+  --color-error: #9c3b2e;
 
-  --pillar-legal-tech: #693a79;
-  --pillar-running: #b23a3a;
+  --pillar-legal-tech: #38415a;
+  --pillar-running: #a8432a;
   --pillar-workshop: #a6792e;
-  --pillar-field-notes: #3f7d5c;
+  --pillar-field-notes: #3f7a6e;
 
   --font-serif: "Literata", serif;
   --font-mono: "Space Mono", monospace;
@@ -46,17 +46,17 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-paper: #161a1e;
-    --color-raised: #1f242a;
+    --color-paper: #1a1816;
+    --color-raised: #211e1b;
     --color-ink: #edf0f2;
     --color-ink-soft: #a0a9b3;
-    --color-line: #454e57;
-    --color-error: #e8698f;
+    --color-line: #3a362f;
+    --color-error: #e15c4f;
 
-    --pillar-legal-tech: #be8dce;
-    --pillar-running: #e1726c;
+    --pillar-legal-tech: #8c97be;
+    --pillar-running: #de8f6c;
     --pillar-workshop: #d9a857;
-    --pillar-field-notes: #6fbb94;
+    --pillar-field-notes: #7fc2b2;
   }
 }
 

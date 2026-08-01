@@ -14,12 +14,12 @@ const fontsDir = join(process.cwd(), "src/assets/og-fonts");
 const literataItalic500 = readFileSync(join(fontsDir, "literata-italic-500.woff"));
 const spaceMonoBold = readFileSync(join(fontsDir, "space-mono-bold.woff"));
 
-export const NEUTRAL = { raised: "#1f242a", ink: "#edf0f2", inkSoft: "#98a2ac" };
+export const NEUTRAL = { raised: "#211E1B", ink: "#edf0f2", inkSoft: "#a0a9b3" };
 export const PILLAR_ACCENT: Record<string, string> = {
-  "legal-tech": "#7c9bdb",
-  running: "#e1726c",
+  "legal-tech": "#8C97BE",
+  running: "#DE8F6C",
   workshop: "#d9a857",
-  "field-notes": "#6fbb94",
+  "field-notes": "#7FC2B2",
 };
 // "Default accent = workshop gold" — docs/05-favicon-marks.md §4.
 export const DEFAULT_ACCENT = PILLAR_ACCENT.workshop;
