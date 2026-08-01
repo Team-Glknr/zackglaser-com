@@ -92,8 +92,16 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
     <div class="chapter-nav-row">
       {prevChapter ? (
         <a href={`/workshop/${project.data.series}/chapters/${prevChapter.data.order}`} class="chapter-nav-card">
-          <div class="chapter-nav-label">← previous chapter</div>
-          <div class="chapter-nav-title">{prevChapter.data.title}</div>
+          <img
+            class="chapter-nav-img"
+            src={`/og/workshop-chapters/${project.data.series}/${prevChapter.data.order}.png`}
+            alt=""
+            loading="lazy"
+          />
+          <div class="chapter-nav-body">
+            <div class="chapter-nav-label">← previous chapter</div>
+            <div class="chapter-nav-title">{prevChapter.data.title}</div>
+          </div>
         </a>
       ) : (
         <div />
@@ -103,8 +111,16 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
           href={`/workshop/${project.data.series}/chapters/${nextChapter.data.order}`}
           class="chapter-nav-card chapter-nav-card-right"
         >
-          <div class="chapter-nav-label">next chapter →</div>
-          <div class="chapter-nav-title">{nextChapter.data.title}</div>
+          <img
+            class="chapter-nav-img"
+            src={`/og/workshop-chapters/${project.data.series}/${nextChapter.data.order}.png`}
+            alt=""
+            loading="lazy"
+          />
+          <div class="chapter-nav-body">
+            <div class="chapter-nav-label">next chapter →</div>
+            <div class="chapter-nav-title">{nextChapter.data.title}</div>
+          </div>
         </a>
       ) : (
         <div />
@@ -301,16 +317,27 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
     background: var(--color-raised);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
-    padding: var(--space-4) var(--space-5);
+    overflow: hidden;
     text-decoration: none;
     color: var(--color-ink);
     display: flex;
     flex-direction: column;
-    gap: 6px;
   }
   .chapter-nav-card-right {
     text-align: right;
     align-items: flex-end;
+  }
+  .chapter-nav-img {
+    width: 100%;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+    display: block;
+  }
+  .chapter-nav-body {
+    padding: var(--space-4) var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
   .chapter-nav-label {
     font-family: var(--font-mono);
