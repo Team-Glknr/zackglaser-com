@@ -37,7 +37,10 @@ const projectEntries = await getProjectEntries(project.data.series);
 const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.status === "published");
 ---
 
-<Layout title={`${chapter.data.title} — ${project.data.title} — zackglaser.com`}>
+<Layout
+  title={`${chapter.data.title} — ${project.data.title} — zackglaser.com`}
+  image={`/og/workshop-chapters/${project.data.series}/${chapter.data.order}.png`}
+>
   <div class="chapter-container" style="--accent:var(--pillar-workshop)">
     <a href={`/workshop/${project.data.series}`} class="breadcrumb">← {project.data.title} — project view</a>
 
