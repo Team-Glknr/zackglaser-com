@@ -260,19 +260,60 @@ const tickets = [
     <div class="booking-card">
       <div class="booking-card-title">For an event or a podcast</div>
       <div class="booking-card-sub">Keynote, CLE session, workshop, or a long-form conversation — in person or remote.</div>
-      <form class="form-grid">
-        <input class="form-input" placeholder="event / show name" />
-        <input class="form-input" placeholder="date (if known)" />
-        <input class="form-input form-input-full" placeholder="email" />
-        <button type="button" class="submit-btn">[ send ]</button>
+      <form class="form-grid" id="booking-form">
+        <input class="form-input" name="event" placeholder="event / show name" />
+        <input class="form-input" name="date" placeholder="date (if known)" />
+        <input class="form-input form-input-full" name="email" type="email" required placeholder="email" />
+        <button type="submit" class="submit-btn">[ send ]</button>
       </form>
+      <p class="form-status" id="booking-status" role="status" aria-live="polite"></p>
       <p class="affinity-line">
         Looking for hands-on consulting instead? That's Affinity's work, not this page's —{" "}
-        <a href="#" class="inline-link">reach out to the team</a>.
+        <a href="https://www.affinityconsulting.com/contact/" class="inline-link">reach out to the team</a>.
       </p>
     </div>
   </div>
 </Layout>
+
+<script>
+  const form = document.getElementById("booking-form") as HTMLFormElement | null;
+  const status = document.getElementById("booking-status");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    const submitBtn = form.querySelector<HTMLButtonElement>(".submit-btn");
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    status.dataset.state = "";
+    status.textContent = "sending…";
+    if (submitBtn) submitBtn.disabled = true;
+
+    try {
+      const res = await fetch("/api/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const body = await res.json();
+
+      if (res.ok) {
+        status.dataset.state = "ok";
+        status.textContent = "sent — I'll follow up by email.";
+        form.reset();
+      } else {
+        status.dataset.state = "error";
+        status.textContent = body.error || "couldn't send — try again.";
+      }
+    } catch {
+      status.dataset.state = "error";
+      status.textContent = "couldn't reach the server — try again.";
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+</script>
 
 <style>
   .speaking-page {
@@ -611,6 +652,18 @@ const tickets = [
   }
   .submit-btn:hover {
     border-color: var(--color-ink);
+  }
+  .form-status {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    margin: 0;
+    min-height: 1em;
+  }
+  .form-status[data-state="ok"] {
+    color: var(--pillar-field-notes);
+  }
+  .form-status[data-state="error"] {
+    color: var(--color-error);
   }
   .affinity-line {
     font-family: var(--font-sans);
