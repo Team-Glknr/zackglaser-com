@@ -95,22 +95,16 @@ const dateMeta = post.data.newsletter ? `${formattedDate} · issue ${post.data.n
         <div class="next-prev-row">
           {prevPost ? (
             <a href={`/${prevPost.id}`} class="next-prev-card">
-              <img class="next-prev-img" src={`/og/${prevPost.id}.png`} alt="" loading="lazy" />
-              <div class="next-prev-body">
-                <div class="next-prev-label">← previous</div>
-                <div class="next-prev-title">{prevPost.data.title}</div>
-              </div>
+              <div class="next-prev-label">← previous</div>
+              <div class="next-prev-title">{prevPost.data.title}</div>
             </a>
           ) : (
             <div />
           )}
           {nextPost ? (
             <a href={`/${nextPost.id}`} class="next-prev-card next-prev-card-right">
-              <img class="next-prev-img" src={`/og/${nextPost.id}.png`} alt="" loading="lazy" />
-              <div class="next-prev-body">
-                <div class="next-prev-label">next →</div>
-                <div class="next-prev-title">{nextPost.data.title}</div>
-              </div>
+              <div class="next-prev-label">next →</div>
+              <div class="next-prev-title">{nextPost.data.title}</div>
             </a>
           ) : (
             <div />
@@ -313,27 +307,16 @@ const dateMeta = post.data.newsletter ? `${formattedDate} · issue ${post.data.n
     background: var(--color-raised);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
-    overflow: hidden;
+    padding: var(--space-4) var(--space-5);
     text-decoration: none;
     color: var(--color-ink);
     display: flex;
     flex-direction: column;
+    gap: 6px;
   }
   .next-prev-card-right {
     text-align: right;
     align-items: flex-end;
-  }
-  .next-prev-img {
-    width: 100%;
-    aspect-ratio: 1200 / 630;
-    object-fit: cover;
-    display: block;
-  }
-  .next-prev-body {
-    padding: var(--space-4) var(--space-5);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
   }
   .next-prev-label {
     font-family: var(--font-mono);

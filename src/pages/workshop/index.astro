@@ -28,18 +28,15 @@ const projectCards = await Promise.all(
       <div class="project-list">
         {projectCards.map(({ project, stats }) => (
           <a href={`/workshop/${project.data.series}`} class="project-row">
-            <img class="project-row-img" src={`/og/workshop-projects/${project.data.series}.png`} alt="" loading="lazy" />
-            <div class="project-row-body">
-              <div class="project-row-top">
-                <span class="project-status">{project.data.status}</span>
-                <div class="project-title">{project.data.title}</div>
-              </div>
-              <p class="project-teaser">{project.data.teaser}</p>
-              <div class="project-stats">
-                <span>{stats.totalChapters} chapters</span>
-                <span>{stats.totalEntries} entries</span>
-                <span>{project.data.cost}</span>
-              </div>
+            <div class="project-row-top">
+              <span class="project-status">{project.data.status}</span>
+              <div class="project-title">{project.data.title}</div>
+            </div>
+            <p class="project-teaser">{project.data.teaser}</p>
+            <div class="project-stats">
+              <span>{stats.totalChapters} chapters</span>
+              <span>{stats.totalEntries} entries</span>
+              <span>{project.data.cost}</span>
             </div>
           </a>
         ))}
@@ -83,28 +80,16 @@ const projectCards = await Promise.all(
     margin-bottom: var(--space-6);
   }
   .project-row {
-    display: flex;
-    align-items: flex-start;
+    display: block;
+    padding: var(--space-5);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
     background: var(--color-raised);
     text-decoration: none;
     color: var(--color-ink);
-    overflow: hidden;
   }
   .project-row:hover {
     background: var(--color-paper);
-  }
-  .project-row-img {
-    width: 240px;
-    height: 126px;
-    flex-shrink: 0;
-    object-fit: cover;
-    display: block;
-  }
-  .project-row-body {
-    padding: var(--space-5);
-    min-width: 0;
   }
   .project-row-top {
     display: flex;
@@ -148,14 +133,6 @@ const projectCards = await Promise.all(
   @media (max-width: 560px) {
     .pillar-label {
       font-size: 28px;
-    }
-    .project-row {
-      flex-direction: column;
-    }
-    .project-row-img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 1200 / 630;
     }
   }
 </style>
