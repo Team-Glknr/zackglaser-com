@@ -75,5 +75,7 @@ tags: []
 - 023 — The speaking page, and pulling the placeholders (brief §9 resolved and built; headshot and testimonials dropped rather than placeholder'd, clip quotes kept as text, episode count/Affinity URL/booking backend still pending) ✓
 - 024 — The colophon: /how-this-site-is-made ships (docs/04-ai-first.md §8's last checklist item; real links throughout, including the now-published "Stop hiding the seams" essay) ✓
 - 025 — The footer's elsewhere column, for real: Lawyerist Podcast, a real /rss.xml feed, LinkedIn and GitHub in place of email ✓
-- 026 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 027 — Launch
+- 026 — The OG mechanism, made general: project and chapter pages get real social images, noticed while working on a different workshop project entirely ✓
+- 027 — Thumbnails on the cards, not just the meta tags: OG images surfaced on every boxed card site-wide (Hub, /workshop, prev/next nav); compact list-rows left text-only ✓
+- 028 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 029 — Launch
