@@ -1,0 +1,129 @@
+---
+// GitHub on-ramp — docs/03-github-onramp.md. Replaces the old inline
+// "suggest an edit" line and Comments.astro's intro note with one
+// three-step component: read the history, react (comment), contribute
+// (edit). Mounted on both post templates ([...id].astro and
+// newsletter/[...id].astro) via the entry's filePath.
+interface Props {
+  filePath: string;
+}
+const { filePath } = Astro.props;
+
+const readUrl = `https://github.com/thirdth/zackglaser-com/commits/main/${filePath}`;
+const contributeUrl = `https://github.com/thirdth/zackglaser-com/edit/main/${filePath}`;
+const reactHref = "#comments";
+---
+
+<div class="github-onramp">
+  <a href={readUrl} class="onramp-item">
+    <span class="onramp-head">
+      <svg class="onramp-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4,6 H11 V18 H4 Z" stroke-width="1.25" stroke-linecap="square" />
+        <path d="M13,6 H20 V18 H13 Z" stroke-width="1.25" stroke-linecap="square" />
+      </svg>
+      <span class="onramp-label">read</span>
+    </span>
+    <span class="onramp-subline">every change to this page, ever</span>
+  </a>
+
+  <span class="onramp-divider" aria-hidden="true">—</span>
+
+  <a href={reactHref} class="onramp-item">
+    <span class="onramp-head">
+      <svg class="onramp-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4,5 H20 V16 H10 L6,20 V16 H4 Z" stroke-width="1.25" stroke-linecap="square" />
+      </svg>
+      <span class="onramp-label">react</span>
+    </span>
+    <span class="onramp-subline">comment—you'll need a free GitHub account</span>
+  </a>
+
+  <span class="onramp-divider" aria-hidden="true">—</span>
+
+  <a href={contributeUrl} class="onramp-item">
+    <span class="onramp-head">
+      <svg class="onramp-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M8,5 V9 L12,13 V19 M16,5 V9 L12,13" stroke-width="1.25" stroke-linecap="square" />
+        <rect x="6" y="3" width="4" height="4" stroke-width="1.25" fill="none" />
+        <rect x="14" y="3" width="4" height="4" stroke-width="1.25" fill="none" />
+        <rect x="10" y="17" width="4" height="4" stroke-width="1.25" fill="none" />
+      </svg>
+      <span class="onramp-label">contribute</span>
+    </span>
+    <span class="onramp-subline">spot something? GitHub writes the pull request for you</span>
+  </a>
+</div>
+
+<style>
+  .github-onramp {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-6);
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: var(--space-5) var(--space-6);
+    margin-bottom: var(--space-9);
+  }
+  .onramp-item {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: opacity var(--motion-fast);
+  }
+  .onramp-item:hover {
+    opacity: 0.7;
+  }
+  .onramp-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .onramp-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    stroke: var(--color-ink);
+  }
+  .onramp-label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-ink);
+  }
+  .onramp-subline {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    margin-top: 4px;
+    margin-left: calc(24px + var(--space-2));
+  }
+  .onramp-divider {
+    align-self: center;
+    color: var(--color-line);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 680px) {
+    .github-onramp {
+      background: none;
+      border: none;
+      border-radius: 0;
+      padding: var(--space-5) 0 0;
+      border-top: 1px solid var(--color-line);
+      gap: var(--space-3);
+    }
+    .onramp-subline {
+      display: none;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .github-onramp {
+      gap: var(--space-2);
+    }
+    .onramp-label {
+      font-size: 12px;
+    }
+  }
+</style>

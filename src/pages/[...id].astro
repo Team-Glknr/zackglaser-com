@@ -8,6 +8,7 @@ import Layout from "../layouts/Layout.astro";
 import NewsletterCard from "../components/NewsletterCard.astro";
 import AuthorshipStamp from "../components/AuthorshipStamp.astro";
 import Comments from "../components/Comments.astro";
+import GithubOnramp from "../components/GithubOnramp.astro";
 import { pillars } from "../lib/pillars";
 import { findEntryChapter } from "../lib/buildLog";
 
@@ -78,17 +79,7 @@ const dateMeta = post.data.newsletter ? `${formattedDate} · issue ${post.data.n
       <AuthorshipStamp authorship={post.data.authorship} />
     </div>
 
-    {
-      post.filePath && (
-        <p class="edit-line">
-          Spot a typo or a bad take?{" "}
-          <a href={`https://github.com/thirdth/zackglaser-com/edit/main/${post.filePath}`} class="inline-link">
-            Suggest an edit
-          </a>{" "}
-          — no coding required; GitHub will walk you through it.
-        </p>
-      )
-    }
+    {post.filePath && <GithubOnramp filePath={post.filePath} />}
 
     {
       (prevPost || nextPost) && (
@@ -276,23 +267,6 @@ const dateMeta = post.data.newsletter ? `${formattedDate} · issue ${post.data.n
     color: var(--color-ink-soft);
     line-height: 1.5;
     max-width: 420px;
-  }
-
-  .edit-line {
-    font-family: var(--font-sans);
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--color-ink-soft);
-    margin: 0 0 var(--space-9);
-  }
-  .edit-line .inline-link {
-    color: var(--color-ink-soft);
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-line);
-  }
-  .edit-line .inline-link:hover {
-    color: var(--color-ink);
-    border-bottom-color: var(--color-ink);
   }
 
   .next-prev-row {

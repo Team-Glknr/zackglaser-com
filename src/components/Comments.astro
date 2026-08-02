@@ -3,6 +3,8 @@
 // src/pages/[...id].astro with the real repo-id/category-id from the
 // giscus app install + "Comments" Discussion category on thirdth/zackglaser-com.
 // Zero client JS shipped by us; the script below is giscus's own, lazy-loaded.
+// Intro messaging now lives in GithubOnramp.astro's "react" step, which
+// anchor-links to this section's id — keep the id in sync with that href.
 interface Props {
   repoId: string;
   categoryId: string;
@@ -10,10 +12,7 @@ interface Props {
 const { repoId, categoryId } = Astro.props;
 ---
 
-<section class="comments">
-  <p class="comments-note">
-    Comments run on GitHub Discussions. You'll need a (free) GitHub account — which is rather the point around here.
-  </p>
+<section class="comments" id="comments">
   <script
     is:inline
     src="https://giscus.app/client.js"
@@ -35,11 +34,5 @@ const { repoId, categoryId } = Astro.props;
 <style>
   .comments {
     margin-bottom: var(--space-8);
-  }
-  .comments-note {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-ink-soft);
-    margin: 0 0 var(--space-4);
   }
 </style>
