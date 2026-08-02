@@ -3,6 +3,8 @@
 // against the real account's own generated snippet, not just the generic docs.
 // `tag` (optional) records where the signup came from, for the pillar-crossover
 // metric in brief §10.
+import TextInput from "./TextInput.astro";
+import BracketButton from "./BracketButton.astro";
 interface Props {
   eyebrow?: string;
   tag?: string;
@@ -19,9 +21,9 @@ const { eyebrow = "knolling — the newsletter", tag } = Astro.props;
     class="embeddable-buttondown-form newsletter-form-row"
   >
     <label for="bd-email-card" class="sr-only">Enter your email</label>
-    <input type="email" name="email" id="bd-email-card" required class="newsletter-input" placeholder="you@email.com" />
+    <TextInput type="email" name="email" id="bd-email-card" required size="md" placeholder="you@email.com" />
     {tag && <input type="hidden" name="tag" value={tag} />}
-    <button type="submit" class="subscribe-btn">[ subscribe ]</button>
+    <BracketButton type="submit" size="sm">subscribe</BracketButton>
   </form>
   <a href="https://buttondown.com/refer/knolling" target="_blank" rel="noopener" class="powered-by">
     Powered by Buttondown.
@@ -58,31 +60,6 @@ const { eyebrow = "knolling — the newsletter", tag } = Astro.props;
     display: flex;
     gap: var(--space-3);
     max-width: 420px;
-  }
-  .newsletter-input {
-    flex: 1;
-    min-width: 0;
-    background: var(--color-paper);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-input);
-    padding: 10px 14px;
-    font-family: var(--font-sans);
-    font-size: 14px;
-    color: var(--color-ink);
-  }
-  .subscribe-btn {
-    background: transparent;
-    border: 1px solid var(--color-line);
-    color: var(--color-ink);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    cursor: pointer;
-    padding: 8px 14px;
-    border-radius: var(--radius-input);
-    flex-shrink: 0;
-  }
-  .subscribe-btn:hover {
-    border-color: var(--color-ink);
   }
   .powered-by {
     font-family: var(--font-mono);
