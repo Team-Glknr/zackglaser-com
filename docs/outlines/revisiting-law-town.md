@@ -188,4 +188,8 @@ the more mainstream-reachable version of the same underlying capability.
 - ~~Subheads vs. continuous prose, for SEO/AEO~~ — resolved 2026-08-02: true
   H2 subheads, five of them, listed under Structure above. Deliberate
   departure from the field-notes take's headerless precedent.
-- ~~Target word count~~ — resolved 2026-08-02: 800–1,000 words.
+- ~~Target word count~~ — resolved 2026-08-02: 800–1,000 words, revised
+  same day to ~1,100–1,200 once the draft ran long by the time it reached
+  the guardrails section — letting it run rather than compressing the SOP
+  material (Sam's quote, the "brief a new hire" framing, the practical
+  on-ramp) to fit an arbitrary cap.
