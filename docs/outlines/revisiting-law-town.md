@@ -23,11 +23,15 @@ wrong," it's "here's what most people haven't clocked yet."
 
 ## Structure
 
-Remapped 2026-08-02 onto docs/09-writing-voice.md's five-part shape. Whether
-this renders with true subheads or stays continuous prose with bolded inline
-signposts (matching the field-notes take's precedent) is still open — see
-below. Either way, these five parts are the argument's skeleton, not
-necessarily what prints on the page.
+Remapped 2026-08-02 onto docs/09-writing-voice.md's five-part shape. **Decided
+2026-08-02: this piece uses true H2 subheads**, not continuous prose — a
+deliberate exception to the one house precedent (the field-notes take runs
+headerless), made for SEO/AEO: this is a search-and-cite-shaped topic
+("is Claude's Microsoft 365 connector safe," "how do lawyers use AI
+connectors"), and headers are the chunk boundary an answer engine actually
+extracts from. Opening and Ending stay unheaded — a header before the hook or
+one literally labeled "Conclusion" would be exactly the formulaic scaffolding
+the style guide warns against.
 
 ### 1. Opening
 
@@ -45,6 +49,8 @@ line personally. Land the thesis fast.
 
 ### 2. Reframing
 
+**H2: "The Forecast Was Right. The Tools Weren't There Yet."**
+
 Why "Mayor of Law Town" read as sci-fi in January: not wrong, just built on
 tools that lived in an engineer's world (Claude Code, Cowork, Antigravity —
 same territory as Yegge's Gas Town, which he explicitly gates to "Stage 6-7"
@@ -55,38 +61,50 @@ reached "everyday attorney" faster than most people's mental model of it did.
 
 ### 3. Development
 
-Two moves:
+**H2: "The Connector Went Free. Claude Moved into Word and Outlook."**
 
-- **The pivot — what actually shipped.** Bar moved from "run a terminal" to
-  "have an Outlook account." (See research notes below for exact timeline.)
-- **Make it concrete: the demand letter.** From the Lawyerist episode (Sam
-  Harden transcript, ~41:32–44:26): Zack walks through drafting a demand
-  letter live — a SharePoint connector points Claude at the client's
-  discovery folder, an off-the-shelf skill from the Claude-for-Legal GitHub
-  plugin drafts the letter, and then one plain-English correction ("I'm in
-  Tennessee, I always want you to draft this with a Tennessee jurisdiction —
-  can you change that portion of the skill?") turns a generic template into
-  the firm's own version. Use this over a hypothetical: it chains
-  connector → skill → correction in one breath, using the exact category of
-  tool the piece is about, not an adjacent one.
+The pivot — what actually shipped. Bar moved from "run a terminal" to "have
+an Outlook account." (See research notes below for exact timeline.)
+
+**H2: "A Demand Letter, Start to Finish"**
+
+Make it concrete. From the Lawyerist episode (Sam Harden transcript,
+~41:32–44:26): Zack walks through drafting a demand letter live — a
+SharePoint connector points Claude at the client's discovery folder, an
+off-the-shelf skill from the Claude-for-Legal GitHub plugin drafts the
+letter, and then one plain-English correction ("I'm in Tennessee, I always
+want you to draft this with a Tennessee jurisdiction — can you change that
+portion of the skill?") turns a generic template into the firm's own version.
+Use this over a hypothetical: it chains connector → skill → correction in
+one breath, using the exact category of tool the piece is about, not an
+adjacent one.
 
 ### 4. Application
 
-- **Guardrail details as part of the translation, not a caveat.** Tenant-bound
-  data, write access off by default, admin approval required — the texture a
-  vision-level pitch skips, and what makes it legible as "a setting" rather
-  than "a leap of faith."
-- **Practical next steps**, led by Sam's own rule from the transcript:
-  *"if you don't have good SOPs for how you do your work right now, it's not
-  the best idea to go into Claude and start creating a bunch of skills to do
-  different things. Get SOPs first."* His test for a good one: write it the
-  way you'd brief "a new person in your office who was really smart, but
-  needed direction." Pair with Zack's own line from the same conversation —
-  "if you just use AI to enhance a shitty process, it's just gonna do that
-  process faster" — as the one-sentence version of why this order matters.
-  Concrete on-ramp from there: turn on read-only first, test on a closed
-  matter, treat output like a fast first-year associate's draft, don't flip
-  on send/write permissions firm-wide without a supervision policy.
+**H2: "Is This Safe for Confidential Client Data?"**
+
+Guardrail details as part of the translation, not a caveat. Tenant-bound
+data, write access off by default, admin approval required — the texture a
+vision-level pitch skips, and what makes it legible as "a setting" rather
+than "a leap of faith." The one deliberate question-style header in the
+piece — it mirrors how someone would actually phrase this to a search engine
+or an AI assistant, and the section resolves it rather than gesturing at it,
+which is what earns it the question form (see docs/09-writing-voice.md's
+rule on when a question is allowed to carry a section).
+
+**H2: "Get Your SOPs First"**
+
+Practical next steps, led by Sam's own rule from the transcript: *"if you
+don't have good SOPs for how you do your work right now, it's not the best
+idea to go into Claude and start creating a bunch of skills to do different
+things. Get SOPs first."* His test for a good one: write it the way you'd
+brief "a new person in your office who was really smart, but needed
+direction." Pair with Zack's own line from the same conversation — "if you
+just use AI to enhance a shitty process, it's just gonna do that process
+faster" — as the one-sentence version of why this order matters. Concrete
+on-ramp from there: turn on read-only first, test on a closed matter, treat
+output like a fast first-year associate's draft, don't flip on send/write
+permissions firm-wide without a supervision policy.
 
 ### 5. Ending
 
@@ -122,17 +140,9 @@ the more mainstream-reachable version of the same underlying capability.
 - ~~Concrete example for Development~~ — resolved: the demand-letter walkthrough from the transcript.
 - ~~Whether/how to pull from the Sam Harden podcast transcript~~ — resolved: used for Development and Application.
 - How much of Sam as a named, quoted source vs. folded-in-unattributed paraphrase — he's a coworker, so keep references plain and functional (this piece cites him the way it would cite any writer whose work is on point) rather than either over-crediting or going quiet about the connection.
-- **Subheads vs. continuous prose, for SEO/AEO.** True headers help both —
-  they're the natural chunk boundary an AI answer engine pulls a citable
-  passage from, and they help search engines parse topical structure. But the
-  site's one published "take" runs as a headerless continuous essay, and
-  docs/09-writing-voice.md itself says structure should be "driven by the
-  idea, not imposed by a template." Recommendation: keep it headerless, but
-  use a bolded inline signpost sentence or two (the way the field-notes piece
-  uses "**The seam is more useful than the smooth surface it's covering
-  up.**") at the Reframing and Ending turns — gets some of the
-  scannability/chunk-boundary benefit without breaking the take format's
-  identity. Pending Zack's call.
+- ~~Subheads vs. continuous prose, for SEO/AEO~~ — resolved 2026-08-02: true
+  H2 subheads, five of them, listed under Structure above. Deliberate
+  departure from the field-notes take's headerless precedent.
 - **Target word count** — not yet set. The one published take runs ~750
   words with no subheads; this piece covers more ground (two source pieces,
   a timeline, a worked example) so may want more room. Pending Zack.
