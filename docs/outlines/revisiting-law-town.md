@@ -70,8 +70,17 @@ accessible to most attorneys." Also: don't re-name "Welcome to Law Town" here
 
 **H2: "The Connector Went Free. Claude Moved into Word and Outlook."**
 
-The pivot — what actually shipped. Bar moved from "run a terminal" to "have
-an Outlook account." (See research notes below for exact timeline.)
+Sharpened 2026-08-02, per Zack: the finer point isn't that a new AI
+capability shipped — coders could always read/write files and run Skills via
+Claude Code/Cowork. What actually changed is who can walk through that door
+and which door they use: an ordinary attorney ("Jamie Attorney"), with
+nothing but Claude Chat and an admin's approval, can now read and write
+client files via the connector (write access shipped July 2026 — see
+research notes) and, more importantly for the "Law Town" crowd, run Skills
+against those Microsoft 365 files without touching Cowork or Code at all.
+This section now absorbs the July write-access milestone, so it covers all
+four releases (Oct/April/May/July) and lands the "same AI, new door" point.
+Full drafted text lives in the post file / chat log, not duplicated here.
 
 **H2: "A Demand Letter, Start to Finish"**
 
@@ -90,14 +99,20 @@ adjacent one.
 
 **H2: "Is This Safe for Confidential Client Data?"**
 
-Guardrail details as part of the translation, not a caveat. Tenant-bound
-data, write access off by default, admin approval required — the texture a
-vision-level pitch skips, and what makes it legible as "a setting" rather
-than "a leap of faith." The one deliberate question-style header in the
-piece — it mirrors how someone would actually phrase this to a search engine
-or an AI assistant, and the section resolves it rather than gesturing at it,
-which is what earns it the question form (see docs/09-writing-voice.md's
-rule on when a question is allowed to carry a section).
+Development now covers the July write-access announcement, so this section
+opens straight on the guardrails rather than re-announcing anything: admin
+has to re-consent to the updated permission set, org has to turn write tools
+on per account (blocked by default otherwise), Teams stays read-only no
+matter what, data is tenant-bound and not cached, and — the sharpest detail —
+Claude can never exceed the Microsoft 365 permissions of the person it's
+acting for. No SharePoint access for the human, none for Claude either. This
+is the texture a vision-level pitch skips, and what makes it legible as "a
+setting" rather than "a leap of faith." The one deliberate question-style
+header in the piece — it mirrors how someone would actually phrase this to a
+search engine or an AI assistant, and the section resolves it rather than
+gesturing at it, which is what earns it the question form (see
+docs/09-writing-voice.md's rule on when a question is allowed to carry a
+section).
 
 **H2: "Get Your SOPs First"**
 
@@ -119,23 +134,46 @@ The forecast held up; what's lagging is everyone's sense of how close it
 already is. Sharper than "here's what's coming" — return to the scaffolding
 image from the opening if it earns a second look.
 
-## Research notes (grounding for §3/§6, so it isn't re-researched at draft time)
+## Research notes (grounding for Development/Application, so it isn't
+re-researched at draft time)
 
-Two separate Anthropic releases get conflated in casual conversation — worth
-keeping distinct in the piece:
+Three separate Anthropic releases get conflated in casual conversation —
+worth keeping distinct in the piece, and worth getting the sequence right
+since it's the actual six-month timeline the piece is arguing from:
 
-- **Microsoft 365 connector**: read/write access to SharePoint, OneDrive,
-  Outlook, Teams via delegated Microsoft Graph permissions. Enterprise-only at
-  launch (Oct 2025) → expanded to all plans including Free (April 2026). Data
-  stays tenant-bound, not cached; write scopes (`Mail.Send`, `Files.ReadWrite.All`)
-  blocked by default even where available — an org has to opt in deliberately.
-  Admin approval + Entra tenant auth required; supports conditional access
-  (MFA, device compliance). Anthropic holds SOC 2 Type II, ISO 27001, GDPR.
-  ([security guide](https://support.claude.com/en/articles/12684923-microsoft-365-connector-security-guide), [UC Today coverage](https://www.uctoday.com/productivity-automation/anthropic-expands-claude-microsoft-365-integration-for-all-user-plans/))
-- **Claude for Word/Excel/PowerPoint** (GA) **+ Outlook** (public beta) —
-  shipped May 7, 2026. Claude runs as one persistent agent across the four
-  apps, carrying conversation context as you move between an email, a doc,
-  and a spreadsheet without re-explaining the work in progress.
+- **Oct 2025** — Microsoft 365 connector launches. Enterprise-only,
+  **read-only**: search/read across SharePoint, OneDrive, Outlook, Teams via
+  delegated Microsoft Graph permissions.
+- **April 2026** — connector expands to all plans (Free, Pro, Max, Team,
+  Enterprise). Still read-only at this point.
+- **May 7, 2026** — separate release: Claude add-ins for Word, Excel,
+  PowerPoint go GA, Outlook joins in beta. Claude runs as one persistent
+  agent across the four apps, carrying conversation context as you move
+  between an email, a doc, and a spreadsheet without re-explaining the work
+  in progress.
+- **July 7, 2026** — the connector gets **write access**, across all plans:
+  send email, manage drafts and calendar events, update mailbox settings,
+  create/update files in OneDrive and SharePoint. This is the milestone that
+  actually operationalizes Sam's "workflow execution" idea, not just
+  visibility into case files. Requires deliberate admin action, not
+  automatic: a Microsoft Entra admin has to re-consent to the updated
+  permission set, then the org has to turn on write tools per account. Orgs
+  that were already connected before write tools launched have them blocked
+  by default until an admin opts in. Teams stays read-only regardless —
+  Claude can pull context from a Teams channel but can't post to one.
+  Critically: Claude can never exceed the M365 permissions of the person
+  it's acting on behalf of — no access to a SharePoint site for the human,
+  none for Claude either. Data stays tenant-bound, not cached. Anthropic
+  holds SOC 2 Type II, ISO 27001, GDPR.
+  ([security guide](https://support.claude.com/en/articles/12684923-microsoft-365-connector-security-guide),
+  [setup/plan-availability doc](https://support.claude.com/en/articles/12542951-set-up-the-microsoft-365-connector),
+  [UC Today coverage of the April expansion](https://www.uctoday.com/productivity-automation/anthropic-expands-claude-microsoft-365-integration-for-all-user-plans/))
+
+~~Decision on where July write access goes~~ — resolved 2026-08-02: "The
+Connector Went Free. Claude Moved into Word and Outlook." now covers all four
+releases (Oct/April/May/July), framed around who gets access rather than
+what's newly possible. "Is This Safe for Confidential Client Data?" opens
+straight on guardrails instead.
 
 Sam's specific examples in "Law Town" (timeline generation from medical
 records, discovery-email triage, appellate-transcript analysis) all ran on
