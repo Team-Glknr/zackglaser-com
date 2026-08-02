@@ -55,9 +55,16 @@ Why "Mayor of Law Town" read as sci-fi in January: not wrong, just built on
 tools that lived in an engineer's world (Claude Code, Cowork, Antigravity —
 same territory as Yegge's Gas Town, which he explicitly gates to "Stage 6-7"
 developers). Reasonable to have filed it as "interesting thought experiment,
-check back in a few years." The actual distinction to draw: the gap that's
-closed since isn't a technology gap, it's a comprehension gap — the tooling
-reached "everyday attorney" faster than most people's mental model of it did.
+check back in a few years." The actual distinction to draw: the gap wasn't a
+technology gap, it's a comprehension gap — and unlike the first draft's
+"that's the part worth naming precisely" framing (flagged as overused
+phrasing, avoid repeating it), land this as an ongoing, present-tense close
+rather than a completed one: the gap is *closing*, not closed. Working line
+from Zack, 2026-08-02: "More and more, that comprehension gap is starting to
+close. The technology, obfuscated behind a terminal, is now easily
+accessible to most attorneys." Also: don't re-name "Welcome to Law Town" here
+— it's already introduced in the Opening, so this section should refer to
+"Sam's piece"/"his post," not reintroduce the title.
 
 ### 3. Development
 
