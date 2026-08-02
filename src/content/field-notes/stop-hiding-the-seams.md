@@ -6,6 +6,7 @@ pillar: field-notes
 format: take
 authorship: duet
 tags: [ai, authorship, transparency]
+teaser: "If who-typed-it was never a reliable signal of trust, the honest question is what would be — and the answer is showing the process, not hiding it."
 ---
 
 For most of the internet's life, "who wrote this" has stood in for a question we actually cared about: can I trust it? One name at the top of a post was supposed to mean one person's judgment, one person's research, one person's mistakes to own. We built an entire culture of bylines and bios around that proxy.

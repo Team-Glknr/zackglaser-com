@@ -11,6 +11,9 @@ const postSchema = z.object({
   format: z.enum(['teardown', 'log', 'take']),
   series: z.string().optional(),
   newsletter: z.number().optional(),
+  // Shown on pillar-page cards, same role as a project's teaser. Optional so
+  // it doesn't retroactively break posts/issues written before this existed.
+  teaser: z.string().optional(),
   // Provenance, not a third axis — who typed it, never drives navigation. docs/04-ai-first.md §3.
   authorship: z.enum(['human', 'duet', 'bot']),
   tags: z.array(z.string()).default([]),

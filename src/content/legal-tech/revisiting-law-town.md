@@ -5,6 +5,7 @@ status: published
 pillar: legal-tech
 format: take
 authorship: duet
+teaser: "Six months after Sam Harden's Welcome to Law Town, the tooling caught up faster than anyone's sense of it — what actually shipped, and how to use it without getting yourself in trouble."
 ---
 
 I spend a significant part of my day building scaffolding these days. Yes, I run bots and agents—plenty of them. But most of the actual work is building the infrastructure they operate inside: the permissions, the templates, the guardrails that decide what an agent can touch on its own and what it has to hand back to me.
