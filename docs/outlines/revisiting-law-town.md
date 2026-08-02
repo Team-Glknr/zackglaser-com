@@ -143,6 +143,4 @@ the more mainstream-reachable version of the same underlying capability.
 - ~~Subheads vs. continuous prose, for SEO/AEO~~ — resolved 2026-08-02: true
   H2 subheads, five of them, listed under Structure above. Deliberate
   departure from the field-notes take's headerless precedent.
-- **Target word count** — not yet set. The one published take runs ~750
-  words with no subheads; this piece covers more ground (two source pieces,
-  a timeline, a worked example) so may want more room. Pending Zack.
+- ~~Target word count~~ — resolved 2026-08-02: 800–1,000 words.
