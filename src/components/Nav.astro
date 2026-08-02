@@ -8,10 +8,33 @@ import { pillars } from "../lib/pillars";
 <nav class="site-nav">
   <a href="/" class="wordmark">
     <svg class="nav-mark" viewBox="-24 -24 80 80" width="44" height="44" aria-hidden="true">
-      <g class="mark-part p1"><rect x="1" y="1" width="13" height="13" rx="1.5" class="mark-ink" /></g>
-      <g class="mark-part p2"><rect x="18" y="1" width="13" height="13" rx="1.5" class="mark-ink" /></g>
-      <g class="mark-part p3"><rect x="1" y="18" width="13" height="13" rx="1.5" class="mark-ink" /></g>
-      <g class="mark-part p4"><rect x="18" y="18" width="13" height="13" rx="1.5" class="mark-accent" /></g>
+      <g class="mark-part p1">
+        <circle cx="8" cy="8" r="7" class="mark-ink" /><rect x="6.9" y="4" width="2.2" height="8" class="mark-paper" /><rect
+          x="4"
+          y="6.9"
+          width="8"
+          height="2.2"
+          class="mark-paper"
+        />
+      </g>
+      <g class="mark-part p2">
+        <circle cx="24" cy="8" r="7" class="mark-ink" /><rect x="20" y="6.9" width="8" height="2.2" class="mark-paper" />
+      </g>
+      <g class="mark-part p3">
+        <circle cx="8" cy="24" r="7" class="mark-ink" /><polygon
+          points="8,19.5 9.1,22.1 11.9,21.75 10.2,24 11.9,26.25 9.1,25.9 8,28.5 6.9,25.9 4.1,26.25 5.8,24 4.1,21.75 6.9,22.1"
+          class="mark-paper"
+        />
+      </g>
+      <g class="mark-part p4">
+        <circle cx="24" cy="24" r="7" class="mark-accent" /><rect
+          x="21.2"
+          y="21.2"
+          width="5.6"
+          height="5.6"
+          class="mark-paper"
+        />
+      </g>
     </svg>
     <span class="wordmark-zack">zack</span><span class="wordmark-glaser">glaser</span>
   </a>
@@ -102,7 +125,10 @@ import { pillars } from "../lib/pillars";
     fill: var(--color-ink);
   }
   .mark-accent {
-    fill: var(--pillar-workshop);
+    fill: var(--pillar-running);
+  }
+  .mark-paper {
+    fill: var(--color-paper);
   }
   .mark-part {
     transform-box: fill-box;

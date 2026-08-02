@@ -77,5 +77,6 @@ tags: []
 - 025 — The footer's elsewhere column, for real: Lawyerist Podcast, a real /rss.xml feed, LinkedIn and GitHub in place of email ✓
 - 026 — The OG mechanism, made general: project and chapter pages get real social images, noticed while working on a different workshop project entirely ✓
 - 027 — Thumbnails on the cards, not just the meta tags: OG images surfaced on every boxed card site-wide (Hub, /workshop, prev/next nav); compact list-rows left text-only ✓
-- 028 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 029 — Launch
+- 028 — One mark, not two: the new four-circle mark replaces Mark A and Mark B site-wide; Mark B retired and deleted (docs/05-favicon-marks.md rewritten) ✓
+- 029 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 030 — Launch
