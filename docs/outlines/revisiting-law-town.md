@@ -61,7 +61,7 @@ technology gap, it's a comprehension gap — and unlike the first draft's
 phrasing, avoid repeating it), land this as an ongoing, present-tense close
 rather than a completed one: the gap is *closing*, not closed. Working line
 from Zack, 2026-08-02: "More and more, that comprehension gap is starting to
-close. The technology, obfuscated behind a terminal, is now easily
+close. The technology, previously obfuscated behind a terminal, is now easily
 accessible to most attorneys." Also: don't re-name "Welcome to Law Town" here
 — it's already introduced in the Opening, so this section should refer to
 "Sam's piece"/"his post," not reintroduce the title.
