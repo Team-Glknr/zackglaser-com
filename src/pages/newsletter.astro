@@ -11,6 +11,10 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import EmptyState from "../components/EmptyState.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import TextInput from "../components/TextInput.astro";
+import BracketButton from "../components/BracketButton.astro";
+import Chip from "../components/Chip.astro";
 import { pillars } from "../lib/pillars";
 
 // src/content/newsletter/ is empty pre-launch (just .gitkeep) — Astro's
@@ -32,7 +36,7 @@ try {
   description="One issue, one thing taken apart. The subject rotates across legal tech, running, and the workshop; the method never does. Weekly-ish, free, no fluff."
 >
   <div class="hero">
-    <div class="eyebrow">the newsletter</div>
+    <SectionLabel size={12}>the newsletter</SectionLabel>
     <h1 class="h1">Knolling</h1>
     <p class="dek">
       One issue, one thing taken apart — a piece of legal software, a training block, a workbench, an idea. The
@@ -45,26 +49,27 @@ try {
       class="embeddable-buttondown-form hero-form-row"
     >
       <label for="bd-email-newsletter" class="sr-only">Enter your email</label>
-      <input
+      <TextInput
         type="email"
         name="email"
         id="bd-email-newsletter"
         required
-        class="hero-input"
+        size="lg"
+        surface="raised"
         placeholder="you@email.com"
       />
       <input type="hidden" name="tag" value="newsletter" />
-      <button type="submit" class="hero-subscribe-btn">[ subscribe ]</button>
+      <BracketButton type="submit" size="lg">subscribe</BracketButton>
     </form>
     <a href="https://buttondown.com/refer/knolling" target="_blank" rel="noopener" class="powered-by">
       Powered by Buttondown. Unsubscribe anytime.
     </a>
   </div>
 
-  <div class="section-label">the archive</div>
+  <SectionLabel size={12} class="archive-label">the archive</SectionLabel>
   <div class="filter-row">
-    <span class="filter-active">all</span>
-    {pillars.map((p) => <span class="filter-chip">{p.label}</span>)}
+    <Chip size="md" active>all</Chip>
+    {pillars.map((p) => <Chip size="md">{p.label}</Chip>)}
   </div>
 
   {
@@ -103,13 +108,6 @@ try {
     align-items: center;
     gap: var(--space-4);
   }
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
   .h1 {
     font-family: var(--font-serif);
     font-weight: 600;
@@ -131,31 +129,6 @@ try {
     max-width: 400px;
     margin-top: var(--space-2);
   }
-  .hero-input {
-    flex: 1;
-    min-width: 0;
-    background: var(--color-raised);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-input);
-    padding: 12px 16px;
-    font-family: var(--font-sans);
-    font-size: 14px;
-    color: var(--color-ink);
-  }
-  .hero-subscribe-btn {
-    background: transparent;
-    border: 1px solid var(--color-line);
-    color: var(--color-ink);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    cursor: pointer;
-    padding: 12px 20px;
-    border-radius: var(--radius-input);
-    flex-shrink: 0;
-  }
-  .hero-subscribe-btn:hover {
-    border-color: var(--color-ink);
-  }
   .powered-by {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -166,12 +139,7 @@ try {
     color: var(--color-ink);
   }
 
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-ink-soft);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+  :global(.archive-label) {
     margin-bottom: var(--space-5);
   }
   .filter-row {
@@ -180,22 +148,6 @@ try {
     gap: var(--space-2);
     margin-bottom: var(--space-5);
     flex-wrap: wrap;
-  }
-  .filter-active {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-paper);
-    background: var(--color-ink);
-    border-radius: var(--radius-pill);
-    padding: 6px 14px;
-  }
-  .filter-chip {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-ink-soft);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-pill);
-    padding: 6px 14px;
   }
 
   .issue-list {
