@@ -31,4 +31,12 @@ The Microsoft 365 connector—Anthropic's bridge into SharePoint, OneDrive, Outl
 
 Put those four releases together: Jamie Attorney—no terminal, no Cowork, nothing but Claude Chat and an admin's approval—can now read and write the same client files a developer could always reach. More to the point for anyone who read "Welcome to Law Town": Jamie can run Skills against those files. The SOP-as-Skill idea Sam described six months ago, aimed at whatever's sitting in SharePoint, from the ordinary chat window. That's the door that opened. Not a new kind of AI. The same AI, reachable by someone who was never going to install Claude Code.
 
+## A Demand Letter, Start to Finish
+
+I ran through exactly this, live, on the Lawyerist Podcast with Sam Harden a few months back—worth walking through because the value is in how unremarkable it is. Point Claude at the discovery folder in SharePoint. Ask for a demand letter. Claude reads the file, pulls the relevant facts, and produces a draft: competent, generic, built off whatever template the Skill defaults to.
+
+Then the correction: "I'm in Tennessee. I always want this drafted under Tennessee jurisdiction. Update the Skill so it does that from now on." Claude rewrites that section, and the fix sticks the next time I ask for a demand letter.
+
+That's the whole workflow. A connector to find the file, a Skill to draft it, one plain-English correction to make it mine instead of generic. Nothing in that sequence touched a settings menu, a line of documentation, or anything resembling code. It required knowing what a good demand letter looks like—something any attorney already knows.
+
 <!-- draft in progress — remaining sections per docs/outlines/revisiting-law-town.md. status: draft keeps this out of the public listing and RSS until it's flipped to published. -->
