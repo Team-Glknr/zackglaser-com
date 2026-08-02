@@ -37,7 +37,7 @@ const FORMATS = ["teardown", "log", "take"];
 
   {
     posts.length > 0 ? (
-      <div class="post-list">
+      <div class="post-list" style={`--accent:var(--pillar-${pillar.id})`}>
         {posts.map((post) => (
           <a href={`/${post.id}`} class="post-row">
             <div class="post-row-left">
@@ -124,7 +124,10 @@ const FORMATS = ["teardown", "log", "take"];
     border-bottom: none;
   }
   .post-row:hover {
-    background: var(--color-raised);
+    border-bottom-color: var(--accent);
+  }
+  .post-row:last-child:hover {
+    border-bottom: 1px solid var(--accent);
   }
   .post-row-left {
     display: flex;
