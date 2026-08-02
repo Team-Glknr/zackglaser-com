@@ -23,4 +23,12 @@ For everyone else, the reasonable response was to file Sam's piece under interes
 
 More and more, that comprehension gap is starting to close. The technology, previously obfuscated behind a terminal, is now easily accessible to most attorneys. The distance between "this is possible" and "this is now sitting in the app you already have open" is closing.
 
+## The Connector Went Free. Claude Moved into Word and Outlook.
+
+None of this required a new capability. Coders could already do it—Claude Code and Claude Cowork have been able to read and write files, and run *Skills*, for close to a year. What changed is who else can walk through that door, and which door they use.
+
+The Microsoft 365 connector—Anthropic's bridge into SharePoint, OneDrive, Outlook, and Teams—launched in October, enterprise-only, read and search only. In April, it opened to every plan, including free. A month later, Claude's add-ins for Word, Excel, and PowerPoint went to general availability, with Outlook joining in beta. In July, the connector itself picked up write access.
+
+Put those four releases together: Jamie Attorney—no terminal, no Cowork, nothing but Claude Chat and an admin's approval—can now read and write the same client files a developer could always reach. More to the point for anyone who read "Welcome to Law Town": Jamie can run Skills against those files. The SOP-as-Skill idea Sam described six months ago, aimed at whatever's sitting in SharePoint, from the ordinary chat window. That's the door that opened. Not a new kind of AI. The same AI, reachable by someone who was never going to install Claude Code.
+
 <!-- draft in progress — remaining sections per docs/outlines/revisiting-law-town.md. status: draft keeps this out of the public listing and RSS until it's flipped to published. -->
