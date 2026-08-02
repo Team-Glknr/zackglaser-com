@@ -1,0 +1,18 @@
+---
+// The bordered, rounded, corner-clipping container around a set of ListRows.
+// The clip is what makes the last row's corners round — keep overflow:hidden.
+interface Props { class?: string }
+const { class: className } = Astro.props;
+---
+
+<div class={["list-row-group", className].filter(Boolean).join(" ")}><slot /></div>
+
+<style>
+  .list-row-group {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+</style>

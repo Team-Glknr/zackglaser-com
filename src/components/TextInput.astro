@@ -1,0 +1,40 @@
+---
+// The system's only text field. Focus uses the global 2px ink ring
+// from theme.css — never a colored border.
+interface Props {
+  size?: "sm" | "md" | "lg";  // sm = footer, md = newsletter card / booking form, lg = newsletter hero
+  surface?: "paper" | "raised"; // the newsletter page hero sits on raised
+  type?: string;
+  name?: string;
+  id?: string;
+  placeholder?: string;
+  required?: boolean;
+  class?: string;
+}
+const { size = "md", surface = "paper", type = "text", name, id, placeholder, required = false, class: className } = Astro.props;
+---
+
+<input
+  class={["text-input", `s-${size}`, `bg-${surface}`, className].filter(Boolean).join(" ")}
+  type={type}
+  name={name}
+  id={id}
+  placeholder={placeholder}
+  required={required}
+/>
+
+<style>
+  .text-input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-input);
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+  }
+  .bg-paper { background: var(--color-paper); }
+  .bg-raised { background: var(--color-raised); }
+  .s-sm { padding: 8px 12px; font-size: 13px; }
+  .s-md { padding: 10px 14px; font-size: 14px; }
+  .s-lg { padding: 12px 16px; font-size: 14px; }
+</style>

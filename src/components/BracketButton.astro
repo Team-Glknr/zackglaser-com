@@ -1,0 +1,56 @@
+---
+// The one button treatment: mono label inside literal square brackets.
+// Pass the label bare — the component adds the brackets.
+interface Props {
+  href?: string;
+  variant?: "default" | "solid" | "ghost";
+  size?: "sm" | "md" | "lg";
+  type?: "button" | "submit";
+  disabled?: boolean;
+  class?: string;
+}
+const { href, variant = "default", size = "md", type = "button", disabled = false, class: className } = Astro.props;
+const Tag = href ? "a" : "button";
+const cls = ["bracket-btn", `v-${variant}`, `s-${size}`, className].filter(Boolean).join(" ");
+---
+
+<Tag class={cls} href={href} type={href ? undefined : type} disabled={href ? undefined : disabled}>[ <slot /> ]</Tag>
+
+<style>
+  .bracket-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1;
+    border-radius: var(--radius-input);
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: border-color var(--motion-fast), color var(--motion-fast);
+  }
+  /* sizes are the real call-site paddings, not a normalized scale */
+  .s-sm { padding: 8px 14px; }   /* nav subscribe, footer go, newsletter card */
+  .s-md { padding: 10px 16px; }  /* speaking submit, one-sheet */
+  .s-lg { padding: 12px 20px; }  /* newsletter page hero */
+  .bracket-btn:hover { border-color: var(--color-ink); }
+
+  .v-solid {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .v-ghost,
+  .bracket-btn:disabled {
+    border-style: dashed;
+    color: var(--color-ink-soft);
+    cursor: not-allowed;
+  }
+  .v-ghost:hover,
+  .bracket-btn:disabled:hover { border-color: var(--color-line); }
+</style>

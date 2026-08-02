@@ -1,0 +1,33 @@
+---
+// One pill shape, four jobs: format pill, tag chip, filter chip, audience chip.
+interface Props {
+  active?: boolean;          // selected filter — ink fill, paper text
+  accent?: string;           // pillar accent for pillar tags, e.g. "var(--pillar-running)"
+  size?: "xs" | "sm" | "md"; // xs = format pill, sm = audience chip, md = filter/tag chip
+  class?: string;
+}
+const { active = false, accent, size = "md", class: className } = Astro.props;
+const cls = ["chip", `s-${size}`, active && "is-active", className].filter(Boolean).join(" ");
+---
+
+<span class={cls} style={accent && !active ? `--chip-accent:${accent}` : undefined}><slot /></span>
+
+<style>
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    color: var(--chip-accent, var(--color-ink-soft));
+    border: 1px solid var(--chip-accent, var(--color-line));
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+  }
+  .s-xs { font-size: 10px; padding: 2px 9px; }
+  .s-sm { font-size: 10px; padding: 3px 10px; }
+  .s-md { font-size: 12px; padding: 6px 14px; }
+  .is-active {
+    color: var(--color-paper);
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+</style>

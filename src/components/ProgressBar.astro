@@ -1,0 +1,40 @@
+---
+// Publish-progress on a build-log project rollup. The only meter in the system —
+// do not repurpose it as a loading or usage bar.
+interface Props {
+  percent: number;   // computed from published / total entries
+  label: string;     // e.g. "12 of 28 entries published"
+  class?: string;
+}
+const { percent, label, class: className } = Astro.props;
+---
+
+<div class={["progress-wrap", className].filter(Boolean).join(" ")}>
+  <div class="progress-label-row">
+    <span>{label}</span>
+    <span>{percent}%</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" style={`width:${percent}%`} /></div>
+</div>
+
+<style>
+  .progress-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-2);
+  }
+  .progress-track {
+    height: 6px;
+    background: var(--color-line);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent, var(--pillar-workshop));
+    border-radius: var(--radius-pill);
+  }
+</style>

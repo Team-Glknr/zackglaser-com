@@ -1,0 +1,48 @@
+---
+// The system's single card surface. Static cards get --shadow-card;
+// --shadow-elevation stays reserved for dropdowns and overlays.
+interface Props {
+  href?: string;             // makes the whole card a link
+  accent?: string;           // required by either edge treatment
+  edge?: "none" | "tab" | "left";
+  padding?: string;          // default var(--space-5); speaking/newsletter use var(--space-6)
+  hoverAccent?: boolean;     // border takes the accent on hover (door cards)
+  class?: string;
+}
+const { href, accent, edge = "none", padding = "var(--space-5)", hoverAccent = false, class: className } = Astro.props;
+const Tag = href ? "a" : "div";
+const cls = ["card", edge === "left" && "edge-left", hoverAccent && "hover-accent", className].filter(Boolean).join(" ");
+---
+
+<Tag class={cls} href={href} style={`--card-padding:${padding};${accent ? `--accent:${accent};` : ""}`}>
+  {edge === "tab" && accent && <span class="card-tab" />}
+  <slot />
+</Tag>
+
+<style>
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: var(--card-padding);
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: border-color var(--motion-fast);
+  }
+  .edge-left { border-left: 3px solid var(--accent); }
+  .hover-accent:hover { border-color: var(--accent); }
+  .card-tab {
+    position: absolute;
+    top: 0;
+    right: 22px;
+    width: 10px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 0 0 3px 3px;
+  }
+</style>

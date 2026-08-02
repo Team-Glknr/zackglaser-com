@@ -1,0 +1,21 @@
+---
+// Uppercase mono label that opens a section, acts as a page eyebrow,
+// or heads a footer column.
+interface Props {
+  size?: 11 | 12;  // 12 = section label / page eyebrow, 11 = column + card labels
+  class?: string;
+}
+const { size = 12, class: className } = Astro.props;
+---
+
+<div class={["section-label", `s-${size}`, className].filter(Boolean).join(" ")}><slot /></div>
+
+<style>
+  .section-label {
+    font-family: var(--font-mono);
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+  }
+  .s-12 { font-size: 12px; letter-spacing: 0.06em; }
+  .s-11 { font-size: 11px; letter-spacing: 0.05em; }
+</style>

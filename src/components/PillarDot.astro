@@ -1,0 +1,26 @@
+---
+// A pillar's accent as a dot. Accent never carries meaning alone —
+// always render it next to the pillar's text label.
+import type { pillars } from "../lib/pillars";
+interface Props {
+  pillar: (typeof pillars)[number]["id"];
+  size?: 7 | 8 | 9;   // 7 in lists and cards, 8 in the nav dropdown, 9 in the mobile overlay
+  class?: string;
+}
+const { pillar, size = 7, class: className } = Astro.props;
+---
+
+<span
+  class={["pillar-dot", className].filter(Boolean).join(" ")}
+  style={`--dot-size:${size}px;background:var(--pillar-${pillar})`}
+/>
+
+<style>
+  .pillar-dot {
+    display: inline-block;
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+</style>

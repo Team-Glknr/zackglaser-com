@@ -1,0 +1,86 @@
+---
+// One row inside a bordered, rounded list. Chapter rows, entry rows and
+// newsletter issue rows are the same shape. Wrap a group in ListRowGroup.astro.
+interface Props {
+  href: string;
+  no?: string;                    // leading mono number: "03", "001"
+  noSize?: 12 | 13 | 18;          // 18 chapter rows, 13 entry rows, 12 issue rows
+  accentNo?: boolean;             // tint the number with the workshop accent
+  title: string;
+  sub?: string;                   // mono sub-line, e.g. "entries 007–010"
+  right?: string;                 // right-hand mono content (date or cost)
+  arrow?: boolean;                // trailing → in ink (chapter rows)
+  padding?: "row" | "chapter";    // chapter rows use var(--space-5) all round
+  class?: string;
+}
+const { href, no, noSize = 13, accentNo = false, title, sub, right, arrow = false, padding = "row", class: className } = Astro.props;
+---
+
+<a href={href} class={["list-row", `p-${padding}`, className].filter(Boolean).join(" ")}>
+  <div class="list-row-left">
+    {no && <span class={["list-row-no", accentNo && "is-accent"].filter(Boolean).join(" ")} style={`font-size:${noSize}px`}>{no}</span>}
+    <slot name="before" />
+    <div>
+      <div class="list-row-title">{title}</div>
+      {sub && <div class="list-row-sub">{sub}</div>}
+    </div>
+  </div>
+  <div class="list-row-right">
+    {right && <span>{right}</span>}
+    {arrow && <span class="list-row-arrow">→</span>}
+  </div>
+</a>
+
+<style>
+  .list-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    border-bottom: 1px solid var(--color-line);
+    text-decoration: none;
+    color: var(--color-ink);
+    background: var(--color-raised);
+  }
+  .p-row { padding: var(--space-4) var(--space-5); }
+  .p-chapter { padding: var(--space-5); }
+  .list-row:last-child { border-bottom: none; }
+  .list-row:hover { background: var(--color-paper); }
+
+  .list-row-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+  .list-row-no {
+    font-family: var(--font-mono);
+    color: var(--color-ink-soft);
+    flex-shrink: 0;
+  }
+  .list-row-no.is-accent { color: var(--pillar-workshop); }
+  .list-row-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--color-ink);
+    line-height: 1.3;
+  }
+  .list-row-sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-soft);
+    margin-top: 2px;
+  }
+  .list-row-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .list-row-arrow { color: var(--color-ink); }
+</style>
