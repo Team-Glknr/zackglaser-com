@@ -29,7 +29,7 @@ None of this required a new capability. Coders could already do it—Claude Code
 
 The Microsoft 365 connector—Anthropic's bridge into SharePoint, OneDrive, Outlook, and Teams—launched in October, enterprise-only, read and search only. In April, it opened to every plan, including free. A month later, Claude's add-ins for Word, Excel, and PowerPoint went to general availability, with Outlook joining in beta. In July, the connector itself picked up write access.
 
-Put those four releases together: Jamie Attorney—no terminal, no Cowork, nothing but Claude Chat and an admin's approval—can now read and write the same client files a developer could always reach. More to the point for anyone who read "Welcome to Law Town": Jamie can run Skills against those files. The SOP-as-Skill idea Sam described six months ago, aimed at whatever's sitting in SharePoint, from the ordinary chat window. That's the door that opened. Not a new kind of AI. The same AI, reachable by someone who was never going to install Claude Code.
+Put those four releases together and your everyday attorney—no terminal, no Cowork, nothing but Claude Chat and an admin's approval—can now read and write the same client files a developer could always reach. More to the point for anyone who read "Welcome to Law Town": that attorney can run Skills against those files. The SOP-as-Skill idea Sam described six months ago, aimed at whatever's sitting in SharePoint, from the ordinary chat window. That's the door that opened. Not a new kind of AI. The same AI, reachable by someone who was never going to install Claude Code.
 
 ## A Demand Letter, Start to Finish
 
