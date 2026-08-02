@@ -2,7 +2,7 @@
 
 Source of truth for building zackglaser.com in code (Astro, per `github.md`). This is a prototype/reference project, not a production codebase — every page below is a clickable HTML mockup meant to be read for exact values (colors, type, spacing) and structure, then implemented for real in VS Code.
 
-**Repo:** thirdth/zackglaser-com (branch: main) — see `github.md` for sync history and the screen map back to real doc sources (`docs/01-site-brief.md`, `docs/02-build-log-format.md`).
+**Repo:** Team-Glknr/zackglaser-com (branch: main) — see `github.md` for sync history and the screen map back to real doc sources (`docs/01-site-brief.md`, `docs/02-build-log-format.md`).
 
 ## Brand premise
 Zack takes things apart to see how they work — software stacks, training plans, workbenches, beliefs — and shows people the pieces. One person, one method, four subjects (currently labeled "pillars" — naming still open, see Open Items).

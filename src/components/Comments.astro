@@ -1,7 +1,7 @@
 ---
 // GitHub on-ramp rung 2 — docs/03-github-onramp.md §5.2. Mounted in
 // src/pages/[...id].astro with the real repo-id/category-id from the
-// giscus app install + "Comments" Discussion category on thirdth/zackglaser-com.
+// giscus app install + "Comments" Discussion category on Team-Glknr/zackglaser-com.
 // Zero client JS shipped by us; the script below is giscus's own, lazy-loaded.
 // Intro messaging now lives in GithubOnramp.astro's "react" step, which
 // anchor-links to this section's id — keep the id in sync with that href.
@@ -16,7 +16,7 @@ const { repoId, categoryId } = Astro.props;
   <script
     is:inline
     src="https://giscus.app/client.js"
-    data-repo="thirdth/zackglaser-com"
+    data-repo="Team-Glknr/zackglaser-com"
     data-repo-id={repoId}
     data-category="Comments"
     data-category-id={categoryId}

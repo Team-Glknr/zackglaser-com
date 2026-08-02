@@ -1,4 +1,4 @@
-repo: thirdth/zackglaser-com
+repo: Team-Glknr/zackglaser-com
 branch: main
 
 ## Last sync

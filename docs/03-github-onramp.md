@@ -44,7 +44,7 @@ Cost: both require readers to sign in with a GitHub account to comment. For this
 
 Add to the site-wide footer (every page):
 
-> This site lives in a public GitHub repo — [read the source](https://github.com/thirdth/zackglaser-com) or [see every change ever made to it](https://github.com/thirdth/zackglaser-com/commits/main).
+> This site lives in a public GitHub repo — [read the source](https://github.com/Team-Glknr/zackglaser-com) or [see every change ever made to it](https://github.com/Team-Glknr/zackglaser-com/commits/main).
 
 Voice check: plain-spoken, no jargon. "Every change ever made" teaches what a commit history is before naming it.
 
@@ -59,7 +59,7 @@ A single component dropped into the post layout, below the post body:
     account — which is rather the point around here.
   </p>
   <script src="https://giscus.app/client.js"
-    data-repo="thirdth/zackglaser-com"
+    data-repo="Team-Glknr/zackglaser-com"
     data-repo-id="<from giscus.app>"
     data-category="Comments"
     data-category-id="<from giscus.app>"
@@ -87,7 +87,7 @@ On every content page, near the footer of the post:
 The link targets GitHub's web editor for the post's source file. Astro content collections expose the file path on each entry (`entry.filePath`), so the layout builds:
 
 ```
-https://github.com/thirdth/zackglaser-com/edit/main/${entry.filePath}
+https://github.com/Team-Glknr/zackglaser-com/edit/main/${entry.filePath}
 ```
 
 For non-collection pages (e.g. `/about`), hardcode the path or skip the link. When a logged-in reader without write access clicks through, GitHub automatically offers to fork and open a pull request — that flow *is* the tutorial, and it's Github's job to run it, not ours.
