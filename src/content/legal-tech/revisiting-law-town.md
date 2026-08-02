@@ -39,4 +39,20 @@ Then the correction: "I'm in Tennessee. I always want this drafted under Tenness
 
 That's the whole workflow. A connector to find the file, a Skill to draft it, one plain-English correction to make it mine instead of generic. Nothing in that sequence touched a settings menu, a line of documentation, or anything resembling code. It required knowing what a good demand letter looks like—something any attorney already knows.
 
-<!-- draft in progress — remaining sections per docs/outlines/revisiting-law-town.md. status: draft keeps this out of the public listing and RSS until it's flipped to published. -->
+## Is This Safe for Confidential Client Data?
+
+Genuinely, yes—with real qualifications, not marketing ones. Write access doesn't turn on by itself. A Microsoft Entra administrator has to re-consent to the updated permission set, and then the organization has to switch write tools on for specific accounts. If a firm connected before write access existed, it stays off until someone with admin rights decides otherwise. Nobody wakes up to Claude suddenly able to send email on their behalf.
+
+The detail that matters most: Claude can never see more than the person it's acting for can see. If an associate doesn't have access to a matter in SharePoint, Claude doesn't either, no matter what's asked of it. Teams stays read-only regardless of any setting—Claude can pull context from a channel, but it can't post to one. Data stays inside the firm's own tenant; nothing gets cached or pulled out to train anything.
+
+None of that replaces judgment. It's the difference between trusting the vendor and reading the settings page, then deciding—which is a much easier thing to ask a managing partner to do than "trust me."
+
+## Get Your SOPs First
+
+Sam's actual advice, from the same conversation: "If you don't have good SOPs for how you do your work right now, it's not the best idea to go into Claude and start creating a bunch of Skills to do different things. Get SOPs first." His test for a good one is worth stealing directly: write it the way you'd brief a smart new hire who needs direction—what you'd actually tell them, what you'd hand them to work from. That's the Skill.
+
+If your SOPs are crap, though, your output is going to be crap—just faster. So it's worth taking this moment to sharpen your axe.
+
+In order, then: write down how you actually do the thing—the demand letter, the intake, the deposition summary—before asking Claude to do it. Turn on read access before write access. Test it on a closed matter before a live one. Treat the first output the way you'd treat a first-year associate's first draft: read every word, expect to redline it, don't sign your name to anything you haven't actually checked. And don't turn on write permissions for the whole firm until someone's watched how it goes for a handful of people first.
+
+Sam's forecast held up. What's lagging is everyone else's sense of how close it already is—not in some hypothetical rollout eighteen months out, but this quarter, gated by nothing harder than an admin's checkbox. I still spend most of my day building scaffolding. The difference, six months on, is how many other people now have the parts to build their own.
