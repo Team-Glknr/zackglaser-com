@@ -3,6 +3,9 @@
 // and Mobile Nav.dc.html. Dropdown and mobile overlay use native
 // <details>/checkbox toggles — zero client JS, per brief §7 design direction.
 import { pillars } from "../lib/pillars";
+import SectionLabel from "./SectionLabel.astro";
+import PillarDot from "./PillarDot.astro";
+import BracketButton from "./BracketButton.astro";
 ---
 
 <nav class="site-nav">
@@ -45,7 +48,7 @@ import { pillars } from "../lib/pillars";
       {
         pillars.map((p) => (
           <a href={p.href} class="pillar-item">
-            <span class="pillar-dot" style={`background:var(--pillar-${p.id})`} />
+            <PillarDot pillar={p.id} size={8} />
             {p.label}
           </a>
         ))
@@ -56,7 +59,7 @@ import { pillars } from "../lib/pillars";
   <a href="/legal-tech/speaking" class="nav-link">speaking</a>
   <a href="/newsletter" class="nav-link">knolling</a>
   <a href="/about" class="nav-link">about</a>
-  <a href="/newsletter" class="nav-subscribe">[ subscribe ]</a>
+  <BracketButton href="/newsletter" size="sm" class="nav-subscribe">subscribe</BracketButton>
 
   <input type="checkbox" id="mobile-nav-toggle" class="mobile-nav-toggle" />
   <label for="mobile-nav-toggle" class="mobile-menu-btn" aria-label="Toggle menu">
@@ -69,11 +72,11 @@ import { pillars } from "../lib/pillars";
   </label>
 
   <div class="mobile-overlay">
-    <div class="overlay-section-label">pillars</div>
+    <SectionLabel size={11} class="overlay-section-label">pillars</SectionLabel>
     {
       pillars.map((p) => (
         <a href={p.href} class="overlay-row">
-          <span class="pillar-dot pillar-dot-lg" style={`background:var(--pillar-${p.id})`} />
+          <PillarDot pillar={p.id} size={9} class="pillar-dot-lg" />
           {p.label}
         </a>
       ))
@@ -248,29 +251,12 @@ import { pillars } from "../lib/pillars";
   .pillar-item:hover {
     background: var(--color-paper);
   }
-  .pillar-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
+  :global(.pillar-dot) {
     margin-right: 10px;
-    flex-shrink: 0;
   }
 
-  .nav-subscribe {
+  .site-nav :global(.nav-subscribe) {
     margin-left: auto;
-    background: transparent;
-    border: 1px solid var(--color-line);
-    color: var(--color-ink);
-    text-decoration: none;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    padding: 8px 14px;
-    border-radius: var(--radius-input);
-    flex-shrink: 0;
-  }
-  .nav-subscribe:hover {
-    border-color: var(--color-ink);
   }
 
   .mobile-nav-toggle {
@@ -317,12 +303,7 @@ import { pillars } from "../lib/pillars";
   .mobile-nav-toggle:checked ~ .mobile-overlay {
     display: flex;
   }
-  .overlay-section-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  :global(.overlay-section-label) {
     padding: 10px 4px 6px;
   }
   .overlay-divider {
@@ -341,9 +322,7 @@ import { pillars } from "../lib/pillars";
     text-decoration: none;
     padding: 0 4px;
   }
-  .pillar-dot-lg {
-    width: 9px;
-    height: 9px;
+  :global(.pillar-dot-lg) {
     margin-right: 12px;
   }
   .overlay-subscribe {
@@ -366,8 +345,10 @@ import { pillars } from "../lib/pillars";
       padding: 14px 20px;
     }
     .nav-pillars,
-    .site-nav > .nav-link,
-    .nav-subscribe {
+    .site-nav > .nav-link {
+      display: none;
+    }
+    .site-nav :global(.nav-subscribe) {
       display: none;
     }
     .mobile-menu-btn {
