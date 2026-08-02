@@ -1,7 +1,7 @@
 ---
 title: "Revisiting Law Town"
 date: 2026-08-02
-status: draft
+status: published
 pillar: legal-tech
 format: take
 authorship: duet
