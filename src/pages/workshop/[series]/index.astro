@@ -5,6 +5,9 @@
 import { getCollection, render } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import NewsletterCard from "../../../components/NewsletterCard.astro";
+import SectionLabel from "../../../components/SectionLabel.astro";
+import StatBox from "../../../components/StatBox.astro";
+import ProgressBar from "../../../components/ProgressBar.astro";
 import { chapterRange, getProjectStats } from "../../../lib/buildLog";
 
 export async function getStaticPaths() {
@@ -25,41 +28,23 @@ const stats = await getProjectStats(project);
   <a href="/workshop" class="breadcrumb">← workshop</a>
 
   <div class="header">
-    <div class="eyebrow">workshop · project</div>
+    <SectionLabel size={12} class="eyebrow">workshop · project</SectionLabel>
     <h1 class="h1">{project.data.title}</h1>
     <p class="sub">{project.data.teaser}</p>
   </div>
 
   <div class="totals-row">
-    <div class="total-box">
-      <div class="total-label">cost</div>
-      <div class="total-val">{project.data.cost}</div>
-    </div>
-    <div class="total-box">
-      <div class="total-label">time</div>
-      <div class="total-val">—</div>
-    </div>
-    <div class="total-box">
-      <div class="total-label">chapters</div>
-      <div class="total-val">{stats.totalChapters}</div>
-    </div>
-    <div class="total-box">
-      <div class="total-label">entries</div>
-      <div class="total-val">{stats.totalEntries}</div>
-    </div>
+    <StatBox label="cost" value={project.data.cost} size="lg" />
+    <StatBox label="time" value="—" size="lg" />
+    <StatBox label="chapters" value={stats.totalChapters} size="lg" />
+    <StatBox label="entries" value={stats.totalEntries} size="lg" />
   </div>
 
   <article class="recap-body">
     <Content />
   </article>
 
-  <div class="progress-wrap">
-    <div class="progress-label-row">
-      <span>{stats.publishedEntries} of {stats.totalEntries} entries published</span>
-      <span>{stats.percentDone}%</span>
-    </div>
-    <div class="progress-track"><div class="progress-fill" style={`width:${stats.percentDone}%`} /></div>
-  </div>
+  <ProgressBar percent={stats.percentDone} label={`${stats.publishedEntries} of ${stats.totalEntries} entries published`} />
 
   <div class="chapters-list">
     {
@@ -104,12 +89,7 @@ const stats = await getProjectStats(project);
     margin-bottom: var(--space-6);
     max-width: 620px;
   }
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+  :global(.eyebrow) {
     margin-bottom: var(--space-3);
   }
   .h1 {
@@ -133,28 +113,6 @@ const stats = await getProjectStats(project);
     gap: var(--space-2);
     margin-bottom: var(--space-6);
   }
-  .total-box {
-    background: var(--color-raised);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    padding: var(--space-4);
-  }
-  .total-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--color-ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 6px;
-  }
-  .total-val {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 20px;
-    color: var(--color-ink);
-  }
-
   .recap-body {
     margin-bottom: var(--space-6);
   }
@@ -166,27 +124,8 @@ const stats = await getProjectStats(project);
     margin: 0 0 var(--space-5);
   }
 
-  .progress-wrap {
+  :global(.progress-wrap) {
     margin-bottom: var(--space-6);
-  }
-  .progress-label-row {
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-ink-soft);
-    margin-bottom: var(--space-2);
-  }
-  .progress-track {
-    height: 6px;
-    background: var(--color-line);
-    border-radius: var(--radius-pill);
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: var(--accent, var(--pillar-workshop));
-    border-radius: var(--radius-pill);
   }
 
   .chapters-list {
