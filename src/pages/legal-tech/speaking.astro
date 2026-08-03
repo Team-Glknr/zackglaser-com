@@ -13,6 +13,10 @@
 // Podcast's real episode count isn't known yet either; its ticket shows
 // "HOST" / "ONGOING" instead of a guessed number.
 import Layout from "../../layouts/Layout.astro";
+import SectionLabel from "../../components/SectionLabel.astro";
+import Chip from "../../components/Chip.astro";
+import Card from "../../components/Card.astro";
+import BracketButton from "../../components/BracketButton.astro";
 
 const clips = [
   {
@@ -141,7 +145,7 @@ const tickets = [
 >
   <div class="speaking-page" style="--accent:var(--pillar-legal-tech)">
     <div class="hero-row">
-      <div class="eyebrow">speaking</div>
+      <SectionLabel size={12}>speaking</SectionLabel>
       <h1 class="h1">I take legal technology apart for a living — in writing, on a podcast, and now on stage.</h1>
       <p class="hero-sub">
         Legal Tech Advisor at Lawyerist/Affinity, host of the Lawyerist Podcast. What that actually looks like is
@@ -149,11 +153,11 @@ const tickets = [
       </p>
     </div>
 
-    <div class="section-label">watch me work</div>
+    <SectionLabel size={12} class="content-label">watch me work</SectionLabel>
     <div class="clip-grid">
       {
         clips.map((clip) => (
-          <div class="clip-card">
+          <Card padding="var(--space-4)">
             {clip.youtubeId && (
               <div class="clip-video">
                 <iframe
@@ -168,12 +172,12 @@ const tickets = [
             <div class="clip-tag">{clip.tag}</div>
             <p class="clip-quote">"{clip.quote}"</p>
             <div class="clip-attribution">{clip.attribution}</div>
-          </div>
+          </Card>
         ))
       }
     </div>
 
-    <div class="section-label">a teardown, in writing</div>
+    <SectionLabel size={12} class="content-label">a teardown, in writing</SectionLabel>
     <div class="teardown-card">
       <p>
         Ask your case management vendor where your client's file is, and you'll get a soothing word: the cloud.
@@ -186,11 +190,11 @@ const tickets = [
       <p>That's a teardown. Now imagine forty-five minutes and a slide clicker.</p>
     </div>
 
-    <div class="section-label">what I can talk about</div>
+    <SectionLabel size={12} class="content-label">what I can talk about</SectionLabel>
     {
       topicGroups.map((group) => (
         <div class="topic-group">
-          <div class="topic-group-label">{group.label}</div>
+          <SectionLabel size={11} class="topic-group-label">{group.label}</SectionLabel>
           <div class="topic-row">
             {group.items.map((t) => (
               <div class="topic-card">
@@ -198,7 +202,7 @@ const tickets = [
                 <div class="topic-fact">{t.fact}</div>
                 <div class="topic-audience-row">
                   {t.audiences.map((aud) => (
-                    <span class="audience-chip">{aud}</span>
+                    <Chip size="sm">{aud}</Chip>
                   ))}
                 </div>
               </div>
@@ -208,7 +212,7 @@ const tickets = [
       ))
     }
 
-    <div class="section-label">where I've spoken</div>
+    <SectionLabel size={12} class="content-label">where I've spoken</SectionLabel>
     <div class="ticket-grid">
       <div class="ticket-card ticket-card-flagship">
         <div class="ticket-top-row">
@@ -253,25 +257,25 @@ const tickets = [
           Bio, topics, headshots, and past appearances in one PDF — everything a program chair needs to say yes.
         </div>
       </div>
-      <button type="button" class="one-sheet-btn" disabled>[ coming soon ]</button>
+      <BracketButton variant="ghost" size="md" disabled>coming soon</BracketButton>
     </div>
 
-    <div id="book" class="section-label">book me</div>
-    <div class="booking-card">
+    <div id="book"><SectionLabel size={12} class="content-label">book me</SectionLabel></div>
+    <Card padding="var(--space-6)" class="booking-card">
       <div class="booking-card-title">For an event or a podcast</div>
       <div class="booking-card-sub">Keynote, CLE session, workshop, or a long-form conversation — in person or remote.</div>
       <form class="form-grid" id="booking-form">
         <input class="form-input" name="event" placeholder="event / show name" />
         <input class="form-input" name="date" placeholder="date (if known)" />
         <input class="form-input form-input-full" name="email" type="email" required placeholder="email" />
-        <button type="submit" class="submit-btn">[ send ]</button>
+        <BracketButton type="submit" size="md" class="submit-btn">send</BracketButton>
       </form>
       <p class="form-status" id="booking-status" role="status" aria-live="polite"></p>
       <p class="affinity-line">
         Looking for hands-on consulting instead? That's Affinity's work, not this page's —{" "}
         <a href="https://www.affinityconsulting.com/contact/" class="inline-link">reach out to the team</a>.
       </p>
-    </div>
+    </Card>
   </div>
 </Layout>
 
@@ -321,12 +325,7 @@ const tickets = [
     margin: 0 auto;
   }
 
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-ink-soft);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+  :global(.content-label) {
     margin: 0 0 var(--space-5);
   }
 
@@ -337,13 +336,6 @@ const tickets = [
     gap: var(--space-4);
     max-width: 720px;
     margin-bottom: var(--space-8);
-  }
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
   }
   .h1 {
     font-family: var(--font-serif);
@@ -371,16 +363,6 @@ const tickets = [
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-4);
     margin-bottom: var(--space-8);
-  }
-  .clip-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    background: var(--color-raised);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    padding: var(--space-4);
   }
   .clip-video {
     aspect-ratio: 16 / 9;
@@ -444,12 +426,7 @@ const tickets = [
   .topic-group {
     margin-bottom: var(--space-6);
   }
-  .topic-group-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  :global(.topic-group-label) {
     margin-bottom: var(--space-3);
   }
   .topic-row {
@@ -487,15 +464,6 @@ const tickets = [
     gap: var(--space-2);
     flex-wrap: wrap;
   }
-  .audience-chip {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--color-ink-soft);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-pill);
-    padding: 3px 10px;
-  }
-
   /* Ticket wall */
   .ticket-grid {
     display: grid;
@@ -589,29 +557,9 @@ const tickets = [
     max-width: 460px;
     line-height: 1.5;
   }
-  .one-sheet-btn {
-    background: transparent;
-    border: 1px dashed var(--color-line);
-    color: var(--color-ink-soft);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    padding: 10px 16px;
-    border-radius: var(--radius-input);
-    flex-shrink: 0;
-    cursor: not-allowed;
-  }
-
   /* Booking */
-  .booking-card {
-    background: var(--color-raised);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    padding: var(--space-6);
+  :global(.booking-card) {
     max-width: 560px;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
     margin-bottom: var(--space-8);
   }
   .booking-card-title {
@@ -643,21 +591,10 @@ const tickets = [
   .form-input-full {
     grid-column: 1 / -1;
   }
-  .submit-btn {
+  :global(.submit-btn) {
     grid-column: 1 / -1;
     width: fit-content;
     margin-top: var(--space-1);
-    background: transparent;
-    border: 1px solid var(--color-line);
-    color: var(--color-ink);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    cursor: pointer;
-    padding: 10px 16px;
-    border-radius: var(--radius-input);
-  }
-  .submit-btn:hover {
-    border-color: var(--color-ink);
   }
   .form-status {
     font-family: var(--font-mono);
