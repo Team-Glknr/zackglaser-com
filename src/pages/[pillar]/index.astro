@@ -7,6 +7,7 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import NewsletterCard from "../../components/NewsletterCard.astro";
 import EmptyState from "../../components/EmptyState.astro";
+import Chip from "../../components/Chip.astro";
 import { pillars } from "../../lib/pillars";
 import { postMetaWithinPillar } from "../../lib/postMeta";
 
@@ -31,8 +32,8 @@ const FORMATS = ["teardown", "log", "take"];
   </div>
 
   <div class="filter-row">
-    <span class="filter-active">all</span>
-    {FORMATS.map((f) => <span class="filter-chip">{f}</span>)}
+    <Chip size="md" active>all</Chip>
+    {FORMATS.map((f) => <Chip size="md">{f}</Chip>)}
   </div>
 
   {
@@ -41,7 +42,7 @@ const FORMATS = ["teardown", "log", "take"];
         {posts.map((post) => (
           <a href={`/${post.id}`} class="post-row">
             <div class="post-row-top">
-              <span class="format-pill">{post.data.format}</span>
+              <Chip size="xs" class="format-pill">{post.data.format}</Chip>
               <div class="post-title">{post.data.title}</div>
             </div>
             {post.data.teaser && <p class="post-teaser">{post.data.teaser}</p>}
@@ -89,23 +90,6 @@ const FORMATS = ["teardown", "log", "take"];
     gap: var(--space-2);
     margin-bottom: var(--space-5);
   }
-  .filter-active {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-paper);
-    background: var(--color-ink);
-    border-radius: var(--radius-pill);
-    padding: 6px 14px;
-  }
-  .filter-chip {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-ink-soft);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-pill);
-    padding: 6px 14px;
-  }
-
   .post-list {
     display: flex;
     flex-direction: column;
@@ -133,13 +117,7 @@ const FORMATS = ["teardown", "log", "take"];
     gap: var(--space-3);
     margin-bottom: var(--space-2);
   }
-  .format-pill {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--color-ink-soft);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-pill);
-    padding: 2px 9px;
+  :global(.format-pill) {
     flex-shrink: 0;
   }
   .post-title {
