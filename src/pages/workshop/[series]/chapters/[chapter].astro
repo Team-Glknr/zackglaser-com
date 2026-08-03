@@ -6,6 +6,8 @@
 import { getCollection, render } from "astro:content";
 import Layout from "../../../../layouts/Layout.astro";
 import NewsletterCard from "../../../../components/NewsletterCard.astro";
+import StatBox from "../../../../components/StatBox.astro";
+import Chip from "../../../../components/Chip.astro";
 import { chapterRange, entryNumber, getChapterEntries, getProjectChapters, getProjectEntries } from "../../../../lib/buildLog";
 
 export async function getStaticPaths() {
@@ -47,24 +49,15 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
     <div class="article-header">
       <div class="meta-row">
         <span class="pillar-tag">workshop</span>
-        <span class="format-pill">chapter · entries {chapterRange(chapter)}</span>
+        <Chip size="xs" class="format-pill">chapter · entries {chapterRange(chapter)}</Chip>
       </div>
       <h1 class="h1">{chapter.data.title}</h1>
     </div>
 
     <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-label">cost</div>
-        <div class="stat-val">{chapter.data.cost}</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">time</div>
-        <div class="stat-val">—</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">entries</div>
-        <div class="stat-val">{entries.length}</div>
-      </div>
+      <StatBox label="cost" value={chapter.data.cost} />
+      <StatBox label="time" value="—" />
+      <StatBox label="entries" value={entries.length} />
     </div>
 
     <article class="article-body">
@@ -78,7 +71,7 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
           <a href={`/${post.id}`} class="entry-row">
             <div class="entry-row-left">
               <span class="entry-no">{String(entryNumber(post)).padStart(3, "0")}</span>
-              <span class="format-pill">{post.data.format}</span>
+              <Chip size="xs" class="format-pill">{post.data.format}</Chip>
               <span class="entry-title">{post.data.title}</span>
             </div>
             <span class="entry-date">
@@ -150,14 +143,6 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
-  .format-pill {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-ink-soft);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-pill);
-    padding: 1px 9px;
-  }
   .h1 {
     font-family: var(--font-serif);
     font-weight: 600;
@@ -172,29 +157,6 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
     gap: var(--space-2);
     margin-bottom: var(--space-6);
   }
-  .stat-box {
-    background: var(--color-raised);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    padding: 10px 16px;
-    min-width: 100px;
-  }
-  .stat-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--color-ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 4px;
-  }
-  .stat-val {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 16px;
-    color: var(--color-ink);
-  }
-
   .article-body {
     margin-bottom: var(--space-6);
   }
@@ -269,13 +231,7 @@ const entries = getChapterEntries(chapter, projectEntries).filter((e) => e.data.
     flex-shrink: 0;
     width: 28px;
   }
-  .format-pill {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--color-ink-soft);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-pill);
-    padding: 2px 9px;
+  :global(.format-pill) {
     flex-shrink: 0;
   }
   .entry-title {
