@@ -78,5 +78,6 @@ tags: []
 - 026 — The OG mechanism, made general: project and chapter pages get real social images, noticed while working on a different workshop project entirely ✓
 - 027 — Thumbnails on the cards, not just the meta tags: OG images surfaced on every boxed card site-wide (Hub, /workshop, prev/next nav); compact list-rows left text-only ✓
 - 028 — One mark, not two: the new four-circle mark replaces Mark A and Mark B site-wide; Mark B retired and deleted (docs/05-favicon-marks.md rewritten) ✓
-- 029 — A game as a front door (tabled; three prototypes in docs/mockups/)
-- 030 — Launch
+- 029 — Nine patterns, promoted: ten components landed from a design handoff, migrated one page per commit wherever they matched the real CSS exactly; Card and ListRow's low fit rate flagged as a component-level finding ✓
+- 030 — A game as a front door (tabled; three prototypes in docs/mockups/)
+- 031 — Launch
