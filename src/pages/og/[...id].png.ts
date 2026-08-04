@@ -3,12 +3,15 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import { pillars } from "../../lib/pillars";
 import { renderOgImage, PILLAR_ACCENT } from "../../lib/ogImage";
 
+type OgEntry = CollectionEntry<"posts"> | CollectionEntry<"newsletter">;
+
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => data.status === "published");
-  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+  const issues = await getCollection("newsletter", ({ data }) => data.status === "published");
+  return [...posts, ...issues].map((post) => ({ params: { id: post.id }, props: { post } }));
 }
 
-export async function GET({ props }: { props: { post: CollectionEntry<"posts"> } }) {
+export async function GET({ props }: { props: { post: OgEntry } }) {
   const { post } = props;
   const pillarLabel = pillars.find((p) => p.id === post.data.pillar)?.label ?? post.data.pillar;
   const accent = PILLAR_ACCENT[post.data.pillar] ?? PILLAR_ACCENT["legal-tech"];

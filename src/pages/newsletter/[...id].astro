@@ -32,7 +32,7 @@ const nextIssue = idx < siblings.length - 1 ? siblings[idx + 1] : null;
 const formattedDate = issue.data.date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 ---
 
-<Layout title={`${issue.data.title} — Knolling — zackglaser.com`}>
+<Layout title={`${issue.data.title} — Knolling — zackglaser.com`} image={`/og/${issue.id}.png`}>
   <div class="post-container" style={`--accent:var(--pillar-${issue.data.pillar})`}>
     <a href="/newsletter" class="breadcrumb">← Knolling</a>
 

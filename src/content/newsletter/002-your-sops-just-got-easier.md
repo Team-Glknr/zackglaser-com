@@ -1,5 +1,5 @@
 ---
-title: "Let's start our SOPs"
+title: "Your SOPs just got easier"
 date: 2026-08-04
 status: published
 pillar: legal-tech
