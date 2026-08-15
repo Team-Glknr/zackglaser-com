@@ -13,8 +13,17 @@ const pillar = pillars.find((p) => p.id === "workshop")!;
 
 const projects = await getCollection("projects");
 const projectCards = await Promise.all(
-  projects.map(async (project) => ({ project, stats: await getProjectStats(project) }))
+  projects.map(async (project) => {
+    const stats = await getProjectStats(project);
+    // Most recently active project first — the most recent entry date is a
+    // better signal than file order, which is really just alphabetical.
+    const latestDate = stats.entries.length > 0
+      ? Math.max(...stats.entries.map((e) => e.data.date.valueOf()))
+      : 0;
+    return { project, stats, latestDate };
+  })
 );
+projectCards.sort((a, b) => b.latestDate - a.latestDate);
 ---
 
 <Layout title={`${pillar.label} — zackglaser.com`} description={pillar.doorDesc}>
