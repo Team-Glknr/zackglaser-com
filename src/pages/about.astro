@@ -2,8 +2,10 @@
 // Structure/tokens ported from docs/design-system/About Page.dc.html —
 // photo hero and gallery omitted (no real images yet); text content
 // unchanged in shape.
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import NewsletterCard from "../components/NewsletterCard.astro";
+import zackAscii from "../assets/zack-glaser-ascii-146.png";
 
 const arcSteps = [
   { year: "2004", label: "Religion degree (BA)", detail: "Studying why people believe what they believe." },
@@ -18,19 +20,30 @@ const arcSteps = [
   description="Zack Glaser: Legal Tech Advisor at Lawyerist/Affinity, runner, tinkerer. Religion degree, JD, fullstack certificate — one instinct, three subjects."
 >
   <div class="about-container">
-    <div class="intro">
-      <div class="eyebrow">about</div>
-      <h1>I take things apart to see how they work.</h1>
-      <p>
-        That's true of legal software, of a marathon training block, of a workbench, and — this part took longer to
-        admit — of my own career. I have a religion degree, a JD, and a fullstack certificate, in that order, and
-        for a long time I thought that was three separate people.
-      </p>
-      <p>
-        It's one instinct. Studying religion is asking why people believe what they believe. Practicing law is
-        asking why a system is built the way it's built. Learning to code is asking what's actually happening under
-        a button click. Different subjects, same question.
-      </p>
+    <div class="hero">
+      <div class="intro">
+        <div class="eyebrow">about</div>
+        <h1>I take things apart to see how they work.</h1>
+        <p>
+          That's true of legal software, of a marathon training block, of a workbench, and — this part took longer to
+          admit — of my own career. I have a religion degree, a JD, and a fullstack certificate, in that order, and
+          for a long time I thought that was three separate people.
+        </p>
+        <p>
+          It's one instinct. Studying religion is asking why people believe what they believe. Practicing law is
+          asking why a system is built the way it's built. Learning to code is asking what's actually happening under
+          a button click. Different subjects, same question.
+        </p>
+      </div>
+      <div class="hero-portrait">
+        <Image
+          src={zackAscii}
+          alt="ASCII-art portrait of Zack Glaser, rendered from a photo as text characters"
+          widths={[280, 400, 600]}
+          sizes="(max-width: 720px) 60vw, 300px"
+          class="ascii-portrait"
+        />
+      </div>
     </div>
 
     <div class="section-label">the arc</div>
@@ -64,12 +77,34 @@ const arcSteps = [
     margin: 0 auto;
   }
 
+  .hero {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-8);
+    margin-bottom: var(--space-8);
+  }
   .intro {
     max-width: 640px;
-    margin-bottom: var(--space-8);
+    flex: 1 1 420px;
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+  }
+  .hero-portrait {
+    flex: 0 0 260px;
+    max-width: 260px;
+  }
+  .ascii-portrait {
+    display: block;
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+  }
+  @media (prefers-color-scheme: dark) {
+    .ascii-portrait {
+      filter: invert(1);
+      mix-blend-mode: screen;
+    }
   }
   .eyebrow {
     font-family: var(--font-mono);
@@ -149,6 +184,14 @@ const arcSteps = [
   }
 
   @media (max-width: 720px) {
+    .hero {
+      flex-direction: column-reverse;
+      gap: var(--space-5);
+    }
+    .hero-portrait {
+      max-width: 220px;
+      align-self: center;
+    }
     .arc-row {
       flex-direction: column;
     }
