@@ -29,7 +29,9 @@ const entries = [
   },
 ];
 
-const lastUpdated = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+// Hand-set to the date `entries` actually last changed — not computed from
+// build time, which would silently drift on every unrelated site deploy.
+const lastUpdated = "August 15, 2026";
 ---
 
 <Layout title="Now — zackglaser.com" description="What Zack is building, training for, and reading right now.">
