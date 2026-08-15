@@ -3,7 +3,8 @@ title: "Morning Report"
 series: morning-report
 status: active
 teaser: "A local app that opens at 8am, scores my Downloads folder by how deletable each file is, and makes cleaning it out a ten-file-a-morning game instead of a chore I never get to."
-cost: "~42 min + Anthropic API usage"
+cost: "Ongoing Anthropic API"
+time: "~42 min"
 authorship: duet
 ---
 

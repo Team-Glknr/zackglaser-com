@@ -35,7 +35,7 @@ const stats = await getProjectStats(project);
 
   <div class="totals-row">
     <StatBox label="cost" value={project.data.cost} size="lg" />
-    <StatBox label="time" value="—" size="lg" />
+    <StatBox label="time" value={project.data.time ?? "—"} size="lg" />
     <StatBox label="chapters" value={stats.totalChapters} size="lg" />
     <StatBox label="entries" value={stats.totalEntries} size="lg" />
   </div>

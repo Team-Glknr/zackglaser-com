@@ -44,6 +44,7 @@ const projects = defineCollection({
     status: z.enum(['active', 'done']),
     teaser: z.string(),
     cost: z.string(),
+    time: z.string().optional(),
     authorship: z.enum(['human', 'duet', 'bot']),
   }),
 });
