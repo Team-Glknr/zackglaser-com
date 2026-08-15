@@ -37,4 +37,4 @@ Every one of these was a real launch-path bug that my own terminal-based testing
 
 A license, publishing the repo to GitHub, and deciding whether to retire the original Automator droplet now that the replacement actually works end to end.
 
-**Costs so far:** $0 — several hours of debugging, no paid tools or services involved
+**Costs so far:** $0 — roughly 45 minutes of active debugging across two bursts, though the wall-clock gap between them (waiting on real-device testing) was closer to two hours
