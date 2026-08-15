@@ -1,5 +1,5 @@
 ---
-title: "local-transcribe"
+title: "Local Transcription App"
 series: local-transcribe
 status: active
 teaser: "A local web app that transcribes video files entirely on your own machine — built for the kind of recordings lawyers can't hand to a cloud service."
