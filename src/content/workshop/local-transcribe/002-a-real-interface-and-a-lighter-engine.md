@@ -1,7 +1,7 @@
 ---
 title: A real interface, and a lighter engine
 date: 2026-08-15
-status: draft
+status: published
 pillar: workshop
 format: log
 series: local-transcribe
