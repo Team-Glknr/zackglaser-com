@@ -5,7 +5,7 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import NewsletterCard from "../components/NewsletterCard.astro";
-import zackAscii from "../assets/zack-glaser-ascii-146.png";
+import zackAscii from "../assets/zack-glaser-ascii-transparent.png";
 
 const arcSteps = [
   { year: "2004", label: "Religion degree (BA)", detail: "Studying why people believe what they believe." },
@@ -98,12 +98,10 @@ const arcSteps = [
     display: block;
     width: 100%;
     height: auto;
-    mix-blend-mode: multiply;
   }
   @media (prefers-color-scheme: dark) {
     .ascii-portrait {
       filter: invert(1);
-      mix-blend-mode: screen;
     }
   }
   .eyebrow {
