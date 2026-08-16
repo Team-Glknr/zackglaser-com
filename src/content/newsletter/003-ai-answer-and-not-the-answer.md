@@ -48,6 +48,8 @@ Client data never needs to leave your machine, since you're simply running a loc
 
 This doesn't mean that none of my problems can (or should) be solved with AI processing. But, where the input and output are both structured and repeatable, AI's job it to generate the tool, not to be the tool. Which, almost counter-intuitively, increases the usefulness of standard LLMs in the legal practice. 
 
+Notice what happened to the questions I started with. I never had to teach the model to think like me, because I never asked it to think — I asked it to write. I never had to decide how much autonomy to give it, because it never touched my data at all. The only question left standing was whether I can trust the output. And unlike the other two, that one I can check.
+
 It's not that there is some new magic tool on the market that will do all of the work for me. I simply have the ability to build tools that already existed on my own and with very little investment. 
 
 -- Zack
