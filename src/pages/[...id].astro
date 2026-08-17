@@ -41,7 +41,7 @@ const formattedDate = post.data.date.toLocaleDateString("en-US", { month: "long"
 const dateMeta = post.data.newsletter ? `${formattedDate} · issue ${post.data.newsletter}` : formattedDate;
 ---
 
-<Layout title={`${post.data.title} — zackglaser.com`} image={`/og/${post.id}.png`}>
+<Layout title={`${post.data.title} — zackglaser.com`} description={post.data.teaser} image={`/og/${post.id}.png`}>
   <div class="post-container" style={`--accent:var(--pillar-${post.data.pillar})`}>
     <a href={breadcrumbHref} class="breadcrumb">← {breadcrumbLabel}</a>
 

@@ -5,6 +5,7 @@ status: published
 pillar: legal-tech
 format: teardown
 newsletter: 3
+teaser: "AI's job is to generate the tool, not to be the tool — how field-mapping a case database taught me where LLMs actually help lawyers, and where they don't."
 authorship: duet
 tags: [ai, workflow, automation, legal-tech]
 ---
